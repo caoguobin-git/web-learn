@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script src="../js/vue.js"></script>
+        <style type="text/css">
+            .test {
+                width: 100px;
+                height: 100px;
+
+            }
+        </style>
+    </head>
+    <body>
+        <div id="demo">
+            <div class="test" :style="styleObject">
+                adsf
+            </div>
+        </div>
+    </body>
+</html>
+
+<script type="text/javascript">
+    var demo = new Vue({
+        el: '#demo',
+        data: {
+            red: 255,
+            direction:1
+        },
+        computed: {
+            green: function() {
+                return 255 - this.red
+            },
+            styleObject: function() {
+                return {
+                    background: 'rgba(' + this.red + ',' + this.green + ',0,1)'
+                }
+            }
+        },
+        methods: {
+            changeColor:function(){
+                this.red-=this.direction;
+                if(this.red==0||this.red==255){
+                    this.direction*=-1;
+                }
+                requestAnimationFrame(this.changeColor);
+            }
+        },
+        mounted:function(){
+            this.changeColor();
+        }
+    })
+</script>

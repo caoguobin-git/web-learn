@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>开关灯效果</title>
+        <script src="../js/vue.js"></script>
+        <style type="text/css">
+            body {
+                background-color: black;
+            }
+
+            .bulb-off {
+                width: 100px;
+                height: 20px;
+                background-color: deepskyblue;
+                border-radius: 20px;
+                /* animation: myBulb 3s infinite linear; */
+                /* animation-direction: alternate; */
+                margin: 200px auto;
+                text-align: center;
+                line-height: 20px;
+                font-size: 12x;
+                font-family: "kaiti";
+                font-weight: 800;
+                cursor: pointer;
+                opacity: .2;
+                transform: all 3s linear;
+                box-shadow: 0 0 3px skyblue;
+            }
+            
+            .bulb-on {
+                width: 100px;
+                height: 20px;
+                background-color: lightskyblue;
+                border-radius: 20px;
+                text-align: center;
+                line-height: 20px;
+                font-size: 12x;
+                font-family: "kaiti";
+                font-weight: 800;
+                cursor: pointer;
+                /* animation: myBulb 3s infinite linear; */
+                /* animation-direction: alternate; */
+                margin: 200px auto;
+                opacity: 1;
+                transform: all 3s linear;
+                box-shadow: 0 0 50px skyblue;
+            }
+
+            /*            @-webkit-keyframes myBulb {
+                0% {
+                    transform: scale(1);
+                    opacity: 0.5;
+                    box-shadow: 0 0 3px skyblue;
+                }
+
+                100% {
+                    transform: scale(1.02);
+                    opacity: 1;
+                    box-shadow: 0 0 20px skyblue;
+                } */
+            }
+        </style>
+    </head>
+    <body>
+        <div  >aj;ldfjal;sdkfj;alsdfkj;</div>
+        <div id="bulbs">
+            <my-bulb
+            v-for="bulb in bulbs"
+            :key=bulb.id
+            :bulb-on-ini=bulb.bulbOn
+            ></my-bulb>
+        </div>
+    </body>
+</html>
+
+<script type="text/javascript">
+    
+    Vue.component('my-bulb',{
+        props:['bulbOnIni'],
+        data:function(){
+            return{
+               bulbOn:this.bulbOnIni
+            }
+        },
+        template:'<div  :class="bulbClass" @click="switchBulb">{{switchMessage}}</div>',
+        computed:{
+            bulbClass:function(){
+                return{
+                    'bulb-on':this.bulbOn,
+                    'bulb-off':!this.bulbOn
+                    
+                }
+            },
+            switchMessage:function(){
+                return this.bulbOn?'关灯':'开灯';
+            }
+        },
+        methods:{
+            switchBulb:function(){
+                this.bulbOn=!this.bulbOn;
+                // if(this.bulbOn){
+                //     document.getElementsByTagName('body')[0].style.backgroundColor='black';
+                // }else{
+                //     document.getElementsByTagName('body')[0].style.backgroundColor='white';
+                // }
+            }
+        }
+    })
+    
+    var bulb = new Vue({
+        el: '#bulbs',
+        data:{
+            bulbs:[
+                {id:1,bulbOn:false},
+                {id:2,bulbOn:false},
+                {id:3,bulbOn:false},
+                {id:4,bulbOn:true},
+            ]
+        }
+    })
+    document.oncopy=function(){
+        return false;
+    }
+    document.onselectstart=function(){
+        return false;
+    }
+</script>

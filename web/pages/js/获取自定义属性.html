@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>获取自定义属性</title>
+	</head>
+	<body>
+        <input type="button" id="btn" value="获取" data="JavaScript" />
+	</body>
+</html>
+<script type="text/javascript">
+    window.onload=function(){
+        var oBtn=document.getElementById("btn");
+        oBtn.onclick=function(){
+            var oVal=oBtn.data;
+            var oVal1=oBtn.getAttribute("data");
+            console.log(oVal);
+            console.log(oVal1);
+           
+        }
+    }
+</script>

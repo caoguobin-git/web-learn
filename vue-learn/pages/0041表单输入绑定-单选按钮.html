@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>表单输入绑定-单选按钮</title>
+        <script src="../js/vue.js"></script>
+	</head>
+	<body>
+        <div id="app-41">
+            <input type="radio" id="male" name="gender" value="male" v-model="selected"/>
+            <label for="male">男</label>
+            <input type="radio" id="female" name="gender" value="female" v-model="selected"/>
+            <label for="female">女</label>
+            <p>picked：{{ selected }}</p>
+        </div>
+	</body>
+</html>
+
+<script type="text/javascript">
+    var app41=new Vue({
+        el:'#app-41',
+        data:{
+            selected:''
+        }
+    })
+</script>

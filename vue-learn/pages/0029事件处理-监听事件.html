@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>事件处理-监听事件</title>
+        <script src="../js/vue.js"></script>
+	</head>
+	<body>
+        <div id="app-29">
+            <button @click="counter++">Add 1</button>
+            <p>The button above has been clicked {{counter}} times.</p>
+        </div>
+	</body>
+</html>
+<script type="text/javascript">
+    var app29=new Vue({
+        el:'#app-29',
+        data:{
+            counter:0
+        }
+    })
+</script>

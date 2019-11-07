@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>指令-参数</title>
+        <script src="../js/vue.js"></script>
+	</head>
+	<body>
+        <div id="app-10">
+            <a :href="url">url</a>
+            <a @click="doSomething">doSomething</a>
+        </div>
+	</body>
+</html>
+<script type="text/javascript">
+    var app10=new Vue({
+        el:"#app-10",
+        data:{
+            url:"http://www.baidu.com"
+        },
+        methods:{
+            doSomething:function(){
+                console.log("do something");
+            }
+        }
+    })
+</script>

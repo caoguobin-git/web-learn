@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>表格边框合并</title>
+		<style>
+			table,tr,th,td{
+				border: 1px solid silver;
+			}
+			table{
+				border-collapse: collapse;
+			}
+		</style>
+	</head>
+	<body>
+		<table>
+			<caption>表格标题</caption>
+			<thead>
+				<tr>
+					<th>表头单元格1</th>
+					<th>表头单元格2</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>表行单元格1</td>
+					<td>表行单元格2</td>
+				</tr>
+				<tr>
+					<td>表行单元格3</td>
+					<td>表行单元格4</td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td>表行单元格5</td>
+					<td>表行单元格6</td>
+				</tr>
+			</tfoot>
+		</table>
+	</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>stop-阻止事件继续传播</title>
+        <script src="../js/vue.js"></script>
+    </head>
+    <body>
+        <div id="app-32">
+            <div @click="sayHello">
+                <button @click.stop="sayHi">say hi</button>
+            </div>
+        </div>
+    </body>
+</html>
+<script type="text/javascript">
+    var app32 = new Vue({
+        el: '#app-32',
+        methods: {
+            sayHi: function() {
+                alert("Hello World");
+            },
+            sayHello: function() {
+                alert("事件传播了");
+            }
+        }
+    })
+</script>

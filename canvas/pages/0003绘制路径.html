@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>绘制路径</title>
+	</head>
+	<body>
+        <canvas id="canvas-003" width="600" height="300"></canvas>
+	</body>
+</html>
+
+<script type="text/javascript">
+    var demo =document.getElementById('canvas-003');
+    var ctx=demo.getContext('2d');
+    ctx.beginPath();
+    ctx.moveTo(20,30);
+    ctx.lineTo(80,30);
+    ctx.lineTo(25,80);
+    ctx.lineTo(50,10);
+    ctx.lineTo(75,80);
+    ctx.closePath();
+    ctx.stroke();
+</script>

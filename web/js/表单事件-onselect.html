@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>表单事件-onselect</title>
+        <style type="text/css">
+            textarea{
+                resize: none;
+            }
+        </style>
+	</head>
+	<body>
+        <input type="text" id="txt1" value="如果我真的存在,也是因为你需要我" /><br>
+        <textarea draggable="false"  id="txt2" cols="20" rows="5" placeholder="如果我真的存在,也是因为你需要我">如果我真的存在,也是因为你需要我</textarea>
+	</body>
+</html>
+<script type="text/javascript">
+    window.onload=function(){
+        var oTxt1=document.getElementById("txt1");
+        var oTxt2=document.getElementById("txt2");
+        
+        oTxt1.onselect=function(){
+            console.log("你选中了单行文本框中的内容。");
+            console.log(window.getSelection())
+        };
+        oTxt2.onselect=function(){
+            console.log("你选中了多行文本中的内容.  "+new Date().toLocaleString())
+        }
+        oTxt2.oncontrolselect=function(){
+            console.log("放弃了选择")
+        }
+    }
+</script>

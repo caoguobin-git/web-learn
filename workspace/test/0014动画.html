@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <style type="text/css">
+            div {
+                transition: all 5s;
+                position: relative;
+                width: 100px;
+                height: 100px;
+                background-color: red;
+                animation: my-demo 5s infinite;
+            }
+
+            @-webkit-keyframes my-demo {
+                0% {
+                    left: 0px;
+                }
+
+                20% {
+                    left: 300px;
+                    transform: rotate(20deg);
+                }
+               80%{
+                   left: 500px;
+                   transform: rotate(0deg);
+               }
+                100% {
+                    left: 0px;
+                    transform: rotate(-360deg);
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div></div>
+    </body>
+</html>

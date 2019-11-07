@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script src="../js/vue.js"></script>
+    </head>
+    <body>
+        <div id="demo">
+            <table>
+                <caption>新闻展示</caption>
+                <thead>
+                    <th>国家或地区</th>
+                    <th>新闻内容</th>
+                    <th>重要性</th>
+                    <th>时间</th>
+                </thead>
+                <tbody>
+                    <tr id="news-preview-tr" v-if="newsPreview">
+                        <td>{{newsCountry}}</td>
+                        <td>{{newsContent}}</td>
+                        <td>{{newsTime}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <span  @click="previewNews">预览</span>
+        </div>
+    </body>
+</html>
+
+<script type="text/javascript">
+    var demo = new Vue({
+        el: '#demo',
+        data:{
+            newsPreview:true,
+            newsCountry: '中国',
+            newsContent: '国家统计局：中国7月锌产量同比增长17.4%至51.2万吨。',
+            newsImportant: 3,
+            newsTime:new Date().toLocaleString()
+        },
+        methods:{
+            previewNews:function(){
+                this.newsTime=new Date().toLocaleString();
+                this.newsPreview=!this.newsPreview;
+            }
+        }
+    })
+</script>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>拖动改变div大小</title>
+        <script src="../js/vue.js"></script>
+        <style type="text/css">
+            #demo {
+                position: relative;
+            }
+
+            div {
+                margin: 0;
+                padding: 0;
+            }
+
+            #dragBox {
+                position: absolute;
+                display: inline-block;
+                background-color: red;
+            }
+
+            #dragBar {
+                position: absolute;
+                display: inline-block;
+                width: 20px;
+                height: 200px;
+                background-color: blue;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="demo">
+            <div id="dragBox" :style="{width:dragBoxWidth+'px',height:dragBoxHeight+'px',left:dragBoxleft+'px',top:dragBoxTop+'px'}" @mousedown="dragMousedown"
+                @mousemove="dragMouseMove" @mouseup="dragMouseup" draggable="true">目标div</div>
+            <div id="dragBar" :style="{left:dragBoxWidth+'px'}" @mousedown="resizeMousedown" @mousemove="resizeMousemove"
+                @mouseup="resizeMouseup">拖动</div>
+        </div>
+    </body>
+</html>
+
+<script type="text/javascript">
+    var demo = new Vue({
+        el: '#demo',
+        data: {
+            dragBoxWidth: 200,
+            dragBoxHeight: 200,
+            dragBoxleft:0,
+            dragBoxTop:0,
+            chazhiX:0,
+            chazhiY:0,
+            dragging: false,
+            resizing: false,
+            startX: 0
+        },
+        methods: {
+            resizeMousedown: function(e) {
+                this.resizing = true;
+                this.startX = e.x;
+                console.log(e.x)
+            },
+            resizeMousemove: function(e) {
+                if (this.resizing) {
+                    console.log(e.x);
+                    this.dragBoxWidth = e.x - 18
+                }
+            },
+            resizeMouseup: function(e) {
+                this.resizing = false
+            },
+            
+            dragMousedown: function(e) {
+                this.dragging = true;
+                this.chazhiX=e.x-this.dragBoxleft;
+                this.chazhiY=e.y-this.dragBoxTop;
+                console.log(e.x);
+            },
+            dragMouseMove: function(e) {
+                if (this.dragging) {
+                    console.log(e.x);
+                    this.dragBoxleft=e.x-this.chazhiX;
+                    this.dragBoxTop=e.y-this.chazhiY;
+                }
+            },
+            dragMouseup: function(e) {
+                this.dragging=false
+                console.log(e.x);
+            }
+        }
+    })
+</script>

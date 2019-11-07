@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>打开新的空白窗口</title>
+	</head>
+	<body>
+        <input type="button" id="btn" value="打开新窗口" />
+	</body>
+</html>
+<script type="text/javascript">
+    window.onload=function(){
+        var oBtn=document.getElementById("btn");
+        
+        oBtn.onclick=function(){
+            var newPage=window.open(null,"_self");
+            newPage.document.write("This is a new page");
+            newPage.document.body.style.backgroundColor='hotpink';
+        }
+    }
+</script>

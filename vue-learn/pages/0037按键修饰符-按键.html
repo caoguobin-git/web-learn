@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>按键修饰符-按键</title>
+        <script src="../js/vue.js"></script>
+        <style type="text/css">
+            div{
+                width: 1000px;
+                height: 300px;
+                background-color: gray;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app-37" :style="{backgroundColor:bgcolor}" @mouseout="bgcolor='green'" @mousemove="getXY($event)" @mouseenter="mouseentercolor">
+            <input @keyup.enter="doSomething" />
+            <p>({{clientX}},{{clientY}})</p>
+        </div>
+    </body>
+</html>
+<script type="text/javascript">
+    var app37 = new Vue({
+        el: '#app-37',
+        data: {
+            clientX: 1,
+            clientY: 1,
+            bgcolor:''
+        },
+        methods: {
+            doSomething: function() {
+                console.log('Hello World!');
+            },
+            getXY: function(e) {
+                this.clientX=e.clientX;
+                this.clientY=e.clientY;
+            },
+            mouseentercolor:function(){
+                this.bgcolor='red'
+            }
+        }
+    })
+</script>

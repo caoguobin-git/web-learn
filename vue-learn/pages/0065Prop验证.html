@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Prop验证</title>
+        <script src="../js/vue.js"></script>
+	</head>
+	<body>
+        <div id="app-65">
+            <my-component
+                :prop-a="43"
+                :prop-b="123"
+                prop-c="必填字符串"
+                :prop-d="123"
+                :prop-e="{message:'Hello world'}"
+                prop-f="success"
+            ></my-component>
+        </div>
+	</body>
+</html>
+<script type="text/javascript">
+    
+    Vue.component('my-component',{
+        props:{
+            //基础的类型检查('null'和'undefined'会通过任何类型的检查)
+            propA:Number,
+            //多个可能的类型
+            propB:[String,Number],
+            //必填的字符串
+            propC:{
+                type:String,
+                required:true
+            },
+            //带有默认值的数字
+            propD:{
+                type:Number,
+                default:100
+            },
+            //对象或数组默认值必须从一个工厂函数获取
+            propE:{
+                type:Object,
+                default:function(){
+                    return {message:'Hello'}
+                }
+            },
+            //自定义验证函数
+            propF:{
+                validator:function(value){
+                    return ['success','waring','danger'].indexOf(value) !== -1
+                }
+            }
+        },
+        template:'<div>\
+                    <p>{{ propA }}</p>\
+                    <p>{{ propB }}</p>\
+                    <p>{{ propC }}</p>\
+                    <p>{{ propD }}</p>\
+                    <p>{{ propE.message }}</p>\
+                    <p>{{ propF }}</p>\
+                  </div>'
+    })
+    
+    var app65=new Vue({
+        el:'#app-65'
+    })
+</script>

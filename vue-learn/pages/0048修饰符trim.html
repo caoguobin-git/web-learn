@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>修饰符-trim</title>
+        <script src="../js/vue.js"></script>
+	</head>
+	<body>
+        <div id="app-48">
+            <p>Message: {{ message }}</p>
+            <input type="text" v-model.trim="message" />
+        </div>
+	</body>
+</html>
+
+<script type="text/javascript">
+    console.log("                   hsdf       hsdfsdf".trim())
+    var app48=new Vue({
+        el:'#app-48',
+        data:{
+            message:''
+        }
+    })
+</script>

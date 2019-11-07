@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>编辑事件-oncopy</title>
+	</head>
+	<body>
+        <div id="txt">不要用战术上的勤奋，来掩盖战略上的愚蠢</div>
+	</body>
+</html>
+<script type="text/javascript">
+    window.onload=function(){
+        document.body.oncopy=function(){
+            return false;
+        }
+        
+        var oTxt=document.getElementById("txt");
+        oTxt.onselectstart=function(){
+            return false;
+        }
+    }
+</script>

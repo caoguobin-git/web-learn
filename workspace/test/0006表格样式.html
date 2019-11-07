@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>表格样式</title>
+        <script src="../js/vue.js"></script>
+        <style type="text/css">
+            #demo{
+                width: 600px;
+                height: 900px;
+                overflow: scroll;
+            }
+            table{
+                border-collapse: collapse;
+            }
+            tr:hover{
+                background-color: lightskyblue;
+            }
+            td{
+                text-align: center;
+                border-radius: 5px;
+                border: 1px solid black;
+                padding-left: 5px;
+            }
+        </style>
+	</head>
+	<body>
+        <div  id="demo">
+            <table>
+                <tr 
+                    v-for="(item,key) in openPositions"
+                    :key="key">
+                    <td>{{item.symbol}}</td>
+                    <td>{{item.amount}}</td>
+                    <td>{{item.side==1?"买":"卖"}}</td>
+                    <td>{{item.open}}</td>
+                    <td>{{item.close}}</td>
+                    <td>{{item.pl}}</td>
+                    <td>{{item.time}}</td>
+                </tr>
+            </table>
+        </div>
+	</body>
+</html>
+<script type="text/javascript">
+    var demo=new Vue({
+        el:'#demo',
+        data:{
+            openPositions:{
+                '10215485':{
+                    symbol:'EUR/USD',
+                    amount:1000,
+                    side:1,
+                    open:1502.52,
+                    close:1588.58,
+                    pl:86.0,
+                    time:'2019/8/14  下午 5:28:57'
+                },
+                '10235485':{
+                    symbol:'EUR/USD',
+                    amount:1000,
+                    side:1,
+                    open:1502.52,
+                    close:1588.58,
+                    pl:86.0,
+                    time:'2019/8/14  下午 5:28:57'
+                },
+                '10212485':{
+                    symbol:'EUR/USD',
+                    amount:1000,
+                    side:1,
+                    open:1502.52,
+                    close:1588.58,
+                    pl:86.0,
+                    time:'2019/8/14  下午 5:28:57'
+                },'10215285':{
+                    symbol:'EUR/USD',
+                    amount:1000,
+                    side:1,
+                    open:1502.52,
+                    close:1588.58,
+                    pl:86.0,
+                    time:'2019/8/14  下午 5:28:57'
+                },'10215483':{
+                    symbol:'EUR/USD',
+                    amount:1000,
+                    side:1,
+                    open:1502.52,
+                    close:1588.58,
+                    pl:86.0,
+                    time:'2019/8/14  下午 5:28:57'
+                }
+            }
+        }
+    })
+</script>

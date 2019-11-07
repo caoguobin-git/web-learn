@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>单个根元素</title>
+        <script src="../js/vue.js"></script>
+    </head>
+    <body>
+        <div id="app-51">
+            <blog-post v-for="post in posts" :key=post.id :post="post"></blog-post>
+        </div>
+    </body>
+</html>
+
+<script type="text/javascript">
+    Vue.component('blog-post', {
+        props: ['post'],
+        template: '<div class="blog-post">\
+                        <h3>{{ post.title }}</h3>\
+                        <div v-html="post.content"></div>\
+                  </div>'
+    })
+
+    var app51 = new Vue({
+        el: '#app-51',
+        data: {
+            posts: [{
+                    id: 1,
+                    title: '111',
+                    content: '<p style="color:\'red\'">和了咯world</p>'
+                },
+                {
+                    id: 2,
+                    title: 'hello',
+                    content: '<p style="color:\'red\'">Hello World</p>'
+                }
+            ]
+        }
+    })
+</script>

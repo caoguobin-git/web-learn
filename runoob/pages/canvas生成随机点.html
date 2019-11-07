@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>canvas生成随机点线</title>
+        <script src="../js/vue.js"></script>
+        <style type="text/css">
+            canvas {
+                border: 1px solid black;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="demo">
+            <canvas id="canvas" :width="canvas_width" :height="canvas_height"></canvas>
+        </div>
+    </body>
+</html>
+<script type="text/javascript">
+    var demo = new Vue({
+        el: '#demo',
+        data: {
+            canvas: {},
+            canvas_width: 0,
+            canvas_height: 0,
+            points: [{
+                    x: 5,
+                    y: 5,
+                    xa: 0,
+                    ya: 0
+                },
+                {
+                    x: 20,
+                    y: 20,
+                    xa: 0,
+                    ya: 0
+                }
+            ]
+        },
+        watch: {
+            points: function(val) {
+                this.drawCanvas();
+            }
+        },
+        methods: {
+            //设置canvas区域大小
+            setCanvasSize: function() {
+                this.canvas_width = window.innerWidth - 20 || document.documentElement.clientWidth ||
+                    document.body.clientWidth;
+                this.canvas_height = window.innerHeight - 25 || document.documentElement.clientHeight ||
+                    document.body.clientHeight;
+            },
+            //调用canvas绘画
+            drawCanvas: function() {
+                this.canvas.clearRect(0, 0, this.canvas_width, this.canvas_height);
+                
+                this.canvas.strokeStyle = 'rgba(0,255,0,0.2)';
+                this.canvas.strokeWidth=20;
+                this.canvas.fillStyle='#00ff00';
+                this.canvas.beginPath();
+                this.canvas.moveTo(this.points[0].x+5, this.points[0].y+5);
+                this.canvas.lineTo(this.points[1].x+5, this.points[1].y+5);
+                this.canvas.closePath()
+                this.canvas.stroke();
+                
+                for (var i = 0; i < this.points.length; i++) {
+                    this.canvas.fillStyle = '#ff0000';
+                    this.canvas.fillRect(this.points[i].x, this.points[i].y, 10, 10);
+                }
+
+
+
+            },
+            //获取新的点坐标
+            getPoint: function() {
+                console.log(this.canvas_width)
+                var x1 = parseInt(Math.random() * this.canvas_width);
+                var y1 = parseInt(Math.random() * this.canvas_height);
+                var xa1 = 2 * Math.random() - 1;
+                var ya1 = 2 * Math.random() - 1;
+                var p = {
+                    x: x1,
+                    y: y1,
+                    xa: xa1,
+                    ya: ya1
+                }
+                return p;
+
+            }
+        },
+        mounted() {
+            //初始化canvas
+            this.canvas = document.getElementById('canvas').getContext('2d');
+            this.setCanvasSize()
+            window.onresize = function() {
+                demo.setCanvasSize();
+                console.log(demo.canvas_height)
+            }
+            //定时刷新点坐标
+            setInterval(function() {
+                demo.points.pop();
+                demo.points.pop();
+                demo.points.push(demo.getPoint());
+                demo.points.push(demo.getPoint());
+                var a = demo.getPoint();
+                console.log(a)
+            }, 3000)
+        }
+    })
+</script>

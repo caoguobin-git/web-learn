@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>prop类型检查</title>
+        <script src="../js/vue.js"></script>
+    </head>
+    <body>
+        <div id="app-66">
+            <my-component v-for="person in persons" :key="person.firstName" :author="person"></my-component>
+        </div>
+    </body>
+</html>
+
+<script type="text/javascript">
+    function Person(firstName, lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    Vue.component('my-component', {
+        props: {
+            author: {
+                type: Person
+            },
+            template: '<div>{{author.firstName}}</div>'
+        }
+    })
+
+    var app66 = new Vue({
+        el: '#app-66',
+        data: {
+            persons: [new Person('guobin', 'cao'),
+                new Person('cao', 'cao')
+            ]
+        }
+    })
+</script>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>计算属性</title>
+        <script src="../js/vue.js"></script>
+	</head>
+	<body>
+        <div  id="demo">
+            <p>{{getTime('nihao')}}</p>
+            <p>{{getTime('hello')}}</p>
+            <p>{{new Date(time).toTimeString().substring(0,8)}}</p>
+        </div>
+	</body>
+</html>
+<script type="text/javascript">
+    var demo=new Vue({
+        el:'#demo',
+        data:{
+          time:1586485180000  
+        },
+        
+        methods:{
+            getTime:function(val){
+                return 'hello '+val;
+            }
+        }
+    })
+</script>

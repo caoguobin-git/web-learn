@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>贪吃蛇</title>
+        <script src="../js/vue.js"></script>
+        <style type="text/css">
+            canvas {
+                border: 1px solid silver;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="snake" style="text-align: center;">
+            <label>得分：<span>{{snakeLength}}</span></label>
+            <br>
+            <label>头部颜色：<input type="color" v-model="snakeHeadColor" /></label>
+            <label>身体颜色：<input type="color" v-model="snakeBodyColor" /></label>
+            <label>场景宽度：<input type="number" v-model="canvasWidth" /></label>
+            <label>场景高度：<input type="number" v-model="canvasHeight" /></label>
+            <button @click="move()">继续</button>
+            <button @click="pause()">暂停</button>
+            <button @click="init()">重置</button>
+            <hr>
+            <canvas id="canvas-snake" :height="canvasHeight" :width="canvasWidth"></canvas>
+            <div>
+                <button @click="direction=direction=='down'?'down':'up'">上</button>
+                <br>
+                <button @click="direction=direction=='right'?'right':'left'">左</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button @click="direction=direction=='left'?'left':'right'">右</button>
+                <br>
+                <button @click="direction=direction=='up'?'up':'down'">下</button>
+            </div>
+        </div>
+    </body>
+</html>
+
+<script type="text/javascript">
+    var snake = new Vue({
+        el: '#snake',
+        data: {
+            canvasWidth: 800,
+            canvasHeight: 800,
+            bodyWidth: 10,
+            direction: 'right',
+            snake: [],
+            snakeBodyColor: '#FFFF00',
+            snakeHeadColor: '#000000',
+            moveInterval: '',
+            beanPosition: {
+                x: 0,
+                y: 0
+            }
+        },
+        computed: {
+            snakeLength: function() {
+                return this.snake.length;
+            }
+        },
+        watch: {
+            snake: function(val) {
+                var canvasSnake = document.getElementById('canvas-snake');
+                var ctx = canvasSnake.getContext('2d');
+                ctx.clearRect(0, 0, snake.canvasWidth, snake.canvasHeight);
+                for (var item in val) {
+                    if (item == snake.snake.length - 1) {
+                        ctx.fillStyle = snake.snakeHeadColor;
+                    } else {
+                        ctx.fillStyle = snake.snakeBodyColor;
+                    }
+                    ctx.fillRect(val[item].x, val[item].y, this.bodyWidth, this.bodyWidth);
+                }
+                ctx.fillStyle = '#FF0000';
+                ctx.fillRect(this.beanPosition.x, this.beanPosition.y, this.bodyWidth, this.bodyWidth);
+
+            }
+        },
+        methods: {
+            init: function() {
+                while (this.snake.pop() != null) {
+
+                }
+                this.snake.push({
+                    x: 0,
+                    y: 0
+                }, {
+                    x: this.bodyWidth * 1,
+                    y: 0
+                }, {
+                    x: this.bodyWidth * 2,
+                    y: 0
+                }, {
+                    x: this.bodyWidth * 3,
+                    y: 0
+                }, {
+                    x: this.bodyWidth * 4,
+                    y: 0
+                }, {
+                    x: this.bodyWidth * 5,
+                    y: 0
+                }, {
+                    x: this.bodyWidth * 6,
+                    y: 0
+                }, {
+                    x: this.bodyWidth * 7,
+                    y: 0
+                });
+                this.direction = 'right';
+                this.createBean();
+                this.move();
+
+            },
+            createBean: function() {
+                var x = parseInt(parseInt(Math.random() * this.canvasWidth) / this.bodyWidth) * this.bodyWidth;
+                var y = parseInt(parseInt(Math.random() * this.canvasHeight) / this.bodyWidth) * this.bodyWidth;
+                this.beanPosition.x = x;
+                this.beanPosition.y = y;
+            },
+            pause: function() {
+                clearInterval(snake.moveInterval)
+            },
+            move: function() {
+                snake.moveInterval = setInterval(function() {
+                    var head = snake.snake[snake.snake.length - 1];
+                    var headX = head.x;
+                    var headY = head.y;
+                    var newHeadX;
+                    var newHeadY;
+
+                    if (snake.direction === 'left') {
+                        newHeadX = headX - snake.bodyWidth;
+                        newHeadY = headY;
+                        if (newHeadX < 0) {
+                            alert('撞墙了');
+                            clearInterval(snake.moveInterval);
+                        }
+                    } else if (snake.direction === 'up') {
+                        newHeadX = headX;
+                        newHeadY = headY - snake.bodyWidth;
+                        if (newHeadY < 0) {
+                            alert('撞墙了');
+                            clearInterval(snake.moveInterval);
+                        }
+                    } else if (snake.direction === 'right') {
+                        newHeadX = headX + snake.bodyWidth;
+                        newHeadY = headY;
+                        if (newHeadX > snake.canvasWidth) {
+                            alert('撞墙了');
+                            clearInterval(snake.moveInterval);
+                        }
+                    } else if (snake.direction === 'down') {
+                        newHeadX = headX;
+                        newHeadY = headY + snake.bodyWidth;
+                        if (newHeadY > snake.canvasWidth) {
+                            alert('撞墙了');
+                            clearInterval(snake.moveInterval);
+                        }
+                    }
+
+                    for (var index in snake.snake) {
+                        if (newHeadX == snake.snake[index].x && newHeadY == snake.snake[index].y) {
+                            alert('游戏结束');
+                            clearInterval(snake.moveInterval);
+                            snake.init();
+                        }
+                    }
+                    snake.snake.push({
+                        x: newHeadX,
+                        y: newHeadY
+                    })
+                    if (newHeadX === snake.beanPosition.x && newHeadY === snake.beanPosition.y) {
+                        console.log("吃到豆子了");
+                        snake.createBean()
+                        return;
+                    } else {
+                        snake.snake.shift()
+                    }
+                }, 75)
+            }
+        },
+        mounted() {
+            document.onkeydown = function(e) {
+                var key = window.event.keyCode;
+                if (key === 37) {
+                    if (snake.direction != 'right') {
+                        snake.direction = 'left';
+                    }
+                } else if (key === 38) {
+                    if (snake.direction != 'down') {
+                        snake.direction = 'up';
+                    }
+                } else if (key === 39) {
+                    if (snake.direction != 'left') {
+                        snake.direction = 'right';
+                    }
+                } else if (key === 40) {
+                    if (snake.direction != 'up') {
+                        snake.direction = 'down';
+                    }
+                }
+            }
+        }
+    })
+</script>

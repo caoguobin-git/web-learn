@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+        <script src="js/vue.js"></script>
+        <style type="text/css">
+            div{
+                width: 6.25rem;
+                height: 6.25rem;
+                display: inline-block;
+                margin: 1.25rem;
+                background-color: red;
+            }
+            .demo2.demo3{
+                background-color: black;
+            }
+        </style>
+	</head>
+	<body>
+        <div class="demo1 demo2"></div>
+        <div class="demo2 demo3"></div>
+        <div @click="doTest" id="demo"></div>
+	</body>
+</html>
+<script type="text/javascript">
+    var demo =new Vue({
+        el:'#demo',
+        methods:{
+            doTest:function(){
+                console.log('hello');
+                setTimeout(function(){
+                    console.log("hahah")
+                },1000)
+            }
+        }
+    })
+</script>

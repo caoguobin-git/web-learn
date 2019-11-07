@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>v-for访问父作用域属性</title>
+        <script src="../js/vue.js"></script>
+	</head>
+	<body>
+        <div id="app-23">
+            <ul>
+                <li v-for="(item,index) in items">
+                    {{ parentMessage }} - {{ index }} - {{ item.message }}
+                </li>
+            </ul>
+        </div>
+	</body>
+</html>
+<script type="text/javascript">
+    var app23=new Vue({
+        el:'#app-23',
+        data:{
+            parentMessage:"Parent",
+            items:[
+                {message:'Foo'},
+                {message:'Bar'}
+            ]
+        }
+    })
+</script>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>v-for和v-if一起使用</title>
+        <script src="../js/vue.js"></script>
+	</head>
+	<body>
+        <div id="app-27">
+            <ul>
+                <li v-for="item in items" v-if="item.id%2===0">
+                    {{item.msg}}
+                </li>
+            </ul>
+        </div>
+	</body>
+</html>
+<script type="text/javascript">
+    var app27=new Vue({
+        el:"#app-27",
+        data:{
+            items:[
+                {id:0,msg:"蔬菜"},
+                {id:1,msg:"水果"},
+                {id:2,msg:"奶酪"},
+            ]
+        }
+    })
+</script>

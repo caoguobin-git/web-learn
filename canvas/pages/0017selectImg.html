@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>select img</title>
+        <script src="../js/vue.js"></script>
+        <script src="../js/jquery-3.4.1.js"></script>
+        <script src="../bootstrap/js/bootstrap.js"></script>
+        <link rel="stylesheet" href="../bootstrap/css/bootstrap.css" />
+        <style type="text/css">
+            html{
+                font-size: 16px;
+            }
+            #demo {
+                position: relative;
+            }
+
+            #time {
+                display: inline-block;
+                position: absolute;
+                padding-left: 0.3125rem;
+                text-align: ;
+                width: 7rem;
+                height: 2.5rem;
+                line-height: 2.5rem;
+                font-size: 0.1rem;
+                animation: myDemo 1s linear infinite alternate;
+            }
+
+            .maohao {
+                color: red;
+                animation: maohaoDemo 1s infinite linear;
+            }
+
+            @-webkit-keyframes maohaoDemo {
+                0% {
+                    opacity: 0;
+                }
+                
+                50% {
+                    opacity: 0;
+                }
+                60%{
+                    opacity: 1;
+                }
+                100% {
+                    opacity: 1;
+                }
+            }
+
+            @-webkit-keyframes myDemo {
+                from {
+                    border: 0.0625rem solid black;
+                }
+
+                to {
+                    border: 0.0625rem solid red;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div id="demo">
+            <span id="time">{{hour}}<span class="maohao">:</span>{{minute}}<span class="maohao">:</span>{{second}}.{{milliSecond}}</span>
+        </div>
+    </body>
+</html>
+<script type="text/javascript">
+    var demo = new Vue({
+        el: '#demo',
+        data: {
+            hour: 0,
+            minute: 0,
+            second: 0,
+            milliSecond: 0
+        },
+        computed: {
+
+        },
+        mounted() {
+            setInterval(function() {
+                var a = new Date();
+                demo.hour = a.getHours();
+                demo.minute = a.getMinutes();
+                demo.second = a.getSeconds();
+                demo.milliSecond = a.getMilliseconds();
+            }, 1)
+        }
+    })
+</script>

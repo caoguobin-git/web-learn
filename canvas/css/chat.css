@@ -1,0 +1,151 @@
+#chat-container,
+#content-message-received-box {
+    border: .5px solid silver;
+}
+
+
+#banner-left {
+    background-color: rgba(39, 41, 46, 1);
+    position: relative;
+}
+
+#myIcon,#icon-select {
+    position: absolute;
+    width: 65%;
+    height: 65%;
+    left: 14.135px;
+    top: 30px;
+    border-radius: 4px;
+}
+
+
+#content-message-received-box {
+    background-color: rgba(245, 245, 245, 1);
+    border-left: none;
+    border-right: none;
+}
+
+#contact-box {
+    background-color: rgba(235, 235, 235, 0.8);
+    text-align: center;
+    padding-top: 15px;
+}
+
+
+
+.contact-list-user{
+    padding: 8px 0px;
+    cursor: default;
+}
+.contact-list-user:hover{
+    transition: all .2s ease-in-out;
+    background-color: rgba(220,220,220,1);
+}
+.user-icon {
+    width: 40px;
+    border-radius: 6px;
+}
+
+.currentTargetUser{
+    background-color: rgba(196,196,196,1);
+}
+.user-nick-box,.user-new-message-box{
+    text-align: left;
+}
+.user-nick-box{
+    font-weight: bolder;
+    font-size: 110%;
+    line-height: 20px;
+    margin-bottom: -5px;
+}
+
+.user-new-message-box{
+    color: gray;
+}
+
+#search-contact {
+    width: 80%;
+    height: 35px;
+    border-radius: 4px;
+    border: 1px solid silver;
+    outline: none;
+    appearance: none;
+}
+
+#content-contact-title {
+    font-size: 25px;
+    font-weight: 520;
+    padding: 15px 0px 0px 20px;
+}
+
+#content-message-send-btn-box {
+    vertical-align: middle;
+    padding: 3px 0 0 0;
+    text-align: right;
+}
+
+#content-message-send-box {
+    text-align: center;
+    padding: 10px 0px 0px 6px;
+}
+
+textarea {
+    width: 95%;
+    height: 90%;
+    line-height: 150%;
+    font-size: 20px;
+    font-family: 'kaiti';
+    font-weight: 600;
+    resize: none;
+    border: none;
+}
+
+textarea:focus {
+    border: none;
+    outline: none;
+}
+
+#content-message-send-btn {
+    display: inline-block;
+    background-color: rgba(245, 245, 245, 1);
+    height: 110%;
+    font-size: 120%;
+    color: rgba(96, 96, 96, 1);
+    padding: 1px 15px;
+    border: 1px solid rgba(229, 229, 229, 1);
+    margin-right: 20px;
+    margin-top: -4px;
+    line-height: 200%;
+    border-radius: 0px;
+    cursor: pointer;
+    transition: all .05s;
+}
+
+#content-message-send-btn:hover {
+    background-color: rgba(18, 150, 17, 1);
+    color: white;
+    border: 1px solid rgba(18, 150, 17, 1);
+}
+
+
+*::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    background-color: white;
+    cursor: pointer;
+    display: none;
+}
+
+*::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    background-color: #F5F5F5;
+    cursor: pointer;
+}
+
+*::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+    background-color: #a8a8a8;
+    cursor: pointer;
+}

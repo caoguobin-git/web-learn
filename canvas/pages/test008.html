@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script src="../js/vue.js"></script>
+        <style type="text/css">
+        </style>
+    </head>
+    <body>
+        <div id="demo">
+            <img src="../img/china.png">
+            <span>{{speed}}</span>
+            <input type="range" min="0.05" step="0.05" max="100" v-model="speed"></input>
+        </div>
+    </body>
+</html>
+<script type="text/javascript">
+    var pics = document.getElementsByTagName("img");
+    var a = 0;
+    var demo = new Vue({
+        el: '#demo',
+        data: {
+            position: 0,
+            speed: 0.05,
+            hello: 0
+        },
+        methods: {
+            test: function() {
+                for (var i = 0; i < pics.length; i++) {
+                    pics[i].style.transform = 'rotate(' + this.position + 'deg)'
+                }
+                this.position += this.speed;
+                this.hello = requestAnimationFrame(this.test);
+            }
+        },
+        watch: {
+            speed: function(val) {
+                console.log(val)
+                cancelAnimationFrame(this.hello)
+                requestAnimationFrame(this.test)
+            }
+        },
+        mounted: function() {
+            this.test()
+        }
+    })
+
+
+
+    var pics = document.getElementsByTagName("img");
+    var picsArray = [];
+    for (var i = 0; i < pics.length; i++) {
+        picsArray.push(pics[i].getAttribute('src'))
+    }
+
+    function daluan() {
+        for (var i = 0; i < picsArray.length; i++) {
+            var index = parseInt(Math.random() * picsArray.length);
+            var a = picsArray[i];
+            picsArray[i] = picsArray[index];
+            picsArray[index] = a;
+        }
+
+        for (var i = 0; i < pics.length; i++) {
+            pics[i].setAttribute('src', picsArray[i])
+        }
+    }
+    daluan();
+
+    var a = 360;
+    var pics = document.getElementsByTagName("img");
+    function test() {
+        setInterval(function() {
+            for (var i = 0; i < pics.length; i++) {
+                pics[i].style.transition = 'all 2s'
+                pics[i].style.transform = 'rotate(' + a * parseInt(Math.random() * 2) + 'deg)';
+            }
+            // a+=1;
+        }, 3000)
+    }
+    test()
+</script>

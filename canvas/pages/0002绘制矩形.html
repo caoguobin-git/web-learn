@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>绘制矩形</title>
+    </head>
+    <body>
+        <div id="demo002">
+            <canvas id="canvas-002"></canvas>
+        </div>
+    </body>
+</html>
+<script type="text/javascript">
+    var demo = document.getElementById('canvas-002');
+    var ctx = demo.getContext('2d');
+    ctx.fillRect(10, 10, 100, 50); // 绘制矩形，填充的默认颜色为黑色
+    ctx.strokeRect(9, 9, 102, 52); // 绘制矩形边框
+    ctx.clearRect(15,15,20,15);
+</script>

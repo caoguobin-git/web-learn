@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>传递静态或动态Prop-数字</title>
+        <script src="../js/vue.js"></script>
+	</head>
+	<body>
+        <div id="app-60">
+            <!-- 静态传递值 -->
+            <blog-post title="静态传递值" likes=45></blog-post>
+            <!-- 动态传递值 -->
+            <blog-post v-for="blog in blogs" :likes="blog.likes" :title="blog.title+' by '+blog.author.name"></blog-post>
+        </div>
+	</body>
+</html>
+
+<script type="text/javascript">
+    
+    Vue.component('blog-post',{
+        props:{
+            title:String,
+            likes:Number
+        },
+        template:'<div>{{ title }} likes:{{ likes }}</div>'
+    })
+    
+    var app59=new Vue({
+        el:'#app-60',
+        data:{
+            blogs:[
+                {
+                    title:'Hello',
+                    author:{
+                        name:'caoguobin'
+                    },
+                    likes:43
+                },
+                {
+                    title:'hahah',
+                    author:{
+                        name:'zhangsanfeng'
+                    },
+                    likes:93
+                }
+            ]
+        }
+    })
+</script>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>监听子组件事件</title>
+        <script src="../js/vue.js"></script>
+    </head>
+    <body>
+        <div id="app-52">
+            <div :style="{fontSize:postFontSize+'px'}"  >
+            <blog-post @lagger-font="postFontSize+=$event" v-for="post in posts" :key="post.id" :post="post"></blog-post>
+            </div>
+        </div>
+    </body>
+</html>
+
+
+<script type="text/javascript">
+    
+    Vue.component('blog-post',{
+        props:['post'],
+        template:'<div>\
+                    <h1>{{ post.title }}</h1>\
+                    <p v-html="post.content"></p>\
+                    <button @click="$emit(\'lagger-font\',0.5)">放大</button>\
+                  </div>'
+    })
+    
+    var app52 = new Vue({
+        el: '#app-52',
+        data: {
+            postFontSize:25,
+            posts: [{
+                    id: 1,
+                    title: '111',
+                    content: '<p style="color:\'red\'">和了咯world</p>'
+                },
+                {
+                    id: 2,
+                    title: 'hello',
+                    content: '<p style="color:\'red\'">Hello World</p>'
+                }
+            ]
+        }
+    })
+</script>

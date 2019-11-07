@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>自动滚动到底部</title>
+        <script src="../js/vue.js"></script>
+        <style type="text/css">
+            div {
+                width: 200px;
+                height: 350px;
+                overflow-y: scroll;
+                overflow-x: hidden;
+                border: 2px solid silver;
+            }
+
+            .active {
+                /* animation: myDemo .1s 3; */
+                border: 2px dashed red;
+            }
+
+            @-webkit-keyframes myDemo {
+                0% {
+                    border: 2px solid silver;
+                }
+
+                10% {
+                    border: 2px solid red;
+                }
+                
+                40%{
+                    border: 2px solid silver;
+                }
+                
+                80%{
+                    border: 2px solid red;
+                }
+                
+                100%{
+                    border: 2px solid silver;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div id="demo" :class="{active:active}" @scroll="scrollHandler">
+            <table>
+                <tr v-for="item in items">
+                    <td>{{item}}</td>
+                </tr>
+            </table>
+            <audio src="../audio/song.mp3"  id="myAudio" ></audio>
+        </div>
+    </body>
+</html>
+<script type="text/javascript">
+    var demo = new Vue({
+        el: '#demo',
+        data: {
+            items: [1, 2, 3, 4, 5, 65, 7, 8, 9],
+            active: false,
+            audio:{}
+        },
+        watch: {
+            items: function() {
+//                 setTimeout(function() {
+//                     var div = document.getElementById('demo')
+//                     console.log(div.scrollHeight)
+//                     div.scrollTop = div.scrollHeight;
+//                 }, 50);
+                
+                this.audio=document.getElementById('myAudio');
+                this.audio.play();
+                
+                
+                demo.active = true;
+                console.log('hello')
+                // setTimeout(() => {
+                //     demo.active = false;
+                // }, 5000)
+
+            }
+        },
+        methods:{
+            testAudio:function(e){
+              console.log(e)  
+            },
+            scrollHandler:function(e){
+
+                if((e.target.scrollHeight-e.target.scrollTop)<=(e.target.clientHeight+3)){
+                    demo.active=false;
+                    this.audio.pause();
+                    this.audio.currentTime=0;
+                    
+                }
+                
+                
+                
+            }
+        }
+        // mounted() {
+        //     setInterval(function() {
+        //         demo.items.push(new Date().getTime())
+        //     }, 2000)
+        // }
+    })
+</script>

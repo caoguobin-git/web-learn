@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>椭圆</title>
+        <style type="text/css">
+            #tuoyuan{
+                width: 80px;
+                height: 80px;
+                border: 40px solid black;
+                background-color: blue;
+                transition: border-radius 3s, background-color 4s,width 3s,border-width 3s;
+            }
+            #tuoyuan:hover{
+                width: 200px;
+                border-radius: 50px;
+                background-color: red;
+                border-width: 2px;
+            }
+            
+            #sanjiao{
+                width: 0;
+                height: 0;
+                border-left:50px solid transparent;
+                border-right:50px solid transparent;
+                border-bottom: 86px solid red;
+                margin-left: 30px;
+            }
+            
+        </style>
+	</head>
+	<body>
+        <div id="tuoyuan"></div>
+        <div id="sanjiao" draggable="true" align="center"></div>
+        <code>helloworld</code>
+	</body>
+</html>

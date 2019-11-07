@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>peggi</title>
+        <script src="../js/vue.js"></script>
+        <style type="text/css">
+            #peggi{
+                position: relative;
+                left: 500px;
+                top: 200px;
+                width: 200px;
+                height: 5px;
+                background-color: red;
+                border-radius: 3px;
+                animation: myPeggi 3600s infinite linear;
+                -webkit-transform-origin: 0% 50%;
+            }
+            
+            @-webkit-keyframes myPeggi{
+                0%{transform: rotate(-90deg);}
+                100%{transform: rotate(270deg);}
+            }
+        </style>
+	</head>
+	<body>
+        <div id="peggi">
+            
+        </div>
+	</body>
+</html>
+<script type="text/javascript">
+    var peggi=new Vue({
+        el:'#peggi'
+    })
+    
+    console.log(new Date().getHours()%12)
+</script>

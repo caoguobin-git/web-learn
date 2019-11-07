@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        Title</title>
+</head>
+<body>
+<canvas id="canvas" width="1500" height="2500"></canvas>
+<img src="https://doc.tjrckj.net/pics/3.1.jpg"/>
+</body>
+</html>
+<script>
+    var canvas=document.getElementById('canvas');
+    var ctx=canvas.getContext('2d');
+    window.onload=function () {
+        ctx.translate(20,20);
+        //后面
+        ctx.save();
+        ctx.beginPath();
+        ctx.moveTo(0,0);
+        ctx.lineTo(900,0);
+        ctx.lineTo(900,1800)
+        ctx.lineTo(0,1800);
+        ctx.closePath();
+        ctx.fillStyle='rgba(0,0,0,0.5)';
+        ctx.lineWidth='5'
+        ctx.fill();
+        ctx.stroke();
+
+        //右侧面
+        ctx.save();
+        ctx.beginPath();
+        ctx.moveTo(900,0);
+        ctx.lineTo(1120,220);
+        ctx.lineTo(1120,2020);
+        ctx.lineTo(900,1800)
+        ctx.closePath();
+        ctx.fillStyle='rgba(255,255,0,0.5)';
+        ctx.lineWidth='5'
+        ctx.fill();
+        ctx.stroke();
+
+        //顶面
+        ctx.save();
+        ctx.beginPath();
+        ctx.moveTo(0,0);
+        ctx.lineTo(900,0);
+        ctx.lineTo(1120,220);
+        ctx.lineTo(220,220)
+        ctx.fillStyle='rgba(255,0,0,1)';
+        ctx.closePath();
+        ctx.lineWidth='5'
+        ctx.fill();
+        ctx.stroke();
+        ctx.restore();
+
+        //中间隔板
+        ctx.save();
+        ctx.beginPath();
+        ctx.moveTo(0,950);
+        ctx.lineTo(900,950);
+        ctx.lineTo(1120,1170);
+        ctx.lineTo(220,1170)
+        ctx.closePath();
+        ctx.fillStyle='rgba(255,0,0,1)';
+        ctx.lineWidth='5'
+        ctx.fill();
+        ctx.stroke();
+
+        //底面
+        ctx.save();
+        ctx.beginPath();
+        ctx.moveTo(0,1800);
+        ctx.lineTo(900,1800);
+        ctx.lineTo(1120,2020);
+        ctx.lineTo(220,2020)
+        ctx.closePath();
+        ctx.fillStyle='rgba(255,0,0,1)';
+        ctx.lineWidth='5'
+        ctx.fill();
+        ctx.stroke();
+
+        //左侧面
+        ctx.save();
+        ctx.beginPath();
+        ctx.moveTo(0,0);
+        ctx.lineTo(220,220);
+        ctx.lineTo(220,2020);
+        ctx.lineTo(0,1800)
+        ctx.closePath();
+        ctx.fillStyle='rgba(255,255,180,0.9)';
+        ctx.lineWidth='5'
+        ctx.fill();
+        ctx.stroke();
+
+
+
+
+
+
+    }
+</script>

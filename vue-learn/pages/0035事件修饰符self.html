@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>事件修饰符self</title>
+        <script src="../js/vue.js"></script>
+    </head>
+    <body>
+        <!-- 只当在 event.target 是当前元素自身时触发处理函数 -->
+        <!-- 即事件不是从内部元素触发的 -->
+        <div id="app-34">
+            <div @click.self="sayHi">
+                <button @click="sayHello">Hello</button>
+            </div>
+        </div>
+    </body>
+</html>
+<script type="text/javascript">
+    var app34 = new Vue({
+        el: '#app-34',
+        methods: {
+            sayHello: function() {
+                alert("hello");
+            },
+            sayHi: function() {
+                alert("hi");
+            }
+        }
+    })
+</script>

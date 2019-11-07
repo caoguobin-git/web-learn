@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>表单输入绑定</title>
+		<script type="text/javascript" src="../js/vue.js"></script>
+		<style>
+			body{
+				background: #000000;
+				color: white;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- 文本 -->
+		<div id="text-example">
+			<p>Message is {{message}}</p>
+			<input v-model="message" placeholder="edit me" />
+		</div>
+
+		<!-- 多长文本 -->
+		<div id="multiple-example">
+			<p style="white-space: pre; color: red;font-size: 20px;">{{message}}</p>
+			<textarea v-model="message" placeholder="add multiple lines"></textarea>
+		</div>
+
+		<!-- 单个复选框 -->
+		<div id="chackbox-example">
+			<input type="checkbox" id="checkbox" v-model="checked" />
+			<label for="checkbox">{{checked}}</label>
+		</div>
+
+		<!-- 多个复选框 -->
+		<div id="example-3">
+			<input type="checkbox" id="jack" value="Jack" v-model="checkedNames" />
+			<label for="jack">Jack</label>
+			<input type="checkbox" id="john" value="John" v-model="checkedNames" />
+			<label for="john">John</label>
+			<input type="checkbox" id="mike" value="Mike" v-model="checkedNames" />
+			<label for="mike">Mike</label>
+			<br />
+			<span>Checked names: {{checkedNames}}</span>
+		</div>
+
+		<!-- 单选按钮 -->
+		<div id="example-4">
+			<input type="radio" id="one" value="One" v-model="picked" />
+			<label for="one">One</label>
+			<input type="radio" id="two" value="Two" v-model="picked" />
+			<label for="two">Two</label>
+			<br>
+			<span>Picked : {{picked}}</span>
+		</div>
+
+		<!-- 单选选择框 -->
+		<div id="example-5">
+			<select v-model="selected">
+				<option disabled="disabled" value="">请选择</option>
+				<option value="a">A</option>
+				<option value="b">B</option>
+				<option value="c">C</option>
+			</select>
+			<span>Selected : {{selected}}</span>
+		</div>
+
+		<!-- 多选选择框 -->
+		<div id="example-6">
+			<select v-model="selected" multiple="multiple">
+				<option disabled="disabled" value="">请选择</option>
+				<option value="a">A</option>
+				<option value="b">B</option>
+				<option value="c">C</option>
+			</select>
+			<span>Selected: {{selected}}</span>
+		</div>
+
+		<!-- 动态选项 -->
+		<div id="example-7">
+			777
+			<select v-model="selected" multiple="multiple" style="width: 50px;">
+				<option v-for="(option,index) in options" :value="option.value">{{values[index]}} {{option.text}}</option>
+			</select>
+			<span>Selected : {{selected}}</span>
+		</div>
+
+	</body>
+</html>
+<script>
+	var example7 = new Vue({
+		el: "#example-7",
+		data: {
+			values:['1','2','3'],
+			selected: [],
+			options: [{
+					text: 'A',value:'1'
+				},
+				{
+					text: 'B',value:'2'
+				},
+				{
+					text: 'C',value:'3'
+				}
+			]
+		}
+	})
+
+	var example6 = new Vue({
+		el: "#example-6",
+		data: {
+			selected: []
+		}
+	})
+	var example5 = new Vue({
+		el: "#example-5",
+		data: {
+			selected: ''
+		}
+	})
+
+	var example4 = new Vue({
+		el: "#example-4",
+		data: {
+			picked: ''
+		}
+	})
+
+	var example3 = new Vue({
+		el: '#example-3',
+		data: {
+			checkedNames: []
+		}
+	})
+
+	var checkboxExample = new Vue({
+		el: "#chackbox-example",
+		data: {
+			checked: false
+		}
+	})
+
+	var multipleExample = new Vue({
+		el: "#multiple-example",
+		data: {
+			message: ''
+		}
+	})
+
+	var textExample = new Vue({
+		el: "#text-example",
+		data: {
+			message: ''
+		}
+	})
+</script>

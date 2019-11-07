@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style> 
+div
+{
+width:100px;
+height:100px;
+background:red;
+border-radius:50px;
+text-align:center;
+line-height:100px;
+position:relative;
+animation:mymove  infinite;
+-webkit-animation:mymove infinite linear; /*Safari and Chrome*/
+-webkit-animation-duration: 1s;
+}
+
+@keyframes mymove
+{
+from {transform:rotate(0deg);}
+to {transform:rotate(360deg);}
+}
+
+@-webkit-keyframes mymove /*Safari and Chrome*/
+{
+from {left:0px; transform:rotate(0deg);}
+to {left:200px;  transform:rotate(250deg);}
+}
+</style>
+</head>
+<body>
+
+<p><strong>注释：</strong>Internet Explorer 9 以及更早的版本不支持 animation 属性。</p>
+
+<div>W</div>
+
+</body>
+</html>

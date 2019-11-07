@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>单向数据流</title>
+        <script src="../js/vue.js"></script>
+    </head>
+    <body>
+        <div id="app-64">
+            <my-demo v-for="number in numbers" :key="number" :initial-counter="number"></my-demo>
+            <!-- 即便 `false` 是静态的，我们仍然需要 `v-bind` 来告诉 Vue -->
+            <!-- 这是一个 JavaScript 表达式而不是一个字符串。-->
+            <my-demo-transform size="123"></my-demo-transform>
+        </div>
+    </body>
+</html>
+
+<script type="text/javascript">
+    Vue.component('my-demo', {
+        props: ['initialCounter'],
+        template: '<button  @click="counter++">You have clicked me {{ counter }} times</button>',
+        data: function() {
+            return {
+                counter: this.initialCounter
+            }
+        }
+    })
+
+    Vue.component('my-demo-transform', {
+        props: {
+            size: String
+        },
+        template: '<div>{{ normalizedSize }}</div>',
+        computed: {
+            normalizedSize: function() {
+                return this.size.trim().toLowerCase() + ' px';
+            }
+        }
+    })
+
+    var app64 = new Vue({
+        el: '#app-64',
+        data: {
+            numbers: [12, 32, 3]
+        }
+    })
+</script>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>表单输入绑定-文本</title>
+        <script src="../js/vue.js"></script>
+        <style type="text/css">
+            p{
+                white-space: pre;
+            }
+        </style>
+	</head>
+	<body>
+        <div id="app-38">
+            <p>Message is: {{ message }}</p>
+            <input type="text" v-model="message" />
+        </div>
+	</body>
+</html>
+<script type="text/javascript">
+    var app38=new Vue({
+        el:'#app-38',
+        data:{
+            message:''
+        }
+    })
+</script>

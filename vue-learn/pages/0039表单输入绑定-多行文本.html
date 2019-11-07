@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>表单输入绑定-多行文本</title>
+        <script src="../js/vue.js"></script>
+	</head>
+	<body>
+        <div id="app-39">
+            <p style="white-space: pre;">{{ message }}</p>
+            <textarea v-model="message"></textarea>
+        </div>
+	</body>
+</html>
+
+<script type="text/javascript">
+    var app39=new Vue({
+        el:'#app-39',
+        data:{
+            message:''
+        }
+    })
+</script>

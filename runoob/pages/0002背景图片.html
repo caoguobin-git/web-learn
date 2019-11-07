@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>背景图像</title>
+        <style type="text/css">
+            body{
+                background-image: url(../img/paper.gif);
+                background-color: red;
+            }
+            div{
+                width: 12.5rem;
+                height: 12.5rem;
+                background-image: url(../img/bgdesert.jpg);
+                background-repeat: repeat;
+                
+            }
+        </style>
+	</head>
+	<body>
+        背景图像测试
+        <div>
+            不好的背景
+        </div>
+	</body>
+</html>
+<script type="text/javascript">
+    document.oncopy=function(){
+        return false;
+    }
+    
+    document.onselectstart=function(){
+        return false;
+    }
+</script>

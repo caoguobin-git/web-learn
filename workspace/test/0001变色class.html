@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>变色</title>
+        <script src="../js/vue.js"></script>
+        <script src="../js/jquery-3.4.1.js"></script>
+        <style type="text/css">
+            #price-change-test {
+                width: 100px;
+                height: 25px;
+                border-radius: 5px;
+                border: 1px solid rgba(125, 125, 125, 0.5);
+                text-align: center;
+                line-height: 25px;
+            }
+
+            .priceUp {
+                animation: myPriceUpAni 2s linear;
+            }
+
+            @-webkit-keyframes myPriceUpAni {
+                0% {
+                    background-color: red;
+                }
+
+                90% {
+                    background-color: red;
+                }
+
+                100% {
+                    background-color: white;
+                }
+            }
+
+            .priceDown {
+                animation: myPriceDownAni 2s linear;
+            }
+
+            @-webkit-keyframes myPriceDownAni {
+                0% {
+                    background-color: blue;
+                }
+
+                90% {
+                    background-color: blue;
+                }
+
+                100% {
+                    background-color: white;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div id="price-change-test" :class="classObject">{{ price }}</div>
+    </body>
+</html>
+
+<script type="text/javascript">
+    var priceChange = new Vue({
+        el: '#price-change-test',
+        data: {
+            priceUpV: true,
+            price: 1
+        },
+        computed: {
+            classObject: function() {
+                return {
+                    priceUp: this.priceUpV,
+                    priceDown: !this.priceUpV
+                }
+            }
+        }
+    })
+
+    var pre = 0;
+
+    setInterval(function() {
+        var now = Math.random();
+        console.log("pre:  "+pre+"  now:  "+now);
+        priceChange.priceUpV = (now > pre ? true : false);
+        priceChange.price = now.toFixed(5);
+        pre = now;
+    }, 1000)
+</script>

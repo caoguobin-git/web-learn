@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>
+		Title</title>
+	<script src="../js/vue.js"></script>
+	<style>
+		.items {
+			width: 200px;
+			height: 100px;
+			border: 1px solid black;
+		}
+		
+		.active {
+			background: red;
+		}
+	</style>
+</head>
+<body>
+<div id="demo">
+	<my-div
+			:messages="messages">
+	</my-div>
+</div>
+</body>
+</html>
+<script>
+    Vue.component('my-div', {
+        props: ['messages'],
+        data: function () {
+            return {
+                currentDisplay: ''
+            }
+        },
+        template: '<div @click="shuchu()"><div v-for="item in messages" @click.stop="currentDisplay=item" :class="getClass(item)" class="items">{{item}}</div></div>',
+        methods: {
+            shuchu:function(val){
+              console.log('div 事件')
+			},
+            getClass: function (val) {
+                return val == this.currentDisplay ? 'active' : ''
+            }
+        }
+    })
+    var demo = new Vue({
+        el: '#demo',
+        data: {
+            currentDiv: '1',
+            messages: [1, 2, 3, 4]
+        },
+        methods: {}
+    })
+
+</script>

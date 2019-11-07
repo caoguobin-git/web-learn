@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>绘制圆弧</title>
+        <script src="../js/vue.js"></script>
+    </head>
+    <body>
+        <div id="demo">
+            <canvas id="canvas-006" width="800" height="400"></canvas>
+            <input v-model="colorPic" type="color" />
+            <p :style="{color:colorPic}"  style="font-weight: bolder;">Hello World</p>
+        </div>
+    </body>
+</html>
+<script type="text/javascript">
+    var demo = document.getElementById('canvas-006');
+    var ctx = demo.getContext('2d');
+    ctx.beginPath();
+    ctx.moveTo(50, 50);
+    //参数1、2：控制点1坐标   参数3、4：控制点2坐标  参数4：圆弧半径
+    ctx.arcTo(200, 50, 200, 200, 100);
+    ctx.lineTo(200, 200)
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.rect(50, 45, 10, 10);
+    ctx.rect(195, 50, 10, 10)
+    ctx.rect(195, 200, 10, 10)
+    ctx.fill()
+    
+    var vueDemo=new Vue({
+        el:'#demo',
+        data:{
+            colorPic:''
+        },
+        watch:{
+            colorPic:function(val){
+                console.log(val)
+            }
+        }
+    })
+</script>

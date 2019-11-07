@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>事件-内联处理器中的方法</title>
+        <script src="../js/vue.js"></script>
+	</head>
+	<body>
+        <div id="app-31">
+            <button @click="say('hi',$event)">Say hi</button>
+            <button @click="say('what',$event)">Say what</button>
+        </div>
+	</body>
+</html>
+
+<script type="text/javascript">
+    var app31=new Vue({
+        el:'#app-31',
+        data:{
+            
+        },
+        methods:{
+            say:function(val,e){
+                console.log(event)
+                alert(val);
+                alert(e.target.tagName)
+            }
+        }
+    })
+</script>

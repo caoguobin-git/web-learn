@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>值绑定-单选按钮</title>
+        <script src="../js/vue.js"></script>
+	</head>
+	<body>
+        <div id="app-44">
+            <input type="radio" name="test" v-model="pick" :value="a" />
+            <input type="radio" name="test" v-model="pick" :value="b" />
+            <p>{{pick}}</p>
+        </div>
+	</body>
+</html>
+
+<script type="text/javascript">
+    var app44=new Vue({
+        el:'#app-44',
+        data:{
+            pick:'',
+            a:'Hello World',
+            b:'Hello Vue.js'
+        }
+    })
+</script>

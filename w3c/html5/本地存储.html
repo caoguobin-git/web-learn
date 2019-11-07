@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+        <p id="myLocalDatas"> </p>
+	</body>
+</html>
+
+<script type="text/javascript">
+    window.onload=function(){
+        localStorage.setItem("lastname","caoguobin");
+        var text=document.getElementById("myLocalDatas");
+        text.innerHTML=localStorage.getItem("lastname");
+        console.log("内容"+localStorage.getItem("lastname"))
+    }
+</script>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>ID选择器</title>
+    </head>
+    <body>
+        <div id="div1">
+            <h1>Hello world</h1>
+            <button onclick="changeColor()">改变颜色</button>
+        </div>
+    </body>
+</html>
+<script type="text/javascript">
+    function changeColor() {
+        var div1 = document.getElementById("div1");
+        var color = getRandomColor();
+        div1.style.color = color;
+
+        var span = document.createElement("p");
+        span.style.fontSize = Math.floor(Math.random() * 40) + 10 + "px";
+        span.style.fontWeight = "bolder";
+        var text = document.createTextNode("动态创建的节点\n");
+        span.appendChild(text);
+        div1.appendChild(span);
+        var spans = document.getElementsByTagName("p");
+        for (var i = 0; i < spans.length; i++) {
+            spans[i].style.color = getRandomColor()
+        }
+        console.log(document.getElementsByTagName("body")==document.body)
+        
+    }
+
+    function getRandomColor() {
+        var str = "123456789ABCDEF";
+        var randomRed1 = str.charAt(Math.floor(Math.random() * 15));
+        var randomRed2 = str.charAt(Math.floor(Math.random() * 15));
+        var randomGreen1 = str.charAt(Math.floor(Math.random() * 15));
+        var randomGreen2 = str.charAt(Math.floor(Math.random() * 15));
+        var randomBlue1 = str.charAt(Math.floor(Math.random() * 15));
+        var randomBlue2 = str.charAt(Math.floor(Math.random() * 15));
+        var color = "#" + randomRed1 + randomRed2 + randomGreen1 + randomGreen2 + randomBlue1 + randomBlue2;
+        console.log(color);
+        return color;
+    }
+</script>

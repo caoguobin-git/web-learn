@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>盒子模型</title>
+        <style type="text/css">
+            div#inner{
+                position: absolute;
+                width: 300px;
+                height: 150px;
+                background-color: #000000;
+                border-image: url(../img/bgdesert.jpg);
+                box-sizing: border-box;
+                text-align: center;
+                vertical-align: middle;
+                border: 10px solid red;
+                border-radius: 5px;
+                box-shadow: 0 0 10px 3px red ;
+            }
+            div#inner2{
+                position: absolute;
+                left: 50px;
+                top: 35px;
+                opacity: .5;
+                width: 300px;
+                height: 150px;
+                background-color: #000000;
+                border-image: url(../img/bgdesert.jpg);
+                box-sizing: border-box;
+                text-align: center;
+                vertical-align: middle;
+                border: 10px solid red;
+                border-radius: 5px;
+                box-shadow: 0 0 10px 3px red ;
+            }
+            img{
+                width: 80%;
+            }
+        </style>
+	</head>
+	<body>
+        <div id="outer">
+            <div id="inner">
+                <!-- <img src="../img/bg_sky.jpg" /> -->
+            </div>
+            <div id="inner2">
+                
+            </div>
+        </div>
+	</body>
+</html>

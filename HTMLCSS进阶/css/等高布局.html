@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>等高布局</title>
+        <style type="text/css">
+            #wrapper{
+                display: table-row;
+            }
+            #img-box{
+                display: table-cell;
+                vertical-align: middle;
+                text-align: center;
+                width: 150px;
+                border: 1px solid red;
+                padding: 20px;
+            }
+            
+            #text-box{
+                display: table-cell;
+                width: 200px;
+                border: 1px solid red;
+                border-left: none;
+                padding: 10px;
+            }
+            img{
+                width: 150px;
+                height: 150px;
+            }
+        </style>
+	</head>
+	<body>
+        <div id="wrapper">
+            <div id="img-box">
+                <img src="../img/bg.jpg" alt="草原" title="草原" >
+            </div>
+            <div id="text-box">
+                <span>《ONE PIECE》（海贼王、航海王）简称“OP”，是日本漫画家尾田荣一郎作画的少年漫画作品。在《周刊少年Jump》1997年34号开始连载。描述了拥有橡皮身体戴草帽的青年路飞，以成为“海贼王”为目标和同伴在大海展开冒险的故事。</span>
+            </div>
+        </div>
+	</body>
+</html>

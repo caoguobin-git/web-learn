@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>图片回显</title>
+        <script src="../js/vue.js"></script>
+        <script>
+            document.documentElement.style.fontSize = document.documentElement.clientWidth / 19200*100 + 'px';
+        </script>
+        <style type="text/css">
+            /*            html{
+                font-size: 20px
+            } */
+            #demo{
+                position: relative;
+            }
+            img {
+                width: 3rem;
+                height: 2rem;
+                margin: 0.625rem;
+                animation: imgDemo 3s 1 linear;
+            }
+            
+            @-webkit-keyframes imgDemo{
+                from{opacity: 0;}
+                to{opacity: 1;}
+            }
+            input{
+                position: absolute;
+                width: 15rem;
+                height: 12.5rem;
+                opacity: 0;
+                outline: none;
+            }
+
+            #input-bg{
+                position: absolute;
+                width: 15rem;
+                height: 12.5rem;
+                opacity: .5;
+                margin: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="demo">
+            <img src="../img/china.png" id="input-bg">
+            <input type="file" @change="displayPic" multiple />
+            <span style="position: fixed; right: 5px;bottom: 1.25rem;"><img style="width: 1.25rem;height: 1.25rem;" src="../img/myIcon.jpg" /> </span>
+            
+          
+            <img v-for="item in pic" :src="item">
+        </div>
+    </body>
+</html>
+
+<script type="text/javascript">
+    var demo = new Vue({
+        el: '#demo',
+        data: {
+            pic: []
+        },
+        methods: {
+            displayPic: function(e) {
+                var pic = e.target.files;
+
+                for (var i = 0; i < pic.length; i++) {
+                    var reader = new FileReader();
+                    var picData = pic[i];
+                    reader.readAsDataURL(picData);
+                    reader.onload = function(x) {
+                       demo.pic.push(this.result)
+                       
+                       (function(){
+                           setTimeout(function(){
+                               console.log(demo.pic[i])
+                           },1000)
+                       }(i))
+                    }
+                }
+            },
+        },
+        mounted() {
+            console.log(document.documentElement.clientWidth)
+            console.log(window.innerWidth)
+            console.log(window.innerHeight)
+            console.log(window.outerWidth)
+            console.log(window.outerHeight)
+        }
+    })
+</script>

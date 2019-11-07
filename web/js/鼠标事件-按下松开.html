@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>鼠标事件-按下松开</title>
+        <style type="text/css">
+            
+        </style>
+	</head>
+	<body>
+        <h1 id="title">绿叶学习网</h1>
+        <hr>
+        <input id="btn" type="button" value="button" />
+	</body>
+</html>
+<script type="text/javascript">
+    window.onload=function(){
+        hello()
+    }
+    
+    function hello(){
+        var oDiv=document.getElementById("title");
+        var oBtn=document.getElementById("btn");
+        
+        oBtn.onmousedown=function(){
+            oDiv.style.color="red";
+        }
+        
+        oBtn.onmouseup=function(){
+            oDiv.style.color="black";
+        }
+    }
+</script>

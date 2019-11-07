@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>图片轮播</title>
+        <script src="../js/vue.js"></script>
+        <script src="../js/jquery-3.4.1.js"></script>
+        <style type="text/css">
+            #demo-002 {
+                position: relative;
+                width: 150px;
+                height: 100px;
+            }
+
+            img {
+                position: absolute;
+                width: 150px;
+                height: 100px;
+            }
+
+            #img-container {
+                position: absolute;
+                width: 650px;
+                height: 100px;
+                /* animation: myDemo 5s infinite linear; */
+            }
+
+            /*            @-webkit-keyframes myDemo{
+                from{left: 0px;}
+                to{left: -475px;}
+            } */
+
+            .image-enter-active,
+            .image-leave-active {
+                transition: opacity 5s;
+            }
+
+            .image-enter,
+            .image-leave-to {
+                opacity: 0;
+            }
+
+            #controller {
+                position: absolute;
+                top: 88%;
+                left: 37%;
+                width: 26%;
+                height: 10%;
+                opacity: .5;
+                background-color: black;
+                z-index: 20;
+                color: red;
+                font-size: 8px;
+                padding: 0px;
+                border-radius: 10px;
+            }
+
+            table {
+                margin-top: -3.5px;
+                width: 100%;
+            }
+
+            td {
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="demo-002">
+            <div id="img-container">
+                <transition name="image" v-for="img in imgs" :key="img">
+                    <img v-if="displayImg===img" :src="'../img/'+(img+1)+'.jpg'" />
+                </transition>
+            </div>
+            <div id="controller">
+                <table style="table-layout: fixed;">
+                    <tr>
+                        <td v-for="index in imgs" @click="pause(index)">{{ index+1 }}</td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+    </body>
+</html>
+
+<script type="text/javascript">
+    var timer;
+
+
+    var demo002 = new Vue({
+        el: '#demo-002',
+        data: {
+            displayImg: 0,
+            imgs: [0, 1, 2, 3]
+        },
+        methods: {
+            pause: function(val) {
+                this.displayImg = val;
+                clearInterval(timer);
+                setTimer();
+            }
+        }
+    })
+
+    function setTimer() {
+        timer = setInterval(function() {
+            var a = demo002.displayImg;
+            demo002.displayImg = (++a) % 4;
+        }, 5000)
+    }
+
+    $(function() {
+        setTimer();
+    })
+</script>

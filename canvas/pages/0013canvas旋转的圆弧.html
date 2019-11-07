@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <canvas id="canvas-demo" width="800" height="800"></canvas>
+    </body>
+</html>
+
+<script type="text/javascript">
+    var canvas = document.getElementById('canvas-demo');
+    var ctx = canvas.getContext('2d');
+
+    ctx.lineWidth = 30;
+    ctx.lineCap='round';
+    var rotateDeg=0;
+    ctx.strokeStyle='#000000'
+    setInterval(function() {
+        // ctx.clearRect(0,0,800,800);
+        ctx.beginPath();
+        ctx.arc(400, 400, 200, 0 * Math.PI, (rotateDeg) * Math.PI);
+        ctx.stroke();
+        rotateDeg+=0.01;
+        if(Math.abs(rotateDeg-2)<1.5){
+            ctx.strokeStyle = getRandomColor();
+            ctx.lineWidth-=2;
+            if(ctx.lineWidth==2){
+                ctx.lineWidth=30;
+            }
+            console.log("111");
+            rotateDeg=0;
+        }
+        
+    }, 5)
+
+    function getRandomColor() {
+        var result = '#';
+        for (var i = 0; i < 6; i++) {
+            var a = parseInt(Math.random() * 16 + 1).toString(16);
+            result += a;
+        }
+        return result;
+    }
+</script>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>手绘功能</title>
+        <script src="../js/vue.js"></script>
+    </head>
+    <body>
+        <div id="demo">
+            <canvas style="border: 5px solid silver;" @mousemove="drawPic" @click="switchDraw" id="canvas-008" width="800" height="400"></canvas>
+            <br>
+            <span :style="{backgroundColor:strokeStyle,width:lineWidth+'px'}" style="display: inline-block;border-radius: 50px;">{{lineWidth}}</span><br><input
+                type="range" min="1" maxlength="20" value="5" v-model="lineWidth" />
+            <input type="color" v-model="strokeStyle" />
+        </div>
+    </body>
+</html>
+
+<script type="text/javascript">
+    var demo = new Vue({
+        el: '#demo',
+        data: {
+            draw: false,
+            ctx: '',
+            startPoint: {
+                x: 0,
+                y: 0
+            },
+            lineWidth: 5,
+            strokeStyle: '#FF0000'
+        },
+        methods: {
+            drawPic: function(e) {
+                if (this.draw) {
+                    var x = e.clientX - 7;
+                    var y = e.clientY - 7;
+                    var demo1 = document.getElementById('canvas-008');
+                    var ctx = demo1.getContext('2d');
+                    ctx.fillStyle = '#FF0000';
+                    ctx.lineCap = 'round';
+                    ctx.beginPath();
+                    ctx.lineWidth = this.lineWidth;
+                    ctx.strokeStyle = this.strokeStyle;
+                    ctx.moveTo(this.startPoint.x, this.startPoint.y);
+                    ctx.lineTo(x, y, 10, 10);
+
+                    ctx.stroke();
+                    this.startPoint.x = x;
+                    this.startPoint.y = y;
+                }
+            },
+            switchDraw: function(e) {
+                this.draw = !this.draw;
+                this.startPoint.x = e.clientX;
+                this.startPoint.y = e.clientY;
+            }
+        },
+        created() {
+            // var demo1 = document.getElementById('canvas-008');
+            // this.ctx = demo1.getContext('2d');
+            // document.onmousedown = function(e) {
+            //     if (e.buttons == 1) {
+            //         this.draw = true;
+            //         console.log(this.draw)
+            //     }
+            // }
+            // document.onmouseup = function(e) {
+            //     console.log(e.detail)
+            //     if (e.detail == '1') {
+            //         this.draw = false;
+            //         console.log(this.draw)
+            //     }
+            // }
+        }
+    })
+</script>

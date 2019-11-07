@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>值绑定-选择框的选项</title>
+        <script src="../js/vue.js"></script>
+	</head>
+	<body>
+        <div id="app-45">
+            <select v-model="selected">
+                <option :value="{number:123}">123</option>
+                <option :value="{number:456}">456</option>
+            </select>
+            <p>{{selected.number}}</p>
+        </div>
+	</body>
+</html>
+
+<script type="text/javascript">
+    var app45=new Vue({
+        el:'#app-45',
+        data:{
+            selected:''
+        }
+    })
+</script>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>元素复用-key</title>
+        <script src="../js/vue.js"></script>
+    </head>
+    <body>
+        <div id="app-21">
+            <template v-if="loginType==='username'">
+                <label>Username: </label>
+                <input list="myList" type="text" placeholder="Enter your username" autofocus="autofocus" />
+                <datalist id="myList">
+                    <option>天安门</option>
+                    <option>颐和园</option>
+                    <option>王府井</option>
+                    <option>天塔</option>
+                    <option>啊手动阀天</option>
+                </datalist>
+            </template>
+            <template v-else>
+                <label>Email: </label>
+                <input type="text" placeholder="Enter your email address" key="username"/>
+            </template>
+            <div v-show="seenThis" style="width: 100px;height: 100px;background-color: red;"></div>
+                
+            <p>
+                <input type="button" @click="toggleLoginType()" value="Toggle login type" key="email"/>
+            </p>
+        </div>
+    </body>
+</html>
+<script type="text/javascript">
+    var app21 = new Vue({
+        el: '#app-21',
+        data: {
+            loginType: 'username',
+            seenThis:true
+        },
+        methods: {
+            toggleLoginType: function() {
+                this.loginType = this.loginType === 'username' ? 'email' : 'username';
+            }
+        }
+    })
+</script>

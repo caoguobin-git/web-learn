@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>列表的交错过渡</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+        <style type="text/css">
+            ul{
+                list-style-type: none;
+            }
+            #hello{
+                width: 300px;
+                height: 200px;
+                overflow-y: scroll;
+            }
+        </style>
+	</head>
+	<body>
+        <div id="staggered-list-demo">
+          <input v-model="query">
+          <div  id="hello">
+              <transition-group
+                name="staggered-fade"
+                tag="ul"
+                v-bind:css="false"
+                v-on:before-enter="beforeEnter"
+                v-on:enter="enter"
+                v-on:leave="leave"
+              >
+                <li
+                  v-for="(item, index) in computedList"
+                  v-bind:key="item.msg"
+                  v-bind:data-index="index"
+                >{{ item.msg }}</li>
+              </transition-group>
+          </div>
+        </div>
+	</body>
+</html>
+<script type="text/javascript">
+    new Vue({
+      el: '#staggered-list-demo',
+      data: {
+        query: '',
+        list: [
+          {msg:'阿布哈兹'},
+          {msg:'阿富汗'},
+          {msg:'阿尔巴尼亚'},
+          {msg:'阿尔及利亚'},
+          {msg:'美属萨摩亚（美国）'},
+          {msg:'安道尔'},
+          {msg:'安哥拉'},
+          {msg:'安圭拉'},
+          {msg:'安提瓜和巴布达'},
+          {msg:'阿根廷'},
+          {msg:'亚美尼亚'},
+          {msg:'阿鲁巴（荷兰）'},
+          {msg:'澳大利亚'},
+          {msg:'奥地利'},
+          {msg:'阿塞拜疆'},
+          {msg:'巴哈马'},
+          {msg:'巴林'},
+          {msg:'孟加拉国'},
+          {msg:'巴巴多斯'},
+          {msg:'白俄罗斯'},
+          {msg:'比利时'},
+          {msg:'伯利兹'},
+          {msg:'贝宁'},
+          {msg:'百慕大（英国）'},
+          {msg:'不丹'},
+          {msg:'玻利维亚'},
+          {msg:'波黑'},
+          {msg:'博茨瓦纳'},
+          {msg:'巴西'},
+          {msg:'英属印度洋领地（英国）'},
+          {msg:'文莱'},
+          {msg:'保加利亚'},
+          {msg:'布基纳法索'},
+          {msg:'布隆迪'},
+          {msg:'柬埔寨'},
+          {msg:'喀麦隆'},
+          {msg:'加拿大'},
+          {msg:'佛得角'},
+          {msg:'开曼群岛（英国）'},
+          {msg:'中非共和国'},
+          {msg:'乍得'},
+          {msg:'智利'},
+          {msg:'中国'},
+          {msg:'圣诞岛（澳大利亚）'},
+          {msg:'科科斯(基林)群岛（澳大利亚）'},
+          {msg:'哥伦比亚'},
+          {msg:'科摩罗'},
+          {msg:'刚果共和国'},
+          {msg:'刚果民主共和国'},
+          {msg:'库克群岛（新西兰）'},
+          {msg:'哥斯达黎加'},
+          {msg:'科特迪瓦'},
+          {msg:'克罗地亚'},
+          {msg:'古巴'},
+          {msg:'库拉索(荷兰)'},
+          {msg:'塞浦路斯'},
+          {msg:'捷克'},
+          {msg:'丹麦'},
+          {msg:'吉布提'},
+          {msg:'多米尼克'},
+          {msg:'多米尼加'},
+          {msg:'厄瓜多尔'},
+          {msg:'埃及'},
+          {msg:'萨尔瓦多'},
+          {msg:'赤道几内亚'},
+          {msg:'厄立特里亚'},
+          {msg:'爱沙尼亚'},
+          {msg:'埃塞俄比亚'},
+          {msg:'福克兰群岛（英国、阿根廷争议）'},
+          {msg:'法罗群岛（丹麦）'},
+          {msg:'斐济'},
+          {msg:'芬兰'},
+          {msg:'法国'},
+          {msg:'法属波利尼西亚（法国）'},
+          {msg:'加蓬'},
+          {msg:'冈比亚'},
+          {msg:'格鲁吉亚'},
+          {msg:'德国'},
+          {msg:'加纳'},
+          {msg:'直布罗陀（英国）'},
+          {msg:'希腊'},
+          {msg:'格陵兰（丹麦）'},
+          {msg:'格林纳达'},
+          {msg:'关岛（美国）'},
+          {msg:'危地马拉'},
+          {msg:'根西岛（英国）'},
+          {msg:'几内亚'},
+          {msg:'几内亚比绍'},
+          {msg:'圭亚那'},
+          {msg:'海地'},
+          {msg:'洪都拉斯'},
+          {msg:'中国香港'},
+          {msg:'匈牙利'},
+          {msg:'冰岛'},
+          {msg:'印度'},
+          {msg:'印尼'},
+          {msg:'伊朗'},
+          {msg:'伊拉克'},
+          {msg:'爱尔兰'},
+          {msg:'以色列'},
+          {msg:'意大利'},
+          {msg:'牙买加'},
+          {msg:'日本'},
+          {msg:'泽西岛（英国）'},
+          {msg:'约旦'},
+          {msg:'肯尼亚'},
+          {msg:'基里巴斯'},
+          {msg:'韩国'},
+          {msg:'科索沃'},
+          {msg:'科威特'},
+          {msg:'吉尔吉斯斯坦'},
+          {msg:'老挝'},
+          {msg:'拉脱维亚'},
+          {msg:'黎巴嫩'},
+          {msg:'莱索托'},
+          {msg:'利比里亚'},
+          {msg:'利比亚'},
+          {msg:'列支敦士登'},
+          {msg:'立陶宛'},
+          {msg:'卢森堡'},
+          {msg:'中国澳门'},
+          {msg:'马其顿'},
+          {msg:'马达加斯加'},
+          {msg:'马拉维'},
+          {msg:'马来西亚'},
+          {msg:'马尔代夫'},
+          {msg:'马里'},
+          {msg:'马耳他'},
+          {msg:'马恩岛（英国）'},
+          {msg:'马绍尔群岛'},
+          {msg:'毛里塔尼亚'},
+          {msg:'毛里求斯'},
+          {msg:'马约特（法国）'},
+          {msg:'墨西哥'},
+          {msg:'密克罗尼西亚联邦'},
+          {msg:'摩尔多瓦'},
+          {msg:'摩纳哥'},
+          {msg:'蒙古国'},
+          {msg:'黑山'},
+          {msg:'蒙特塞拉特岛（英国）'},
+          {msg:'摩洛哥'},
+          {msg:'莫桑比克'},
+          {msg:'缅甸'},
+          {msg:'纳戈尔诺-卡拉巴赫'},
+          {msg:'纳米比亚'},
+          {msg:'瑙鲁'},
+          {msg:'尼泊尔'},
+          {msg:'荷兰'},
+          {msg:'新喀里多尼亚（法国）'},
+          {msg:'新西兰'},
+          {msg:'尼加拉瓜'},
+          {msg:'尼日尔'},
+          {msg:'尼日利亚'},
+          {msg:'纽埃（新西兰）'},
+          {msg:'诺福克岛（澳大利亚）'},
+          {msg:'北塞浦路斯'},
+          {msg:'北马里亚纳群岛（美国）'},
+          {msg:'挪威'},
+          {msg:'阿曼'},
+          {msg:'巴基斯坦'},
+          {msg:'帕劳'},
+          {msg:'巴勒斯坦'},
+          {msg:'巴拿马'},
+          {msg:'巴布亚新几内亚'},
+          {msg:'巴拉圭'},
+          {msg:'朝鲜'},
+          {msg:'秘鲁'},
+          {msg:'菲律宾'},
+          {msg:'皮特凯恩群岛（英国）'},
+          {msg:'波兰'},
+          {msg:'葡萄牙'},
+          {msg:'德涅斯特河左岸'},
+          {msg:'波多黎各（美国）'},
+          {msg:'卡塔尔'},
+          {msg:'留尼汪（法国）'},
+          {msg:'罗马尼亚'},
+          {msg:'俄罗斯'},
+          {msg:'卢旺达'},
+          {msg:'圣赫勒拿岛（英国）'},
+          {msg:'圣基茨和尼维斯'},
+          {msg:'圣卢西亚'},
+          {msg:'圣皮埃尔和密克隆群岛（法国）'},
+          {msg:'圣文森特和格林纳丁斯'},
+          {msg:'萨摩亚'},
+          {msg:'圣马利诺'},
+          {msg:'圣多美和普林西比'},
+          {msg:'沙特阿拉伯'},
+          {msg:'塞内加尔'},
+          {msg:'塞尔维亚'},
+          {msg:'塞舌尔'},
+          {msg:'塞拉利昂'},
+          {msg:'新加坡'},
+          {msg:'荷属圣马丁（荷兰）'},
+          {msg:'斯洛伐克'},
+          {msg:'斯洛文尼亚'},
+          {msg:'所罗门群岛'},
+          {msg:'索马里'},
+          {msg:'索马里兰'},
+          {msg:'南非'},
+          {msg:'南奥塞梯'},
+          {msg:'南苏丹'},
+          {msg:'西班牙'},
+          {msg:'斯里兰卡'},
+          {msg:'苏丹'},
+          {msg:'苏里南'},
+          {msg:'斯瓦尔巴群岛（挪威）'},
+          {msg:'斯威士兰'},
+          {msg:'瑞典'},
+          {msg:'瑞士'},
+          {msg:'叙利亚'},
+          {msg:'台湾'},
+          {msg:'塔吉克斯坦'},
+          {msg:'坦桑尼亚'},
+          {msg:'泰国'},
+          {msg:'东帝汶'},
+          {msg:'多哥'},
+          {msg:'托克劳（新西兰）'},
+          {msg:'汤加'},
+          {msg:'特立尼达和多巴哥'},
+          {msg:'突尼斯'},
+          {msg:'土耳其'},
+          {msg:'土库曼斯坦'},
+          {msg:'特克斯和凯科斯群岛（英国）'},
+          {msg:'图瓦卢'},
+          {msg:'乌干达'},
+          {msg:'乌克兰'},
+          {msg:'阿联酋'},
+          {msg:'英国'},
+          {msg:'美国'},
+          {msg:'乌拉圭'},
+          {msg:'乌兹别克斯坦'},
+          {msg:'瓦努阿图'},
+          {msg:'梵蒂冈'},
+          {msg:'委内瑞拉'},
+          {msg:'越南'},
+          {msg:'英属维尔京群岛（英国）'},
+          {msg:'美属维尔京群岛（美国）'},
+          {msg:'瓦利斯和富图纳群岛（法国）'},
+          {msg:'西撒哈拉'},
+          {msg:'也门'},
+          {msg:'赞比亚'},
+          {msg:'津巴布韦'}
+        ]
+      },
+      computed: {
+        computedList: function () {
+          var vm = this
+          return this.list.filter(function (item) {
+            return item.msg.toLowerCase().indexOf(vm.query.toLowerCase()) !== -1
+          })
+        }
+      },
+      methods: {
+        beforeEnter: function (el) {
+          el.style.opacity = 0
+          el.style.height = 0
+        },
+        enter: function (el, done) {
+          var delay = el.dataset.index * 5
+          setTimeout(function () {
+            Velocity(
+              el,
+              { opacity: 1, height: '1.6em' },
+              { complete: done }
+            )
+          }, delay)
+        },
+        leave: function (el, done) {
+          var delay = el.dataset.index * 5
+          setTimeout(function () {
+            Velocity(
+              el,
+              { opacity: 0, height: 0 },
+              { complete: done }
+            )
+          }, delay)
+        }
+      }
+    })
+</script>

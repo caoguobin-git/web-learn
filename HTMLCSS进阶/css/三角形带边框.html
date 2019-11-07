@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>三角形带边框</title>
+        <style type="text/css">
+            #triangle{
+                position: relative;
+                width: 0;
+                height: 0;
+                border-width: 31px;
+                border-style: solid;
+                border-color: transparent transparent black transparent; 
+            }
+            
+            #triangle div{
+                position: absolute;
+                top: -28px;
+                left: -29px;
+                width: 0;
+                height: 0;
+                border-width: 29px;
+                border-style: solid;
+                border-color: transparent transparent #BBFFEE transparent; 
+            }
+        </style>
+	</head>
+	<body>
+        <div id="triangle">
+            <div></div>
+        </div>
+	</body>
+</html>

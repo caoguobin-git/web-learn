@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<!DOCTYPE html>
+<html>
+<head> 
+	<title></title> 
+	<meta charset='utf-8' /> 
+	<style> 
+	#div1
+	{
+		width: 100px;
+	 	height: 100px;
+	  	background: red;
+	   	position: absolute;
+	    left: 0;
+     	top: 40px;
+        border-radius: 50px;
+	} 
+	</style>
+	
+</head> 
+<body> 
+	<input type="button" value="开始运动" onclick="startMove()"/>
+	<div id="div1"></div> 
+</body>
+<script>
+	//添加拖拽功能
+	window.onload=function(){ 
+		var oDiv = document.getElementById('div1');
+		//当在oDiv中点击鼠标(这里会用到事件对象),则将获取X,Y鼠标当前位置-oDiv 
+		//当前的left和top值,获取到鼠标离oDiv最左边/上边的距离 
+		oDiv.onmousedown = function(ev){ 
+			var oEvent = ev || event; 
+			var disX = oEvent.clientX-oDiv.offsetLeft; 
+			var disY = oEvent.clientY-oDiv.offsetTop;
+		//当在文档中移动鼠标时,则将当前鼠标坐标-已处理好的disX和disY,获取到oDiv.left/top值 
+		document.onmousemove = function(ev){
+			var oEvent = ev || event;
+			var l = oEvent.clientX-disX;
+			var t = oEvent.clientY-disY;
+			//oDiv的left/top值=获取到的oDiv.left/top值,则用户如何移动left/top随之改变
+			oDiv.style.left = l+"px";
+			oDiv.style.top = t+"px";
+		};
+		//当鼠标在文档松开时,则把鼠标移动/松开的方法置空. 
+		document.onmouseup = function(){
+			document.onmousemove = null;
+			document.onmouseup = null;//在鼠标松开时调用startMove函数,实现自由弹跳
+			startMove(); 
+		};
+		//当鼠标移动时,则关闭定时器,为了避免跟startMove函数抢定时器.
+		clearInterval(timer);
+		};
+	};//定义X和Y轴速度;
+	var speedX = 200;
+	var speedY = 100;
+	var timer = null;
+	function startMove(){
+		clearInterval(timer);
+		timer = setInterval(function(){
+			var oDiv = document.getElementById("div1");
+			//每次Y轴+2,越弹越高 
+			speedY += 5;
+			//把X,Y轴速度存起来,便意使用 
+			var l = oDiv.offsetLeft+speedX; 
+			var t = oDiv.offsetTop+speedY;
+			//当T大于了可视化区域-oDIV的高度,就使oDiv越来越慢,随之等于可视化区域-oDiv当前高度.避免了撑大可视化区域 
+			if(t > document.documentElement.clientHeight - oDiv.offsetHeight) {
+				//Y*-0.8 使越弹越矮;当然也要让X轴越来越小,随之T等于可视化区域-oDiv当前高度
+				speedY *= -0.8;
+				speedX *= 0.8;
+				t = document.documentElement.clientHeight-oDiv.offsetHeight; 
+			}
+			//当T小余等于0时,使Y轴*=-0.8,使越弹越矮;当然也使X轴变慢,随之T=0,避免了撑大可视化区域 
+			else if(t <= 0){
+				speedY *= -1;
+				speedX *= 0.8;
+				t = 0;
+			} 
+			//当L大于了可视化区域-oDIV的宽度,就使oDiv越来越慢,随之等于可视化区域-oDiv当前宽度.避免了撑大可视化区域 
+			if(l > document.documentElement.clientWidth-oDiv.offsetWidth) {
+				//X*-0.8 使越弹越矮,随之L等于可视化区域-oDiv当前高度
+				speedX *= -0.8;
+				l = document.documentElement.clientWidth-oDiv.offsetWidth 
+			}
+			//当L小余等于0时,使X轴*=-0.8,使越弹越矮;随之L=0,避免了撑大可视化区域 
+			else if(l <= 0){
+				speedX *= -0.8;
+				l = 0; 
+			} 
+			//当X和Y轴的绝对值小余1时,则X和Y轴=0; 避免负小数点出现误差
+			if(Math.abs(speedX) < 1){
+				speedX = 0; 
+			}
+			if(Math.abs(speedY) < 1){
+				speedY = 0; 
+			} 
+			//停止条件:当X,Y轴速度都为0时,并且t=可视化高度-oDiv.offsetHeight,则关闭定时器
+			if(speedX == 0 && speedY == 0 && t == document.documentElement.clientHeight-oDiv.offsetHeight){
+				clearInterval(timer); 
+			}else{ 
+				//添加oDIV速度 
+				oDiv.style.left = l+"px"; 
+				oDiv.style.top = t+"px";
+			} 
+			document.title = speedX; 
+		},30)
+	}
+</script> 
+</html>

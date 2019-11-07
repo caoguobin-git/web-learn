@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>template中使用v-if</title>
+        <script src="../js/vue.js"></script>
+	</head>
+	<body>
+        <div id="app-20">
+            <template v-if="article1">
+                <article>
+                    <h1>静夜思</h1>
+                    <p>床前明月光，疑是地上霜。</p>
+                    <p>举头望明月，低头思故乡。</p>
+                </article>
+            </template>
+            <template v-else-if="article2">
+                <article>
+                    <h1>草</h1>
+                    <p>离离原上草，一岁一枯荣。</p>
+                    <p>野火烧不尽，春风吹又生。</p>
+                </article>
+            </template>
+            <template v-else></template>
+        </div>
+	</body>
+</html>
+<script type="text/javascript">
+    var app20=new Vue({
+        el:'#app-20',
+        data:{
+            displayArticle:1
+        },
+        computed:{
+            article1:function(){
+                if(this.displayArticle==1){
+                    return true;
+                }
+            },
+            article2:function(){
+                if(this.displayArticle==2){
+                    return true;
+                }
+            }
+        }
+    })
+</script>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>事件修饰符once</title>
+        <script src="../js/vue.js"></script>
+	</head>
+	<body>
+        <div id="app-36">
+            <a @click.once="doSomething">once test</a>
+        </div>
+	</body>
+</html>
+<script type="text/javascript">
+    var app36=new Vue({
+        el:'#app-36',
+        methods:{
+            doSomething:function(){
+                console.log('Hello World');
+            }
+        }
+    })
+</script>

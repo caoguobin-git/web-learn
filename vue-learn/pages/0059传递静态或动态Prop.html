@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>传递静态或动态Prop-字符串</title>
+        <script src="../js/vue.js"></script>
+	</head>
+	<body>
+        <div id="app-59">
+            <!-- 静态传递值 -->
+            <blog-post title="Hello world"></blog-post>
+            <blog-post v-for="blog in blogs" :title="blog.title+' by '+blog.author.name"></blog-post>
+        </div>
+	</body>
+</html>
+
+<script type="text/javascript">
+    
+    Vue.component('blog-post',{
+        props:{
+            title:String
+        },
+        template:'<div>{{ title }}</div>'
+    })
+    
+    var app59=new Vue({
+        el:'#app-59',
+        data:{
+            blogs:[
+                {
+                    title:'Hello',
+                    author:{
+                        name:'caoguobin'
+                    }
+                },
+                {
+                    title:'hahah',
+                    author:{
+                        name:'zhangsanfeng'
+                    }
+                }
+            ]
+        }
+    })
+</script>

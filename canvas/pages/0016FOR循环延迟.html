@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body onload="start()">
+    </body>
+</html>
+<script type="text/javascript">
+    function start() {
+        for (var i = 0; i < 10; i++) {
+
+            // (function(a) {
+            //     setTimeout(function() {
+            //         console.log(a)
+            //     }, 1000)
+            // }(i))
+            
+            display(i)
+        }
+    }
+    
+    function display(val){
+        setTimeout(function(){
+            console.log(val)
+        },1000*val)
+    }
+</script>

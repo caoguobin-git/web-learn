@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>事件修饰符capture</title>
+        <script src="../js/vue.js"></script>
+    </head>
+    <body>
+        <!-- 添加事件监听器时使用事件捕获模式 -->
+        <!-- 即元素自身触发的事件先在此处理，然后才交由内部元素进行处理 -->
+        <div id="app-34">
+            <div @click.capture="sayHi">
+                <button @click="sayHello">Hello</button>
+            </div>
+        </div>
+    </body>
+</html>
+<script type="text/javascript">
+    var app34 = new Vue({
+        el: '#app-34',
+        methods: {
+            sayHello: function() {
+                alert("hello");
+            },
+            sayHi: function() {
+                alert("hi");
+            }
+        }
+    })
+</script>

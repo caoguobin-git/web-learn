@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>小球</title>
+        <script src="../js/vue.js"></script>
+        <style type="text/css">
+            #demo{
+                position: relative;
+            }
+            .ball,.shadow{
+                position: absolute;
+            }
+            .ball {
+                width: 300px;
+                height: 300px;
+                background: radial-gradient(circle at 150px 10px, #5cabff, #000);
+                ;
+                border-radius: 100%;
+            }
+            .shadow{
+                display: block;
+                width: 250px;
+                height: 50px;
+                background-color: black;
+                top: 280px;
+                left: 35px;
+                border-radius: 50%;
+                filter: blur(10px);
+                z-index: -1;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="demo">
+            <div class="ball"></div><span class="shadow"></span>
+        </div>
+    </body>
+</html>
+<script type="text/javascript">
+
+</script>

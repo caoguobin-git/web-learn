@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>开仓数据</title>
+        <script src="../js/vue.js"></script>
+    </head>
+    <body>
+        <div id="trader">
+            <!--            <component 
+            is="trade-body-trader-open-position"
+            v-for="(positon,pos) in traderOpenPositions"
+            :position="position"
+            :key="pos"
+            ></component> -->
+            <component 
+                is="trade-body-trader-open-position" 
+                v-for="(position,key) in traderCurrentDisplayData" 
+                :key="key"
+                :position="position"
+                ></component>
+
+        </div>
+    </body>
+</html>
+<script type="text/javascript">
+    Vue.component('trade-body-trader-open-position', {
+        props: ['position'],
+        template: '<p >\
+                        <span v-for="item in position">{{item}}</span>\
+                    </p>'
+    })
+
+
+    var demo = new Vue({
+        el: '#trader',
+        data: {
+            traderdisplaytarget:'positions',
+            traderCurrentTargetData:'traderOpenPositions',
+            traderOpenPositions: {
+                '65259118': {
+                    ticket: '65259118',
+                    symbol: 'XAU/USD',
+                    amount: 1.0,
+                    side: 1,
+                    open: 1501.4,
+                    margin: 8.0,
+                    time: 1565652433000
+                }
+            },
+            position:{
+                '65259118': {
+                    ticket: '65259118888',
+                    symbol: 'XAU/USD',
+                    amount: 1.0,
+                    side: 1,
+                    open: 1501.4,
+                    margin: 8.0,
+                    time: 1565652433000
+                }
+            }
+        },
+        computed:{
+            traderCurrentDisplayData:function(){
+                return this[this.traderCurrentTargetData];
+            }
+        }
+    })
+</script>

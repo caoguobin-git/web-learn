@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>鼠标事件-单击</title>
+        <style type="text/css">
+            #btn{
+                display: inline-block;
+                width: 100px;
+                height: 24px;
+                line-height: 24px;
+                font-family: "微软雅黑";
+                font-size: 15px;
+                text-align: center;
+                border-radius: 3px;
+                background-color: deepskyblue;
+                color: white;
+                cursor: pointer;
+            }
+            #btn:hover{
+                background-color: dodgerblue;
+            }
+        </style>
+	</head>
+	<body>
+        <div id="btn">
+            调试代码
+        </div>
+	</body>
+</html>
+<script type="text/javascript">
+    window.onload=function(){
+        var oBtn=document.getElementById("btn");
+        oBtn.onclick=function(){
+            alert("玩我吗？");
+        }
+    }
+</script>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>表单事件-onfocus和onblur 搜索框</title>
+        <style type="text/css">
+            #search{
+                color: #bbbbbb;
+            }
+            
+        </style>
+	</head>
+	<body>
+        <input id="search" type="text"  placeholder="百度一下,你就知道" />
+        <input id="Button1" type="button" value="搜索" />
+	</body>
+</html>
+<script type="text/javascript">
+    window.onload=function(){
+        var oSearch=document.getElementById("search");
+        oSearch.focus()
+        oSearch.onfocus=function(){
+            if(this.value=="百度一下,你就知道"){
+                this.value="";
+                this.style.backgroundColor="white";
+            };
+            oSearch.onblur=function(){
+                if(this.value==""){
+                    this.value="百度一下,你就知道";
+                    this.style.backgroundColor="hotpink";
+                }
+            };
+        }
+    }
+</script>

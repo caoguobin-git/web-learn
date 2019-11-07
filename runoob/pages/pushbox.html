@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>推箱子</title>
+        <script src="../js/vue.js"></script>
+        <style type="text/css">
+            div {
+                position: absolute;
+                width: 2rem;
+                height: 2rem;
+            }
+
+            #pushbox {
+                position: absolute;
+                width: 30rem;
+                height: 30rem;
+                background-image: url(../img/bg_sky.jpg);
+                background-size: 100% 50%;
+                background-repeat: no-repeat;
+                border: 1px solid silver;
+                box-shadow: 0 0 25px black, 0 0 3px red;
+            }
+
+            div#person {
+                background: url(../img/person.png);
+                background-size: 50% 100%;
+                background-repeat: no-repeat;
+                background-position: 100% 0%;
+                transform: rotate(90deg);
+                transition: all .2s linear;
+            }
+
+            div#box {
+                background: url(../img/box.png);
+                background-size: 100% 100%;
+                transition: all .2s linear;
+            }
+            img{
+                position: absolute;
+                width: 500px;
+                left: 800px;
+                box-shadow: 0 2px 20px 5px black inset;
+                border-radius: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="pushbox">
+            <div id="person" :style="{transform:'rotate('+personRot+'deg)',left:personLeft+'rem',top:personTop+'rem'}"></div>
+            <div id="box" :style="{left:boxLeft+'rem',top:boxTop+'rem'}"></div>
+        </div>
+        <img src="../img/bg_sky.jpg" />
+    </body>
+</html>
+
+<script type="text/javascript">
+    var pushbox = new Vue({
+        el: '#pushbox',
+        data: {
+
+            boxLeft: 2,
+            boxTop: 2,
+            personLeft: 0,
+            personTop: 2,
+            personRot: 0
+        },
+        methods: {
+            moveBox: function(direction, num) {
+                if (this.boxLeft == this.personLeft && this.boxTop == this.personTop) {
+                    this['box' + direction] = this['box' + direction] + num
+                }
+            }
+        },
+        created() {
+            window.onkeydown = function(e) {
+                let key = e.keyCode;
+                if (key == 37) {
+                    // pushbox.personRot = 180;
+                    if (pushbox.personLeft == 0) {
+                        return
+                    }
+                    pushbox.personLeft -= 2;
+
+                    if (pushbox.boxLeft != 0) {
+                        pushbox.moveBox('Left', -2);
+                    }
+
+                } else if (key == 39) {
+                    // pushbox.personRot = 0
+                    if (pushbox.personLeft == 28) {
+                        return
+                    }
+                    pushbox.personLeft += 2
+                    if (pushbox.boxLeft != 28) {
+                    pushbox.moveBox('Left', 2);}
+                } else if (key == 38) {
+                    // pushbox.personRot = -90
+                    if (pushbox.personTop == 0) {
+                        return
+                    }
+                    pushbox.personTop -= 2;
+                    pushbox.moveBox('Top', -2);
+                } else if (key == 40) {
+                    // pushbox.personRot = 90
+                    if (pushbox.personTop == 28) {
+                        return
+                    }
+                    pushbox.personTop += 2;
+                    pushbox.moveBox('Top', 2);
+                }
+            }
+        }
+    })
+</script>

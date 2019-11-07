@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>背景图像-水平或垂直平铺</title>
+        <style type="text/css">
+           div{
+                display: inline-block;
+                width: 56.25rem;
+                height: 50rem;
+            }
+            div:nth-child(1) {
+                background-image: url(../img/gradient2.png);
+            }
+
+            div:nth-child(2) {
+                background-image: url(../img/gradient2.png);
+                background-repeat: repeat-x;
+            }
+            
+        </style>
+    </head>
+    <body>
+        <div>没有水平平铺</div>
+        <div>水平平铺效果更好</div>
+    </body>
+</html>

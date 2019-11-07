@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Class与Style绑定</title>
+        <script type="text/javascript" src="../js/vue.js"></script>
+    </head>
+    <body>
+        <div id="classDemo" v-bind:class="classObject">
+            hello
+        </div>
+        <div id="style-demo" v-bind:style="styleObject">
+            <p>hello</p>
+            <button @click="biggerSize()">放大</button>
+        </div>
+    </body>
+</html>
+<script>
+    var styleDemo = new Vue({
+        el: "#style-demo",
+        data: {
+            color: 'red',
+            fontSize: 70
+        },
+        computed: {
+            styleObject: function() {
+                return {
+                    'color': this.color,
+                    'font-size': this.fontSize + 'px'
+                }
+            }
+        },
+        methods: {
+            biggerSize: function() {
+                this.fontSize += 10;
+            }
+        }
+    })
+    var classDemo = new Vue({
+        el: "#classDemo",
+        data: {
+            isActive: true,
+            error: null
+        },
+        computed: {
+            classObject: function() {
+                return {
+                    active: this.isActive && !this.error,
+                    'text-danger': this.error && this.error.type === 'fatal'
+                }
+            }
+        }
+    })
+</script>

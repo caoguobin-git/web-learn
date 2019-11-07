@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>templa 中使用v-for</title>
+        <script src="../js/vue.js"></script>
+	</head>
+	<body>
+        <div id="app-26">
+            <ul>
+                <template v-for="item in items">
+                    <li>{{item.msg}}</li>
+                    <li class="driver" role="presentation"></li>
+                </template>
+            </ul>
+        </div>
+	</body>
+</html>
+<script type="text/javascript">
+    var app26=new Vue({
+        el:'#app-26',
+        data:{
+            items:[
+                {msg:'蔬菜'},
+                {msg:'水果'}
+            ]
+        }
+    })
+</script>

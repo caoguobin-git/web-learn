@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script src="../js/vue.js"></script>
+        <style type="text/css">
+            canvas {
+                border: 1px solid black;
+            }
+
+            #target {
+                position: relative;
+                width: 50px;
+                height: 50px;
+                z-index: 10;
+                border-radius: 50px;
+                background: radial-gradient(at 30% 30%, white 3%, red 20%, black 80%);
+                box-shadow: 0 0 3px black;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="demo">
+            <div id="target" :style="{left:left+'px',top:top+'px'}"></div>
+        </div>
+    </body>
+</html>
+<script type="text/javascript">
+    var demo = new Vue({
+        el: '#demo',
+        data: {
+            left: 0,
+            top: 0,
+            mouseX: 0,
+            mouseY: 0,
+            time: 15
+        },
+        computed: {
+            xspeed: function() {
+                return Math.abs(this.left - this.mouseX) / this.time;
+            },
+            yspeed: function() {
+                return Math.abs(this.top - this.mouseY) / this.time;
+            }
+        },
+        methods: {
+            move: function() {
+                if (this.mouseX < this.left) {
+                    this.left -= this.xspeed;
+                } else if (this.mouseX > this.left) {
+                    this.left += this.xspeed;
+                }
+                if (this.mouseY < this.top) {
+                    this.top -= this.yspeed;
+                } else if (this.mouseY > this.top) {
+                    this.top += this.yspeed;
+                }
+                requestAnimationFrame(this.move);
+            }
+        },
+        mounted: function() {
+            this.move();
+            window.onclick = function(e) {
+                demo.mouseX = e.clientX - 30;
+                demo.mouseY = e.clientY - 30;
+            }
+            window.ontouchstart = function(e) {
+                demo.mouseX = e.targetTouches[0].pageX - 30;
+                demo.mouseY = e.targetTouches[0].pageY - 30;
+            }
+        }
+    })
+</script>

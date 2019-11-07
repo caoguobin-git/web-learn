@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Test</title>
+        <script type="text/javascript" src="../js/vue.js"></script>
+        <script type="text/javascript" src="../js/jquery-3.4.1.js"></script>
+        <style type="text/css">
+            #wheel {
+                position: relative;
+                top: 20px;
+                left: 20px;
+                width: 100px;
+                height: 100px;
+                -webkit-transform-origin: 50px 50px;
+                -webkit-animation: myLove infinite linear;
+
+            }
+
+            @keyframes myLove {
+                from {
+                    transform: rotate(0deg);
+                }
+
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+
+            #wheel img {
+                width: 100%;
+                height: 100%;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="wheel-container">
+            <div id="wheel" :style="{animationDuration: speed+'s'}">
+                <img src="../img/wheel002.jpg" />
+            </div>
+            <p>
+                <button @click="speed+=2">减速</button>
+                <button @click="speed-=0.1">加速</button>
+            </p>
+        </div>
+    </body>
+</html>
+<script>
+    var wheel = new Vue({
+        el: '#wheel-container',
+        data: {
+            speed: 1
+        }
+    })
+</script>

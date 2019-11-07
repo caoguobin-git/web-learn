@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>事件名</title>
+        <script src="../js/vue.js"></script>
+	</head>
+	<body>
+        <div id="app-67">
+            <button onclick="alert('hello')">阿斯顿发生</button>
+            <my-button 
+                v-for="button in buttons"
+                :title="button"
+                :key="button"
+                @my-event="myAlert(button)"
+                ></my-button>
+        </div>
+	</body>
+</html>
+
+<script type="text/javascript">
+    
+    Vue.component('my-button',{
+        props:['title'],
+        // template:'<button @click="$emit(\'my-event\')">{{ title }}</button>'
+        template:'<button @click="myEvent(title)">{{ title }}</button>',
+        methods:{
+            myEvent:function(val){
+                alert(val)
+            }
+        }
+    })
+    
+    var app67=new Vue({
+        el:'#app-67',
+        data:{
+            buttons:['北京','上海','广州']
+        },
+        methods:{
+            myAlert:function(val){
+                alert(val)
+            }
+        }
+    })
+</script>

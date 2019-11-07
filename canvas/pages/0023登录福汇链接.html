@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+        <script src="../js/vue.js"></script>
+        <style type="text/css">
+            a{
+                display: inline-block;
+                width: 4rem;
+            }
+            #content{
+                width: 100%;
+                height: 100%;
+            }
+            #login{
+                position: fixed;
+                top: 90%;
+                width: 100%;
+                text-align: center;
+            }
+        </style>
+	</head>
+	<body>
+        <div id="demo">
+            <div id="content">
+                asdf 
+            </div>
+            <div id="login" v-if="loginAlready">
+                <a href="http://www.baidu.com" target="_blank" @click="loginAlready=!loginAlready">百度一下</a>
+                <a href="http://www.sina.com.cn" target="_blank">新浪一下</a>
+            </div>
+            
+            <a href="#content" onclick="console.log(new Date().getTime()+'进行了点击操作')">11</a>
+        </div>
+	</body>
+</html>
+<script type="text/javascript">
+     var demo = new Vue({
+         el:'#demo',
+         data:{
+             message:'hello world',
+             loginAlready:true
+         }
+     })
+</script>

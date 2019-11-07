@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>传递静态或动态Prop-对象</title>
+        <script src="../js/vue.js"></script>
+	</head>
+	<body>
+        <div id="app-63">
+            <!-- 静态传递值 -->
+            <blog-post 
+                title="静态传递值" 
+                :likes="45" 
+                :author="{name:'Veronica',company:'Veridian Dynamics'}"
+                :comment-ids="[234,266,273]"
+                :is-published="true"></blog-post>
+            <!-- 动态传递值 -->
+            <blog-post 
+                v-for="blog in blogs" 
+                :key="blog.title" 
+                :is-published="blog.isPublished" 
+                :likes="blog.likes" 
+                :title="blog.title"
+                :author="blog.author"
+                :comment-ids="blog.commentIds"
+                :id="blog.id"
+                ></blog-post>
+        </div>
+	</body>
+</html>
+
+<script type="text/javascript">
+    
+    Vue.component('blog-post',{
+        props:{
+            id:Number,
+            title:String,
+            author:Object,
+            likes:Number,
+            isPublished:Boolean,
+            commentIds:Array
+        },
+        template:'<div>\
+                    <p>{{id}}</p>\
+                    <h2>{{ title }} by {{author.name}}</h2>\
+                    <p>likes:{{ likes }}</p>\
+                    <p>isPublished: {{ isPublished }}</p>\
+                    <p><span v-for="commentId in commentIds">{{ commentId }} </span></p>\
+                  </div>'
+    })
+    
+    var app63=new Vue({
+        el:'#app-63',
+        data:{
+            blogs:[
+                {
+                    id:1,
+                    title:'Hello',
+                    author:{
+                        name:'caoguobin'
+                    },
+                    likes:43,
+                    isPublished:true,
+                    commentIds:[123,1223,12432]
+                },
+                {
+                    id:2,
+                    title:'hahah',
+                    author:{
+                        name:'zhangsanfeng'
+                    },
+                    likes:93,
+                    isPublished:false,
+                    commentIds:[23,433,532]
+                }
+            ]
+        }
+    })
+</script>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>价格变动CSS</title>
+        <script src="../js/vue.js"></script>
+        <style type="text/css">
+            span {
+                border-radius: 3px;
+                border: 1px solid gray;
+                padding: 1px 15px;
+            }
+
+            .priceUp {
+                background-color: red;
+                color: white;
+                animation: myPriceUp 500ms linear;
+                animation-delay: 1.5s;
+                animation-timing-function: ease-out;
+            }
+
+            @-webkit-keyframes myPriceUp {
+                from {
+                    background-color: red;
+                    color: white;
+                }
+                to {
+                    background-color: white;
+                    color: black;
+                }
+            }
+
+            .priceDown {
+                background-color: blue;
+                animation: myPriceDown 400ms;
+                color: white;
+                animation-delay: 1.6s;
+                animation-timing-function: ease-in;
+            }
+
+            @-webkit-keyframes myPriceDown {
+                from {
+                    background-color: blue;
+                    color: white;
+                }
+                to {
+                    background-color: white;
+                    color: black;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app-16">
+            <span :class="classObject">{{ price }}</span>
+        </div>
+    </body>
+</html>
+<script type="text/javascript">
+    var app16 = new Vue({
+        el: "#app-16",
+        data: {
+            price: 10,
+            priceUp: false,
+            priceDown: false,
+            // priceNotChange: true,
+            timerout: 12
+        },
+        computed: {
+            classObject: function() {
+                return {
+                    priceUp: this.priceUp,
+                    priceDown: this.priceDown,
+                    // priceNotChange: this.priceNotChange
+                }
+            }
+        },
+        watch: {
+            price: function(newVal, oldVal) {
+                var a = (newVal > oldVal);
+                clearTimeout(this.timerout);
+                this.priceUp = a;
+                this.priceDown = !a;
+                this.timerout = setTimeout(function() {
+                    app16.priceUp = false;
+                    app16.priceDown = false;
+                }, 2000)
+
+            }
+        }
+    })
+
+    window.onload = function() {
+       var x=setInterval(function() {
+            app16.price = (Math.random()*100).toFixed(3)
+        }, 3000)
+    }
+</script>

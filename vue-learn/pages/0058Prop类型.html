@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Prop类型</title>
+        <script src="../js/vue.js"></script>
+	</head>
+	<body>
+        <div id="app-58">
+            
+        </div>
+	</body>
+</html>
+
+<script type="text/javascript">
+    
+    Vue.component('blog-post',{
+        // props:['title','likes','isPublished','commentIds','author']
+        props:{
+            title:String,
+            likes:Number,
+            isPublished:Boolean,
+            commentIds:Array,
+            author:Object,
+            callback:function,
+            contactsPromise:Promise// or any other constructor
+        }
+    })
+    
+    var app58=new Vue({
+        el:'#app-58'        
+    })
+</script>

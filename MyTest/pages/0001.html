@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+            }
+
+            .gavin_design div {
+                width: 200px;
+                height: 200px;
+                margin: 20px auto;
+            }
+
+            .no {
+                background: #ccc;
+                -webkit-transition: all 2s linear;
+            }
+
+            .no:hover {
+                background: #f60;
+            }
+
+            .line {
+                position: relative;
+                background: -webkit-linear-gradient(top, #f60, #47CC38);
+            }
+
+            .line_gavinfix {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                opacity: 0;
+                background: -webkit-linear-gradient(top, #47CC38, #f60);
+                -webkit-transition: opacity 2s linear;
+            }
+
+            .line:hover .line_gavinfix {
+                opacity: 1;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="gavin_design">
+            <div class="no"></div>
+            <div class="line"><span class="line_gavinfix"></span></div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>实例生命周期钩子</title>
+        <script src="../js/vue.js"></script>
+	</head>
+	<body>
+        <div id="app-8">
+            <p>{{created}}</p>
+            <p>{{mounted}}</p>
+            <p>{{updated}}</p>
+        </div>
+	</body>
+</html>
+<script type="text/javascript">
+    var app8=new Vue({
+        el:"#app-8",
+        data:{
+            message:"Hello Vue",
+            created:'',
+            mounted:'',
+            updated:''
+        },
+        created:function(){
+            this.created='创建 '+new Date().getTime();
+        },
+        mounted:function(){
+            this.mounted='mounted '+new Date().getTime();
+        },
+        updated:function(){
+            this.updated='更新于 '+new Date().getTime();
+        }
+    })
+</script>

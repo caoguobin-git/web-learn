@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>display:table-cell</title>
+        <style type="text/css">
+            div {
+                display: table-cell;
+                width: 150px;
+                height: 150px;
+                border: 1px solid red;
+                vertical-align: middle;
+                text-align: center;
+            }
+
+            img {
+                width: 100px;
+                height: 100px;
+                vertical-align: middle;
+            }
+
+            div+div {
+                border-left: none;
+            }
+        </style>
+    </head>
+    <body>
+        <div><img src="../img/bg.jpg"></div>
+        <div><img src="../img/bg1.jpg"></div>
+        <div><img src="../img/icon.jpg"></div>
+    </body>
+</html>

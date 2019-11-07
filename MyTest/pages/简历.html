@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>简历</title>
+        <script src="../js/vue.js"></script>
+        <link rel="stylesheet" href="../css/animate.css" />
+        <style type="text/css">
+            *{
+                cursor: pointer;
+            }
+            #container {
+                position: relative;
+                width: 800px;
+                margin: auto;
+                text-align: center;
+            }
+
+            .bar {
+                width: 100%;
+                height: 30px;
+                line-height: 30px;
+                padding-left: 20px;
+                text-align: left;
+                font-family: "kaiti";
+                font-weight: bolder;
+                font-size: 20px;
+                border-bottom: 2px solid skyblue;
+                background: linear-gradient(to right, skyblue 10%, white 60%);
+                cursor: pointer;
+                border-radius: 3px 0 0 3px;
+                transition: all 5s linear;
+            }
+
+            .bar:hover {
+                background: linear-gradient(to right, red 10%, white 60%);
+                border-bottom: 2px solid red;
+            }
+
+            a:visited {
+                color: red;
+            }
+
+            a:hover {
+                animation: myDemo .5s linear;
+            }
+
+            @-webkit-keyframes myDemo {
+                from {
+                    transform: rotateY(0deg);
+                    color: blue;
+                }
+
+                to {
+                    transform: rotateY(360deg);
+                    color: pink;
+                }
+            }
+
+            li {
+                text-align: left;
+                font-family: "kaiti";
+                font-size: 20px;
+            }
+
+            .itskill-enter-active,
+            .itskill-leave-active {
+
+                transition: opacity .5s;
+            }
+
+            .itskill-enter,
+            .itskill-leave-to
+
+            /* .fade-leave-active below version 2.1.8 */
+                {
+                opacity: 0;
+            }
+
+            a {
+                text-decoration: none;
+                display: inline-block;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="container">
+            曹国彬
+            <div class="bar animated bounceInLeft">工作经历</div>
+            <div>2019.1——至今 天津多创网络科技发展有限公司 Java开发</div>
+            <div class="bar animated bounceInLeft delay-1s delay-1s " @click="changeShow">
+                IT技能
+            </div>
+            <div class=" animated bounceInLeft delay-1s">
+                <transition name="itskill">
+                    <ol v-if="show">
+                        <li>熟练使用<a target="_blank" href="https://www.eclipse.org/"><b><i>Eclipse</i></b></a>、<a target="_blank"
+                                href="http://www.jetbrains.com/idea/"><b><i>IntelliJ IDEA</i></b></a>等开发软件。</li>
+                        <li>熟练使用轻量级反向代理服务器Nginx实现反向代理和负载均衡，初步解决高并发等问题。</li>
+                        <li>熟练使用Mysql数据库存储数据，熟悉SQL语句的语法规则,熟悉使用IntelliJ IDEA内置数据库管理工具进行对数据库的管理和维护。</li>
+                        <li>熟练使用Spring、SpringMVC、Mybatis对Web项目进行开发。</li>
+                        <li>熟练使用Maven对项目进行管理,实现项目中所需依赖的集中管理。</li>
+                        <li>熟练使用CentOS系统,可以在Linux环境下实现项目的部署和发布。 </li>
+                        <li>熟练使用Redis,在CentOS系统环境下部署Redis集群,实现数据的缓存管理,提高项目对高并发情况的处理能力以及对请求的响应速度。</li>
+                        <li>熟练使用Mycat软件，对项目中数据库进行分库分表，利用热备份的方式保证数据的安全性和一致性。</li>
+                        <li>熟悉分布式架构模式，可以使用HttpClient和Dubbo及ZooKeeper进行方法的远程调用。</li>
+                        <li>熟悉JDBC原理，了解c3p0、druid的使用,并可以通过Spring对其进行资源整合实现数据的持久化操作。</li>
+                        <li>熟悉前端框架，如JQuery、Vue等，了解html5新对象的使用，如canvas绘图</li>
+                        <li>掌握跨域方法JsonP的使用以及Json串和对象的相互转换,在分布式架构中实现不同模块之间的请求和通信需求。</li>
+                        <li>熟悉Ajax的使用流程，实现网页的异步加载,提升用户体验。</li>
+                        <li>熟悉Shiro安全框架的结构，可以使用Shiro框架进行多方式、多角色的认证与授权的处理。</li>
+                        <li>了解HTML、CSS、JavaScript、jQuery等基础web开发流程，可以初步的实现web阶段的开发。</li>
+                    </ol>
+                </transition>
+            </div>
+
+            <div class="bar animated bounceInLeft delay-2s">234</div>
+        </div>
+    </body>
+</html>
+<script type="text/javascript">
+    var container = new Vue({
+        el: '#container',
+        data: {
+            message: 'sdfasdf',
+            show: true
+        },
+        methods: {
+            changeShow: function() {
+                this.show = !this.show
+                console.log(this.show)
+            }
+        }
+    })
+
+    window.onload = function() {
+        document.onselectstart = function() {
+            return false;
+        }
+        document.onselect=function(){
+            return false;
+        }
+    }
+</script>

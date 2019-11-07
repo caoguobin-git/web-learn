@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>设置html属性值</title>
+	</head>
+	<body>
+        <input type="button" id="btn" style="color: red;font-weight: bolder;" value="测试" />
+	</body>
+</html>
+<script type="text/javascript">
+    window.onload=function(){
+        var oBtn=document.getElementById("btn");
+        oBtn.onclick=function(){
+            oBtn.value=new Date().toLocaleString();
+            oBtn.style.color=getRandomColor();
+        }
+        
+        setInterval(function(){
+            var oBtn=document.getElementById("btn");
+            oBtn.click()
+        },500)
+    }
+    
+    function getRandomColor() {
+        var str = "123456789ABCDEF";
+        var randomRed1 = str.charAt(Math.floor(Math.random() * 15));
+        var randomRed2 = str.charAt(Math.floor(Math.random() * 15));
+        var randomGreen1 = str.charAt(Math.floor(Math.random() * 15));
+        var randomGreen2 = str.charAt(Math.floor(Math.random() * 15));
+        var randomBlue1 = str.charAt(Math.floor(Math.random() * 15));
+        var randomBlue2 = str.charAt(Math.floor(Math.random() * 15));
+        var color = "#" + randomRed1 + randomRed2 + randomGreen1 + randomGreen2 + randomBlue1 + randomBlue2;
+        console.log(color);
+        return color;
+    }
+</script>

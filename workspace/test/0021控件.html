@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>控件</title>
+        <script src="../js/vue.js"></script>
+        <style type="text/css">
+            .demo {
+                width: 100px;
+                height: 100px;
+                border: 1px solid silver;
+                background-color: yellow;
+                transition-duration: all 3s;
+            }
+            @-webkit-keyframes my-demo{
+                from{transform: rotate(0deg);}
+                to{transform: rotate(720deg);}
+            }
+        </style>
+    </head>
+    <body>
+        <div id="demo">
+            <div class="demo" :style="demoStyle" @click="resetDemo">
+
+            </div>
+            <br>
+            <br>
+            <br>
+            <input type="range" max="1000" min="1" maxlength="500px" v-model="demoDeg" />
+            <p>{{demoDeg}}</p>
+        </div>
+    </body>
+</html>
+<script type="text/javascript">
+    var demo = new Vue({
+        el: '#demo',
+        data: {
+            demoDeg:1
+        },
+        computed: {
+            demoStyle: function() {
+                return {
+                    animation:'my-demo '+1000/this.demoDeg+'s linear infinite'
+                }
+            }
+        },
+        methods:{
+            resetDemo:function(){
+                this.demoDeg=1;
+            }
+        }
+    })
+</script>

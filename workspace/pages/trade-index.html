@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="shortcut icon" href="../img/blackhole2019_pc.png" />
+        <script type="text/javascript" src="../js/jquery-3.4.1.js"></script>
+        <link rel="stylesheet" type="text/css" href="../css/CSSReset.css" />
+        <link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.css" />
+        <script type="text/javascript" src="../bootstrap/js/bootstrap.js"> </script>
+        <script type="text/javascript" src="../js/vue.js"></script>
+        <link type="text/css" rel="stylesheet" href="../css/trade.css" />
+        <title>交易页面</title>
+    </head>
+    <body>
+
+        <div class="container-fluid">
+            <div class="row" id="trade-header">
+                <news-post 
+                    v-for="news in messages"
+                    :news="news"
+                    :position-left='120'
+                    :key="news.content"
+                    ></news-post>
+            </div>
+            <div class="row" id="trade-body">
+                <div class="col-lg-12">
+                    <div class="row">
+                     <div class="col-lg-4" id="trade-market-datas">
+                         市场数据
+                         <table>
+                             <thead>
+                                 <th>商品组合</th>
+                                 <th>卖出</th>
+                                 <th>买进</th>
+                                 <th>差价</th>
+                                 <th>变化,%</th>
+                                 <th>最高价</th>
+                                 <th>最低价</th>
+                                 <th>卖出过夜利息</th>
+                                 <th>买入过夜利息</th>
+                                 <th>卖出红利</th>
+                                 <th>买入红利</th>
+                                 <th>每点价值</th>
+                                 <th>维持保证金</th>
+                                 <th>时间</th>
+                             </thead>
+                             <tbody>
+                                 <tr 
+                                    is="market-data"
+                                    v-for="data in marketDatas"
+                                    :key="data.symbol"
+                                    :symbol="data.symbol"
+                                    :sell="data.sell.toFixed(5)"
+                                    :buy="data.buy"
+                                    :change="data.change.toFixed(5)"
+                                    :high="data.high"
+                                    :low="data.low"
+                                    :roll-s="data.rollS"
+                                    :roll-b="data.rollB"
+                                    :div-s="data.divS"
+                                    :div-b="data.divB"
+                                    :pip-cost="data.pipCost"
+                                    :mmr="data.mmr"
+                                    :time="data.time"
+                                    ></tr>
+                             </tbody>
+                         </table>
+                     </div>
+                     <div class="col-lg-4" id="trade-trader-datas">
+                         交易员信息
+                     </div>
+                     <div class="col-lg-4">
+                         <div class="row" id="trade-notices">
+                             交易提醒
+                         </div>
+                         <div class="row" id="trade-news">
+                             新闻
+                         </div>
+                     </div>
+                    </div>
+                    <div class="row" id="trade-body-user">
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <button v-for="tab in tabs" :key="tab.value" @click="currentTab=tab.value" :class="{'trade-body-user-button-active':tab.value.toLowerCase()===currentTab.toLowerCase()}"
+                                    class="trade-body-user-button">{{ tab.text }}</button>
+                            </div>
+                            <div class="row">
+                                <component :is="currentTabComonent"></component>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="trade-footer">
+                这是脚部<a href="fxcm-register.html" target="_blank">注册福汇</a>
+            </div>
+        </div>
+    </body>
+</html>
+
+<script src="../js/trade.js"></script>

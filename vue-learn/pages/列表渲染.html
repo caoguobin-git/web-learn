@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script type="text/javascript" src="../js/vue.js"></script>
+		<title>列表渲染</title>
+		<style>
+			body{
+				background-color: #000000;
+				color: white;
+			}
+		</style>
+	</head>
+	<body>
+		<ol id="example-1">
+			<li v-for="(item,index) in items">{{index}}&nbsp;&nbsp;&nbsp;{{item.message}}</li>
+		</ol>
+		
+		<ul id="example-2">
+			<li v-for="(item,index) in items">{{parentMessage}}-{{index}}-{{item.message}}</li>
+		</ul>
+	
+		<ul id="v-for-object" class="demo">
+			<li v-for="(value,key,index) in object">{{index}} : {{key}} : {{value}}</li>
+		</ul>
+		<div id="fraidDemo" v-if="display" v-bind:style="styleDemo" style="text-align: center; color: red; font-size: 50px; font-weight: 800;">{{time}}</div>
+		
+		<ul id="sortDemo">
+			<li v-for="n in evenNumbers">{{n}}</li>
+		</ul>
+		
+		<ul id="evenNumberDemo">
+			<li v-for="n in even(numbers)">{{n}}</li>
+		</ul>
+	</body>
+</html>
+<script type="text/javascript">
+	
+	var evenNumberDemo=new Vue({
+		el:"#evenNumberDemo",
+		data:{
+			numbers:[1,2,3,4,5]
+		},
+		methods:{
+			even:function(numbers){
+				return numbers.filter(function(number){
+					return number%2===0;
+				})
+			}
+		}
+	})
+	
+	var sortDemo=new Vue({
+		el:"#sortDemo",
+		data:{
+			numbers:[1,2,3,4,5]
+		},
+		computed:{
+			evenNumbers:function(){
+				return this.numbers.filter(function(number){
+					return number%2===0;
+				})
+			}
+		}
+	})
+	
+	var vForObject=new Vue({
+		el:"#v-for-object",
+		data:{
+			object:{
+				title:'How to do lists in Vue',
+				author: 'Jane Doe',
+				publishedAt:'2016-04-10'
+			}
+		}
+	})
+	
+	var fradeDemo=new Vue({
+		el:"#fraidDemo",
+		data:{
+			display:true,
+			shadow:false,
+			time:''
+		},
+		created() {
+			setInterval(this.changeDisplay,200)
+		},
+		methods:{
+			changeDisplay:function(){
+				this.display=!this.display
+				this.time=new Date().toLocaleString()
+				if(Math.random()>0.5){
+					this.shadow=!this.shadow
+				}
+			}
+		},
+		computed:{
+			styleDemo:function(){
+				if(this.shadow){
+					return{
+						textShadow: '5px 5px 5px red',
+						transform: 'rotate('+Math.random()*180+'deg)'
+					}
+				}else{
+					return{
+						transform: 'rotate('+Math.random()*180+'deg)',
+						color:'blue'
+					}
+				}
+				
+			}
+		}
+	})
+	
+	var example2=new Vue({
+		el:"#example-2",
+		data:{
+			parentMessage:'Parent',
+			items:[
+				{message:'Foo'},
+				{message:'Bar'}
+			]
+		}
+	})
+	var example1=new Vue({
+		el:"#example-1",
+		data:{
+			items:[
+				{message:'Foo'},
+				{message:'Bar'}
+			]
+		}
+	})
+</script>

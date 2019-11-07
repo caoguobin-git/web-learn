@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>秒表</title>
+        <script src="../js/vue.js"></script>
+        <script src="../js/jquery-3.4.1.js"></script>
+        <style type="text/css">
+            #clock {
+                position: relative;
+                width: 100px;
+                height: 100px;
+                background-color: gray;
+                border-radius: 50px;
+            }
+
+            #hour {
+                position: absolute;
+                top: 50px;
+                left: 25px;
+                width: 25px;
+                height: 2px;
+                background-color: red;
+                -webkit-transform-origin: 100% 50%;
+            }
+
+            #minute {
+                position: absolute;
+                top: 50px;
+                left: 20px;
+                width: 30px;
+                height: 2px;
+                background-color: blue;
+                -webkit-transform-origin: 100% 50%;
+            }
+            #second {
+                position: absolute;
+                top: 50px;
+                left: 12px;
+                width: 38px;
+                height: 1px;
+                background-color: yellow;
+                -webkit-transform-origin: 100% 50%;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="clock">
+            <div id="hour" :style="{transform:'rotate('+hourDeg+'deg)'}"></div>
+            <div id="minute" :style="{transform:'rotate('+minuteDeg+'deg)'}"></div>
+            <div id="second" :style="{transform:'rotate('+secondDeg+'deg)'}"></div>
+        </div>
+    </body>
+</html>
+
+<script type="text/javascript">
+    var clock = new Vue({
+        el: '#clock',
+        data: {
+            secondDeg: 0
+        },
+        computed: {
+            hourDeg: function() {
+                return this.minuteDeg/12;
+            },
+            minuteDeg: function() {
+                return this.secondDeg/60;
+            }
+        }
+    })
+
+    $(function() {
+        setInterval(function() {
+            clock.secondDeg+=6;
+        }, 1)
+    })
+</script>

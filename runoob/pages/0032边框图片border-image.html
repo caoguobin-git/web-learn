@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>边框-border</title>
+        <style type="text/css">
+            div#demo1{
+                width: 500px;
+                height: 300px;
+                background-color: red;
+                box-sizing: border-box;
+                border: solid orange 1rem;
+                -webkit-border-image: url(../img/border.png) 27 round;
+            }
+            div#demo2{
+                width: 500px;
+                height: 300px;
+                background-color: red;
+                box-sizing: border-box;
+                border: solid orange 1rem;
+                -webkit-border-image: url(../img/border.png) 27 stretch repeat ;
+            }
+            #demo3{
+                width: 30px;
+                height: 20px;
+                background-color: blue;
+                border: 10px solid black;
+                border-image: url(../img/rounded_corner.png) 7;
+            }
+        </style>
+	</head>
+	<body>
+        <div id="demo1">
+            Hello World
+        </div>
+        
+        <div id="demo2">
+            Hello World2
+        </div>
+        
+        <div id="demo3">
+            Hello World3
+        </div>
+	</body>
+</html>

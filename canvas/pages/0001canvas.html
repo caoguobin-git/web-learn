@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+        <script src="../js/vue.js"></script>
+        <style type="text/css">
+            #demo001{
+                border: 1px lightblue solid;
+            }
+        </style>
+	</head>
+	<body>
+        <canvas @click="drawLine" id="demo001" width="200" height="200"></canvas>
+	</body>
+</html>
+<script type="text/javascript">
+    var snakeWidth=2;
+    var snakeHeight=2;
+    var snakeX=0;
+    var snakeY=0;
+    var demo = document.getElementById('demo001');
+    var ctx= demo.getContext('2d');
+    ctx.fillStyle='#000000';
+    setInterval(function(){
+        ctx.fillRect(snakeX,snakeY,snakeWidth,snakeHeight);
+        snakeX+=2;
+        if(snakeX==100){
+            snakeY+=2;
+            if(snakeY%4==0){
+                ctx.fillStyle='#FF0000';
+            }else{
+                ctx.fillStyle='#000000';
+            }
+            snakeX=0;
+        }
+    },500)
+    
+    var demo =new Vue({
+        el:'#demo001',
+        data:{
+          start:{
+              x:0,
+              y:0
+          }  
+        },
+        methods:{
+            drawLine:function(e){
+                var x= e.clientX-10;
+                var y = e.clientY-10;
+                var demo = document.getElementById('demo001');
+                var ctx= demo.getContext('2d');
+                var startX=this.start.x;
+                var startY=this.start.y;
+                ctx.moveTo(startX,startY);
+                ctx.lineTo(x,y);
+                ctx.stroke();
+                this.start.x=x;
+                this.start.y=y;
+                ctx.beginPath();
+                ctx.arc(x,y,20,0,1.5*Math.PI);
+            },
+            drawRect:function(e){
+                var x= e.clientX-10;
+                var y = e.clientY-10;
+                var demo = document.getElementById('demo001');
+                var ctx= demo.getContext('2d');
+                ctx.fillStyle='#FFF';
+                ctx.rect(x,y,5,10);
+            }
+            
+        }
+    })
+</script>

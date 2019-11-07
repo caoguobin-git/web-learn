@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        编辑器测试</title>
+    <script type="text/javascript"
+            src="../js/vue.js"></script>
+    <script type="text/javascript"
+            src="../js/jquery-3.4.1.js"></script>
+    <script type="text/javascript"
+            src="../bootstrap/js/bootstrap.js"></script>
+    <link rel="stylesheet"
+          href="../bootstrap/css/bootstrap.css">
+
+</head>
+<body>
+<div class="container"
+     id="editor">
+    <div class="row">
+        <div class="col-lg-12">
+            <ul class="nav nav-tabs">
+                <li class="dropdown">
+                    <a class="dropdown-toggle"
+                       data-toggle="dropdown"
+                       href="#">标题
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a @click="toH(1)"><h1>一级标题</h1></a>
+                        </li>
+                        <li>
+                            <a @click="toH(2)" href="#"><h2>二级标题</h2></a>
+                        </li>
+                        <li>
+                            <a @click="toH(3)" href="#"><h3>三级标题</h3></a>
+                        </li>
+                        <li>
+                            <a @click="toH(4)" href="#"><h4>四级标题</h4></a>
+                        </li>
+                        <li>
+                            <a @click="toH(5)" href="#"><h5>五级标题</h5></a>
+                        </li>
+                        <li>
+                            <a @click="toH(6)" href="#"><h6>六级标题</h6></a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a @click="toP()" href="#">段落</a></li>
+                <li>
+                <li>
+                    <a @click="toList()" href="#">列表</a></li>
+                <li>
+            </ul>
+            <br>
+            <textarea style="resize: none;width: 800px;height: 400px;"></textarea>
+            <span v-html="htmlText"></span>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script>
+    var editor = new Vue({
+        el: '#editor',
+        data: {
+            htmlText: '',
+            inputText: ''
+        },
+        methods: {
+            toList:function(){
+                var text = window.getSelection().toString();
+                var result ='<ol style="list-style: none">';
+                var texts=text.split('\n');
+                for (var i=0;i<texts.length;i++){
+                    result+='<li>'+texts[i]+'</li>';
+                }
+                result+='</ol>';
+                this.htmlText+=result;
+            },
+            toH:function (val) {
+                var text = window.getSelection().toString();
+                var texts=text.split('\n');
+                for (var i=0;i<texts.length;i++){
+                    var result ='';
+                    result+='<h'+val+'>';
+                    result+=texts[i];
+                    result+='</h'+val+'>';
+                    this.htmlText+=result;
+                }
+            },
+            toP:function () {
+                var text = window.getSelection().toString();
+                var texts=text.split('\n');
+                for (var i=0;i<texts.length;i++){
+                    var result ='';
+                    result+='<p style="text-indent: 32px">';
+                    result+=texts[i];
+                    result+='</p>';
+                    this.htmlText+=result;
+                }
+            }
+        }
+    })
+</script>

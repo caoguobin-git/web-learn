@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>fileStyle</title>
+        <style type="text/css">
+            canvas{
+                border: 1px solid black;
+            }
+        </style>
+	</head>
+	<body>
+        <img src="../img/lamp.gif" id="lamp">
+        <canvas id="canvas" width="800" height="800"></canvas>
+        
+	</body>
+</html>
+
+<script type="text/javascript">
+    var canvas;
+    window.onload=function(){
+        console.log("hel")
+        canvas=document.getElementById('canvas').getContext('2d');
+        drawRect();
+        drawGradientRect();
+        drawPatternRect();
+        
+    }
+    
+    //绘制矩形
+    function drawRect(){
+        canvas.fillStyle='blue';
+        canvas.fillRect(0,0,50,50);
+    }
+    
+    //绘制带渐变色的矩形
+    
+    function drawGradientRect(){
+        var my_gradient=canvas.createLinearGradient(0,0,200,0);
+        my_gradient.addColorStop(0,'black');
+        my_gradient.addColorStop(0.5,'red');
+        my_gradient.addColorStop(1,'white');
+        canvas.fillStyle=my_gradient;
+        canvas.fillRect(0,55,200,50)
+    }
+    
+    //使用图像来填充绘图
+    function drawPatternRect(){
+        var img =document.getElementsByTagName('img')[0];
+        console.log(img)
+        var pattern = canvas.createPattern(img,'repeat-y');
+        canvas.fillStyle=pattern;
+        canvas.fillRect(0,150,350,100);
+    }
+</script>

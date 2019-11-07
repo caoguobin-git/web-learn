@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>计算属性缓存vs方法</title>
+        <script src="../js/vue.js"></script>
+	</head>
+	<body>
+        <div id="app-13">
+            <p>Message: {{ message }}</p>
+            <p :style="{color:fontColor,backgroundColor:'black',float:'left'}">Reversed Message: {{ reversedMessage() }}</p><br>
+            <p>Length:{{ length }}</p>
+            <input v-model="message" />
+        </div>
+	</body>
+</html>
+<script type="text/javascript">
+    var app13=new Vue({
+        el:'#app-13',
+        data:{
+            message:'Hello World'
+        },
+        computed:{
+          length:function(){
+              return this.message.length;
+          },
+          fontColor:function(){
+              if(this.length<10){
+                  return 'green';
+              }else if(this.length<20){
+                  return 'yellow';
+              }else{
+                  return 'red';
+              }
+          }
+        },
+        methods:{
+            reversedMessage:function(){
+                return this.message.split('').reverse().join('');
+            }
+        }
+    })
+</script>

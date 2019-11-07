@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>改变模板map数据变色</title>
+        <script src="../js/vue.js"></script>
+        <style type="text/css">
+            .active {
+                color: red;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="test">
+            <my-demo v-for="(value,key) in markets" :key="key" :value="value"></my-demo>
+        </div>
+    </body>
+</html>
+<script type="text/javascript">
+    Vue.component('my-demo', {
+        props: ['value'],
+        template: '<p>\
+                <span :class="classObj">{{value.isActive}}</span>\
+                <span>{{value.price}}</span>\
+            </p>',
+        computed: {
+            classObj: function() {
+                return {
+                    active: this.value.isActive
+                }
+            }
+        },
+        watch: {
+            ['value.price'](newVal, oldVal) {
+                this.value.isActive = (newVal > oldVal) ? true : false;
+            }
+        }
+    })
+
+    var demo = new Vue({
+        el: '#test',
+        data: {
+            markets: {
+                'EUR/USD': {
+                    price: 123,
+                    isActive: true
+                },
+                'XAU/USD': {
+                    price: 1233,
+                    isActive: false
+                }
+            }
+        }
+    })
+</script>

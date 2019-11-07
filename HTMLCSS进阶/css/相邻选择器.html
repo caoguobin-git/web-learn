@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>相邻选择器</title>
+        <style type="text/css">
+            #second+p{
+                color: red;
+            }
+            *{
+                margin: 0;
+                padding: 0;
+            }
+            li+li{
+                border-top: 2px dashed red;
+            }
+        </style>
+	</head>
+	<body>
+        <div id="first">
+            <p>lvye的子元素</p>
+            <p>lvye的子元素</p>
+            <div id="second">
+                <p>lvye子元素的子元素</p>
+                <p>lvye子元素的子元素</p>
+            </div>
+            <p>lvye的子元素</p>
+            <p>lvye的子元素</p>
+        </div>
+        <ul>
+            <li>第1个元素</li>
+            <li>第2个元素</li>
+            <li>第3个元素</li>
+            <li>第4个元素</li>
+            <li>第5个元素</li>
+            <li>第6个元素</li>
+        </ul>
+	</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>侦听器</title>
+        <script src="../js/vue.js"></script>
+	</head>
+	<body>
+        <div id="app-15">
+            <p>
+                Ask a yes/no question:
+                <input v-model="question" />
+            </p>
+            <p>
+                {{answer}}
+            </p>
+        </div>
+	</body>
+</html>
+
+<script type="text/javascript">
+    var app15=new Vue({
+        el:'#app-15',
+        data:{
+            question:'',
+            answer:'I cannot give you an answer until you ask a question!'
+        }
+    })
+</script>

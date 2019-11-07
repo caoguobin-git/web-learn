@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>canvas失焦自动反转测试</title>
+        <script src="../js/vue.js"></script>
+        <style type="text/css">
+            canvas{
+                border: .5px dashed silver;
+                background-color: red;
+                border-radius: 20px 40px 80px 120px;
+            }
+        </style>
+	</head>
+	<body>
+        <div id="demo">
+            <canvas id="canvas-demo" width="800" height="400"></canvas>
+        </div>
+	</body>
+</html>
+<script type="text/javascript">
+    var demo = new Vue({
+        el:'#demo',
+        mounted() {
+            var canvas=document.getElementById('canvas-demo');
+            var ctx=canvas.getContext('2d');
+            ctx.fillStyle="#000000";
+            ctx.strokeStyle='#000000';
+            ctx.lineWidth=6;
+            ctx.beginPath()
+            ctx.arc(200,200,100,Math.PI*0.1,Math.PI*1.5)
+            ctx.stroke()
+        }
+    })
+</script>

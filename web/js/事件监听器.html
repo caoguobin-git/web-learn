@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+        <input id="btn" type="button" value="按钮" />
+	</body>
+</html>
+<script type="text/javascript">
+    window.onload=function(){
+        var oBtn=document.getElementById("btn");
+        
+        oBtn.addEventListener("click",alertMsg,false);
+    }
+    
+    function alertMsg(e){
+        console.log(e.type);
+        alert("JavaScript");
+    }
+</script>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>数字转时间</title>
+        <script src="../js/vue.js"></script>
+	</head>
+	<body>
+        <div id="demo">
+            <p>{{new Date(time).toDateString()}}</p>
+            <p>{{new Date(time).toGMTString()}}</p>
+            <p>{{new Date(time).toISOString()}}</p>
+            <p>{{new Date(time).toJSON()}}</p>
+            <p>{{new Date(time).toLocaleDateString()}}{{new Date(time).toLocaleTimeString()}}</p>
+            <p>{{new Date(time).toLocaleTimeString()}}</p>
+            <p>{{new Date(time).toTimeString()}}</p>
+            <p>{{new Date(time).toUTCString()}}</p>
+            <p>{{new Date(time).getYear()+1900}}</p>
+            <p>{{(new Date(time).getMonth()+1)<10?('0'+(new Date(time).getMonth()+1)):(new Date(time).getMonth()+1)}}</p>
+            <p>{{(new Date(time).getDate()+1<10)?('0'+(new Date(time).getDate()+1)):(new Date(time).getDate())}}</p>
+        </div>
+	</body>
+</html>
+<script type="text/javascript">
+    var demo=new Vue({
+        el:'#demo',
+        data:{
+            time:1449214666666
+        }
+    })
+</script>

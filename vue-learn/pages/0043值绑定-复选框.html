@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>值绑定-复选框</title>
+        <script src="../js/vue.js"></script>
+	</head>
+	<body>
+        <div id="app-43">
+            <input type="checkbox"  v-model="toggle" true-value="yes" false-value="no"/>
+            <p>{{toggle}}</p>
+        </div>
+	</body>
+</html>
+
+<script type="text/javascript">
+    var app43=new Vue({
+        el:'#app-43',
+        data:{
+            toggle:'yes'
+        }
+    })
+</script>

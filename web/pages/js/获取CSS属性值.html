@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>获取CSS属性值</title>
+        <style type="text/css">
+            #box{
+                width: 100px;
+                height: 100px;
+                background-color: #00ff00;
+            }
+        </style>
+	</head>
+	<body>
+        <input id="btn" type="button" value="获取颜色" />
+        <div id="box"></div>
+	</body>
+</html>
+<script type="text/javascript">
+    window.onload=function(){
+        var oBtn=document.getElementById("btn");
+        var oDiv=document.getElementById("box");
+        oBtn.onclick=function(){
+            var color=getComputedStyle(oDiv).backgroundColor;
+            console.log(color);
+        }
+       
+    }
+</script>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>meter标签</title>
+        <style type="text/css">
+
+        </style>
+    </head>
+    <body>
+        <meter id="pro-meter" min="0" max="100" value="12"></meter>
+    </body>
+</html>
+<script type="text/javascript">
+    window.onload = function() {
+        var val = 0;
+        var meter = document.getElementById("pro-meter");
+        var interval = setInterval(function() {
+            val++;
+            meter.value = val;
+            if (val == 100) {
+                clearInterval(interval);
+            }
+            console.log(val);
+        }, 100)
+    }
+</script>

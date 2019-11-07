@@ -1,0 +1,60 @@
+.box{
+    position: relative;
+    left: 6.25rem;
+    top: 6.25rem;
+}
+
+.list {
+    position: absolute;
+}
+
+img {
+    border-radius: 0.4em;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 1);
+}
+
+.flip {
+    -webkit-backface-visibility: hidden;
+    transform: translateX(0);
+}
+
+.in {
+    animation-timing-function: ease-out;
+    animation-duration: 3500ms;
+}
+
+.out {
+    animation-timing-function: ease-in;
+    animation-duration: 2250ms;
+}
+
+.flip.in {
+    animation-name: flipintoright;
+    animation-duration: 2250ms;
+}
+
+.flip.out {
+    transform: rotateY(-90deg) scale(.9);
+    animation-name: flipouttoleft;
+    animation-duration: 1750ms;
+}
+
+@-webkit-keyframes flipouttoleft {
+    from {
+        -webkit-transform: rotateY(0);
+    }
+
+    to {
+        -webkit-transform: rotateY(-90deg) scale(.9);
+    }
+}
+
+@-webkit-keyframes flipintoright {
+    from {
+        -webkit-transform: rotateY(90deg) scale(.9);
+    }
+
+    to {
+        -webkit-transform: rotateY(0);
+    }
+}

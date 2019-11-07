@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>组件基础</title>
+        <script src="../js/vue.js"></script>
+        <style type="text/css">
+            ul {
+                list-style-type: none;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app-7">
+            <ul>
+                <todo-item 
+                    v-for="item in todos" 
+                    v-bind:todo="item" 
+                    v-bind:key="item.id"
+                    ></todo-item>
+            </ul>
+        </div>
+    </body>
+</html>
+<script type="text/javascript">
+    Vue.component("todo-item", {
+        props: ['todo'],
+        template: '<li>{{todo.id+1}}. {{todo.text}}</li>'
+    })
+
+    var app7 = new Vue({
+        el: "#app-7",
+        data: {
+            todos: [{
+                    id: 0,
+                    text: '蔬菜'
+                },
+                {
+                    id: 1,
+                    text: '水果'
+                },
+                {
+                    id: 2,
+                    text: '奶酪'
+                }
+            ]
+        }
+    })
+</script>

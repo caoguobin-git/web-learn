@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+        <style> 
+        #animated_div
+        	{
+        	width:60px;
+        	height:40px;
+        	background:#92B901;
+        	color:#ffffff;
+        	position:relative;
+        	font-weight:bold;
+        	font:bold 20px 'kaiti', Verdana, Arial, Helvetica, sans-serif;
+            text-align: center;
+        	padding:20px 10px 0px 10px;
+        	animation:animated_div 5s 1;
+        	-moz-animation:animated_div 5s 1;
+        	-webkit-animation:animated_div 5s infinite;
+        	-o-animation:animated_div 5s 1;
+        	border-radius:5px;
+        	-webkit-border-radius:5px;
+        	}
+        
+        @-webkit-keyframes animated_div
+        	{
+        	0%		{-webkit-transform: rotate(0deg);left:0px;}
+        	25%		{-webkit-transform: rotate(20deg);left:0px;}
+        	50%		{-webkit-transform: rotate(0deg);left:500px;}
+        	55%		{-webkit-transform: rotate(0deg);left:500px;}
+        	70%		{-webkit-transform: rotate(0deg);left:500px;background:#1ec7e6;}
+        	100%	{-webkit-transform: rotate(-360deg);left:0px;}
+        	}
+
+        </style>
+	</head>
+	<body>
+        <div id="animated_div">多创</div>
+	</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>交易员界面</title>
+        <link rel="shortcut icon" href="../img/blackhole2019_pc.png" />
+        <script type="text/javascript" src="../js/jquery-3.4.1.js"></script>
+        <link rel="stylesheet" type="text/css" href="../css/CSSReset.css" />
+        <link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.css" />
+        <script type="text/javascript" src="../bootstrap/js/bootstrap.js"> </script>
+        <script type="text/javascript" src="../js/vue.js"></script>
+        <link type="text/css" rel="stylesheet" href="../css/traderPage.css" />
+    </head>
+    <body>
+        <div class="container" id="trader-page-container">
+            <div class="row">
+                <p style="text-align: center;">交易平台消息页面</p>
+            </div>
+            <div class="row">
+                <div class="col-lg-6" id="trader-notice-box">
+                    <table>
+                        <caption style="border: 1px solid silver;border-bottom: none;font-weight: 600;">最新金融新闻资讯</caption>
+                        <thead>
+                            <th>商品组合</th>
+                            <th>交易提醒</th>
+                            <th>时间</th>
+                        </thead>
+                        <tbody>
+                            <tr v-if="noticePreview">
+                                <td style="font-weight: 800;">{{noticeSymbol}}</td>
+                                <td class="notice-content">{{noticeContent}}</td>
+                                <td>{{getDateTimeStr(noticeTime)}}</td>
+                            </tr>
+                            <tr v-for="noticeItem in sortedNotices">
+                                <td style="font-weight: 800;">{{noticeItem.symbol}}</td>
+                                <td class="notice-content">{{noticeItem.content}}</td>
+                                <td>{{getDateTimeStr(noticeItem.time)}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <span @click="displayNewsSendBox=!displayNewsSendBox" style="float: right;cursor: pointer;">展开窗口</span>
+                </div>
+                <div class="col-lg-6" id="trader-notice-send-box" v-if="displayNewsSendBox">
+                    <div class="row">
+                        <p class="send-box-title">{{noticeTitle}}</p>
+                        <label>货币：</label><input list="currency-datas" v-model="noticeSymbol" />
+                        <datalist id="currency-datas">
+                            <option v-for="currency in currencyDatas">{{currency}}</option>
+                        </datalist>
+                        <p><label>内容：</label><textarea v-model="noticeContent"></textarea></p>
+
+                        <p>
+                            <span id="trader-notice-preview-btn" :style="noticePreviewBtnStyle" class="trader-btn"
+                                @click="previewNotice">{{noticePreviewText}}</span>
+                            <span id="trader-notice-send-btn" class="trader-btn" @click="sendNotice">发送</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6" id="trader-news-box">
+                    <table>
+                        <caption style="border: 1px solid silver;border-bottom: none;font-weight: 600;">最新金融新闻资讯</caption>
+                        <thead>
+                            <th>国家或地区</th>
+                            <th>新闻内容</th>
+                            <th>重要性</th>
+                            <th>时间</th>
+                        </thead>
+                        <tbody>
+                            <tr v-if="newsPreview">
+                                <td style="font-weight: 800;">{{newsCountry}}</td>
+                                <td class="news-content" :class="importantNum(newsImportant)">{{newsContent}}</td>
+                                <td :class="importantNum(newsImportant)">{{getStars(newsImportant)}}</td>
+                                <td>{{getDateTimeStr(newsTime)}}</td>
+                            </tr>
+                            <tr v-for="newsItem in sortedNews">
+                                <td style="font-weight: 800;">{{newsItem.country}}</td>
+                                <td class="news-content" :class="importantNum(newsItem.important)">{{newsItem.content}}</td>
+                                <td :class="importantNum(newsItem.important)">{{getStars(newsItem.important)}}</td>
+                                <td>{{getDateTimeStr(newsItem.time)}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-lg-6" id="trader-news-send-box">
+                    <p class="send-box-title">{{newsTitle}}</p>
+                    <label>国家：</label><input list="country-datas" v-model="newsCountry" />
+                    <datalist id="country-datas">
+                        <option v-for="country in countryDatas">{{country}}</option>
+                    </datalist>
+                    <p><label>内容：</label><textarea v-model="newsContent"></textarea></p>
+                    <p><label>影响：<span @click="newsImportant--">一 </span><select v-model="newsImportant">
+                                <option value="1">一颗星（影响极小）</option>
+                                <option value="2">二颗星(影响很小)</option>
+                                <option value="3">三颗星(影响中等)</option>
+                                <option value="4">四颗星(影响重大)</option>
+                                <option value="5">五颗星（影响极大）</option>
+                            </select><span @click="newsImportant++"> 十</span></label></p>
+                    <p>
+                        <span id="trader-news-preview-btn" :style="newsPreviewBtnStyle" class="trader-btn" @click="previewNews">{{newsPreviewText}}</span>
+                        <span id="trader-news-send-btn" class="trader-btn" @click="sendNews">发送</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+<script src="../js/traderPage.js"></script>

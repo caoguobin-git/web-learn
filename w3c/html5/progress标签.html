@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>progress标签</title>
+	</head>
+	<body>
+        <progress max="100" value="20">
+            
+        </progress>
+	</body>
+</html>
+<script type="text/javascript">
+    window.onload=function(){
+        var pro=document.getElementsByTagName("progress")[0];
+        var size=0;
+        var timer=setInterval(function(){
+            pro.value=size;
+            size++;
+        },10)
+    }
+</script>

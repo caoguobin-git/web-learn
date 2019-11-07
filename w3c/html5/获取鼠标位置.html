@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>get mouse position</title>
+        <script src="../js/vue.js"></script>
+        <style type="text/css">
+            #demo{
+                width: 1800px;
+                height: 800px;
+                background-color: #DDDDDD;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="demo" @mousemove="updateXY">
+            <canvas id="demo1"></canvas>
+            <p >{{clientX}},{{clientY}}</p>
+        </div>
+    </body>
+</html>
+<script type="text/javascript">
+    var demo = new Vue({
+        el:"#demo",
+        data:{
+          clientX:1,
+          clientY:1
+        },
+        methods:{
+            updateXY:function(e){
+                console.log("hello")
+                this.clientX=e.clientX;
+                this.clientY=e.clientY;
+            }
+        }
+    })
+    
+    var c=document.getElementById("demo1");
+    var ctx=c.getContext("2d");
+    ctx.moveTo(10,10);
+    ctx.lineTo(150,50);
+    ctx.lineTo(10,50);
+    ctx.stroke();
+</script>

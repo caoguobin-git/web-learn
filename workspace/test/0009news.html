@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>news</title>
+        <script src="../js/vue.js"></script>
+        <script src="../js/jquery-3.4.1.js"></script>
+        <style type="text/css">
+            .active {
+                color: red;
+            }
+            table{
+                border-collapse: collapse;
+            }
+            td{
+                border:1px solid silver;
+                padding: 2px 10px;
+            }
+            tr{
+                transition: all .3s;
+            }
+            tr:hover{
+                background-color: rgba(196, 196, 196, 0.82);
+                animation: my-animation .3s 1;
+            }
+            @-webkit-keyframes my-animation{
+                0%{opacity: 1;}
+                50%{opacity: .6;}
+                100%{opacity: 1;}
+            }
+
+        </style>
+    </head>
+    <body>
+        <div id="demo">
+           <news-post
+                :news-items="newsItems"
+            ></news-post>
+        </div>
+        <button onclick="addNews()">添加</button>
+    </body>
+</html>
+<script type="text/javascript">
+
+    Vue.component('news-post', {
+        props: ['newsItems'],
+        template: '<table>\
+        <caption style="border: 1px solid silver;border-bottom: none;font-weight: 600;">最新金融新闻资讯</caption>\
+                    <tr v-for="newsItem in newsItems" >\
+                        <td style="font-weight: 800;">{{newsItem.country}}</td>\
+                        <td :class="importantNum(newsItem.important)">{{newsItem.content}}</td>\
+                        <td :class="importantNum(newsItem.important)">{{getStars(newsItem.important)}}</td>\
+                        <td>{{getDateTimeStr(newsItem.time)}}</td>\
+                    </tr>\
+                  </table>',
+        computed: {
+            
+        },
+        methods: {
+            getStars: function(val) {
+                var a = '';
+                var count = parseInt(val);
+                for (var i = 0; i < count; i++) {
+                    a += "\u2605";
+                };
+                for(var i=0;i<5-count;i++){
+                    a+="\u2606";
+                }
+                return a;
+            },
+            importantNum: function(val) {
+                if (val >= 3) {
+                    return 'active'
+                } else {
+                    return 'inActive'
+                }
+            },
+            getDateTimeStr:function (val) {
+                        var time=parseInt(val);
+                        var year=new Date(time).getFullYear();
+                        var month=(new Date(time).getMonth()+1)<10?('0'+(new Date(time).getMonth()+1)):(new Date(time).getMonth()+1);
+                        var date=(new Date(time).getDate()+1<10)?('0'+(new Date(time).getDate()+1)):(new Date(time).getDate());
+                        var timeStr=new Date(time).toTimeString().substring(0,8);
+                        return year+'-'+month+'-'+date+'  '+timeStr;
+                    }
+
+        }
+    })
+    var demo = new Vue({
+        el: '#demo',
+        data: {
+            news: [{
+                    id: 1,
+                    country: '中国',
+                    content: '国家统计局发布70个大中城市住宅销售价格月度报告',
+                    important: 3,
+                    time:1565852700375
+                },
+                {id: 2,country: '中国',content: '国家统计局发格月度报告',important: 2,time:new Date().getTime()},
+                {id: 2,country: '中国',content: '国家统计局发格月度报告',important: 4,time:new Date().getTime()},
+                {id: 2,country: '中国',content: '国家统计局发格月度报告',important: 1,time:new Date().getTime()},
+            ],
+            notices: [
+                3,4,5,6,7,8
+            ]
+        },
+        computed:{
+            newsItems:function(){
+                return this.news.sort(function(a,b){
+                    return b.time-a.time;
+                })
+            }
+        }
+    })
+    var idBegin = 2;
+
+    function addNews() {
+        idBegin++;
+        var id = idBegin;
+        var content = 'hello world' + new Date().getTime();
+        var important = Math.random()*5+1;
+        demo.news.push({
+            id: id,
+            country: '中国',
+            content: content,
+            important: important,
+            time: new Date().getTime()
+        })
+    }
+</script>

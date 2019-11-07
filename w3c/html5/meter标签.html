@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>meter标签</title>
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
+    </head>
+    <body>
+        <meter min="0" max="100" value="25">1111</meter>
+    </body>
+</html>
+<script type="text/javascript">
+    $(function() {
+        var meter = $("meter");
+        console.log(meter)
+        var size = 0;
+        var int = setInterval(function() {
+            if (size == 100) {
+                // clearInterval(int);
+                size=0;
+            }
+            meter.val(size);
+            size++;
+        }, 10)
+    })
+</script>

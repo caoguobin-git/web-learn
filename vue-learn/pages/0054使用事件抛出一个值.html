@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>使用事件抛出一个值</title>
+        <script src="../js/vue.js"></script>
+    </head>
+    <body>
+        <div id="app-53">
+                <!-- <blog-post @enlarge-text="postFontSize+=$event" v-for="post in posts" :key="post.id" :post="post"></blog-post> -->
+                <blog-post @enlarge-text="enlargeFont" v-for="post in posts" :key="post.id" :post="post"></blog-post>
+        </div>
+    </body>
+</html>
+
+<script type="text/javascript">
+    Vue.component('blog-post', {
+        props: ['post'],
+        methods:{
+            enlargeFont:function(){
+                this.post.blogFontSize++;
+            }
+        },
+        template: `<div
+        class="blog-post" :style="{fontSize:post.blogFontSize+\'px\'}"><h1>{{ post.title }}</h1><p v-html="post.content"></p>
+        <button @click="enlargeFont">放大</button>
+        </div>`
+    })
+
+    var app53 = new Vue({
+        el: '#app-53',
+        data: {
+            postFontSize: 6,
+            posts: [{
+                id: 1,
+                blogFontSize:8,
+                title: '111',
+                content: '<h2 style="color:red">yiyiyiyiyiyi</h2>'
+            }, {
+                id: 2,
+                blogFontSize:16,
+                title: '222',
+                content: '<h2 style="color:red">erererererer</h2>'
+            }, {
+                id: 3,
+                blogFontSize:24,
+                title: '333',
+                content: '<h2 style="color:red">sansansansan</h2>'
+            }]
+        },
+        methods:{
+            enlargeFont:function(val){
+                this.postFontSize+=val;
+            }
+        }
+    })
+</script>

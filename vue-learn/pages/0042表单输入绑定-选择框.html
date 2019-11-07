@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>表单输入绑定-选择框</title>
+        <script src="../js/vue.js"></script>
+	</head>
+	<body>
+        <div id="app-42">
+            <!-- 单个选择 -->
+            <select v-model="selected1">
+                <option disabled value="">--请选择--</option>
+                <option>北京</option>
+                <option>上海</option>
+                <option>广州</option>
+                <option>深圳</option>
+            </select>
+            <p>单选选择： {{ selected1 }}</p>
+            
+            <!-- 多个选择 -->
+            <select v-model="selected" multiple>
+                <option disabled value="">请选择</option>
+                <option>北京</option>
+                <option>上海</option>
+                <option>广州</option>
+                <option>深圳</option>
+            </select>
+            <p>多项选择： {{ selected }}</p>
+            
+            <!-- 用v-for动态渲染选项 -->
+            <select v-model="select">
+                <option disabled value="">请选择</option>
+                <option 
+                    v-for="city in cities"
+                    :value="city.value"
+                >{{city.name}}</option>
+            </select>
+            <p>选择：{{ select }}</p>
+        </div>
+	</body>
+</html>
+
+<script type="text/javascript">
+    var app42=new Vue({
+        el:'#app-42',
+        data:{
+            selected1:'',
+            selected:[],
+            cities:[
+                {name:'北京',value:'bj'},
+                {name:'上海',value:'sh'},
+                {name:'广州',value:'gz'},
+                {name:'深圳',value:'sz'}
+            ],
+            select:''
+        }
+    })
+</script>

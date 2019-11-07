@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>起步</title>
+		<script type="text/javascript" src="../js/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			{{message}}
+		</div>
+		<div id="app-2" v-bind:title="bindTime">
+			鼠标悬停几秒钟查看绑定时间
+		</div>
+		<div v-if="seen" id="app-3">
+			现在你看见我了
+		</div>
+		<div id="app-4">
+			<ol>
+				<li v-for="(todo,index) in todos">
+					{{index}}{{todo.text}}
+				</li>
+			</ol>
+		</div>
+		<div id="app-5">
+			<p>{{message}}</p>
+			<button v-on:click="reverseMessage">反转消息</button>
+		</div>
+		<div id="app-6">
+			<p style="white-space: pre;">{{message}}</p>
+			<textarea v-model="message"></textarea>
+		</div>
+		<div id="app-7">
+			<ol>
+				<todo-item v-for='item in groceryList' v-bind:todo='item' v-bind:key='item.id'></todo-item>
+			</ol>
+		</div>
+		<div id="app-8">
+			<a :href='url' target="_blank" @click="switchUrl">{{url}}</a>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	Vue.component('todo-item', {
+		props: ['todo'],
+		template: '<li>{{todo.text}}</li>'
+	})
+	var app = new Vue({
+		el: "#app",
+		data: {
+			message: 'Hello world'
+		}
+	})
+
+	var app2 = new Vue({
+		el: "#app-2",
+		data: {
+			bindTime: new Date().toLocaleString() + '绑定'
+		}
+	})
+
+	var app3 = new Vue({
+		el: '#app-3',
+		data: {
+			seen: true
+		}
+	})
+
+	var app4 = new Vue({
+		el: "#app-4",
+		data: {
+			todos: [{
+					text: '学习JavaScript'
+				},
+				{
+					text: '学习Vue'
+				},
+				{
+					text: '整个牛项目'
+				}
+			]
+		}
+	})
+
+	var app5 = new Vue({
+		el: "#app-5",
+		data: {
+			message: 'Hello Vue!'
+		},
+		methods: {
+			reverseMessage: function() {
+				this.message = this.message.split('').reverse().join('')
+			}
+		}
+	})
+
+	var app6 = new Vue({
+		el: "#app-6",
+		data: {
+			message: 'input the message'
+		}
+	})
+
+	var app7 = new Vue({
+		el: '#app-7',
+		data: {
+			groceryList: [{
+					id: 0,
+					text: '蔬菜'
+				},
+				{
+					id: 1,
+					text: '奶酪'
+				},
+				{
+					id: 2,
+					text: '随便其它什么人吃的东西'
+				}
+			]
+		}
+	})
+	
+	var app8=new Vue({
+		el:"#app-8",
+		data:{
+			url:"http://www.baidu.com"
+		},
+		methods:{
+			switchUrl:function(){
+				if(this.url==="http://www.baidu.com"){
+					this.url="https://sina.cn/";
+				}else{
+					this.url="http://www.baidu.com"
+				}
+			}
+		}
+	})
+</script>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>鼠标事件-移入移出</title>
+        <style type="text/css">
+            p{
+                text-align: center;
+                width: 100px;
+            }
+        </style>
+	</head>
+	<body>
+        <p id="content">绿叶学习网</p>
+        <p onmouseover="this.style.color='blue'">绿叶学习网</p>
+        <p>绿叶学习网</p>
+	</body>
+</html>
+<script type="text/javascript">
+    window.onload=function(){
+        test()
+    }
+    
+    function test(){
+         var oP=document.getElementById("content");
+        oP.onmouseover=function(){
+            this.style.color="red";
+            this.style.backgroundColor="black";
+        };
+        oP.onmouseout=function(){
+            this.style.color="black";
+            this.style.backgroundColor="red";
+        }
+    }
+</script>

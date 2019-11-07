@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>自定义组件的v-model</title>
+        <script src="../js/vue.js"></script>
+    </head>
+    <body>
+        <!-- 
+            一个组件上的 v-model 默认会利用名为 value 的 
+            prop 和名为 input 的事件，但是像单选框、复选
+            框等类型的输入控件可能会将 value 特性用于不同的
+            目的。model 选项可以用来避免这样的冲突：
+        -->
+        <div id="app-68">
+            <base-checkbox v-model="lovingVue"></base-checkbox>
+        </div>
+    </body>
+</html>
+
+<script type="text/javascript">
+    
+    Vue.component('base-checkbox',{
+        model:{
+            prop:'checked',
+            event:'change'
+        },
+        props:{
+            checked:Boolean
+        },
+        template:`
+            <input
+                type='checkbox'
+                :checked='checked'
+                @change="$emit('change',$event.target.checked)"
+                >
+        `
+    })
+    
+    var app68 = new Vue({
+        el: '#app-68',
+        data:{
+            lovingVue:false
+        }
+    })
+</script>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>按键事件</title>
+	</head>
+	<body>
+        <input id="txt" type="text" />
+        <div>字符串长度：<span id="num">
+            0
+        </span></div>
+	</body>
+</html>
+<script type="text/javascript">
+    window.onload=function(){
+        var oTxt=document.getElementById("txt");
+        var oNum=document.getElementById("num");
+        
+        oTxt.onkeyup=function(){
+            var str=oTxt.value;
+            oNum.innerHTML=str.length;
+        }
+    }
+</script>

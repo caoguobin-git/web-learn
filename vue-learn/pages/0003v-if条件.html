@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>v-if</title>
+        <script src="../js/vue.js"></script>
+	</head>
+	<body>
+        <div id="app-3">
+            <p v-if="seen">限制你看到我了</p>
+        </div>
+	</body>
+</html>
+<script type="text/javascript">
+    var app3=new Vue({
+        el:"#app-3",
+        data:{
+            seen:true
+        }
+    })
+</script>

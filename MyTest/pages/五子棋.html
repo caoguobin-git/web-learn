@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script src="../js/vue.js"></script>
+        <style type="text/css">
+            canvas {
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="demo">
+            <canvas id="canvas" :width="size" :height="size"></canvas>
+            <p>当前选手：{{currentPlayer}} size:{{size}} </p>
+            <audio id="bgm" src="../audio/shengyin.mp3"></audio>
+        </div>
+    </body>
+</html>
+
+<script type="text/javascript">
+    var demo = new Vue({
+        el: '#demo',
+        data: {
+            size:800,
+            ctx: {},
+            lineNum: 20,
+            xTurn: true,
+            xPos: [],
+            yPos: []
+        },
+        methods: {
+            drawCells: function() {
+                this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+                for (let i = this.cellWidth / 2; i < this.ctx.canvas.width; i += this.cellWidth) {
+                    this.ctx.shadowBlur = 0;
+                    this.ctx.shadowColor = 'white';
+                    this.ctx.shadowOffsetX = 0;
+                    this.ctx.shadowOffsetY = 0;
+                    this.ctx.lineWidth = 0.3;
+                    this.ctx.strokeStyle = 'rgba(50,50,50,0.5)'
+                    this.ctx.beginPath();
+                    this.ctx.moveTo(i, 0);
+                    this.ctx.lineTo(i, this.ctx.canvas.height);
+                    this.ctx.closePath();
+                    this.ctx.stroke();
+                    this.ctx.beginPath();
+                    this.ctx.moveTo(0, i);
+                    this.ctx.lineTo(this.ctx.canvas.height, i);
+                    this.ctx.closePath();
+                    this.ctx.stroke();
+                }
+                for (let i in this.xPos) {
+                    let cell = this.xPos[i];
+                    this.drawCell('red', cell);
+                };
+                for (let i in this.yPos) {
+                    let cell = this.yPos[i];
+                    this.drawCell('blue', cell);
+                }
+            },
+            drawCell: function(color, point) {
+                let x = (point.x + 0.5) * this.cellWidth;
+                let y = (point.y + 0.5) * this.cellWidth;
+
+                var radial = this.ctx.createRadialGradient(x - this.cellWidth / 7, y - this.cellWidth / 7,
+                    0, x, y, this.cellWidth / 2);
+                radial.addColorStop(0, 'white');
+                radial.addColorStop(0.4, color);
+                radial.addColorStop(0.9, color);
+                radial.addColorStop(1, 'black');
+                this.ctx.fillStyle = radial;
+                this.ctx.shadowColor = 'black';
+                this.ctx.shadowBlur = 15;
+                this.ctx.shadowOffsetX = 5;
+                this.ctx.shadowOffsetY = 5;
+                this.ctx.beginPath();
+                this.ctx.moveTo(x, y);
+                this.ctx.arc(x, y, this.cellWidth / 2 - 5, 0, Math.PI * 2);
+                this.ctx.closePath();
+                this.ctx.fill();
+            },
+            checkPoint: function(p) {
+                for (let i in this.xPos) {
+                    if (this.xPos[i].x == p.x && this.xPos[i].y == p.y) {
+                        return true;
+                    }
+                }
+                for (let i in this.yPos) {
+                    if (this.yPos[i].x == p.x && this.yPos[i].y == p.y) {
+                        return true;
+                    }
+                }
+                return false;
+            },
+            createTarget: function(direction, current) {
+                var startX,startY,endX,endY,target;
+                         if(direction==1){
+                             startY= current.y - 4;
+                             endY = current.y + 4;
+                             target = [];
+                             for (let i = startY; i <= endY; i++) {
+                                 target.push({
+                                     x: current.x,
+                                     y: i
+                                 })
+                             }
+                             return target;
+                         }else if(direction==2){
+                             startX = current.x - 4;
+                             endX = current.x + 4;
+                             target = [];
+                             for (let i = startX; i <= endX; i++) {
+                                 target.push({
+                                     x: i,
+                                     y: current.y
+                                 })
+                             }
+                             return target;
+                         }else if(direction==3){
+                             startX = current.x +4;
+                             endX = current.x - 4;
+                             startY=current.y-4;
+                             endY=current.y+4;
+                             target = [];
+                             for (let i = startX,j=startY; i >= endX|| j<=endY; i--,j++) {
+                                 target.push({
+                                     x: i,
+                                     y: j
+                                 })
+                             }
+                             return target;
+                         }else if(direction==4){
+                             startX = current.x -4;
+                             endX = current.x + 4;
+                             startY=current.y-4;
+                             endY=current.y+4;
+                             //初始化目标数组
+                             target = [];
+                             for (let i = startX,j=startY; i <= endX|| j<=endY; i++,j++) {
+                                 target.push({
+                                     x: i,
+                                     y: j
+                                 })
+                             }
+                             return target;
+                         }
+            },
+            judge: function(points) {
+                if (points.length < 5) {
+                    return false;
+                }
+                let current = points[points.length - 1];
+                let shuipingTarget = this.createTarget(1, current);
+                if (this.judgeSuccess(shuipingTarget, points)) {
+                    return true;
+                }
+                let chuizhiTarget=this.createTarget(2,current);
+                if(this.judgeSuccess(chuizhiTarget, points)) {
+                    return true;
+                }
+                let xiegangTarget=this.createTarget(3,current);
+                if(this.judgeSuccess(xiegangTarget, points)) {
+                    return true;
+                }
+                let fanxiegangTarget=this.createTarget(4,current);
+                if(this.judgeSuccess(fanxiegangTarget, points)) {
+                    return true;
+                }
+                return false;
+            },
+            judgeSuccess: function(target, points) {
+                
+                for(let i=0;i<target.length-4;i++){
+                    let result =0;
+                    for(let j=i;j<i+5;j++){
+                        for(var k=0;k<points.length;k++){
+                            if(points[k].x==target[j].x&&points[k].y==target[j].y){
+                                result++;
+                            }
+                        }
+                    }
+                    if(result==5){
+                        return true;
+                    }
+                }
+                return false;
+            }
+        },
+        computed: {
+            cellWidth: function() {
+                return this.ctx.canvas.height / this.lineNum;
+            },
+            currentPlayer: function() {
+                return this.xTurn ? '红方' : '蓝方';
+            }
+        },
+        watch: {
+            size:function(){
+                this.drawCells();
+            },
+            xPos: function() {
+                this.drawCells();
+                console.log(this.judge(this.xPos))
+                if (this.judge(this.xPos)) {
+                    setTimeout(function() {
+                        alert('红方胜利');
+                    }, 100)
+                }
+            },
+            yPos: function() {
+                this.drawCells();
+                if (this.judge(this.yPos)) {
+                    setTimeout(function() {
+                        alert('蓝方胜利');
+                        
+                    }, 100)
+                }
+            }
+        },
+        mounted: function() {
+            var canvas = document.getElementById('canvas');
+            canvas.offsetLeft = 0;
+            canvas.offsetTop = 0;
+            this.ctx = canvas.getContext('2d');
+            this.drawCells();
+            canvas.onclick = function(e) {
+                let x = parseInt(e.layerX / demo.cellWidth);
+                let y = parseInt(e.layerY / demo.cellWidth);
+                let a = {
+                    x: x,
+                    y: y
+                };
+                if (demo.checkPoint(a)) {
+                    alert('此处不可放置棋子');
+                    return;
+                }
+                
+                var bgm = document.getElementById('bgm');
+                bgm.pause();
+                bgm.currentTime = 0;
+                bgm.play();
+                
+                if (demo.xTurn) {
+                    demo.xPos.push(a);
+                } else {
+                    demo.yPos.push(a);
+                }
+                demo.xTurn = !demo.xTurn;
+            }
+        }
+    })
+</script>

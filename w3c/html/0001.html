@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style type="text/css">
+        body{
+            background: url(../img/eg_bg_06.gif);
+        }
+        h3{
+            text-align: center;
+            font-size: 120px;
+            font-family: "kaiti";
+            text-shadow: 0 0 20px black;
+        }
+        p{
+            text-align: center;
+            font-family: "kaiti";
+            font-size: 100px;
+            font-weight: bold;
+        }
+    </style>
+    
+</head>
+<body>
+<h3  id="title">静夜思</h3>
+<p>床前明月光，疑是地上霜。<br>举头望明月，低头思故乡。</p>
+
+<dl>
+<dt>First term</dt>
+<dd>Definition</dd>
+<dt>Next term</dt>
+<dd>Definition</dd>
+</dl>
+</body>
+</html>
+<script type="text/javascript">
+    var a=25;
+    var flag=true;
+    window.onload=function(){
+        var title=document.getElementById("title");
+        setInterval(function(){
+            var size=a;
+            if(flag){
+                size+=10;
+               
+            title.style.textShadow="0 0 "+size+"px red";
+            }else{
+                size-=10;
+            title.style.textShadow="0 0 "+size+"px blue";
+            }
+            flag=!flag;
+        },30)
+    }
+</script>

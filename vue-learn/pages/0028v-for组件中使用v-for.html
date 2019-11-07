@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>组件中使用v-for</title>
+        <script src="../js/vue.js"></script>
+    </head>
+    <body>
+        <div id="app-28">
+            <ul>
+                <li 
+                    is="todo-item" 
+                    v-for="(todo,index) in todos" 
+                    :key="todo.id" 
+                    :title="todo.title" 
+                    @remove="todos.splice(index,1)"
+                ></li>
+                <br>
+                <li>总的待办事项：{{totalTodoNum}}件</li>
+            </ul>
+            <form @submit.prevent="addNewTodo">
+                <label for="new-todo">新增待办项：</label>
+                <br>
+                <input list="todoList" v-model="newTodoText" id="new-todo" placeholder="例: 喂猫" />
+                <datalist id="todoList">
+                    <option>洗脸</option>
+                    <option>刷牙</option>
+                    <option>吃饭</option>
+                    <option>上班</option>
+                </datalist>
+                <button type="submit"><b>新增</b></button>
+            </form>
+        </div>
+    </body>
+</html>
+
+<script type="text/javascript">
+    Vue.component('todo-item', {
+        props: ['title'],
+        template: '<li>{{ title }} <button @click="$emit(\'remove\')">Remove</button></li>'
+    })
+
+    var app28 = new Vue({
+        el: '#app-28',
+        data: {
+            newTodoText: '',
+            todos: [{
+                    id: 1,
+                    title: '洗碗',
+                },
+                {
+                    id: 2,
+                    title: '扔垃圾',
+                },
+                {
+                    id: 3,
+                    title: '修理草坪'
+                }
+            ],
+            nextTodoId: 4
+        },
+        methods: {
+            addNewTodo: function() {
+                if (this.newTodoText === '') {
+                    alert("待办事项不能为空");
+                    return;
+                }
+                this.todos.push({
+                    id: this.nextTodoId,
+                    title: this.newTodoText
+                });
+                this.nextTodoId++;
+                this.newTodoText = '';
+            }
+        },
+        computed: {
+            totalTodoNum: function() {
+                return this.todos.length;
+            }
+        }
+    })
+</script>

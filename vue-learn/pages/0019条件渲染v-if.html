@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script src="../js/vue.js"></script>
+        <title>条件渲染v-if</title>
+    </head>
+    <body>
+        <div id="app-19">
+            <h1 v-if="seen">Vue is awesome!</h1>
+            <h1 v-else>Oh no</h1>
+            <h1 v-if="message<0.33" :style="{backgroundColor:bgcolor}">随机数字 小： {{message}}</h1>
+            <h1 v-else-if="message<0.66" :style="{backgroundColor:bgcolor}">随机数字 中： {{message}}</h1>
+            <h1 v-else :style="{backgroundColor:bgcolor}">随机数字 大： {{message}}</h1>
+        </div>
+    </body>
+</html>
+<script type="text/javascript">
+    var app19 = new Vue({
+        el: '#app-19',
+        data: {
+            seen: true,
+            message: 1
+        },
+        computed: {
+            bgcolor: function() {
+                if (this.message < 0.33) {
+                    return 'red';
+                } else if (this.message < 0.66) {
+                    return 'yellow';
+                } else {
+                    return "green";
+                }
+            }
+        }
+    })
+
+    window.onload = function() {
+        setInterval(function() {
+            app19.seen = !app19.seen;
+            app19.message = Math.random().toFixed(2)
+        }, 400)
+    }
+</script>

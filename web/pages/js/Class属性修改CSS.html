@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Class属性修改CSS</title>
+        <style type="text/css">
+            .oldBox {
+                width: 100px;
+                height: 100px;
+                background-color: red;
+                transition:all linear .5s;
+            }
+
+            .newBox {
+                width: 120px;
+                height: 200px;
+                background-color: green;
+                transition:all linear .5s;
+            }
+        </style>
+    </head>
+    <body>
+        <input id="btn" type="button" value="切换" />
+        <div id="box" class="oldBox"></div>
+    </body>
+</html>
+<script type="text/javascript">
+    window.onload = function() {
+        setInterval(function() {
+            changeColor();
+        }, 500)
+    }
+
+    var flag = true;
+
+    function changeColor() {
+        var oBtn = document.getElementById("btn");
+        var oBox = document.getElementById("box");
+        // oBtn.onclick = function() {
+        if (flag) {
+            oBox.className = "newBox";
+        } else {
+            oBox.className = "oldBox";
+        }
+        flag = !flag;
+        // }
+    }
+</script>

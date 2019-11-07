@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>VueTest</title>
+		<script type="text/javascript" src="../js/jquery-3.4.1.js"></script>
+		<script type="text/javascript" src="../js/vue.js"></script>
+		<script src="https://unpkg.com/lodash@4.13.1/lodash.min.js"></script>
+		<script type="text/javascript" src="../bootstrap/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+		<link type="text/css" rel="stylesheet" href="../css/mycss.css" />
+		<link type="text/css" rel="stylesheet" href="../bootstrap/bootstrap-3.3.7-dist/css/bootstrap.css" />
+	</head>
+	<body>
+		<div class="container">
+			<div class="row">
+				<div id="app1" class="col-lg-3 col-md-4 col-sm-4">
+					<p title="hahah" v-bind:style="fontSize">{{message.split('').reverse().join('')}}</p>
+					<input type="text" v-model="message" />
+				</div>
+				<div id="app2" class="col-lg-3 col-md-4 col-sm-4">
+					<span v-bind:title="title">
+						鼠标悬停几秒钟查看动态绑定的提示信息
+					</span>
+				</div>
+				<div id="app3" class="col-lg-3 col-md-4 col-sm-4">
+					<p v-if="seen">现在你看到我了</p>
+					<button id="dispaly-btn" v-on:click="changeDisplay()">{{display}}</button>
+				</div>
+			</div>
+
+			<div class="row">
+				<div id="app4" class="col-lg-3 col-md-4 col-sm-4">
+					<ol>
+						<li v-for="todo in todos">
+							{{todo.index}}{{todo.text}}
+						</li>
+					</ol>
+				</div>
+				<div id="app5" class="col-lg-3 col-md-4 col-sm-4">
+					<p>{{message}}</p>
+					<button v-on:click="reverseMessage">反转消息</button>
+				</div>
+				<div id="app6" class="col-lg-3 col-md-4 col-sm-4">
+					<p>{{message}}</p>
+					<input v-model="message" />
+				</div>
+			</div>
+			<div class="row">
+				<div id="app7" class="col-lg-3 col-md-4 col-sm-4">
+					<ol>
+						<todo-item v-for='item in groceryList' v-bind:todo='item' v-bind:key='item.id'></todo-item>
+						<hello v-for='item in hellos' v-bind:hello='item'></hello>
+					</ol>
+				</div>
+				<div id="app8" class="col-lg-3 col-md-4 col-sm-4 hello">
+					<p>{{a==1?'yes':'no'}}</p>
+					<p>Using mustaches: {{ rawHtml }}</p>
+					<p>Using v-html directive: <span v-html="rawHtml"></span></p>
+					<p v-html="rawHtml"></p>
+				</div>
+				<div id="example" class="col-lg-3 col-md-4 col-sm-4">
+					<p>Original message:"{{message}}"</p>
+					<p>Computed reversed message: "{{reversedMessage}}"</p>
+				</div>
+			</div>
+			<div class="row">
+				<div id="demo" class="col-lg-3 col-md-4 col-sm-4">
+					{{fullName}}
+				</div>
+				<div id="watch-example" class="col-lg-3 col-md-4 col-sm-4">
+					<p>
+						Ask a yes/no question:
+						<input v-model="question" />
+					</p>
+					<p>{{answer}}</p>
+				</div>
+				<div id="example-class" class="static col-lg-3 col-md-4 col-sm-4" v-bind:class="{active:isActive,'text-danger':hasError}">
+					asdfasdfasdf
+				</div>
+			</div>
+			<div class="row">
+				<div id="app-12" class=" col-lg-3 col-md-4 col-sm-4">
+					<h3 v-bind:style="{'display':isDisplay}">看得见我吗？</h3>
+					<button v-on:click="switchDisplay">点击切换</button>
+				</div>
+				<div id="app-13" class=" col-lg-3 col-md-4 col-sm-4">
+					<button v-on:click="count +=1">add 1</button>
+					<span>{{count}}</span>
+				</div>
+				<div id="greetExample" class=" col-lg-3 col-md-4 col-sm-4">
+					<button v-on:click="greet">Greet</button>
+				</div>
+			</div>
+			<div class="row">
+				<div id="example-3" class="col-lg-3 col-md-4 col-sm-4">
+					<button v-on:click="say('hi')">Say hi</button>
+					<button v-on:click="say('waht')">Say what</button>
+				</div>
+				<div id="components-demo" class="col-lg-3 col-md-4 col-sm-4">
+					<button-counter title='1'></button-counter>
+					<button-counter title='2' title2=asdf></button-counter>
+					<button-counter title='3'></button-counter>
+					<button-counter title=4></button-counter>
+				</div>
+				<div id="blog-post-demo">
+					<blog-post v-for='post in posts' v-bind:key=post.id v-bind:title='post.title'></blog-post>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+<script type="text/javascript" src="../js/myvue.js"></script>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>动态组件</title>
+        <script src="../js/vue.js"></script>
+        <style type="text/css">
+            .app-56-btn {
+                padding: 3px 15px;
+                border-top-left-radius: 3px;
+                border-top-right-radius: 3px;
+                border: 1px solid #ccc;
+                cursor: pointer;
+                background: #f0f0f0;
+                margin-bottom: -1px;
+                margin-right: 1px;
+            }
+
+            .app-56-btn:hover{
+                background-color: #E0E0E0;
+            }
+
+            .app-56-btn-active {
+                background-color: #E0E0E0;
+            }
+
+            .app-56-component {
+                border: 1px solid #ccc;
+                width: 200px;
+                height: 100px;
+                padding: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app-56">
+            <button v-for="tab in tabs" @click="currentTab=tab" :key="tab" :class="{'app-56-btn-active':tab===currentTab}"
+                class="app-56-btn">{{ tab }}</button>
+            <component :is="currentTabComponent" class="app-56-component"></component>
+        </div>
+    </body>
+</html>
+
+<script type="text/javascript">
+    Vue.component('tab-home', {
+        template: '<div>tab home</div>'
+    })
+    Vue.component('tab-posts', {
+        template: '<div>tab posts</div>'
+    })
+    Vue.component('tab-archive', {
+        template: '<div>tab archive</div>'
+    })
+
+    var app56 = new Vue({
+        el: '#app-56',
+        data: {
+            currentTab: 'Home',
+            tabs: ['Home', 'Posts', 'Archive']
+        },
+        computed: {
+            currentTabComponent: function() {
+                return 'tab-' + this.currentTab.toLowerCase();
+            }
+        }
+    })
+</script>

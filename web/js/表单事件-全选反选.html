@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>表单事件-全选/反选</title>
+    <style type="text/css">
+
+    </style>
+</head>
+<body>
+<p><label><input id="selectAll" type="checkbox"/>全选/反选</label></p>
+<label><input type="checkbox" name="fruit" value="苹果" />苹果</label>
+<label><input type="checkbox" name="fruit" value="香蕉" />香蕉</label>
+<label><input type="checkbox" name="fruit" value="西瓜" />西瓜</label>
+</body>
+</html>
+<script type="text/javascript">
+    window.onload=function(){
+        var oFruit=document.getElementsByName("fruit");
+        var oSelectAll=document.getElementById("selectAll");
+
+        oSelectAll.onchange=function () {
+            if (this.checked){
+                for (var i=0;i<oFruit.length;i++){
+                    oFruit[i].checked=true;
+                }
+            } else {
+                for (var i=0;i<oFruit.length;i++){
+                    oFruit[i].checked=false;
+                }
+            }
+        }
+
+        for (var i=0;i<oFruit.length;i++){
+            oFruit[i].onchange=function () {
+                var flag=true;
+                for (var j=0;j<oFruit.length;j++){
+                    if (!oFruit[j].checked){
+                        flag=false;
+                    }
+                }
+                if (flag){
+                    oSelectAll.checked=true;
+                } else {
+                    oSelectAll.checked=false;
+                }
+            }
+        }
+    }
+</script>

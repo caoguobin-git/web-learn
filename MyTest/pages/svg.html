@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <style type="text/css">
+            svg {
+                border: 1px solid black;
+                animation: myde 1s infinite alternate;
+            }
+
+            @-webkit-keyframes name {
+                from {}
+
+                to {}
+            }
+        </style>
+    </head>
+    <body>
+        <svg width="800px" height="800px">
+            <circle cx="100" cy="550" r="50" fill="#00BFFF" opacity="0">
+
+                <animate attributeName="opacity" values="0;1;0;1;0;1;0;1" begin="0s" dur="0.5s" repeatCount="1" fill="freeze" />
+
+            </circle>
+
+            <path stroke="#00BFFF" stroke-width="5" d="M100,550 L100,550">
+
+                <animate attributeName="d" values="M100,550 L100,550;M100,550 L500,350" begin="0.5s" dur="2.5s"
+                    repeatCount="1" fill="freeze" />
+
+            </path>
+
+            <circle cx="500" cy="350" r="50" fill="#00BFFF" opacity="0">
+
+                <animate attributeName="opacity" values="0;1;0;1;0;1;0;1" begin="3s" dur="0.5s" repeatCount="1" fill="freeze" />
+
+            </circle>
+        </svg>
+    </body>
+</html>

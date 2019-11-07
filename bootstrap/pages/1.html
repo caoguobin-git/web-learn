@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <style>
+
+
+
+        .message-received{
+            text-align: left;
+        }
+        .message-send{
+            text-align: right;
+        }
+        .message-time{
+            text-align: center;
+        }
+        .message-box{
+            width: 800px;
+        }
+        .message-received div,.message-send div{
+            max-width: 200px;
+            display: inline-block;
+            word-break: break-all;
+            text-align: left;
+            padding: 2px 8px;
+        }
+        .message-send>div{
+            background: rgba(152,225,101,0.8);
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+<div class="message-box">
+    <div class="message-received">
+        <p class="message-time">11:12</p>
+        <div>asdfaasdfffffffffffffffffffffffffffffffffffffffsdf</div>
+    </div>
+    <div class="message-send">
+        <p class="message-time">11:12</p>
+        <div>asdfaasdfffffffffffffffffffffffffffffffffffffffsdf</div>
+    </div>
+</div>
+
+
+</body>
+</html>
+
+<script>
+    var demo = new Vue({
+        el: '#demo',
+        data: {}
+    })
+</script>
