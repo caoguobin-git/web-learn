@@ -9,6 +9,7 @@
     <body>
         <div id="app-5">
             <p>{{ message }}</p>
+            <p>{{reversedMessage}}</p>
             <button @click="reverseMessage">反转消息</button>
         </div>
     </body>
@@ -22,6 +23,11 @@
         methods: {
             reverseMessage: function() {
                 this.message = this.message.split("").reverse().join("");
+            }
+        },
+        computed:{
+            reversedMessage:function () {
+                return this.message.split("").reverse().join("");
             }
         }
     })
