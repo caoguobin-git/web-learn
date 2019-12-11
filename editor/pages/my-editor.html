@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Editor</title>
+    <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+    <script src="https://code.jquery.com/jquery-latest.js"></script>
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        #text-area {
+            width: 800px;
+            height: 400px;
+            border: 1px solid rgb(72, 218, 196);
+            border-radius: 5px;
+            outline: none;
+            padding: 5px 5px;
+            overflow: scroll;
+        }
+        *::-webkit-scrollbar{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container" id="editor">
+    <div class="btn-group">
+        <button class="btn btn-default">字体</button>
+        <button class="btn btn-default" id="font-size-toggle"
+                data-toggle="dropdown">字号
+        </button>
+        <ul class="dropdown-menu" role="menu" style="height: 300px;overflow-y: scroll"
+            aria-labelledby="font-size-toggle">
+            <li role="presentation" v-for="i in 50">
+                <a @click="setFontSize(i)" role="menuitem" tabindex="-1" href="#">{{i}}</a>
+            </li>
+        </ul>
+        <button @click="setFontBold()" class="btn btn-default">加粗</button>
+        <button @click="setBackColor()" class="btn btn-default">背景</button>
+        <button @click="selectBackColor()" :style="{background:backColor,color:backColor}" class="btn btn-default">原色</button>
+        <input type="color" style="display: none" id="back-color-input" v-model="backColor">
+        <button @click="setFontColor()" class="btn btn-default">颜色</button>
+        <button @click="selectFontColor()" :style="{background:fontColor,color:fontColor}" class="btn btn-default">原色</button>
+        <input type="color" style="display: none" id="font-color-input" v-model="fontColor">
+        <button class="btn btn-default">段落</button>
+        <button @click="setIndent()" class="btn btn-default">缩进</button>
+        <button @click="setOrderList()" class="btn btn-default">列表</button>
+        <button @click="setCode()" class="btn btn-default">代码</button>
+        <button @click="setUndo()" class="btn btn-default">撤销</button>
+        <button @click="setRedo()" class="btn btn-default">重做</button>
+    </div>
+    <div id="text-area" contenteditable="true"></div>
+</div>
+</body>
+</html>
+<script>
+    var editor = new Vue({
+        el: '#editor',
+        data: {
+            currentColor: '',
+            fontColor:'black',
+            backColor:'black'
+        },
+        methods: {
+            setCode:function(){
+              this.executeSet('insertHTML',false,'<code contenteditable="true">hello world</code>')
+            },
+            selectBackColor:function(){
+                $('#back-color-input').click();
+            },
+            selectFontColor:function(){
+              $('#font-color-input').click();
+            },
+            setFontBold: function () {
+                this.executeSet('bold', true, null)
+            },
+            setIndent: function () {
+                this.executeSet('indent', true, null)
+            },
+            setBackColor: function () {
+                this.executeSet('backColor', true, editor.backColor);
+            },
+            setFontColor: function () {
+                this.executeSet('foreColor', true, editor.fontColor);
+
+            },
+            setOrderList: function () {
+                this.executeSet('insertOrderedList', false, null)
+            },
+            setUndo: function () {
+                this.executeSet('undo', false, null)
+            },
+            setRedo: function () {
+                this.executeSet('redo', false, null)
+            },
+            setFontSize: function (val) {
+                this.executeSet('fontSize', true, val)
+            },
+            executeSet: function (comm, show, data) {
+                console.log(data)
+                document.execCommand(comm, show, data)
+            }
+        }
+    })
+
+</script>

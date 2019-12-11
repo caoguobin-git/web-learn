@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>
+		Title</title>
+	<script src="../js/vue.js"></script>
+</head>
+<body>
+<div id="demo">
+	<div v-for="item,index in subjects">
+		<p>{{index+1}}.{{item.questionTitle}}</p>
+		<p v-for="answer in item.answers">{{answer.content}}</p>
+	</div>
+</div>
+</body>
+</html>
+<script>
+	var demo =new Vue({
+		el:'#demo',
+		data:{
+		    subjects:[
+				{questionTitle:'猴子有几条腿？',
+				type:'ss',
+				right:'a',
+				answers:[
+					{id:'a',content:'1条'},
+					{id:'b',content:'2条'},
+					{id:'c',content:'3条'},
+					{id:'d',content:'4条'},
+				]}
+			]
+		}
+	})
+</script>
