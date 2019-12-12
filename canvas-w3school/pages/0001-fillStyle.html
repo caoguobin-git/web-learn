@@ -48,7 +48,7 @@
     function drawPatternRect(){
         var img =document.getElementsByTagName('img')[0];
         console.log(img)
-        var pattern = canvas.createPattern(img,'repeat-y');
+        var pattern = canvas.createPattern(img,'repeat');
         canvas.fillStyle=pattern;
         canvas.fillRect(0,150,350,100);
     }

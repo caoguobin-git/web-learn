@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script src="../js/vue.js"></script>
+        <style type="text/css">
+            #myVue{
+                position: absolute;
+                width: 1000px;
+                height: 900px;
+                vertical-align: middle;
+            }
+            svg{
+                border: 1px solid black;
+            }
+            button{
+                vertical-align: middle;
+                display: inline-block;
+            }
+        </style>
+    </head>
+    <body>
+        <div id='myVue'>
+            <svg width='800' height='400'>
+                <line x1='20' y1="20" x2="200" y2="20" style="fill: red;stroke: red;"></line>
+                <circle id="demo" :cx="circleCx" cy="50" r="30" style="fill:red;stroke: #000000;"></circle>
+            </svg>
+            <button @click="speed--">减速</button>
+            <button @click="stopStart">{{stopped?"START":"STOP"}}</button>
+             <button @click="speed++">加速</button>
+        </div>
+    </body>
+</html>
+
+<script type="text/javascript">
+    var demo = new Vue({
+        el: '#myVue',
+        data: {
+            speed: 10,
+            direction: 1,
+            circleCx: 50,
+            stopped: false,
+            ani: {}
+        },
+        methods: {
+            move: function() {
+
+                this.circleCx += this.speed * this.direction;
+                if (this.circleCx > 750 || this.circleCx < 50) {
+                    this.direction *= -1;
+                }
+
+                this.ani = window.requestAnimationFrame(this.move)
+            },
+            stopStart: function() {
+                if (this.stopped) {
+                    this.move();
+                } else {
+                    window.cancelAnimationFrame(this.ani);
+
+                }
+                this.stopped = !this.stopped;
+            }
+        },
+        mounted: function() {
+            this.move()
+        }
+    })
+</script>

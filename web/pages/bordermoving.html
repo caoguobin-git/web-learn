@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #J_borTop{
+            position: absolute;
+            width: 2000px;
+            border-top: 2px dashed silver;
+            animation: mydemo1 20s linear infinite;
+        }
+
+        #J_borBottom{
+            position: absolute;
+            width: 2000px;
+            top: 99.5%;
+            border-top: 2px dashed silver;
+            animation: mydemo2 20s linear infinite;
+        }
+
+        #J_borLeft{
+            position: absolute;
+            height: 2000px;
+            /*left:3%;*/
+            border-left: 2px dashed silver;
+            animation: mydemo3 20s linear infinite;
+        }
+
+        #J_borRight{
+            position: absolute;
+            height: 2000px;
+            left:99.8%;
+            border-right: 2px dashed silver;
+            animation: mydemo4 20s linear infinite;
+        }
+
+        @-webkit-keyframes mydemo4 {
+            0%{
+                top:-1500px;
+            }
+            100%{
+                top: -500px;
+            }
+        }
+
+        @-webkit-keyframes mydemo3 {
+            0%{
+                top:-500px;
+            }
+            100%{
+                top: -1500px;
+            }
+        }
+        @-webkit-keyframes mydemo2 {
+            0%{
+                left:10px
+            }
+            100%{
+                left: -800px;
+            }
+        }
+
+
+        @-webkit-keyframes mydemo1 {
+            0%{
+                left:-800px
+            }
+            100%{
+                left: 10px;
+            }
+        }
+
+        ul li{
+            display: inline-block;
+            width: 19%;
+        }
+    </style>
+</head>
+<body>
+<div style="position: relative;width: 800px;height: 400px;overflow: hidden">
+    <div id="J_borTop">
+
+    </div>
+    <div id="J_borBottom">
+
+    </div>
+
+    <ul style="list-style: none">
+        <li><a href="http://zhidao.baidu.com/" target="_blank"><img src="images/zhidao.gif" alt="百度知道"/></a></li>
+        <li><a href="http://baike.baidu.com/" target="_blank"><img src="images/baike.png" alt="百度百科"/></a></li>
+        <li><a href="http://space.baidu.com/" target="_blank"><img src="images/space.png" alt="百度空间"/></a></li>
+        <li><a href="http://jingyan.baidu.com/" target="_blank"><img src="images/jingyan.png" alt="百度经验"/></a></li>
+        <li><a href="http://lvyou.baidu.com/" target="_blank"><img src="images/lvyou.png" alt="百度旅游"/></a></li>
+        <li><a href="http://ar.tieba.com" target="_blank"><img src="images/tieba.png" alt="百度贴吧国际化"/></a></li>
+        <li><a href="http://xinzhi.baidu.com" target="_blank"><img src="images/xinzhi.png" alt="百度新知"/></a></li>
+        <li><a href="http://test.baidu.com" target="_blank"><img src="images/zhongce.png" alt="百度众测"/></a></li>
+    </ul>
+    <ul>
+        <li><a href="http://mp.weixin.qq.com/cgi-bin/loginpage?t=wxm-login&lang=zh_CN" target="_blank"><img src="images/weixin.png" alt="微信公众平台"/></a></li>
+        <li><a href="http://www.zol.com.cn/" target="_blank"><img src="images/zol.png" alt="中关村在线"/></a></li>
+        <li><a href="http://www.51cto.com/" target="_blank"><img src="images/51cto.gif" alt="51CTO"/></a></li>
+        <li><a href="http://www.yinyuetai.com/" target="_blank"><img src="images/yinyuetai.png" alt="音悦台"/></a></li>
+        <li><a href="http://weibo.10086.cn/" target="_blank"><img src="images/yidongweibo.png" alt="移动微博"/></a></li>
+        <li><a href="http://www.360buy.com/" target="_blank"><img src="images/360buy.png" alt="360buy"/></a></li>
+        <li><a href="http://www.diandian.com/" target="_blank"><img src="images/diandian.png" alt="点点"/></a></li>
+        <li><a href="http://www.lofter.com/" target="_blank"><img src="images/lofter.png" alt="网易轻博"/></a></li>
+        <li><a href="http://note.sdo.com/" target="_blank"><img src="images/mknote.png" alt="麦库记事"/></a></li>
+        <li><a href="http://www.chinasofti.com/" target="_blank"><img src="images/zhongruan.jpg" alt="中软国际"/></a></li>
+        <li><a href="http://union.ijinshan.com/" target="_blank"><img src="images/jinshanlianmeng.png" alt="金山联盟"/></a></li>
+        <li><a href="http://www.lenovo.com.cn/" target="_blank"><img src="images/lianxiang.jpg" alt="联想"/></a></li>
+        <li><a href="http://baa.bitauto.com/" target="_blank"><img src="images/yiche.png" alt="易车网"/></a></li>
+        <li><a href="http://www.beareyes.com.cn/" target="_blank"><img src="images/beareyes.jpg" alt="小熊在线"/></a></li>
+        <li><a href="http://www.wiz.cn/" target="_blank"><img src="images/weizhi.png" alt="为知"/></a></li>
+        <li><a href="http://www.changweibo.com/" target="_blank"><img src="images/changweibo.png" alt="长微博"/></a></li>
+        <li><a href="http://www.dev26.com/home/start" target="_blank"><img src="images/webdev.png" alt="web开发交流站"/></a></li>
+        <li><a href="http://kf.ztgame.com/" target="_blank"><img src="images/jrkf.png" alt="巨人客服中心"/></a></li>
+        <li><a href="http://www.alltosun.com/" target="_blank"><img src="images/hdyg.png" alt="互动阳光"/></a></li>
+        <li><a href="http://www.blogchina.com/" target="_blank"><img src="images/bkzg.png" alt="博客中国"/></a></li>
+        <li><a href="http://www.rainbowsoft.org/" target="_blank"><img src="images/zblog.jpg" alt="zblog"/></a></li>
+        <li><a href="http://www.thinksaas.cn/" target="_blank" ><img src="images/thinksaas.jpg" alt="thinksaas"/></a></li>
+        <li><a href="http://www.twcms.cn/" target="_blank" ><img src="images/twcms.gif" alt="twcms"/></a></li>
+    </ul>
+
+    <div id="J_borLeft">
+
+    </div>
+    <div id="J_borRight">
+
+    </div>
+    <p>Hello World</p>
+</div>
+</body>
+</html>

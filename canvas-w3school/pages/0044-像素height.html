@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>像素 height</title>
+	</head>
+	<body>
+        <canvas id="canvas" width="800" height="800"></canvas>
+	</body>
+</html>
+
+<script type="text/javascript">
+    var ctx;
+    window.onload=function(){
+        ctx=document.getElementById('canvas').getContext('2d');
+        setHeight();
+    }
+    
+    function setHeight(){
+        var img= ctx.createImageData(100,100);
+        console.log(img)
+        console.log('高度是：'+img.height);
+    }
+</script>

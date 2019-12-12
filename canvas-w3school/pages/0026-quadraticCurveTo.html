@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>quadraticCurveTo二次贝塞尔曲线</title>
+    </head>
+    <body>
+        <canvas id="canvas" width="800" height="800"></canvas>
+    </body>
+</html>
+
+<script type="text/javascript">
+    var canvas;
+    var a =80;
+    var b=250;
+    var flag=true;
+    window.onload = function() {
+        canvas = document.getElementById('canvas').getContext('2d');
+        setQuadraticCurveTo();
+        // setInterval(function(){
+        //     if(flag){
+        //         a+=1;
+        //         b+=0.3;
+        //         if(a===100){
+        //             flag=false;
+        //         }
+        //     }else{
+        //         a-=1;
+        //         b-=0.3;
+        //         if(a===0){
+        //             flag=true;
+        //         }
+        //     }
+        //     setQuadraticCurveTo();
+        // },10)
+    }
+    function setQuadraticCurveTo(){
+        canvas.clearRect(0,0,800,800);
+        canvas.beginPath();
+        canvas.moveTo(20,20);
+        canvas.quadraticCurveTo(100,250,190,20);
+        canvas.stroke();
+        
+        canvas.beginPath();
+        canvas.moveTo(400,20);
+        canvas.quadraticCurveTo(280,250,210,20);
+        canvas.stroke();
+        
+    }
+</script>

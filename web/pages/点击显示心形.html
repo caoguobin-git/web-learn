@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link type="text/css" href="../css/animate.css" rel="stylesheet">
+    <style>
+        body{
+            height: 800px;
+        }
+    </style>
+</head>
+<body style="position: relative">
+<p>asdfasasdfasdfasdfasjfa;lsdjsdfasdfasdfasjfa;lsdjsdfasdfasdfasjfa;lsdjsdfasdfasdfasjfa;lsdjsdfasdfasdfasjfa;lsdjsdfasdfasdfasjfa;lsdjsdfasdfasdfasjfa;lsdjsdfasdfasdfasjfa;lsdjsdfasdfasdfasjfa;lsdjsdfasdfasdfasjfa;lsdjsdfasdfasdfasjfa;lsdjsdfasdfasdfasjfa;lsdjsdfasdfasdfasjfa;lsdjsdfasdfasdfasjfa;lsdjsdfasdfasdfasjfa;lsdjsdfasdfasdfasjfa;lsdjsdfasdfasdfasjfa;lsdjsdfasdfasdfasjfa;lsdjsdfasdfasdfasjfa;lsdjsdfasdfasdfasjfa;lsdjsdfasdfasdfasjfa;lsdjsdfasdfasdfasjfa;lsdjsdfasdfasdfasjfa;lsdjsdfasdfasdfasjfa;lsdjsdfasdfasdfasjfa;lsdjsdfasdfasdfasjfa;lsdjsdfasdfasdfasjfa;lsdjsdfasdfasdfasjfa;lsdjsdfasdfasdfasjfa;lsdjsdfasdfasdfasjfa;lsdjsdfasdfasdfasjfa;lsdjsdfasdfasdfasjfa;lsdjsdfasdfasdfasjfa;lsdjsdfasdfasdfasjfa;lsdjsdfasdfasdfasjfa;lsdjsdfasdfasdfasjfa;lsdjsdfasdfasdfasjfa;lsdjfdf</p>
+<div style="height: 400px;width: 100%;border: 1px solid black">
+    <img src="http://image.fxyilan.com/yilanpic/2019/10/17/48D92CDC756E23ABC4BBCE6126FD77C9.png">
+</div>
+</body>
+</html>
+<script>
+    window.onload=function () {
+        document.body.onclick=function (e) {
+            console.log(e)
+            let x = e.layerX;
+            let y = e.layerY;
+            let htmlElement = document.createElement("p");
+            htmlElement.innerText='\u2665';
+            htmlElement.style.cssText='font-size:100px;position:absolute;left:'+(x-30)+'px;top:'+(y-220)+'px;color:rgba('+Math.random()*256+','+Math.random()*256+','+Math.random()*256+','+(Math.random()*1+0.5)+');';
+            htmlElement.className='animated slideOutUp'
+            setTimeout(function () {
+                document.body.removeChild(htmlElement)
+            },3500)
+            document.body.append(htmlElement)
+        }
+    }
+</script>

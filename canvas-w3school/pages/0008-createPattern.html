@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>createPattern</title>
+        <style type="text/css">
+            canvas{
+                border: 1px solid black;
+            }
+        </style>
+	</head>
+	<body>
+        <canvas id="canvas" width="800" height="800"></canvas>
+        <img src="../img/lamp.gif" id="lamp" style="display: none;" />
+	</body>
+</html>
+
+<script type="text/javascript">
+    var canvas;
+    window.onload=function(){
+        canvas=document.getElementById('canvas').getContext('2d');
+        createPattern();
+    }
+    
+    function createPattern(){
+        var img = document.getElementById('lamp');
+        var pat=canvas.createPattern(img,'repeat');
+        canvas.fillStyle=pat;
+        canvas.fillRect(10,10,200,200);
+    }
+</script>

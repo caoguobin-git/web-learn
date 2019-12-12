@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>注入攻击</title>
+        <script src="../js/vue.js"></script>
+        <style type="text/css">
+            table{
+                border-collapse: collapse;
+                width: 800px;
+            }
+            tr,td{
+                border: 1px solid black;
+            }
+        </style>
+	</head>
+	<body>
+        <div id="demo">
+            <table>
+                <caption>所有信息</caption>
+                <tr v-for="i in messages">
+                    <td>{{i}}</td>
+                </tr>
+            </table>
+        </div>
+	</body>
+</html>
+
+<script type="text/javascript">
+    var demo = new Vue({
+        el:'#demo',
+        data:{
+            messages:['hello','world']
+        }
+    })
+</script>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>交易颜色变化</title>
+        <script src="../js/vue.js"></script>
+        <style type="text/css">
+            .price{
+                width: 100px;
+                height: 30px;
+                border-radius: 8px;
+            }
+            .up{
+                animation: priceUp 1s 1 linear;
+            }
+            
+            @-webkit-keyframes priceUp{
+                from{background-color: red;}
+                to{background-color: silver;}
+            }
+            
+            .down{
+                animation: priceDown 1s 1 linear;
+            }
+            
+            @-webkit-keyframes priceDown{
+                from{background-color: blue;}
+                to{background-color: silver;}
+            }
+        </style>
+	</head>
+	<body>
+        <div id="demo">
+            <div :class="classObj" class="price"></div>
+        </div>
+	</body>
+</html>
+
+<script type="text/javascript">
+    var demo =new Vue({
+        el:'#demo',
+        data:{
+            price:1
+        },
+        watch:{
+            price:function(val){
+                console.log(val)
+            }
+        },
+        computed:{
+            classObj:function(){
+                if(this.price%2===0){
+                    return 'up'
+                }else{
+                    return 'down'
+                }
+            }
+        },
+        mounted:function(){
+            setInterval(function(){
+                demo.price=parseInt(Math.random()*20)
+            },200)
+        }
+    })
+</script>

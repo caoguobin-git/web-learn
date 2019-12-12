@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>第三章</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://code.jquery.com/jquery-latest.js"></script>
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../css/stylesheet.css">
+</head>
+<body>
+<div class="container-fluid" id="container" :style="{'font-size':fontSize+'px'}">
+    <p class="head-container"><button @click="fontSize--" class="btn btn-sm btn-danger">缩小</button> <button @click="fontSize++" class="btn btn-sm btn-success">放大</button></p>
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-12">
+    <p class="calibre1" height="5em" width="0pt">
+<span class="calibre4">
+<span class="calibre11">第三章</span>
+</span>
+    </p>
+    <p class="calibre1" height="5em" width="0pt">1</p>
+    <p class="calibre7" height="1em" width="2em">“南哥，老板在瞪你。”</p>
+    <p class="calibre7" height="1em" width="2em">施仲南听到身旁的马仔悄声说道，连忙将手机塞进裤袋。</p>
+    <p class="calibre7" height="1em" width="2em">“南哥，你整天滑手机，是跟女朋友说悄悄话吧？”马仔笑道。施仲南耸耸肩，不置可否。</p>
+    <p class="calibre7" height="1em" width="2em">在旺角惠富商业中心十五楼的一间办公室内，施仲南一如其他员工，对着电脑工作。不过所谓“其他员工”，也只有四个人而已。撇开老板不计，这间叫作“GT
+        Technology Ltd.”的公司仅有五名职员，六百平方英尺<sup class="calibre12"><span id="filepos0000141188"></span>
+            <small class="calibre13">
+                <a href="#filepos0000194087">
+                    <span class="calibre14">[1]</span>
+                </a>
+            </small>
+        </sup>
+        的办公室里除了一间小小的会议室外，就只有一个共用空间，连老板也没有私人的董事长室。然而，这种间隔正合这间公司的性质——一如欧美的科技公司，开放式办公室已是主流。用户超过三亿的社群网路服务推特的创办人之一杰克·多西不但没有房间，他甚至没有办公桌，他说只要拿着平板电脑，四处也是他的工作空间。
+    </p>
+    <p class="calibre7" height="1em" width="2em">
+        当然在施仲南眼中，他的老板李世荣远远及不上多西，只是个差劣的模仿者而已。纵使李老板有远大的志向，期望公司能发展成跨国企业，但无论才能、远见和洞察力他都不足。李世荣本来继承了家族生意，在内地经营一间小型纺织工厂，但因为多年亏损，他便把心一横卖掉祖业，改在本地开设科技公司。</p>
+    <p class="calibre7" height="1em" width="2em">GT Technology
+        Ltd.开业约一年，主要业务是营运一个叫“GT网”的社交网站。施仲南和马仔负责开发与维护网站，是公司里仅有的技术人员。其余三位员工，分别是图像设计师Thomas，网站管理员兼客户服务主任阿豪，以及老板的行政助理Joanne.
+        施仲南进公司后一直怀疑，大学刚毕业的Joanne的真正职位是老板的“贴身”助理——是有多“贴身”就不言而喻了。</p>
+    <p class="calibre7" height="1em" width="2em">
+        比施仲南年长两岁的阿豪对老板跟Joanne的关系倒不以为然：“哎，虽然老板比Joanne老了差不多两轮，但男未娶女未嫁，他们有什么关系干卿底事。况且公司有个正妹养养眼，不是赚到吗？”</p>
+    <p class="calibre7" height="1em" width="2em">
+        施仲南固然同意阿豪的说法，只是心里有多少不甘。虽然Joanne没有模特儿的脸蛋和身材，但胜在青春，在充满臭男人的办公室里尤其突出，施仲南与她初见面不免产生觊觎之心。然而他从阿豪口中得知，李老板近水楼台先得月，Joanne上工一个月，二人便暗地里搞暧昧，施仲南就只能打消念头。他很清楚，职场上上司的女人可碰不得，尤其他想保住工作的话。</p>
+    <p class="calibre7" height="1em" width="2em">
+        纵然公司里只有六人，GT网是本地过去半年异军突起的社交网站。GT网结合了社交网站与讨论区的特色，让用户交流、讨论各式各样的兴趣与话题，而它最瞩目的特点是“八卦买卖”，这也是网站名字的由来——Gossips Trading.
+        网站设立虚拟货币“G币”，容许用家交易，而交易的货品是“八卦消息”。不同于一般要付指定金额虚币才能阅读帖文的讨论区，GT网的消息价格不是由发文者决定，而是以其他用户的点击率和评分自动调节高低。就像股票市场买卖，有爆料价值的、涉及明星偶像的，价钱便会飙涨，相反无聊没趣的，价格便会掉到谷底，甚至变成所有用户都能阅读观看的免费讯息。</p>
+    <p class="calibre7" height="1em" width="2em">“阿南，马仔，影片串流的测试完成了没有？”就在施仲南收好手机后，李老板走到他们的座位旁，问道。</p>
+    <p class="calibre7" height="1em" width="2em">
+        “基本上已完成，下星期可以开放作Beta测试。”马仔回答。GT网支援上传图片，但要在帖子中附上影片，便要使用外连的第三方网站，例如YouTube，Vimeo或优酷之类。使用第三方的服务，便表示用户可以绕过GT网直接到其他网站观看影片，这对GT网的核心概念“买卖八卦”明显有严重矛盾，削弱了用户以虚拟币交易的意愿。</p>
+    <p class="calibre7" height="1em" width="2em">“事关重大，尽快让它上线。”</p>
+    <p class="calibre7" height="1em" width="2em">
+        虽然GT网已上线数个月，但目前仍处于公开测试运行阶段，不少功能仍有待改进。李老板曾说过，GT网必须具备三个决定性的功能：虚拟货币的交易、深入的检索系统和独立的短片串流。前两者大致上已经完成，现在就欠最后一项而已。</p>
+    <p class="calibre7" height="1em" width="2em">检索系统是施仲南的得意力作。和一般单纯搜寻关键字的讨论区或Wiki系统<sup class="calibre12"><span
+            id="filepos0000145404"></span>
+        <small class="calibre13">
+            <a href="#filepos0000194223">
+                <span class="calibre14">[2]</span>
+            </a>
+        </small>
+    </sup>
+        不同，GT网不但搜索文字标签和内文，更能够判断出类似及相关的搜寻结果，就像用户搜寻某男演员的绯闻，系统会连带找出跟他过去有关系的女性的八卦消息。施仲南很清楚这功能背后的威力——在网路社群兴盛的今天，每个人都有成名十五分钟的机会，平凡如餐厅里食客的小纷争、巴士上情侣打情骂俏、街头的滑稽表演，都很可能被上载到GT网，一旦被数据库记录下来，就变成永不磨灭、可以翻查的历史。施仲南知道“起底”已成为网路常态，每个人都担心自己的隐私被侵犯，但反过来它也可以成为武器，让掌握这套游戏规则的人坐收渔利。
+    </p>
+    <p class="calibre7" height="1em" width="2em">“开发手机版App的评估如何了？”李老板转向施仲南，问道。</p>
+    <p class="calibre7" height="1em" width="2em">
+        “要开发跨平台的App，我们可以用Cordova，基本上把我们手机网页版做简单改动，便能生产出iOS版和Android版的App。可是如果要开发‘原生App’，我便反对。我们人手不足，不可能在短期内完成。”施仲南回答。“原生App”是指那些为特定平台设计、以该平台指定的程序语言和模组编写的软件，功能较全面，但开发时间更长。</p>
+    <p class="calibre7" height="1em" width="2em">
+        “人手的话不用担心，幸运的话，我们很快可以扩充规模。”李老板一脸乐观，拍了拍两人的肩膀，“我现在去开会，明天你们准备影片串流组件给我看。”</p>
+    <p class="calibre7" height="1em" width="2em">李老板离开办公室后，马仔问施仲南：“为什么老板说人手不用担心？公司赚大钱吗？”</p>
+    <p class="calibre7" height="1em" width="2em">“你不知道老板去开什么会吗？”施仲南反问。</p>
+    <p class="calibre7" height="1em" width="2em">马仔摇摇头。</p>
+    <p class="calibre7" height="1em" width="2em">“老板最近跟生产力局的人员开会，听说那边有个什么计划，安排一些VC评估本地的小型创意科技公司。”</p>
+    <p class="calibre7" height="1em" width="2em">
+        生产力局全名生产力促进局，是香港的一间公营机构，负责协助企业发展，提高海外竞争力。生产力局里有资讯科技业发展部，GT网这种“网路创意产业”正是他们的服务对象之一。</p>
+    <p class="calibre7" height="1em" width="2em">“什么是VC？”马仔问。</p>
+    <p class="calibre7" height="1em" width="2em">“Venture
+        Capital.”施仲南白了马仔一眼，心想对方就职科技业居然不知道这名词，“就是那些会投资新兴企业，以小博大的融资公司。”</p>
+    <p class="calibre7" height="1em" width="2em">“啊，是‘创投基金’嘛。那我就知道了，就像几年前9GAG<sup class="calibre12"><span
+            id="filepos0000148139"></span>
+        <small class="calibre13">
+            <a href="#filepos0000194475">
+                <span class="calibre14">[3]</span>
+            </a>
+        </small>
+    </sup>
+        获二千万元注资的例子？”</p>
+    <p class="calibre7" height="1em" width="2em">“最好有二千万啦。”刚巧经过二人身后的阿豪插嘴道，“有一千万，我们也可以搬新办公室，然后聘请几个人替我应付那些找碴的麻烦用户查询了。”</p>
+    <p class="calibre7" height="1em" width="2em">“这世上有很多钱多到用不完的VC，难保有一两个傻瓜愿意送两三千万给我们，”施仲南笑了笑，“当然他们能否回本就是后话。”</p>
+    <p class="calibre7" height="1em" width="2em">“嘿，所以你认为GT网根本没有价值嘛？”阿豪干脆拉来一张椅子，坐在二人身旁，问道。</p>
+    <p class="calibre7" height="1em" width="2em">
+        施仲南瞄了瞄在办公室另一角的Joanne，确认这个“老板的眼线”在讲电话，听不到自己的话后，再压下声线说：“不是没价值，是欠缺营利能力，容易被市场淘汰。目前网站试运行，网民的G币都只是以站内贡献程度发放，并未以真金白银交易，自然觉得买买卖卖好好玩，将来让他们‘课金’购买G币，到底他们会有多投入呢？而且更重要的是我们无法令有价值的八卦消息留在网站内，假如是够劲的爆料，恐怕消息出来后，半天便会被转贴到花生讨论区或脸书了。”</p>
+    <p class="calibre7" height="1em" width="2em">
+        “这要看你们喽。”阿豪耸耸肩，“假如影片能够加密，令用户难以将消息转载到其他公开网站，人们自然愿意花G币买来看。就像付钱看娱乐杂志的感觉吧？”</p>
+    <p class="calibre7" height="1em" width="2em">
+        施仲南心想，不懂编程的人总会说出这种不负责任的话。阿豪把“影片加密”说得简单，但实际上，只要用户能在屏幕看到片段，便有方法把它撷取下来，再上载到YouTube或脸书。</p>
+    <p class="calibre7" height="1em" width="2em">
+        “其实就算没加密，说不定也能赚到钱啦，”马仔指了指案头的iPhone，“苹果推出网购音乐前，不少评论者都认为不可能成功，因为会有盗版问题。但结果大众也愿意付费购买正版音乐，即使有盗版，仍无损公司的利润。”</p>
+    <p class="calibre7" height="1em" width="2em">“我还是有所保留。”施仲南说，“要看八卦，到花生讨论区的八卦版便行了，那边还是免钱的。”</p>
+    <p class="calibre7" height="1em" width="2em">“这是因为GT网未普及罢了，人家花生讨论区每个月有三千万点击，假如我们能追到这数目，光是广告收入就有足够盈利。”阿豪说。</p>
+    <p class="calibre7" height="1em" width="2em">“‘假如’我们能追到这数目。”施仲南重复阿豪的话，但强调了最开始的两个字。</p>
+    <p class="calibre7" height="1em" width="2em">
+        “这我也同意南哥的说法，”马仔转过身子，面向阿豪，“人家花生是业界龙头，恐怕我们花十年也追不上。就像前阵子那起十四岁女学生怀疑冤枉猥亵事件，如果那篇申冤文章不是贴在花生讨论区，大概不会那么注目。”</p>
+    <p class="calibre7" height="1em" width="2em">
+        “这个也是无可奈何啦，谁叫人家抢了头香，十年前已开业，用户多自然威力大，”阿豪摊摊手，“可是反过来说，那事件正好代表了GT网有发展潜力啊，你们想一下，就算文章先在花生发布，假如负责起底的网军将那女学生的资料在我们这边公开，那一定能吸引群众踊跃注册成为会员，再付G币一睹内幕。”</p>
+    <p class="calibre7" height="1em" width="2em">“豪哥，那女学生上个月自杀死了，说不定她真的在地铁被侵袭，所以才会以死证明清白，这种死人财，赚了也损阴德啊。”马仔皱了皱眉。</p>
+    <p class="calibre7" height="1em" width="2em">“马仔，你太嫩了。”阿豪摆出一副老气横秋的姿态，像说教似的，“世间财没有分什么积阴德或损阴德，钱就是钱，Money is money.
+        就像股票市场，你趁高位卖出赚钱的股票，接货的投资者被套牢，账面亏一大笔，那你说算不算赚肮脏钱？如果你坚信因果报应，那你又怎么知道那女学生跳楼自杀，会不会也是报应？假如每件事也要衡量因果，那说不定你今天开发的程序，导致他日某个家庭发生悲剧，你又要负责吗？所以我说，钱能赚便去赚，只要不犯法、不会被控告便可以赚。花生讨论区还有成人征友版，一大票援交妹假征友真卖身，花生从这版面的点击数获取盈利，不就跟皮条没分别？但法律一天不禁止，他们就能理直气壮地赚钱啊！在这个城市里，唯有强者才能生存，我们不想成为被剥削的一群，就只有成为剥削他人的阶层，别天真地以为什么‘好人有好报’，这种想法已经过时。这是香港的法则，是资本主义、市场定律下的黄金法则。”</p>
+    <p class="calibre7" height="1em" width="2em">纵使阿豪说得振振有词，马仔还是不同意这功利至上的看法。</p>
+    <p class="calibre7" height="1em" width="2em">
+        “我始终觉得涉及人命的，是另一回事……”马仔嘀嘀咕咕，无法义正词严地反驳阿豪。他转向施仲南，问道：“南哥，你有什么想法？你觉得这样做正确吗？”</p>
+    <p class="calibre7" height="1em" width="2em">
+        “嗯……我觉得你们都有道理啦。那女学生自杀是她的决定，要旁人负责的话，那就是整个社会的责任，”施仲南打圆场道，“那种事情待发生在我们GT网时才辩论吧，我们目前要做的，是完成这平台的功能。”</p>
+    <p class="calibre7" height="1em" width="2em">阿豪噘噘嘴，表情就像在说“你这墙头草”，再站起来回到自己的座位。马仔也转身面向屏幕，再次在键盘上飞快地打字，键入一行行程序原码。</p>
+    <p class="calibre7" height="1em" width="2em">马仔和阿豪都不知道，施仲南这时在心底鄙笑了一声。</p>
+    <p class="calibre7" height="1em" width="2em">他们可不知道，当他们侃侃而谈，说着那女学生事件的前因后果与道德责任时，元凶就近在眼前。</p>
+    <p class="calibre1" height="1em" width="0pt">2</p>
+    <p class="calibre7" height="1em" width="2em">自从出狱后，邵德平外出都戴上帽子。因为这样做可以减少眼神接触，而且在帽舌掩护下，旁人也不会留意到他紧张兮兮的目光。</p>
+    <p class="calibre7" height="1em" width="2em">
+        虽然回家已有一个月，他依然没有回文具店顾店，工作全交给妻子。就在他出狱前十天，那个女学生居然自杀了，记者们自然不会放过采访他的机会。为了逃避这些见猎心喜的食人鱼，邵德平只好躲在家中，闭门不出。</p>
+    <p class="calibre7" height="1em" width="2em">
+        幸好事隔一个月，记者们陆续消失，余下的只是街坊邻里的白眼。邵德平偶然出外吃午饭，但他都会避开人多繁忙的时刻，而且放弃光顾多年的黄大仙下邨熟食档，改到稍远的大成街街市附近的茶餐厅。以前他习惯边走边张望，对穿得清凉的女生行注目礼，如今他只会低着头急步走。</p>
+    <p class="calibre7" height="1em" width="2em">“豆腐火腩饭，热奶茶。”这天下午2点，邵德平走进大成街近启德花园5座一家叫幸福茶餐厅的食店，甫坐下便向伙计说道。</p>
+    <p class="calibre7" height="1em" width="2em">
+        邵德平悄悄地环顾四周，察看有没有认识的人。事件发生后，他发现了很多人的真面目，过去挂着笑脸要他打折算便宜一点的街坊熟客，有些在路上遇上他会特意转身回避，有些则会说些难听的话令他急步离开。文具店的生意虽未算“一落千丈”，但也大受影响，加上租金上涨，家中财务比以往更艰难。近几个月差不多少了一半客人，邵德平老婆每天回家也抱怨，念得他耳朵长茧。</p>
+    <p class="calibre7" height="1em" width="2em">
+        “这个黄脸婆……”邵德平在心里嘀咕。遥想当年老婆年轻时尚有几分姿色，邵德平被唠叨也能当成夫妻情趣，可是如今太太人老珠黄，口出骂言只教他觉得像泼妇骂街。过去他就经常被老婆埋怨，说他在文具店卖那些日本写真集意识不良有碍观瞻，他就以“摄影艺术你懂什么”当挡箭牌——固然，他心里想的是另一回事。男人好色有什么不对？只是他没料到，这些书册成了他人攻击自己的口实，成了暴露他本性的证据。</p>
+    <p class="calibre7" height="1em" width="2em">
+        不过最令邵德平气愤的，是那些从事地区工作的议员。数年前他曾为一位亲政府的建制派议员助选，努力向邻里和顾客拉票，文具店至今仍贴着支持议员的海报，可是东窗事发后，他向那议员求助，希望对方打几个电话到报馆和杂志社“打点一下”，减少记者的滋扰，对方却跟自己划清界限，就像邵德平会令他的从政生涯蒙上污点似的。</p>
+    <p class="calibre7" height="1em" width="2em">兔死狗烹、鸟尽弓藏，政客的嘴脸比川剧的变脸变得还要快。邵德平充分体会到世态炎凉，不过他再恼火也无处宣泄，只能生自己的闷气。</p>
+    <p class="calibre7" height="1em" width="2em">邵德平的目光扫过店内每一位客人，感到一丁点欣慰。今天这家茶餐厅里，没有半张认识的脸孔。</p>
+    <p class="calibre7" height="1em" width="2em">
+        “咦？”当邵德平望向左边时，他看到一个提着相机的男人在邻桌坐下。他第一个反应是以为自己被那些可恶的记者缠上，可是他定睛一看，便知道自己误会了。那是一台黑色的、有点历史的双镜反光相机，没有记者会使用这种老古董。</p>
+    <p class="calibre7" height="1em" width="2em">因为那台相机实在少见，邵德平不由得多看了两眼。即使伙计送上奶茶，他仍盯着那台双镜相机不放。</p>
+    <p class="calibre7" height="1em" width="2em">“先生。”相机的主人突然对邵德平说。</p>
+    <p class="calibre7" height="1em" width="2em">“怎、怎么了？”</p>
+    <p class="calibre7" height="1em" width="2em">“可以给我你桌上的糖盅吗？”那男人指了指邵德平眼前放砂糖的罐子。邵德平看到对方面前有一杯热咖啡，桌上却没有糖盅。</p>
+    <p class="calibre7" height="1em" width="2em">邵德平将糖盅递给对方，眼睛仍不时偷瞄放在桌上的相机。</p>
+    <p class="calibre7" height="1em" width="2em">“谢谢。”男人接过糖盅，倒了两茶匙糖后，将糖盅归还，“先生，你也喜欢摄影吗？”</p>
+    <p class="calibre7" height="1em" width="2em">邵德平没想到对方主动问起，他猜自己盯着看的样子一定太着迹。</p>
+    <p class="calibre7" height="1em" width="2em">“嗯。那是Rolleiflex 3.5F吗？”邵德平问。</p>
+    <p class="calibre7" height="1em" width="2em">“不，是2.8F。”</p>
+    <p class="calibre7" height="1em" width="2em">
+        邵德平闻言暗吃一惊。德国禄莱公司是相机名厂，双镜反光相机系列Rolleiflex更是摄影爱好者的至爱古董机之一。3.5F是常见的款式，数千港币便能买到，而外形相似的2.8F则较罕有，状况良好的动辄卖上万多元。</p>
+    <p class="calibre7" height="1em" width="2em">“你也有玩双反机？”那男人问道。</p>
+    <p class="calibre7" height="1em" width="2em">邵德平摇摇头。“太贵了。我的钱顶多够买海鸥4B.”海鸥4B是上海生产的双反相机，只卖数百块钱。</p>
+    <p class="calibre7" height="1em" width="2em">
+        “去年有朋友想出售一台二手Rolleicord，开价一千五百，我差点便买了。”邵德平说。Rolleicord是禄莱公司另一系列的双镜相机，比Rolleiflex便宜。</p>
+    <p class="calibre7" height="1em" width="2em">“Rolleicord也挺好喔。那为什么没买？”</p>
+    <p class="calibre7" height="1em" width="2em">“过不了老婆那一关。”邵德平苦笑道，“女人就是烦，我多买几卷底片，她也啰啰唆唆，不给我好脸色看。”</p>
+    <p class="calibre7" height="1em" width="2em">“底片？你没玩DSLR？”DSLR是数码单眼相机的简称。</p>
+    <p class="calibre7" height="1em" width="2em">“没有，我只有一台Minolta X-700加两支镜头。”</p>
+    <p class="calibre7" height="1em" width="2em">“哦，X-700，不错嘛。”那男人点点头，似是认同邵德平的选择，“但现在数码机是主流，我两者也有玩。”</p>
+    <p class="calibre7" height="1em" width="2em">“好一点的数码单眼太贵啦。”</p>
+    <p class="calibre7" height="1em" width="2em">“网路上有些论坛不时有二手货出让，有时会捡到便宜，”男人说，“要我给你网址吗？”</p>
+    <p class="calibre7" height="1em" width="2em">邵德平摇摇头：“算了吧，我不太懂电脑，网路论坛什么的我都不懂。而且听说玩数码机要配一台高性能的电脑，我没有这种闲钱。”</p>
+    <p class="calibre7" height="1em" width="2em">“玩照片后制弄特殊效果才要那种配置高的电脑。你家没有电脑吗？”</p>
+    <p class="calibre7" height="1em" width="2em">
+        “有是有，但我和家人都很少用。几年前被推销有线电视时一并买下的，我只懂得用来下象棋和看PPS影音。”邵德平问，“玩数码机真的不用贵价电脑吗？”</p>
+    <p class="calibre7" height="1em" width="2em">“不用，只用来储存和观看照片的话，再古老的机种也可以，”那男人说，“不过买相机后倒要替电脑安装一些软件……你有朋友或邻居懂电脑吗？”</p>
+    <p class="calibre7" height="1em" width="2em">
+        “唔……如果是简单的，他们也能够帮忙……”邵德平想起两位兴趣相同的友人，可是他出狱后没再联络，他也不知道自己会不会变成不受欢迎人物了。一想到这里，邵德平不禁打消念头，说：“还是算了，我买新相机的话，我老婆一定大吵大闹。”</p>
+    <p class="calibre7" height="1em" width="2em">“嘿，这就没办法了。”</p>
+    <p class="calibre7" height="1em" width="2em">二人聊到这时，伙计送上饭菜，他们便停下对话，自顾自地吃饭。饭后没有继续话题，邵德平也不想在茶餐厅逗留太久。</p>
+    <p class="calibre7" height="1em" width="2em">“我先走了。”邵德平说。</p>
+    <p class="calibre7" height="1em" width="2em">“嗯，再见。”那男人啜了一口咖啡，向邵德平点点头。</p>
+    <p class="calibre7" height="1em" width="2em">
+        邵德平慢步回家时，不断想着相机的事。自出狱后，他第一次觉得脚步轻松，没有继续为家庭、为那女学生、为狱中的生活感到抑郁恐惧。虽然听起来很荒谬，他决定犒赏自己，不管是数码相机还是海鸥牌双镜相机，他想多买一台。</p>
+    <p class="calibre7" height="1em" width="2em">老婆要骂要埋怨就由她吧——邵德平领悟到，人生在世，就该顺天听命，及时行乐。</p>
+    <p class="calibre1" height="1em" width="0pt">3</p>
+    <p class="calibre7" height="1em" width="2em">“邵德平是个烂人。”阿涅刚开门便对阿怡说道。</p>
+    <p class="calibre7" height="1em" width="2em">
+        星期五晚上阿涅答应阿怡调查后，翌日早上阿怡便到银行将八万多元存款提出，交给阿涅。银行出纳员看到她一口气清空账户，担心她遇上骗子，再三询问，阿怡只能笑着保证她是提款自用。事实上，阿怡也有想过，把款项给阿涅搞不好跟送钱给骗子没分别，就算阿涅一直说没结果，阿怡也无可奈何。阿涅收下钞票——和零钱——后说调查有结果会主动打电话给阿怡，会面不到一分钟便赶阿怡离开，阿怡回家后才想起自己没有阿涅的联络方法。她按捺着忐忑的心情，尝试说服自己阿涅会很快联络她，可是银行职员那句“小姐，你不会遇上骗徒吧”和莫侦探那句“他是专家”在她内心不断交战。</p>
+    <p class="calibre7" height="1em" width="2em">将钱全付给阿涅后，阿怡身上只余下钱包中本来有的一张百元纸钞、储值约五十块的八达通卡<sup class="calibre12"><span
+            id="filepos0000163506"></span>
+        <small class="calibre13">
+            <a href="#filepos0000194731">
+                <span class="calibre14">[4]</span>
+            </a>
+        </small>
+    </sup>
+        以及口袋中的十数元零钱。在阿涅接受委托前一天，阿怡到过超级市场购物，家中粮油杂货尚算充足，然而距离发薪日还有半个月，余下日子就算她每餐只啃泡面，上下班的交通费再省每天也花二十元，她可不能不上班，而且她这个月还未交水费电费。阿怡有点后悔没办理信用卡，假如她现在一卡在手，至少不用为接下来两星期的生活发愁——她一直奉行母亲的教导，对“先使未来钱”<sup
+                class="calibre12"><span id="filepos0000164096"></span>
+            <small class="calibre13">
+                <a href="#filepos0000194980">
+                    <span class="calibre14">[5]</span>
+                </a>
+            </small>
+        </sup>
+        十分抗拒，所以即使有一份稳定的职业，仍拒绝了所有信用卡推销员的劝诱。她觉得现代经济就像海市蜃楼，连没有收入的学生都能拿到一两万信用额，为了获得更大的利润，商人和银行家不断诱骗年轻人走进这个“借款——还款”的循环，而目前的繁荣景象，随时会像砂粒堆成高塔，刹那间坍落崩毁。
+    </p>
+    <p class="calibre7" height="1em" width="2em">
+        周六下午回到图书馆值班时，阿怡向同事Wendy借几百块应急。因为阿怡不是“月光族”，Wendy不免感到奇怪，问及原因，阿怡却支吾以对，只说一时周转不灵。</p>
+    <p class="calibre7" height="1em" width="2em">“嗯，这儿八百，你下月才还我吧。”Wendy从钱包掏出所有百元钞票。</p>
+    <p class="calibre7" height="1em" width="2em">“咦，我只想借五百……”</p>
+    <p class="calibre7" height="1em" width="2em">“行啦，难得你也有‘周转不灵’的时候。不过有什么事情不妨跟我说啊。”</p>
+    <p class="calibre7" height="1em" width="2em">
+        Wendy两年前从沙田图书馆调职到中央图书馆，比阿怡年长五岁，为人健谈外向，满腔热忱，事实上阿怡有点受不了她那种过度热情的性格；Wendy每次约大伙儿去吃饭看电影，阿怡都会借词推搪，缺席聚会。然而这时候Wendy的热心却救了阿怡一把，在她无助之时愿意伸出援手，也让她心里好过一点。只是，Wendy的话令阿怡想起早上银行职员的疑问，她觉得自己就像《警讯》<sup
+            class="calibre12"><span id="filepos0000165661"></span>
+        <small class="calibre13">
+            <a href="#filepos0000195156">
+                <span class="calibre14">[6]</span>
+            </a>
+        </small>
+    </sup>
+        里那些诈骗案例中的愚蠢受害者。这令她更在意阿涅的调查进度，每天不时检查手机，担心错过了阿涅的联络，可是一直杳无音信。</p>
+    <p class="calibre7" height="1em" width="2em">三天后，她终于按捺不住了。</p>
+    <p class="calibre7" height="1em" width="2em">6月16号星期二，她下班后再次来到西营盘，打算找阿涅询问进度，然而当她走到第二街时又犹豫起来。</p>
+    <p class="calibre7" height="1em" width="2em">
+        “我会不会太白目了？万一惹他不高兴，他会不会敷衍我，甚至中止调查？”阿怡站在街角，裹足不前。明明自己是付钱的“客户”，她却对阿涅有种莫名其妙的畏惧感，就像青蛙与蛇，对方是恍如天敌般的存在。</p>
+    <p class="calibre7" height="1em" width="2em">她踌躇了十分钟仍没立定主意，手机却突然响起来。</p>
+    <p class="calibre7" height="1em" width="2em">“既然来到便上来，别在我家附近徘徘徊徊，你迟早会被当成跟踪狂给抓进警局。”阿涅说完便挂线。</p>
+    <p class="calibre7" height="1em" width="2em">
+        这通电话令阿怡惊讶地张望四周。她只站在街角，还没有靠近151号，照道理阿涅不可能从窗口看到她，但阿涅就是知道她来了附近。虽然感到不解，阿怡还是急步走进阿涅居住的唐楼，一口气走上五层楼梯。</p>
+    <p class="calibre7" height="1em" width="2em">“邵德平是个烂人。”阿涅刚开门便对阿怡说道，“不过他跟kidkit727无关。”</p>
+    <p class="calibre7" height="1em" width="2em">“什么？”阿怡没想到阿涅劈头第一句话不是问她为什么再来烦他，而是说出跟调查相关的事情。</p>
+    <p class="calibre7" height="1em" width="2em">
+        “邵德平跟发文者没有瓜葛。”阿涅让阿怡坐在从杂物堆中勉强腾出座位的沙发后，继续说，“莫大毛的报告有提过邵德平也不知道谁帖文，但那家伙始终是文章的中心人物，所以我有必要亲自跑一趟。”</p>
+    <p class="calibre7" height="1em" width="2em">“跑一趟？你不是用电脑去找出对方的隐私吗？”阿怡问。</p>
+    <p class="calibre7" height="1em" width="2em">“有些事情，直接问一句会更简单。”</p>
+    <p class="calibre7" height="1em" width="2em">“你见过邵德平？还直接问他？他不会说实话啊。”阿怡一脸不解。</p>
+    <p class="calibre7" height="1em" width="2em">
+        “区小姐，人是很奇怪的动物，只要让对方卸下心防，对陌生人透露的会比对家人说的更多，”阿涅边说边将一台双镜相机放在阿怡面前，“我跟监了两天，昨天假装成普通的摄影爱好者，在茶餐厅跟邵德平聊了几句。”</p>
+    <p class="calibre7" height="1em" width="2em">“你、你直接问他‘你是不是kidkit727’？”</p>
+    <p class="calibre7" height="1em" width="2em">阿涅扑哧一笑，说：“这样就连三岁小孩也不会上当吧。我就是跟他聊聊相机而已。”</p>
+    <p class="calibre7" height="1em" width="2em">阿怡伸手拿起眼前的相机，仔细打量，问道：“这样子便能知道他跟kidkit727无关？”</p>
+    <p class="calibre7" height="1em" width="2em">
+        “首先，邵德平、他老婆和他老妈对电脑或网路都是门外汉，邵德平亲口对我说他只用电脑来下象棋和看PPS网路电视，我之前查过他们家宽带和手机的网路使用记录，确认那是实话。他们一家里面，不可能有会考虑‘如何在网路讨论区消除脚印’的人。我也引导他回答我另一个问题，看看他有没有相熟朋友是电脑专家，但结论是没有。”</p>
+    <p class="calibre7" height="1em" width="2em">阿怡认真地聆听着阿涅解释。</p>
+    <p class="calibre7" height="1em" width="2em">
+        “其次，邵德平自己和他的交友圈子的政治立场都跟那篇文章有矛盾，”阿涅继续说，“假如邵德平是主谋，或是他的家人朋友想以那篇文章替他平反，文章的写法会有所不同。”</p>
+    <p class="calibre7" height="1em" width="2em">“政治立场？”</p>
+    <p class="calibre7" height="1em" width="2em">
+        “邵德平曾替‘保皇党’的议员助选，他的文具店仍贴着海报，而且根据法庭记录，油麻地地铁站便利商店店员供称，邵德平曾抱怨今天的年轻人都是‘搞乱香港的废青’，可见他的政治立场倾向保守，”阿涅将办公桌的笔记本放到茶几上，画面仍是花生讨论区的那篇文章，“可是，这文章的作者是个自由主义者，而且颇年轻，会用上一些时下流行的反抗用语。例如‘香港现在是非颠倒，有强权无公理，白的可以被说成黑的，有理根本说不清’和‘向不公义的裁决低头’，这些用语都不会出自保守派之口，若然保守派要写，至少会省略‘强权’和‘不公义’这种带政治色彩的词语。正所谓物以类聚，邵德平周遭有这种跟他取向南辕北辙、却又愿意为他鸣不平的亲人朋友的机会，微乎其微。”</p>
+    <p class="calibre7" height="1em" width="2em">
+        “就算有这两点支持，世事总有例外啊？”阿怡反问道，“说不定邵德平就是碰巧认识一位电脑专家，跟他臭味相投，于是邵德平请对方用这种方法为自己洗白呢？用词什么都可以是计谋啊？”</p>
+    <p class="calibre7" height="1em" width="2em">
+        “好，我们就假设kidkit727是个聪明绝顶、跟我一样思虑周详的高手，懂得在字里行间加入伪冒的文笔，还要沉得住气，只发了一篇文章便没有继续在讨论区煽风点火，”阿涅一脸自负地说，“然而这位高手却笨到不等邵德平出狱，在情况最难控制的时候帖文了。”</p>
+    <p class="calibre7" height="1em" width="2em">“最难控制？”</p>
+    <p class="calibre7" height="1em" width="2em">
+        “假如你是邵德平，你会选择自己仍在蹲苦窑、老婆和老妈被记者围攻、自己束手无策的时候叫那位高手朋友帖文，还是会等到自己出狱可以直接受访、通过镜头陈情的时候才演这一出戏？”</p>
+    <p class="calibre7" height="1em" width="2em">阿怡听到这儿才理解阿涅的意思。</p>
+    <p class="calibre7" height="1em" width="2em">
+        “邵德平和他老婆的关系不如文章所说般恩爱，但邵德平可不会蠢到做出妨碍自己文具店经营的事。他不在时，他老婆独力顾店，而文具店是他家唯一收入来源，他在出狱前为自己鸣冤只会得不偿失。况且，假设邵德平像一般人期望利用媒体出风头换取名利，他也该等出狱后，香港媒体只有三分钟热度，一个月后新闻便冷掉了，他那位‘聪明’朋友kidkit727不会不懂得这道理。”阿涅顿了一顿，说，“更重要的是，如今你妹妹自杀，邵德平面对的只有更多的白眼与责难，如果他真是主谋，这次他可说是损己害人，一拍两散。”</p>
+    <p class="calibre7" height="1em" width="2em">阿怡听到阿涅提及小雯，心中泛起一阵难过。</p>
+    <p class="calibre7" height="1em" width="2em">“所以……”阿怡强忍住内心的疼痛，对阿涅说，“犯人的真正目的是要对付小雯吗？”</p>
+    <p class="calibre7" height="1em" width="2em">“没错，这是目前较大的可能。当然在没有任何实质证据支持下，不能否定任何可能性。”</p>
+    <p class="calibre7" height="1em" width="2em">“既然邵德平跟kidkit727毫无瓜葛，他为什么不向记者说出来？”阿怡问。</p>
+    <p class="calibre7" height="1em" width="2em">
+        “他可以说什么？”阿涅笑道，“说‘我其实没有外甥，但有一个我不认识的神秘人替我辩护，减轻我的罪责’吗？这只会愈描愈黑，令自己被记者和大众咬住不放。”</p>
+    <p class="calibre7" height="1em" width="2em">阿怡想了想，觉得阿涅的话有道理。</p>
+    <p class="calibre7" height="1em" width="2em">“说起来，见过邵德平后，那篇文章有令我觉得不解的地方。”阿涅收起笑容，将双手交叠胸前。</p>
+    <p class="calibre7" height="1em" width="2em">“不解是指……”</p>
+    <p class="calibre7" height="1em" width="2em">
+        “文章关于邵德平的描写，有些很确切，有些则很夸大，”阿涅指了指阿怡仍拿着的相机，“文章提到邵德平喜欢摄影和只有二手相机的事都是事实，我也有去过他的文具店观察，店里的确有不少专门的摄影书刊发售，虽然我不知道事发后他是不是收起了更多的美少女写真集，但至少以那些专门杂志的出版日期和种类来看，邵德平对摄影的浓厚兴趣倒是货真价实。而且他能跟我这个陌生人详谈古董相机型号，更证明他不是挂羊头卖狗肉的门外汉……对了，我劝你放下我那借来的相机，它市值二万五千，摔坏了你赔不起。”</p>
+    <p class="calibre7" height="1em" width="2em">阿怡瞠目咋舌，相机差点脱手掉落。她连忙将相机放回茶几上，生怕弄掉半个零件。</p>
+    <p class="calibre7" height="1em" width="2em">
+        “可是，文章说到邵德平的夫妻关系便失实了。”阿涅挨在办公桌边，说，“文中提到邵德平爱妻顾家，因为担心妻子吃苦，宁愿坐牢，尽快平息事件，那通通是鬼话。邵德平出狱后一直没回文具店上班，因为害怕被邻里指指点点，终日宅在家里，完全没有承担的勇气。他只让老婆独个儿顾店，负责一切日常工作，可是他心底毫不领情，还跟我这个萍水相逢的路人甲埋怨说他老婆不准他买相机。”</p>
+    <p class="calibre7" height="1em" width="2em">“那到底为什么文章半真半假？”阿怡问，“能写出真实部分，便证明作者认识邵德平，不会跟他无关啊。”</p>
+    <p class="calibre7" height="1em" width="2em">“你有没有仔细读过文章？你不觉得内容带着某一种味道吗？”</p>
+    <p class="calibre7" height="1em" width="2em">“哪一种味道？”</p>
+    <p class="calibre7" height="1em" width="2em">“嫌犯请律师辩护的味道。”</p>
+    <p class="calibre7" height="1em" width="2em">阿怡愣了一愣。</p>
+    <p class="calibre7" height="1em" width="2em">
+        “隐恶扬善，将对自己有利的事实全列举出来，像夫妻关系这种自由心证的便尽力夸大，反正邵太太说一句‘我们很恩爱’，控方也难以反证，那简直像是庭上陈词的要点。我怀疑文章作者跟邵德平的辩护律师有多少关系，不过从利害得失上计算，他的律师才不会插手做这种不但无益更有机会害自己名誉受损的蠢事，”阿涅从办公桌上一堆纸张中抽出一页，说，“替他辩护的律师叫Martin
+        Mak，是业界小有名气专打刑案的律师，平时有办一些社区法律讲座和提供免费法律咨询，会做这种粉饰门面的事情的人，不会耍小手段危害经营多年的‘品牌’。”</p>
+    <p class="calibre7" height="1em" width="2em">“不是那个律师所为，也可能跟他有关吧？”</p>
+    <p class="calibre7" height="1em" width="2em">“话是没错，可是跟律师交手很麻烦。”阿涅耸耸肩，“那条线我也会跟，但我目前最想调查的，是另一条线。”</p>
+    <p class="calibre7" height="1em" width="2em">“哪一条？”</p>
+    <p class="calibre7" height="1em" width="2em">“你妹妹。”</p>
+    <p class="calibre7" height="1em" width="2em">阿怡心中一凛。</p>
+    <p class="calibre7" height="1em" width="2em">
+        “区小姐，你不想碰这一块吧？”阿涅以一副事不关己的口吻说，“按目前的线索显示，那作者的目的是伤害你妹妹的可能性最大，不管他是跟你妹妹有私怨，还是单纯认为邵德平被你妹妹诬陷于是用这方法替天行道。要追查下去，便要知道区雅雯生前的一切——她的交友关系、她的私生活、她的想法，以及跟她结怨的人。”</p>
+    <p class="calibre7" height="1em" width="2em">“小雯只有十五岁，哪有什么结怨啊！”</p>
+    <p class="calibre7" height="1em" width="2em">
+        阿涅冷笑一下。“你别那么天真，今天十四五岁的女孩子拥有的秘密，随时比成年人更多，人际关系复杂得不得了。社交网站、即时通信工具冒起，十来岁的孩子也能轻易加入成年人的世界。有些孩子入世未深却不懂装懂，以为援交只是拖拖手、逛逛街，结果最后半推半就被顾客搞上床，甚至被偷拍照片、影片，沦为被长期威胁的受害者，又不敢向他人求助，一直隐忍，而家人还愚蠢地以为那些反常行为只是青春期的情绪问题。文章里说你妹妹喝酒、嗑药，你敢不敢直视我双眼，说一句‘小雯才不是那样子’？”</p>
+    <p class="calibre7" height="1em" width="2em">
+        阿怡跟阿涅对上眼，想说出阿涅要她说的话，可是她想起小雯丧礼上只有数名同学来吊唁，话到喉头便说不出来。在小雯死后，她才察觉自己并不是很了解妹妹。因为她下班时间不定，她从来没怀疑过小雯下课后是否准时回家，或者是不是真的如妹妹所说，有时晚归是因为在图书馆温习做家课。小雯会不会趁自己不注意时，跟某些不良分子来往？会不会有不能跟家人诉说的秘密？有没有可能利用那短短的空当，从事某些不道德的工作赚取零用？</p>
+    <p class="calibre7" height="1em" width="2em">自从小雯离世，那颗埋在阿怡心底名为怀疑的种子，已经不知不觉地长成缠绕心灵、蚕食信赖的毒藤。</p>
+    <p class="calibre7" height="1em" width="2em">
+        面对阿怡退缩的样子，阿涅没有咄咄逼人，他放松语气说：“区小姐，要找出幕后黑手，你便要接触你妹妹生前的事，包括一些你可能不想知道的事情。你有没有这种觉悟？”</p>
+    <p class="calibre7" height="1em" width="2em">听到这个问题，阿怡反而没有犹豫，答道：“有。无论如何，我都要揪出那个害死小雯的凶手。”</p>
+    <p class="calibre7" height="1em" width="2em">“好吧，那你回家看看你妹妹有没有留下什么日记、笔记之类……你妹妹有没有电脑？”</p>
+    <p class="calibre7" height="1em" width="2em">“没有，她只有一支智能手机。”</p>
+    <p class="calibre7" height="1em" width="2em">“那拿她的手机给我，现代人机不离身，光从手机可以彻底了解一个人。”阿涅说。</p>
+    <p class="calibre7" height="1em" width="2em">“你不亲自到我家看看？”</p>
+    <p class="calibre7" height="1em" width="2em">
+        “小姐，跟踪邵德平已耗了我两天，你别把我当成你的私人助理，指示我如何工作。”阿涅回到办公桌后，坐进他的办公椅，“你依我说的去做就是。你要找我可以打这个电话号码，但我不保证会接，有重要事情便留下口讯，我有空自然会回复。”</p>
+    <p class="calibre7" height="1em" width="2em">阿涅向阿怡递上一张便条，上面有八个用铅笔写的数字。</p>
+    <p class="calibre7" height="1em" width="2em">
+        阿怡接过字条后，阿涅伸手指向大门，示意会面结束。虽然阿怡仍想追问，但见了几次面，她渐渐摸清阿涅脾气，死缠下去只会换来尖酸刻薄的讥诮。不过，在回家途中她却想起另一件事——阿涅固然嘴巴不饶人，但他没有敷衍搪塞，随便说句“仍在调查中”了事，反而很认真地跟自己讨论案情。阿怡记得莫侦探说过阿涅个性乖僻，果然所言不虚。</p>
+    <p class="calibre7" height="1em" width="2em">“姑且继续相信他吧。”阿怡边瞧着手中的字条边想。</p>
+    <p class="calibre7" height="1em" width="2em">
+        为了节省交通费，阿怡没坐地铁，改乘便宜一点的电车、渡轮和巴士。她这几天只有上班才会搭地铁，毕竟上班得要准时，回家晚一点却没有关系。阿怡回到乐华邨的家时，已是晚上10点。</p>
+    <p class="calibre7" height="1em" width="2em">
+        打开电灯，阿怡连衣服也没换便走到柜子后，亦即是小雯的“房间”里。小雯逝世后，阿怡一直没有处理小雯的遗物，小小的书桌、书柜、为了节省空间而架在衣橱和书柜上方的卧床等，一切都保持原貌。阿怡小时候有和母亲一起处置父亲遗物的经验，去年母亲病逝，她也强忍住泪水，将母亲的旧衣服收好，但如今她实在无法以相同的心情去整理小雯的东西。小雯的班导袁老师曾于五月尾打电话给阿怡，请她到学校接收小雯遗留在置物柜的一些参考书和作业簿，可是阿怡推说暂时没空，一直拖着，因为她害怕睹物思人。</p>
+    <p class="calibre7" height="1em" width="2em">
+        阿怡拉开书桌抽屉，翻开书架上的课本和笔记本，可是没有找到日记之类的东西。抽屉里放的都是中学女生的小玩意、化妆品、装饰和文具，书架上的书册不过是课堂用的笔记，以及一两本教女生打扮的流行杂志。阿怡连衣橱里放内衣的角落也找过，没有发现。书包里面放的也只有课本而已。</p>
+    <p class="calibre7" height="1em" width="2em">“为什么连记事手账也没有？”阿怡觉得奇怪。她想，小雯就算没有写日记的习惯，至少会有用来记下琐事的手账吧——</p>
+    <p class="calibre7" height="1em" width="2em">“啊，对了，是手机。”</p>
+    <p class="calibre7" height="1em" width="2em">
+        阿怡拍一拍额头。因为她仍使用折叠型的旧式手机，习惯用纸本记事，所以一开始只想到小雯采用相同的做法。而她这时才想到，智慧型手机已经具备记事功能，现代人大都将传统手账和通讯录等电子化，用手机取代。</p>
+    <p class="calibre7" height="1em" width="2em">然而，阿怡找不到小雯的手机。</p>
+    <p class="calibre7" height="1em" width="2em">
+        阿怡清楚记得，小雯平时会将手机放在书桌的右上角，那个角落上方还挂着充电器，可是目前那位置空空如也。阿怡翻开床铺，也没找到那支红色的手机。</p>
+    <p class="calibre7" height="1em" width="2em">细心一想，阿怡更发现，自从小雯死后，她一直没看到那手机。</p>
+    <p class="calibre7" height="1em" width="2em">
+        阿怡连忙掏出自己的电话，按下小雯手机的号码，可是扩音器只传来留言信箱的机器声音。事实上，这天距离小雯自杀已有一个多月，手机的电池早耗光了，根本不可能会响。</p>
+    <p class="calibre7" height="1em" width="2em">“该不会……手机一并掉出窗外了吧……”</p>
+    <p class="calibre7" height="1em" width="2em">
+        阿怡一直不敢猜想小雯自杀一刻的样子，但因为找不到手机，她不由得作出联想。可是假如小雯自杀时手机在身上，它该掉落在小雯着地位置附近，既然警方和管理员都没有通知阿怡，阿怡便想这可能性不大。</p>
+    <p class="calibre7" height="1em" width="2em">那么，手机到底在哪儿？遗留在学校吗？</p>
+    <p class="calibre7" height="1em" width="2em">她掏出阿涅给她的字条，按下号码，打算将情况告诉对方。</p>
+    <p class="calibre7" height="1em" width="2em">“您现在在61448651的留言信箱，请在‘哔’声后下口讯……”又是毫无感情的机器声。</p>
+    <p class="calibre7" height="1em" width="2em">
+        “喂、喂，我是区雅怡，我依照你说的找过了，可是没找到日记，手机也不知道放哪里去了……嗯……你可以亲自来看看吗？”阿怡结结巴巴地留下口讯，再按下挂线的按钮。</p>
+    <p class="calibre7" height="1em" width="2em">阿怡再仔细找了一遍，小雯的钱包和钥匙串也在，就是没有手机。</p>
+    <p class="calibre7" height="1em" width="2em">
+        这一晚，阿怡睡得比之前更差。她老惦挂着手机的事，而阿涅一直也没有回复。翌日早上闹钟响起时，她觉得自己好像没睡过。虽然她照常上班，在图书馆柜台替市民办理借书还书的手续，可是由于她心不在焉，光是上午已出错数次。她的主管见状，便叫她负责将归还书籍上架，减少惹怒他人的机会。</p>
+    <p class="calibre7" height="1em" width="2em">午休时，阿涅仍未回复，她便再打一次电话。结果依然是留言信箱。</p>
+    <p class="calibre7" height="1em" width="2em">直到晚上回家，阿怡的手机还是没有任何来电。</p>
+    <p class="calibre7" height="1em" width="2em">“喂，我是区雅怡，阿涅你听到留言后可不可以回复我？”</p>
+    <p class="calibre7" height="1em" width="2em">阿怡在留言信箱留下一条语气有点倔的口讯。虽然阿怡有求于阿涅，但她心想，既然他给了自己号码，好歹也该回复一下吧。</p>
+    <p class="calibre7" height="1em" width="2em">这一夜还是没有半点回音。早上七点阿怡醒来时，打开手机，却看到意外的标示。她收到一条短信。</p>
+    <p class="calibre7" height="1em" width="2em">你这不长眼睛的笨蛋真的已把整间房子掀起来找一遍？</p>
+    <p class="calibre7" height="6pt" width="2em">
+        发讯时间是两个多钟头前的凌晨4点38分。阿怡看到短信内容后，顿时睡意全消，觉得自己被阿涅小看了。小雯死后，阿怡只要静下来便会胡思乱想，唯有靠工作才能暂时忘掉伤悲，她在家里便以家务来填满生活的空当，无时无刻打扫家中各处；只是为免触景伤情，她没仔细整理小雯的物品，除此之外，房子上上下下她都很清楚，如果小雯的手机放了在厨房的架子上，或是电视机旁的抽屉里，甚至是塞了进沙发的夹缝，阿怡不会没见过。她很想用短信反驳阿涅，但她还是冷静下来，决定先忍一忍。</p>
+    <p class="calibre7" height="1em" width="2em">
+        一天的工作过去后，阿怡8点多离开图书馆，准备直接到阿涅的家跟他理论，或者硬拉他到自己的家，证明自己不是他想象中那么冒失。但当她要搭电车到港岛西区时，她才想起一件事。</p>
+    <p class="calibre7" height="1em" width="2em">家里有一个角落，自从小雯自杀后，阿怡一直无法直视。</p>
+    <p class="calibre7" height="1em" width="2em">就是小雯一跃而下的那扇窗户。</p>
+    <p class="calibre7" height="1em" width="2em">那扇窗户在洗衣机旁边，阿怡这阵子洗衣服都感到不自在，因为她仿佛看到小雯扶着洗衣机，踏上旁边的折叠椅，再推开窗子，往外一跳的过程。</p>
+    <p class="calibre7" height="1em" width="2em">“对了，小雯自杀前一刻，会不会仍拿着手机？”阿怡想。</p>
+    <p class="calibre7" height="1em" width="2em">为了确认想法，她放弃找阿涅，先回乐华邨的家。回到家后，她一鼓作气，走到洗衣机前，压抑着内心的不安，仔细检查四周。</p>
+    <p class="calibre7" height="1em" width="2em">当她跪下，将脸贴在地板上时，她看到了。</p>
+    <p class="calibre7" height="1em" width="2em">小雯的手机就在洗衣机底。</p>
+    <p class="calibre7" height="1em" width="2em">
+        阿怡惊讶地伸手去拿，但她的手太粗，触不到。她焦急地找可以把手机抠出来的工具，可是间尺不够长，家中又没有合用的铁枝。她扭头看到几个金属衣架，于是匆忙将其中一个拆开拗直，然后忍住颤抖，将手机勾出来。</p>
+    <p class="calibre7" height="1em" width="2em">
+        系着附猫咪吊饰手带的手机的玻璃屏幕有一道明显的裂痕，似乎它曾被摔到地上。阿怡按了一下开关钮，可是手机没有反应，她心头一沉，不由得担心它是跌坏了。她三步并成两步冲到小雯的书桌前，将手机插上充电器——她试了三次才成功插上，不是因为她不懂得如何使用充电器，而是她的手抖得无法将两者顺利接起来。</p>
+    <p class="calibre7" height="1em" width="2em">“哔。”</p>
+    <p class="calibre7" height="1em" width="2em">
+        手机的LED灯亮起，画面出现一个充电中的符号。看到手机正常运作，阿怡不禁缓一口气，但脑海同时冒出一堆疑问。她回头望向窗户，猜想手机掉到洗衣机下的理由——是小雯把手机丢下的吗？可是除非用力甩，否则手机不可能掉进洗衣机下的啊？还是掉到地上后，不小心踢倒，令它滑到那个地方？又或者手机是沿着洗衣机和墙壁间的缝隙掉落，于是卡到洗衣机下面？</p>
+    <p class="calibre7" height="1em" width="2em">到底小雯自杀前发生什么事？</p>
+    <p class="calibre7" height="1em" width="2em">
+        阿怡想不到原因，可是她放弃继续深究，总之找到手机就好。虽然手机仍在充电中，她按下电源钮，画面随即亮着，出现手机品牌的开机画面。阿怡不懂得操作，但她想至少打开来看看。</p>
+    <p class="calibre7" height="1em" width="2em">不过她接下来就发现无法继续，因为她不知道手机的密码。</p>
+    <p class="calibre7" height="1em" width="2em">
+        画面显示了九个排成三列三行的圆点，阿怡模仿她见过的样子，用指头把圆点连接起来，可是画面出现了“图样不正确”的提示。她试了几次后，一筹莫展，只好放下手机，让它继续充电。</p>
+    <p class="calibre7" height="1em" width="2em">“阿涅是黑客，他应该懂破解吧。”阿怡想。</p>
+    <p class="calibre7" height="1em" width="2em">
+        阿怡本来打算立即拿着小雯的手机去找阿涅，可是她冷静下来后，发觉现在出发的话已经太晚，半夜回家车费很贵，而且她着急地去找阿涅，搞不好对方接过手机后，还是爱理不理地丢在一旁，那么翌日下班后再找阿涅——兼当面催促他——大概会更好。</p>
+    <p class="calibre7" height="1em" width="2em">“我找到小雯的手机了，明天我下班后会带给你。”阿涅依然没有接听电话，阿怡只好再次对着机器说话。</p>
+    <p class="calibre7" height="1em" width="2em">这天晚上，阿怡梦见小雯。</p>
+    <p class="calibre7" height="1em" width="2em">在梦里，小雯盘腿坐在沙发上，一如平日般滑手机。阿怡跟她谈了几句，她也回答了几句，可是内容是什么，阿怡在梦醒时全想不起来。</p>
+    <p class="calibre7" height="1em" width="2em">她只记得小雯的笑靥。</p>
+    <p class="calibre7" height="1em" width="2em">早上起床时，阿怡擦掉眼角的泪痕，梳洗穿衣后，将充满电的手机塞进手袋里，离开住所往图书馆上班。</p>
+    <p class="calibre7" height="1em" width="2em">“阿怡，我说，你最近神不守舍，真的还好吗？”午饭后，在员工休息室内Wendy对阿怡说。</p>
+    <p class="calibre7" height="1em" width="2em">“嗯，只是有点事情挂心罢了。”阿怡回答道。</p>
+    <p class="calibre7" height="1em" width="2em">“是调查的事吗？我堂姑丈仍未替你查到结果吗？”Wendy的堂姑丈便是莫侦探，她不知道阿怡已被“转介”到个性别扭的黑客侦探那儿去。</p>
+    <p class="calibre7" height="1em" width="2em">“已经有些进展了。”阿怡不欲多言，模棱两可地回答。</p>
+    <p class="calibre7" height="1em" width="2em">“假如是金钱上的困难，我也可以帮忙。”Wendy认真地说。自从小雯出事后，Wendy就更关心阿怡。</p>
+    <p class="calibre7" height="1em" width="2em">“你几天前借了我八百块，已经足够了。”</p>
+    <p class="calibre7" height="1em" width="2em">
+        “我堂姑丈是不是开天杀价了？堂姑妈一向疼我，我可以跟她告状，要堂姑丈再收便宜一点……”Wendy掏出手机，打算通过WhatsApp向莫侦探的老婆打小报告。</p>
+    <p class="calibre7" height="1em" width="2em">
+        看到Wendy输入密码，打开手机，阿怡整个人愣住。她脑海中闪过一个画面——那是小雯滑手机的片段。她本来以为是昨晚梦境中的一幕，但她赫然发现那不是。</p>
+    <p class="calibre7" height="1em" width="2em">那是小雯生前，在家替手机解锁时，阿怡无意间瞥见的一刻。</p>
+    <p class="calibre7" height="1em" width="2em">左下角、正下方、右下角、正中、左上角。</p>
+    <p class="calibre7" height="1em" width="2em">阿怡紧张地掏出小雯的手机，按记忆输入图形密码。画面上没有出现“不正确”的提示，取而代之的，是成功登入的操作画面。</p>
+    <p class="calibre7" height="1em" width="2em">
+        然而，阿怡并没有因为这突破而欣喜。或者该说，她有那么短暂的一刻觉得高兴，可是随着她看到画面上的文字，她感到五脏六腑一下子颠倒过来，头皮发麻。她按了画面一下，上面显示的文字更令她心跳加速，几乎窒息。</p>
+    <p class="calibre7" height="1em" width="2em">“Wen、Wendy，请你替我向、向主管请半天假……”阿怡抑制着颤抖，向Wendy说。</p>
+    <p class="calibre7" height="1em" width="2em">“怎么了？阿怡，你还好吗？”</p>
+    <p class="calibre7" height="1em" width="2em">
+        “我、我现在有急事要早退，麻、麻烦你替我善后……”阿怡说罢，提起手袋将小雯的手机丢进去，无视Wendy的呼唤，头也不回地冲出图书馆大楼外。</p>
+    <p class="calibre7" height="1em" width="2em">
+        阿怡没有用过智慧型手机，所以她不知道在主画面中那个四边形的东西叫“Widget桌面小工具”，她更不知道那是Google旗下电邮服务GMail的小工具。不过，就算她不知道那是什么，上面显示的摘要资讯已足够驱使她伸手按下，让她看到完整的邮件内容。</p>
+    <p class="calibre7" height="1em" width="2em">那可憎的内容。</p>
+    <p class="calibre7" height="1em" width="2em">寄件者：kid kit &lt;kidkit727@gmail.com&gt;</p>
+    <p class="calibre7" height="0pt" width="2em">收件者：Nga-Man &lt;aungamanman@gmail.com&gt;</p>
+    <p class="calibre7" height="0pt" width="2em">日期：2015年5月5日18:06</p>
+    <p class="calibre7" height="0pt" width="2em">主旨：Re：</p>
+    <p class="calibre7" height="0pt" width="2em">区雅雯：</p>
+    <p class="calibre7" height="0pt" width="2em">你有勇气去死吗？你不过想重施故技，换取其他人同情吧？但这次你的同学不会被骗了。你这种人渣，死不足惜。</p>
+    <p class="calibre20" height="1em" width="0pt">kidkit727</p>
+    <p class="calibre1" height="1em" width="0pt"><img class="calibre21" src="../images/00004.jpeg"/>
+    </p>
+    <hr class="calibre17"/>
+    <span id="filepos0000194087"></span>
+    <p class="calibre5" height="1em" width="2em">
+        <a href="#filepos0000141188">
+            <span class="calibre8">[1]</span>
+        </a>
+        <span class="calibre8">约56平方米。</span>
+    </p>
+    <span id="filepos0000194223"></span>
+    <p class="calibre5" height="10pt" width="2em">
+        <a href="#filepos0000145404">
+            <span class="calibre8">[2]</span>
+        </a>
+        <span class="calibre8">一种网路上供多人共同编撰的文字网页系统，维基百科便是使用这种系统建立网路百科全书的例子。</span>
+    </p>
+    <span id="filepos0000194475"></span>
+    <p class="calibre5" height="10pt" width="2em">
+        <a href="#filepos0000148139">
+            <span class="calibre8">[3]</span>
+        </a>
+        <span class="calibre8">以分享笑话及搞笑图片为主的社交网站，于2008年由五名香港人创办。网站名字来自粤语“搞GAG”谐音。</span>
+    </p>
+    <span id="filepos0000194731"></span>
+    <p class="calibre5" height="10pt" width="2em">
+        <a href="#filepos0000163506">
+            <span class="calibre8">[4]</span>
+        </a>
+        <span class="calibre8">香港使用的电子付费系统，初期只用于交通工具，后来扩展至不少商店，顾客可以用来购物付费。</span>
+    </p>
+    <span id="filepos0000194980"></span>
+    <p class="calibre5" height="10pt" width="2em">
+        <a href="#filepos0000164096">
+            <span class="calibre8">[5]</span>
+        </a>
+        <span class="calibre8">粤语俚语，就是先使用未来的金钱的意思。</span>
+    </p>
+    <span id="filepos0000195156"></span>
+    <p class="footer-container"><a class="btn btn-sm btn-info" href="chapter_2.html">上一章</a>&nbsp;&nbsp;&nbsp;<a
+            class="btn btn-sm btn-info" href="chapter_4.html">下一章</a></p>
+</div>    </div>
+</div>
+</body>
+</html><script src="../js/page_js.js"></script>

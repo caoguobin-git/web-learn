@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>hero</title>
+        <script src="js/vue.js"></script>
+        <style type="text/css">
+            #game {
+                text-align: center;
+            }
+
+            canvas {
+                background: url(img/bg.jpg) repeat fixed center;
+                border: 1px solid blue;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="game">
+            <canvas id="canvas" width="400" height="800"></canvas>
+            <img src="img/hero.png" style="display: none;" id="heroPic">
+            <img src="img/bullet.png" style="display: none;" id="bulletPic">
+
+        </div>
+    </body>
+</html>
+
+<script type="text/javascript">
+    var ctx;
+    const heroWidth = 60;
+    const heroHeight = 40;
+    const speed = 10;
+    const bulletPic = document.getElementById('bulletPic');
+    var game = new Vue({
+        el: '#game',
+        data: {
+            heroPic: {},
+            heroPos: {
+                x: 200,
+                y: 400
+            },
+            bullet: []
+        },
+        methods: {
+            drawHero: function() {
+
+                ctx.drawImage(this.heroPic, this.heroPos.x - heroWidth / 2, this.heroPos.y - heroHeight / 2,
+                    heroWidth, heroHeight)
+            }
+        },
+        watch: {
+            heroPos: function(val, oldVal) {
+                ctx.clearRect(oldVal.x - heroWidth / 2, oldVal.y - heroHeight / 2, heroWidth,
+                    heroHeight)
+                console.log(this.heroPos.y);
+                this.drawHero();
+            }
+        },
+        mounted: function() {
+            this.heroPic = document.getElementById('heroPic');
+            ctx = document.getElementById('canvas').getContext('2d');
+            this.drawHero();
+            window.onkeydown = function(e) {
+                let direction = e.keyCode;
+                console.log(direction)
+                if (direction == 37) {
+                    let newX = game.heroPos.x - speed;
+                    if (newX < heroWidth / 2) {
+                        return;
+                    }
+                    game.heroPos = {
+                        x: newX,
+                        y: game.heroPos.y
+                    }
+                } else if (direction == 39) {
+                    let newX = game.heroPos.x + speed;
+                    if (newX > (400 - heroWidth / 2)) {
+                        return;
+                    }
+                    game.heroPos = {
+                        x: newX,
+                        y: game.heroPos.y
+                    }
+                } else if (direction == 38) {
+
+                    let newY = game.heroPos.y - speed;
+                    if (newY < heroHeight / 2) {
+                        return;
+                    }
+                    game.heroPos = {
+                        x: game.heroPos.x,
+                        y: newY
+                    }
+                } else if (direction == 40) {
+                    let newY = game.heroPos.y + speed;
+                    if (newY > (800 - heroHeight / 2)) {
+                        return;
+                    }
+                    game.heroPos = {
+                        x: game.heroPos.x,
+                        y: newY
+                    }
+                }
+            }
+
+            setInterval(function() {
+                let bullet = new Bullet(game.heroPos.x - 15, game.heroPos.y - 50);
+            }, 800)
+        }
+    })
+
+    function Hero(x, y, width, height) {
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+
+    }
+
+
+    function Bullet(x, y, width, height) {
+        this.x = x;
+        this.y = y;
+        this.width = 30;
+        this.height = 30;
+        this.speed = 2;
+        let that = this;
+        ctx.drawImage(bulletPic, x, y, this.width, this.height);
+
+        this.i = setInterval(function() {
+            ctx.clearRect(that.x, that.y, that.width, that.height);
+            that.y -= that.speed;
+            if (that.y < 0 - that.height) {
+                clearInterval(that.i);
+            }
+            ctx.drawImage(bulletPic, that.x, that.y, that.width, that.height);
+        }, 5)
+    }
+</script>

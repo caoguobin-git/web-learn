@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>fill</title>
+        <style type="text/css">
+            canvas{
+                border: 1px solid black;
+            }
+        </style>
+	</head>
+	<body>
+        <canvas id="canvas" width="800" height="800"></canvas>
+	</body>
+</html>
+
+<script type="text/javascript">
+    var canvas;
+    window.onload=function(){
+        window.onkeydown=function(e){
+            console.log(e.keyCode)
+        };
+        canvas=document.getElementById('canvas').getContext('2d');
+        setFill();
+    }
+    
+    function setFill(){
+        canvas.rect(20,20,150,100);
+        canvas.shadowColor='black';
+        canvas.shadowBlur=20;
+        canvas.fillStyle='blue';
+        canvas.fill()
+    }
+    
+</script>

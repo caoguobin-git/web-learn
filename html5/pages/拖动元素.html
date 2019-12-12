@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>拖动元素</title>
+        <script src="../js/vue.js"></script>
+        <style type="text/css">
+            .moveAble {
+                width: 120px;
+                display: inline-block;
+                height: 120px;
+                background: radial-gradient(at 30% 25%,white 3%,red 25%);
+                border-radius: 50%;
+            }
+
+            #div1 {
+                width: 800px;
+                height: 600px;
+                background-color: blue;
+            }
+            
+            #div2 {
+                width: 800px;
+                height: 600px;
+                background-color: silver;
+            }
+        </style>
+    </head>
+    <body  @dragOver="dragOver($event)" @drop="drop($event)">
+        <div id="demo">
+            <div id="div1" @dragOver="dragOver($event)" @drop="drop($event)"></div>
+            <div class="moveAble" draggable="true" @dragstart="drag($event)"></div>
+            <div  class="moveAble" draggable="true" @dragstart="drag($event)"></div>
+            <div  class="moveAble"  draggable="true" @dragstart="drag($event)"></div>
+            <div  class="moveAble"  draggable="true" @dragstart="drag($event)"></div>
+            <div id="div2" @dragOver="dragOver($event)" @drop="drop($event)"></div>
+        </div>
+    </body>
+</html>
+
+<script type="text/javascript">
+    var demo = new Vue({
+        el:'#demo',
+        data:{
+            currentDiv:{}
+        },
+        methods:{
+            dragOver:function(e){
+                e.preventDefault();
+            },
+            drag:function(e){
+                this.currentDiv=e.target
+            },
+            drop:function(e){
+                e.target.appendChild(this.currentDiv)
+            }
+        }
+    })
+</script>

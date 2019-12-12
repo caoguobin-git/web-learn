@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>window对象</title>
+    </head>
+    <body>
+        <!-- 浏览器窗口内高度 -->
+        <button onclick="document.getElementById('demo').innerHTML=window.innerHeight">window.innerHeight</button>
+        <!-- 浏览器窗口内宽度 -->
+        <button onclick="document.getElementById('demo').innerHTML=window.innerWidth">window.innerWidth</button>
+        <button onclick="window.close()">关闭窗口</button>
+        <button onclick="openNewWindow()">打开窗口</button>
+        <button onclick="moveWindow()">移动窗口</button>
+        <button onclick="resizeWindow()">重置窗口大小</button>
+        <p id="demo"></p>
+    </body>
+</html>
+
+<script type="text/javascript">
+    
+    
+    window.onload = function() {
+        displaySize();
+    }
+    window.onresize = function() {
+        displaySize()
+    }
+
+    function displaySize() {
+        console.log('宽:' + window.innerWidth + ' 高:' + window.innerHeight);
+        var a = document.body
+        console.log(a.clientHeight)
+    }
+
+    function openNewWindow() {
+        var myWindow = window.open('http://www.baidu.com', '', 'height=500,width=800')
+        myWindow.moveTo(0, 0);
+        setInterval(function(){
+            myWindow.resizeTo(Math.random()*800,Math.random()*400)
+        },2000)
+    }
+
+    function moveWindow() {
+        myWindow.moveTo(500,500);
+        new Date().getMilliseconds()
+    }
+    
+    function resizeWindow(){
+        window.resizeTo(800,500)
+    }
+</script>

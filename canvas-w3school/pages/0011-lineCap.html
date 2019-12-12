@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>lineCap</title>
+        <style type="text/css">
+            canvas{
+                border: 1px solid black;
+            }
+        </style>
+	</head>
+	<body>
+        <canvas id="canvas" width="800" height="800"></canvas>
+	</body>
+</html>
+
+<script type="text/javascript">
+    var canvas;
+    window.onload=function(){
+        canvas=document.getElementById('canvas').getContext('2d');
+        setLineCap();
+    }
+    function setLineCap(){
+        canvas.lineCap='round';
+        canvas.lineWidth=20;
+        canvas.fillStyle='black';
+        var lineStyle=canvas.createLinearGradient(20,20,200,20);
+        lineStyle.addColorStop(0,'red');
+        lineStyle.addColorStop(1,'black');
+        canvas.strokeStyle=lineStyle;
+        canvas.beginPath();        
+        canvas.moveTo(20,20);
+        canvas.lineTo(200,20);
+        canvas.stroke();
+    }
+</script>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/vue.js"></script>
+    <style>
+        .pic-display-small{
+            width: 50px;
+            height: 30px;
+        }
+        .pic-display-small:hover{
+            width: 500px;
+            height: 300px;
+            position: fixed;
+            top: 200px;
+            left: 20%;
+        }
+    </style>
+</head>
+<body>
+<div id="demo">
+    <img title="asdfasdf" class="pic-display-small" src="http://image.fxyilan.com/yilanpic/2019/10/17/08F92E40513F5DB60B3ABF5C1175DF79.png"/>
+
+    <input id="pics-input" type="file" multiple placeholder="多张图片">
+    <button @click="displayPics">显示图片</button>
+</div>
+</body>
+</html>
+
+<script>
+    var demo = new Vue({
+        el: '#demo',
+        data: {
+            picFiles: []
+        },
+        methods: {
+            displayPics: function () {
+                let pics = document.getElementById('pics-input').files;
+                console.log(pics);
+                for (let i = 0; i < pics.length; i++) {
+                    this.picFiles.push(pics[i]);
+                }
+
+                for (var i = 0; i < pics.length; i++) {
+                    var reader = new FileReader();
+                    reader.readAsDataURL(pics[i]);
+                    reader.onload = function () {
+                        imgSrc = this.result;
+                        let htmlImageElement = document.createElement('img');
+                        htmlImageElement.src = imgSrc;
+                        htmlImageElement.style.cssText = 'width: 80px; height: 60px;';
+                        document.getElementById('demo').appendChild(htmlImageElement)
+                    };
+                }
+            }
+        }
+    })
+</script>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>鼠标点击效果</title>
+        <script src="../js/jquery-3.4.1.js"></script>
+        <script src="../js/vue.js"></script>
+        <link rel="stylesheet" href="../css/animate.css" />
+        <style type="text/css">
+            body {
+                width: 1920px;
+                height: 1080px;
+            }
+        </style>
+    </head>
+    <body>
+
+    </body>
+</html>
+
+<script type="text/javascript">
+    $(function() {
+        $("body").click(function(e) {
+            var x = e.clientX;
+            var y = e.clientY;
+            var a = new Array("富强", "和谐", "文明", "自由", "平等", "公正", "爱国", "敬业", "诚信", "友善");
+            var span = $('<span class="animated bounceOutUp">' + a[parseInt(Math.random() * 10)] + '</span>')
+            span.css({
+                "z-index": 99,
+                "cursor":"pointer",
+                "top": y - 20,
+                "left": x,
+                "position": "absolute",
+                "font-family":"kaiti",
+                "font-weight": "bold",
+                "color": "rgb("+parseInt(Math.random()*256)+","+parseInt(Math.random()*256)+","+parseInt(Math.random()*256)+")"
+            })
+            $('body').append(span);
+            setTimeout(function(){
+                span.remove()
+            },1000)
+        })
+    })
+</script>

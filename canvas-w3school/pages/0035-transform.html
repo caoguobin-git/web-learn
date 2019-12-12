@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>transform</title>
+	</head>
+	<body>
+        <canvas id="canvas" width="800" height="800"></canvas>
+	</body>
+</html>
+
+<script type="text/javascript">
+    var ctx;
+    window.onload=function(){
+        ctx=document.getElementById('canvas').getContext('2d');
+        setTransform();
+    }
+    function setTransform(){
+        ctx.translate(400,400)
+        ctx.rotate(Math.PI*0.3)
+        ctx.fillRect(0,0,150,100);
+        ctx.translate(1,10);
+        ctx.fillStyle='blue';
+        ctx.transform(1,1,0.9,1,0,0);
+        ctx.fillRect(0,100,150,150);
+    }
+</script>

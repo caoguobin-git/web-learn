@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>strokeText</title>
+	</head>
+	<body>
+        <canvas id="canvas" width="800" height="800"></canvas>
+	</body>
+</html>
+
+<script type="text/javascript">
+    var ctx;
+    window.onload=function(){
+        ctx=document.getElementById('canvas').getContext('2d');
+        setStrokeText();
+    }
+    
+    function setStrokeText(){
+        ctx.font='30px kaiti';
+        ctx.strokeText('Hello World!',10,50);
+        
+        var linear=ctx.createLinearGradient(0,0,200,0);
+        linear.addColorStop(0.1,'black');
+        linear.addColorStop(0.5,'red');
+        linear.addColorStop(0.8,'blue');
+        ctx.strokeStyle=linear;
+        ctx.strokeText('中华人民共和国',10,100);
+    }
+</script>

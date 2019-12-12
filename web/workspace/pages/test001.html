@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>页面加载测试</title>
+    <script type="text/javascript" src="../js/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <script type="text/javascript" src="../bootstrap/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.css">
+</head>
+<body>
+<div id="demo">
+
+    <div><p class='wutong-paragraph'>a) 空载电流和空载损耗可按下式进行计算：</p>
+        <img class='wutong-pic'
+             src='https://doc.tjrckj.net/pics/2019/11/04/B0A1CDDA165AC29D263BA720D049D49E.png'></img>
+        <img
+                class='wutong-pic'
+                src='https://doc.tjrckj.net/pics/2019/11/04/840459DEE040D77C6D890CBE2DC78E3B.png'></img>
+        <p class='wutong-paragraph'>b) 试验频率影响及校正</p>
+        <p class='wutong-paragraph'>当试验频率f与额定频率fr有差异、且偏差不大于5%时，施加电压应用Uf代替Ur，按式（3）折算：</p>
+        <img class='wutong-pic'
+             src='https://doc.tjrckj.net/pics/2019/11/04/6E135774179B2CE5D8EE62944EB4B151.png'></img>
+        <img
+                class='wutong-pic'
+                src='https://doc.tjrckj.net/pics/2019/11/04/CA5AB9FAB950052E95DBD6DD5F402BEC.png'></img>
+        <p class='wutong-paragraph'>c) 试验电压波形影响及校正</p>
+        <p class='wutong-paragraph'>若U和U’之差在3%以内，则试验电压波形满足要求。测得的空载损耗按式（5）进行校正：</p>
+        <img class='wutong-pic'
+             src='https://doc.tjrckj.net/pics/2019/11/04/733847D5C7C4DB52EE86A8411AB0C7E3.png'></img>
+        <p class='wutong-paragraph'>d) 计算得到空载电流和空载损耗，将测量值与规定值进行比较，判断是否合格。</p>
+    </div>
+</div>
+
+</body>
+</html>
+<script>
+    var demo = new Vue({
+        el: '#demo',
+        data: {
+            message: 'Hello World'
+        },
+        methods: {
+            loadPage: function () {
+                $('#main-content').load('test002.html', function () {
+
+                })
+            }
+        }
+    })
+</script>

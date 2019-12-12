@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>JS事件</title>
+	</head>
+	<body>
+        <!-- onClick 事件 -->
+        <button onclick="document.getElementById('demo').innerHTML='当前时间是:'+new Date()">时间是？</button>
+        <p id="demo"></p>
+        <button onclick="this.innerHTML=new Date()">获取时间</button>
+	</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script src="../js/vue.js"></script>
+        <style type="text/css">
+            canvas {
+                border: 1px solid black;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="demo">
+            <canvas id="canvas" width="800" height="800"></canvas>
+        </div>
+    </body>
+</html>
+<script type="text/javascript">
+    var RAF;
+    var canvas;
+    var ctx;
+
+
+    var demo = new Vue({
+        el: '#demo',
+        data: {
+            circles: []
+        },
+        methods: {
+            drawFrames: function() {
+
+            }
+        },
+        mounted: function() {
+            RAF = window.requestAnimationFrame;
+            canvas = document.getElementById('canvas');
+            ctx = canvas.getContext('2d');
+            console.log(ctx)
+            canvas.addEventListener('click', function() {
+                console.log('hello')
+            })
+
+            canvas.addEventListener('mousemove', function(e) {
+                console.log(e)
+            })
+
+        }
+    })
+    class Circle {
+        constructor(x, y, r, speed, color) {
+            this.x = x;
+            this.y = y;
+            this.r = r;
+            this.sx = Math.random() * 1 * speed;
+            this.sy = Math.random() * 1 * speed;
+            this.color = color;
+        }
+
+        move() {
+            this.x += this.sx;
+            if (this.x > 800 || this.x < 0) {
+                this.sx = -this.sx * 1.1;
+            }
+
+            this.y += this.sy;
+            if (this.y > 800 || this.y < 0) {
+                this.sy = -this.sy * 1.1;
+            }
+        }
+
+        render(timestamp) {
+            console.log(timestamp)
+            //清除原图
+            ctx.fillStyle = 'white';
+            ctx.fillRect(this.x - this.r - 2, this.y - this.r - 2, this.r * 2 + 5, this.r * 2 + 5);
+
+            this.move();
+            if(parseInt(timestamp)%1000==0){
+                ctx.strokeStyle = getRandomColor();
+            }
+            ctx.beginPath();
+            ctx.moveTo(this.x + this.r, this.y);
+            ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+            ctx.stroke();
+        }
+    }
+    var circles = [];
+    circles.push(new Circle(Math.random() * 800, Math.random() * 800, Math.random() * 30, 3, 'silver'));
+    circles.push(new Circle(Math.random() * 800, Math.random() * 800, Math.random() * 30, 3, 'silver'));
+    circles.push(new Circle(Math.random() * 800, Math.random() * 800, Math.random() * 30, 3, 'silver'));
+
+    function drawPic(timestamp) {
+        for (var i = 0; i < circles.length; i++) {
+            circles[i].render(timestamp);
+        }
+        RAF((timestamp)=>drawPic(timestamp));
+    }
+    
+    drawPic();
+    
+    
+    function getRandomColor(){
+        let result ='#';
+        for(let i=0;i<6;i++){
+            let a=parseInt(Math.random()*16).toString(16);
+            result+=a;
+        }
+        return result;
+    }
+</script>

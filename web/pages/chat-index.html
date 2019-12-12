@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>chat index</title>
+    <script src="../js/vue.js"></script>
+    <script src="../js/jquery-3.4.1.js"></script>
+    <script src="../bootstrap/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.css">
+    <style>
+        div{
+            border:1px solid black;
+        }
+        #main-container{
+            height: 800px;
+        }
+        #user-head-container,#message-container{
+            height: 800px;
+        }
+        #message-container-message-box{
+            height: 65%;
+        }
+        #message-container-message-send{
+            height: 35%;
+            text-align: center;
+        }
+        #message-to-send{
+            height: 85%;
+            width: 100%;
+            resize: none;
+            outline: none;
+            padding: 10px 15px;
+        }
+        #message-send-btn-container{
+            text-align: right;
+            border: none;
+       }
+        #message-send-btn{
+            margin-right: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container" id="chat">
+   <div class="row" id="main-container">
+       <div class="col-lg-3" id="user-head-container">
+
+       </div>
+       <div class="col-lg-9" id="message-container">
+           <div class="row" id="message-container-message-box">
+
+           </div>
+           <div class="row" id="message-container-message-send">
+                <textarea id="message-to-send"></textarea>
+               <div class="col-lg-12" id="message-send-btn-container">
+                   <div class="row"  style="border: none"><button id="message-send-btn" class="btn btn-sm btn-info">发送</button></div>
+               </div>
+           </div>
+       </div>
+   </div>
+</div>
+</body>
+</html>
+<script>
+
+</script>

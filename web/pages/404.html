@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NOT FOUND</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://code.jquery.com/jquery-latest.js"></script>
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        body{
+            background: gray;
+            text-align: center;
+            position: relative;
+        }
+        #container{
+            background: yellow;
+            opacity: 0.7;
+            font-size: 100px;
+            display: inline-block;
+            position: absolute;
+            padding: 10px 40px;
+            border-radius: 20px;
+            box-shadow: 0px 0px 40px black;
+            width: 60%;
+            left: 20%;
+            top: 40%;
+        }
+    </style>
+</head>
+<body>
+<div id="container">抱歉，页面没找到啊</div>
+<button onclick="jiacu()">加粗</button>
+<button onclick="changeColor()">变色</button>
+
+</body>
+</html>
+<script>
+    window.onload=function () {
+        document.getElementById('container').contentEditable=true
+    }
+
+    function jiacu() {
+        document.execCommand('bold', true, '')
+    }
+
+    function changeColor() {
+        document.execCommand('insertOrderedList', true, '')
+    }
+</script>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/jquery-3.4.1.js"></script>
+    <style>
+        .test {
+            width: 100px;
+            height: 100px;
+            background-image: url("https://gitee.com/dbnuo/Cnblogs-Theme-SimpleMemory/raw/master/img/t_o_vertical.gif");
+            background-repeat: repeat-y;
+            background-position-x: -29px;
+            display: inline-block;
+            margin: 20px;
+            border-radius: 10px;
+        }
+        .test:hover{
+            /*transform: rotate(360000deg);*/
+        }
+        .xuanzhuan{
+            transition: all 3s linear;
+            transform: rotate(36000deg);
+        }
+    </style>
+</head>
+<body>
+<div class="test"></div>
+<div class="test"></div>
+<div class="test"></div>
+<div class="test"></div>
+<div class="test"></div>
+</body>
+</html>
+<script>
+    $(function () {
+        $('.test').hover(function (e) {
+            $(e.currentTarget).toggleClass('xuanzhuan')
+        })
+    })
+</script>

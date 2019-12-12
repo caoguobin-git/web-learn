@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>fillText</title>
+    </head>
+    <body>
+        <canvas id="canvas" width="800" height="800"></canvas>
+    </body>
+</html>
+
+<script type="text/javascript">
+    var ctx;
+    window.onload = function() {
+        ctx = document.getElementById('canvas').getContext('2d');
+        setFillText();
+    }
+
+    function setFillText() {
+        ctx.font = '20px Georgia';
+        ctx.textAlign='left';
+        ctx.fillText('Hello World!', 10, 50);
+        
+        var linear=ctx.createLinearGradient(0,0,200,0);
+        linear.addColorStop(0,'black');
+        linear.addColorStop(0.5,'red');
+        linear.addColorStop(1,'yellow');
+        ctx.fillStyle=linear;
+        ctx.fillText('中华人民共和国',10,90);
+    }
+</script>

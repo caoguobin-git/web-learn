@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>饼状图</title>
+        <script src="../js/vue.js"></script>
+	</head>
+	<body>
+        <div id="demo">
+            <canvas id="canvas" width="400" height="200"></canvas>
+            <input type="range" min="0" max="100" width="20px" v-model="persent" />
+        </div>
+	</body>
+</html>
+
+<script type="text/javascript">
+    var demo = new Vue({
+        el:'#demo',
+        data:{
+            ctx:{},
+            persent:20,
+        },
+        mounted:function(){
+            this.ctx=document.getElementById('canvas').getContext('2d');
+            this.drawPersent()
+        },
+        watch:{
+          persent:function(val){
+             
+              console.log(val);
+              this.drawPersent();
+          }  
+        },
+        methods:{
+            drawPersent:function(){
+                
+                //绘制背景
+                this.ctx.beginPath();
+                this.ctx.fillStyle='red';
+                this.ctx.moveTo(300,100);
+                this.ctx.arc(200,100,99.5,0,Math.PI*2);
+                this.ctx.fill();
+
+                //绘制饼
+                this.ctx.beginPath();
+                this.ctx.fillStyle='greenYellow';
+                this.ctx.moveTo(300,100);
+                this.ctx.arc(200,100,100,0,Math.PI*2*this.persent/100);
+                this.ctx.lineTo(200,100);
+                this.ctx.fill();
+            }
+        }
+    })
+</script>

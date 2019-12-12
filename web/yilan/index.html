@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        跟单系统</title>
+    <link rel="stylesheet"
+          href="../css/CSSReset.css">
+    <link rel="stylesheet"
+          href="../css/animate.css">
+    <link rel="stylesheet"
+          href="../css/trade.css">
+    <link rel="stylesheet"
+          href="../bootstrap/css/bootstrap.css">
+    <script type="text/javascript"
+            src="../js/vue.js"></script>
+    <script type="text/javascript"
+            src="../js/jquery-3.4.1.js"></script>
+    <script type="text/javascript"
+            src="../bootstrap/js/bootstrap.js"></script>
+</head>
+<body>
+<div class="container"
+     id="trade">
+    <div class="row"
+         id="index-container"
+         :style="{height:containerHeight}">
+        <div style="height: 100%" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="row" id="trader-container">
+                <div class="col-lg-10 col-lg-offset-1 col-md-10 col-sm-10 col-xs-10 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
+                    <div class="row"><p id="trade-title">{{traderTitle}}</p></div>
+                    <div class="row" v-if="traderLogin">
+                    </div>
+                    <div class="row" v-else>
+                        <div class="input-group">
+                            <span class="input-group-addon">账号:</span>
+                            <input v-model="traderAccount" type="text" class="form-control" placeholder="输入交易员账号">
+                            <span  class="input-group-addon">密码:</span>
+                            <input v-model="traderPassword" type="text" class="form-control" placeholder="输入交易员密码">
+                            <span  class="input-group-addon">类型:</span>
+                            <select v-model="traderAccountType" class="form-control">
+                                <option value="Demo">虚拟</option>
+                                <option value="Real">真实</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-group">
+                            <span class="input-group-addon">交易账号</span>
+                            <input type="text" class="form-control" disabled="disabled" :placeholder="currentTrader">
+                            <span @click="traderLoginOrLogout()" id="trader-btn" class="btn-danger input-group-addon">{{traderButtonMsg}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="follower-container">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="row"><p id="follower-title">{{followerTitle}}</p></div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th class="table-title">账号</th>
+                                <th class="table-title">姓名</th>
+                                <th class="table-title">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr v-for="item in followerAccounts">
+                                <td class="follower-account">{{item.account}}</td>
+                                <td class="follower-name">{{item.name}}</td>
+                                <td class="follower-btn">
+                                    <button @click="followerLogout(item.account)" class="btn btn-sm btn-danger">移除</button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script type="text/javascript"
+        src="../js/trade.js"></script>
+

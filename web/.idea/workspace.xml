@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="57a94e3a-38bc-4ce9-ae72-e4f8c9e2044c" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageViewManager">
+    <option name="myElementSize" value="103" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+        <option value="Vue Single File Component" />
+        <option value="HTTP Request" />
+        <option value="package.json" />
+        <option value="CSS File" />
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1RXXdiaNzOCVEOqwfZsFOJw7bnN" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="E:/web" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="Errors" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\duochuang\WebstormProjects\web\wallhell\img\system" />
+      <recent name="C:\Users\duochuang\WebstormProjects\web\wallhell\img\background" />
+      <recent name="C:\Users\duochuang\WebstormProjects\web\pages" />
+      <recent name="C:\Users\duochuang\WebstormProjects\web\novel\网中人\css" />
+      <recent name="C:\Users\duochuang\WebstormProjects\web\novel\网中人\pages" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\duochuang\WebstormProjects\web\wallhell\img\pic" />
+      <recent name="C:\Users\duochuang\WebstormProjects\web\wallhell\img" />
+      <recent name="C:\Users\duochuang\WebstormProjects\web\wallhell" />
+      <recent name="C:\Users\duochuang\WebstormProjects\web\wallhell\img\system\logo" />
+      <recent name="C:\Users\duochuang\WebstormProjects\web\wallhell\js" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JavaScript Debug.index.html">
+    <configuration name="book1_1.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/web/pages/book1_1.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="canvas001.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/web/pages/canvas001.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="design_pattern.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/web/design_pattern/design_pattern.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/web/yilan/index.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="starter.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/web/workspace/pages/starter.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.index.html" />
+        <item itemvalue="JavaScript Debug.design_pattern.html" />
+        <item itemvalue="JavaScript Debug.starter.html" />
+        <item itemvalue="JavaScript Debug.canvas001.html" />
+        <item itemvalue="JavaScript Debug.book1_1.html" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="57a94e3a-38bc-4ce9-ae72-e4f8c9e2044c" name="Default Changelist" comment="" />
+      <created>1569814503689</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1569814503689</updated>
+      <workItem from="1569814504938" duration="3933000" />
+      <workItem from="1570498993057" duration="780000" />
+      <workItem from="1570582669742" duration="1225000" />
+      <workItem from="1570669537575" duration="10381000" />
+      <workItem from="1570755571518" duration="12758000" />
+      <workItem from="1570842005659" duration="10368000" />
+      <workItem from="1571021962092" duration="4304000" />
+      <workItem from="1571273392487" duration="11698000" />
+      <workItem from="1571360114508" duration="17835000" />
+      <workItem from="1571446917577" duration="599000" />
+      <workItem from="1571534520861" duration="2820000" />
+      <workItem from="1571706215134" duration="603000" />
+      <workItem from="1571723663742" duration="1129000" />
+      <workItem from="1571792847174" duration="11893000" />
+      <workItem from="1571878349331" duration="2225000" />
+      <workItem from="1572137879706" duration="3514000" />
+      <workItem from="1572397178534" duration="1396000" />
+      <workItem from="1572483075996" duration="597000" />
+      <workItem from="1572570038740" duration="11935000" />
+      <workItem from="1572829720980" duration="29000" />
+      <workItem from="1572829776223" duration="6498000" />
+      <workItem from="1572915404858" duration="603000" />
+      <workItem from="1573001679705" duration="8940000" />
+      <workItem from="1573087996907" duration="4938000" />
+      <workItem from="1573175367331" duration="9150000" />
+      <workItem from="1573522200319" duration="1726000" />
+      <workItem from="1573706271761" duration="5730000" />
+      <workItem from="1573781553122" duration="20319000" />
+      <workItem from="1574053240867" duration="1291000" />
+      <workItem from="1574125480099" duration="593000" />
+      <workItem from="1574298994983" duration="13739000" />
+      <workItem from="1574388096796" duration="2433000" />
+      <workItem from="1574832935343" duration="3333000" />
+      <workItem from="1574912120490" duration="14909000" />
+      <workItem from="1575016042142" duration="2656000" />
+      <workItem from="1575248527783" duration="594000" />
+      <workItem from="1575337130566" duration="78000" />
+      <workItem from="1575337256306" duration="652000" />
+      <workItem from="1575434400985" duration="601000" />
+      <workItem from="1575507723501" duration="1918000" />
+      <workItem from="1575624738762" duration="1901000" />
+      <workItem from="1576026198773" duration="16097000" />
+      <workItem from="1576113528389" duration="283000" />
+      <workItem from="1576133032312" duration="8000" />
+      <workItem from="1576133150630" duration="506000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="739" y="266" key="FileChooserDialogImpl" timestamp="1576113628749">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="739" y="266" key="FileChooserDialogImpl/0.0.1920.1050@0.0.1920.1050" timestamp="1576113628749" />
+    <state x="623" y="227" width="672" height="678" key="search.everywhere.popup" timestamp="1576133283843">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="623" y="227" width="672" height="678" key="search.everywhere.popup/0.0.1920.1050@0.0.1920.1050" timestamp="1576133283843" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/web$index_html.dat" NAME="index.html Coverage Results" MODIFIED="1569816886062" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="WipCoverageRunner" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+  </component>
+</project>

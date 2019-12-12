@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>drawPolygon</title>
+        <script src="../js/vue.js"></script>
+    </head>
+    <body>
+        <div id="demo">
+            <canvas id="canvas" width="800" height="800"></canvas>
+           <select v-model="sideNum">
+               <option v-for="i in 20">{{i}}</option>
+           </select>
+        </div>
+    </body>
+</html>
+
+<script type="text/javascript">
+    var demo = new Vue({
+        el: '#demo',
+        data: {
+            ctx: {},
+            sideNum: 4,
+            r: 100,
+            x: 400,
+            y: 400
+        },
+        methods: {
+            drawPolygon: function(x, y) {
+                for (var i in this.points) {
+                    var point = this.points[i];
+                    if (i == 0) {
+                        this.ctx.moveTo(point.x, point.y);
+                    } else {
+                        this.ctx.lineTo(point.x, point.y);
+                    }
+                }
+                this.ctx.closePath();
+                this.ctx.stroke();
+            }
+        },
+        watch:{
+            sideNum:function(){
+                this.drawPolygon();
+            }
+        },
+        computed: {
+            points: function() {
+                var result = [];
+                result.push({
+                    x: this.x,
+                    y: this.y - this.r
+                });
+                for (var i = 2 / this.sideNum; i < 2; i += 2 / this.sideNum){
+                    result.push({
+                        x:this.x+this.r*Math.sin(Math.PI*i),
+                        y:this.y-this.r*Math.cos(Math.PI*i)
+                    })
+                }
+                return result;
+            }
+        },
+        mounted: function() {
+            this.ctx = document.getElementById('canvas').getContext('2d');
+            this.drawPolygon(400, 400);
+        }
+    })
+</script>

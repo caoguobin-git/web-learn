@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>rotate</title>
+	</head>
+	<body>
+        <canvas id="canvas" width="800" height="800"></canvas>
+	</body>
+</html>
+
+<script type="text/javascript">
+    var ctx;
+    var a;
+    window.onload=function(){
+        ctx=document.getElementById('canvas').getContext('2d');
+        setRotate();
+    }
+    function setRotate(){
+        ctx.save();
+        ctx.translate(400,400)
+        ctx.rotate(Math.PI*0.1);
+        ctx.fillRect(-80,-50,160,100);
+        
+        ctx.restore();
+        ctx.save();
+        ctx.translate(200,200);
+        ctx.rotate(Math.PI*0.8)
+        ctx.fillRect(-100,-50,200,100)
+        
+        ctx.restore()
+        ctx.fillRect(0,0,100,50)
+    }
+</script>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>textAlign</title>
+    </head>
+    <body>
+        <canvas id="canvas" width="800" height="800"></canvas>
+    </body>
+</html>
+
+<script type="text/javascript">
+    var ctx;
+    window.onload = function() {
+        ctx = document.getElementById('canvas').getContext('2d');
+        setTextAlign();
+    }
+
+    function setTextAlign() {
+        ctx.strokeStyle = 'blue';
+        ctx.beginPath();
+        ctx.moveTo(400, 0);
+        ctx.lineTo(400, 800);
+        ctx.stroke();
+        
+        ctx.font='30px arial';
+        
+        ctx.textAlign = 'start';
+        ctx.fillText('textAlign=start',400,50)
+        
+        ctx.textAlign='end';
+        ctx.fillText('textAlign=end',400,100)
+        
+        ctx.textAlign='left';
+        ctx.fillText('textAlign=left',400,150)
+        
+        ctx.textAlign='right';
+        ctx.fillText('textAlign=left',400,200)
+        
+        ctx.textAlign='center';
+        ctx.fillText('textAlign=center',400,250)
+    }
+</script>

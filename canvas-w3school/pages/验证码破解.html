@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>破解验证码</title>
+        <script src="../js/vue.js"></script>
+        <style type="text/css">
+            #canvas {
+                border: 1px solid silver;
+                background-color: silver;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="demo">
+            <canvas id="canvas" width="800" height="800"></canvas>
+            <p>结果：{{result}}</p>
+            <img id="toPojie" src="../img/toPojie.png" />
+        </div>
+    </body>
+</html>
+
+<script type="text/javascript">
+    var canvas;
+    var ctx;
+
+    var demo = new Vue({
+        el: '#demo',
+        data: {
+            result: 'hello'
+        },
+        mounted: function() {
+            canvas = document.getElementById('canvas');
+            ctx = canvas.getContext('2d');
+            var img = document.getElementById('toPojie');
+            var width = img.width;
+            var height = img.height;
+            ctx.drawImage(img, 0, 0);
+            var imgData = ctx.getImageData(0, 0, width, height);
+            console.log(imgData.data);
+            for (let i = 0; i < imgData.data.length; i += 4) {
+                if (imgData.data[i]>125) {
+                    imgData.data[i] = 255;
+                    imgData.data[i + 1] = 255;
+                    imgData.data[i + 2] = 255;
+                    imgData.data[i + 3] = 0;
+                }
+            }
+            console.log(imgData.data);
+            ctx.putImageData(imgData, 200, 200)
+        }
+    })
+</script>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>measureText</title>
+	</head>
+	<body>
+        <canvas id="canvas" width="800" height="800"></canvas>
+	</body>
+</html>
+
+<script type="text/javascript">
+    var ctx;
+    
+    window.onload=function(){
+        ctx=document.getElementById('canvas').getContext('2d');
+        setMeasureText();
+    }
+    
+    function setMeasureText(){
+        ctx.font='20px kaiti';
+        var txt='Hello World!';
+        console.log(ctx.measureText(txt).width);
+        
+        ctx.fillText('width:'+ctx.measureText(txt).width+'px',10,50);
+        ctx.fillText(txt,10,100)
+    }
+</script>

@@ -1,0 +1,32 @@
+<div class="container-fluid" id="chat-container">
+    <div class="col-lg-6 col-lg-offset-3 col-md-12">
+        <div class="row" id="chat-page-title-container">
+            <span @click="backToUserPage()"
+                  style="float: left;cursor:pointer;margin-left: 10px"><</span>
+            {{targetUser.username}}
+        </div>
+        <div class="row" id="chat-page-message-container">
+            <div class="col-lg-12">
+                <div class="row" v-for="item in displayMessages"
+                     :key="item.time">
+                    <div class="message-send-received" :class="messageType(item.from)">
+                        <img class="message-user-icon" v-show="!showIcon(item)"
+                             :src="getUserIcon(item)">
+                        <div class="message-body" :style="{maxWidth:getMaxWidth}">{{item.content}}</div>
+                        <img class="message-user-icon" v-show="showIcon(item)"
+                             :src="getUserIcon(item)">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="chat-page-message-send-container">
+            <div class="input-group" style="height: 100%">
+                <textarea style="height: 100%;resize: none" type="text"
+                       placeholder=""
+                          class="form-control"></textarea>
+                <span class="btn btn-sm btn-info input-group-addon">发送</span>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../js/chat-page.js"></script>

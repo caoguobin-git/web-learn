@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>JS数组方法</title>
+        <style type="text/css">
+            p{
+                line-height: 30px;
+                font-size: 16px;
+                margin: 0;
+                vertical-align: text-top;
+            }
+        </style>
+    </head>
+    <body>
+        <p id="source"></p>
+        <p id="toString"></p>
+        <p id="join"></p>
+        <p id="pop"></p>
+        <p id="push"></p>
+        <p id="shift"></p>
+        <p id="unshift"></p>
+        <p id="change"></p>
+        <p id="length"></p>
+        <p id="delete"></p>
+        <p id="splice"></p>
+        <p id="concat"></p>
+        <p id="slice"></p>
+    </body>
+</html>
+<script type="text/javascript">
+    var fruits = ['Banana', 'Apple', 'Orange', 'Mango'];
+    document.getElementById('source').innerHTML = 'source:' + fruits;
+
+    // toString方法
+    document.getElementById('toString').innerHTML = 'toString:' + fruits;
+
+    //join方法
+    document.getElementById('join').innerHTML = 'join:' + fruits.join('*');
+
+    //pop方法
+    fruits.pop();
+    document.getElementById('pop').innerHTML = 'pop:' + fruits;
+
+    //push()
+    fruits.push('kiwi')
+    document.getElementById('push').innerHTML = 'push:' + fruits;
+
+    //shift()
+    fruits.shift();
+    document.getElementById('shift').innerHTML = 'shift: ' + fruits;
+
+    //unshift()
+    fruits.unshift('Lemon');
+    document.getElementById('unshift').innerHTML = 'unshift: ' + fruits;
+    
+    //=
+    fruits[1]='Banana';
+    document.getElementById('change').innerHTML = 'change: ' + fruits;
+    
+    //length
+    fruits[fruits.length]='Coco';
+    document.getElementById('length').innerHTML = 'length: ' + fruits;
+    
+    //delete
+    delete fruits[0];
+    document.getElementById('delete').innerHTML = 'delete: ' + fruits;
+    
+    fruits = ['Banana', 'Apple', 'Orange', 'Mango'];
+    
+    //splice()
+    fruits.splice(0,2,'Lemon','Kiwi');
+    fruits.splice(0,1);
+    document.getElementById('splice').innerHTML = 'splice: ' + fruits;
+    
+    
+    var myGirls = ["Cecilie", "Lone"];
+    var myBoys = ["Emil", "Tobias", "Linus"];
+    //concat
+    var myChildren = myGirls.concat(myBoys);  
+    document.getElementById('concat').innerHTML = 'concat: ' + myChildren;
+    
+    //slice
+    
+    document.getElementById('slice').innerHTML = 'slice: ' + myChildren.slice(2,4);;
+    
+</script>

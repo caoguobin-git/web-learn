@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>自由落体</title>
+        <script src="../js/vue.js"></script>
+        <style type="text/css">
+            #demo {
+                position: relative;
+                width: 1600px;
+                height: 800px;
+                border: 1px solid black;
+            }
+
+            #ball {
+                position: absolute;
+                width: 30px;
+                height: 30px;
+                background: radial-gradient(at 10px 8px, white 0%, black 20%);
+                border-radius: 50%;
+                transition: all 1s;
+            }
+
+            #ball>div:nth-child(2) {
+                position: absolute;
+                width: 25px;
+                height: 8px;
+                z-index: -1;
+                top: 26px;
+                left: 2.5px;
+                border-radius: 50%/50%;
+                background-color: rgba(0, 0, 0, 1);
+                filter: blur(2px);
+            }
+            
+            #ball>div:nth-child(1){
+                position: absolute;
+                top: 12px;
+                left: 12px;
+                color: black;
+                width: 12px;
+                height: 12px;
+                text-align: center;
+                line-height: 12px;
+                font-size: 12px;
+                border-radius: 50%;
+                background-color: white;
+                transform: rotateY(30deg) rotateX(-10deg);
+                transition:all 3s;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="demo">
+            <div id="ball" :style="{left:ballLeft+'px',top:ballTop+'px'}">
+                <div>8</div>
+                <div></div>
+            </div>
+        </div>
+    </body>
+</html>
+
+<script type="text/javascript">
+    var ball = new Vue({
+        el: '#demo',
+        data: {
+            ballLeft: 1,
+            ballTop: 2,
+            speedX: 3,
+            speedY:3,
+            directionX:1,
+            directionY:1,
+        },
+        mounted: function() {
+            setInterval(function() {
+                ball.ballLeft+=ball.speedX*ball.directionX;
+                if(ball.ballLeft>200){
+                    ball.directionX=-1;
+                }
+                if(ball.ballLeft<5){
+                    ball.directionX=1;
+                }
+                ball.ballTop+=ball.speedY*ball.directionY;
+                if(ball.ballTop>200){
+                    ball.directionY=-1;
+                }
+                if(ball.ballTop<0){
+                    ball.directionY=1;
+                }
+                console.log(ball.speedX)
+            }, 50)
+        }
+    })
+</script>

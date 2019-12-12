@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>百度搜索</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+</head>
+<body>
+<div id="demo">
+    <input v-model="keyword"><button @click="getSuggest()">搜索</button>
+    <ul>
+        <li v-for="item in words">{{item}}</li>
+    </ul>
+</div>
+</body>
+</html>
+<script>
+    var demo =new Vue({
+        el:'#demo',
+        data:{
+            keyword:'',
+            words:[]
+        },
+        watch:{
+          keyword: function (val) {
+              this.getSuggest();
+          }
+        },
+        methods:{
+            resultHandler:function(data){
+                console.log(data)
+                this.words.splice(0,this.words.length);
+                if (data.g!=null) {
+                    for (var i = 0; i < data.g.length; i++) {
+                        this.words.push(data.g[i].q);
+                    }
+                }
+            },
+            getSuggest:function () {
+                if (this.keyword==null||this.keyword==''){
+                    return;
+                }
+                var url='https://www.baidu.com/sugrec?prod=pc&wd='+this.keyword+'&cb=demo.resultHandler';
+                $.ajax({
+                    url:url,
+                    dataType:'jsonP',
+                    success:function (result) {
+                        console.log(result)
+                    }
+                })
+            }
+        }
+    })
+</script>

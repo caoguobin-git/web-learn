@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>轮播图</title>
+        <script src="../js/vue.js"></script>
+        <style type="text/css">
+            #demo {
+                position: relative;
+                width: 800px;
+                height: 800px;
+                background-color: silver;
+            }
+
+            .middle {
+                position: absolute;
+                left: 100px;
+                top: 20px;
+                width: 120px;
+                height: 200px;
+                background-color: red;
+                z-index: 3;
+                transition: all .51s;
+                border-radius: 10px;
+
+            }
+
+            .left {
+                position: absolute;
+                z-index: 2;
+                left: 10px;
+                top: 50px;
+                width: 100px;
+                height: 150px;
+                background-color: blue;
+                transition: all .51s;
+                border-radius: 10px;
+
+            }
+
+            .right {
+                position: absolute;
+                z-index: 1;
+                left: 210px;
+                top: 50px;
+                width: 100px;
+                height: 150px;
+                background-color: yellow;
+                transition: all .51s;
+                border-radius: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="demo">
+            <div :class="classObject1"></div>
+            <div :class="classObject2"></div>
+            <div :class="classObject3"></div>
+        </div>
+    </body>
+</html>
+
+<script type="text/javascript">
+    var demo = new Vue({
+        el: '#demo',
+        data: {
+            current: 2,
+
+        },
+        computed: {
+            classObject1: function(e) {
+                if (this.current == 1) {
+                    return 'left';
+                } else if (this.current == 2) {
+                    return 'middle';
+                } else if (this.current == 3) {
+                    return 'right';
+                }
+            },
+            
+            classObject2: function() {
+                if (this.current == 2) {
+                    return 'left';
+                } else if (this.current == 3) {
+                    return 'middle';
+                } else if (this.current == 1) {
+                    return 'right';
+                }
+            },
+            
+            classObject3: function() {
+                if (this.current == 3) {
+                    return 'left';
+                } else if (this.current == 1) {
+                    return 'middle';
+                } else if (this.current == 2) {
+                    return 'right';
+                }
+            }
+        },
+        mounted: function() {
+            setInterval(function() {
+                if (--demo.current < 1) {
+                    demo.current = 3;
+                }
+            }, 3000)
+        }
+    })
+</script>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>canvas001</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+<div id="demo">
+
+    <canvas id="canvas" width="800" height="400"></canvas>
+</div>
+
+</body>
+</html>
+<script>
+    var canvas;
+    var ctx;
+    var demo = new Vue({
+        el: '#demo',
+        data: {
+            x: 0,
+            y: 0,
+            xl: 4,
+            yl: 4
+        },
+        methods: {
+            drawRect: function () {
+                ctx.fillRect(this.x, this.y, this.xl, this.yl);
+                this.x = parseInt(Math.random() * 800);
+                this.y = parseInt(Math.random() * 400);
+                this.xl = Math.random() * 5;
+                this.yl = Math.random() * 5;
+                ctx.fillStyle='rgba('+Math.random()*255+','+Math.random()*255+','+Math.random()*255+','+(0.5+Math.random())+')';
+                ctx.shadowColor = "red";
+                ctx.shadowOffsetX = 20;
+                ctx.shadowOffsetY = 20;
+                ctx.shadowBlur = 0;
+                console.log(this.x + "  " + this.y)
+                requestAnimationFrame(this.drawRect)
+            }
+        },
+        watch: {},
+        mounted: function () {
+            canvas = document.getElementById('canvas');
+            ctx = canvas.getContext('2d');
+            this.drawRect()
+            console.log("hello")
+        }
+    })
+
+
+</script>

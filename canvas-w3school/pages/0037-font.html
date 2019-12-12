@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>font</title>
+	</head>
+	<body>
+        <canvas id="canvas" width="800" height="800"></canvas>
+	</body>
+</html>
+
+<script type="text/javascript">
+    var ctx;
+    window.onload=function(){
+        ctx=document.getElementById('canvas').getContext('2d');
+        setFont();
+    }
+    
+    function setFont(){
+
+        ctx.font='italic small-caps bolder 30px  caption';
+        ctx.fillText('用于标题的字体caption',0,360)
+        ctx.closePath()
+        ctx.restore()
+        ctx.font='normal small-caps bolder 30px  icon';
+        ctx.fillText('用于标记图标的字体icon',0,60)
+        
+        ctx.font='normal small-caps bolder 30px  menu';
+        ctx.fillText('用于标记菜单的字体menu',0,120)
+        
+        ctx.font='normal small-caps bolder 30px  message-box';
+        ctx.fillText('用于标记对话框的字体message-box',0,180)
+        
+        ctx.font='normal small-caps bolder 30px  small-caption';
+        ctx.fillText('用于标记小型控件的字体small-caption',0,240)
+        
+        ctx.font='normal small-caps bolder 30px  status-bar';
+        ctx.fillText('用于标记窗口状态栏的字体status-bar',0,300)
+        
+    }
+</script>

@@ -1,0 +1,40 @@
+
+#index-container {
+    border: 1px solid silver;
+    border-radius: 10px;
+    box-shadow: 20px 20px 20px #8a8a8a;
+    margin: 5%;
+}
+
+#trader-container {
+    /*border: 2px rebeccapurple solid;*/
+}
+
+#trade-title,#follower-title {
+    text-align: center;
+    margin: 0;
+    font-size: 18px;
+    font-family: kaiti;
+    font-weight: bolder;
+    padding: 5px;
+}
+
+#trader-btn{
+    cursor:pointer;
+}
+
+.table-title{
+    text-align: center;
+}
+table{
+    text-align: center;
+}
+.follower-account{
+    width: 50%;
+}
+.follower-name{
+    width: 50%;
+}
+.follower-btn{
+    width: 5%;
+}

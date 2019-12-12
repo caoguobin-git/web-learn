@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>shadowBlur</title>
+        <style type="text/css">
+            canvas{
+                border: 1px solid black;
+            }
+        </style>
+	</head>
+	<body>
+        <canvas id="canvas" width="800" height="800"></canvas>
+	</body>
+</html>
+
+<script type="text/javascript">
+    var canvas;
+    window.onload=function(){
+        canvas=document.getElementById('canvas').getContext('2d');
+        canvas.globalAlpha=0.8;
+        drawShadow();
+        console.log(canvas)
+    }
+    
+    function drawShadow(){
+        canvas.fillStyle='blue';
+        canvas.shadowColor='black';
+        canvas.shadowBlur=40;
+        canvas.shadowOffsetX=20;
+        canvas.shadowOffsetY=20;
+        canvas.fillRect(10,10,150,100);
+    }
+</script>

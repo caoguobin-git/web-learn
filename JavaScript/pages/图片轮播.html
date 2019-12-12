@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>图片轮播</title>
+        <script src="../js/vue.js"></script>
+        <style type="text/css">
+            #demo {
+                text-align: center;
+            }
+
+            #pic-container {
+                position: relative;
+                margin: 50px auto;
+                width: 200px;
+                height: 120px;
+                border: 2px solid black;
+                overflow: hidden;
+            }
+
+            .display-img {
+                position: absolute;
+                width: 200px;
+                border-radius: 5px;
+                outline: 3px solid black;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="demo">
+            <div id="pic-container">
+                <img class="display-img" @mouseenter="pauseMove()" @mouseleave="move()" v-for="(item,index) in pics" :style="{left:getLeft(index)+'px'}" :src="item">
+            </div>
+            <select v-model="speed">
+                <option v-for="i in 10">{{i}}</option>
+            </select>
+        </div>
+    </body>
+</html>
+<script type="text/javascript">
+    var demo = new Vue({
+        el: '#demo',
+
+        data: {
+            distance: [-200, 0, 200],
+            animateFrame:0,
+            speed:5,
+            pics: ['../img/pics/p1.jpg', '../img/pics/p2.jpg', '../img/pics/p3.jpg']
+        },
+        methods: {
+            getLeft: function(val) {
+                return this.distance[val];
+            },
+            move: function() {
+                for (var i = 0; i < this.distance.length; i++) {
+                    if (this.distance[i] == -200) {
+                        this.distance[i] = 400;
+                    } else {
+                        var a =this.distance[i];
+                        a-=this.speed;
+                        this.distance.splice(i, 1, a);
+                    }
+                }
+               this.animateFrame= requestAnimationFrame(this.move);
+            },
+            pauseMove:function(){
+                cancelAnimationFrame(this.animateFrame);
+            }
+
+        },
+        mounted: function() {
+            this.move()
+        }
+    })
+</script>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>新朋友</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://daneden.github.io/animate.css/animate.min.css">
+    <style>
+        #demo {
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        .control-pic {
+            border-radius: 20px;
+            width: 600px;
+            height: 600px;
+            margin-bottom: 50px;
+        }
+
+
+    </style>
+</head>
+<body>
+<div id="demo">
+    <img class="control-pic animated wobble slower infinite" :src="picSrc">
+    <audio id="currentPlay" @timeupdate="changeTime($event)" src="http://youyouban.qiaohu.com/xinpengyou.mp3"></audio>
+    <p>
+        <button :class="btnClass" class="btn" @click="playing=!playing">{{playing?"暂停":"播放"}}</button>
+        <button @click="reloadMusic()" class="btn btn-info">重播</button>
+    </p>
+</div>
+</body>
+</html>
+<script>
+    var demo = new Vue({
+        el: '#demo',
+        data: {
+            currentTime: '',
+            player: {},
+            picSrc:'../img/fox.png',
+            playing: false
+        },
+        computed: {
+            btnClass: function () {
+                return this.playing ? 'btn-success' : 'btn-danger'
+            }
+        },
+        methods: {
+            reloadMusic:function(){
+              this.player.currentTime=0;
+              this.playing=true;
+            },
+            changeTime: function (e) {
+                var currentTime = e.target.currentTime
+                console.log()
+                if (currentTime > parseFloat(e.target.duration - 1.5)) {
+                    e.target.currentTime = 0.5
+                }
+            }
+        },
+        watch: {
+            playing: function (val) {
+                if (val) {
+                    this.player.play()
+                } else {
+                    this.player.pause()
+                }
+            }
+        },
+        mounted: function () {
+            this.player = document.getElementById('currentPlay');
+        }
+    })
+
+</script>

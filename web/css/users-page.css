@@ -1,0 +1,54 @@
+#users-list{
+}
+
+#users-page-title-container{
+    text-align: center;
+    font-size: 22px;
+}
+
+.user-icon{
+    width: 50px;
+    height: 50px;
+    border-radius: 6px;
+    border: 1px solid silver;
+    display: inline-block;
+}
+
+.user-display{
+    transition: all 0.3s ;
+    border-radius: 5px;
+    margin: 1px -5px;
+    cursor:pointer;
+    padding: 2px 0px;
+}
+.user-display:hover{
+    background: rgba(230,230,230,1);
+}
+.user-name{
+    font-weight: bolder;
+    margin-left: 3px;
+
+}
+.user-message{
+    margin-top: 2px;
+    margin-left: 3px;
+    font-size: 12px;
+}
+#users-page-user-container{
+    overflow: scroll;
+    margin-top: 5px;
+}
+
+
+html {
+    /*隐藏滚动条，当IE下溢出，仍然可以滚动*/
+    -ms-overflow-style:none;
+    /*火狐下隐藏滚动条*/
+    overflow:-moz-scrollbars-none;
+}
+/*Chrome下隐藏滚动条，溢出可以透明滚动*/
+html::-webkit-scrollbar{width:0px}
+
+*::-webkit-scrollbar {
+    display: none;
+}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <canvas id="canvas" width="800" height="800"></canvas>
+    </body>
+</html>
+
+<script type="text/javascript">
+    var canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext('2d');
+
+    var currentColor = 1;
+    var color = 255;
+    var direction=1;
+
+    function drawBall(timestamp) {
+
+        let col = getColor();
+        console.log(col)
+        ctx.clearRect(0, 0, 800, 800);
+        var myStyle = ctx.createRadialGradient(300, 300, 0, 300, 300, 400);
+        myStyle.addColorStop(0, 'white');
+        myStyle.addColorStop(0.2, col);
+        myStyle.addColorStop(0.85, 'black');
+
+        ctx.fillStyle = myStyle;
+        ctx.beginPath();
+        ctx.arc(400, 400, 200, 0, Math.PI * 2);
+        ctx.fill();
+
+        requestAnimationFrame(drawBall)
+    }
+
+    requestAnimationFrame((timestamp) => drawBall(timestamp))
+
+    function getRandomColor() {
+        let a = 'rgba(';
+        for (let i = 0; i < 3; i++) {
+            a += Math.floor(Math.random() * 256);
+            a += ',';
+        }
+        a += '255)';
+        return a;
+    }
+
+    function getColor() {
+        var a = '#';
+        switch (currentColor) {
+            case 1:
+                return a + getNum() + '0000';
+            case 2:
+                return a + '00' + getNum() + '00';
+            case 3:
+                return a + '0000' + getNum();
+        }
+        return '#000'
+    }
+    
+    function getNum(){
+        color=color-direction*5;
+        console.log(color)
+        if(color==0||color==255){
+            direction*=-1;
+            currentColor++;
+            if(currentColor>2){
+                currentColor=1;
+            }
+        }
+        var result=color.toString(16)
+        if(result.length<2){
+            result='0'+result;
+        }
+        return result;
+    }
+</script>

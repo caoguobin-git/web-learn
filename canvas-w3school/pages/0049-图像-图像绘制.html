@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>图像-图像绘制</title>
+        <style type="text/css">
+            canvas{
+                border: 1px solid black;
+            }
+        </style>
+	</head>
+	<body>
+        <canvas id="canvas" width="800" height="800"></canvas>
+        <img src="../img/eg_tulip.jpg" id="demo"  style="display: none;"/>
+	</body>
+</html>
+
+<script type="text/javascript">
+    var ctx;
+    window.onload=function(){
+        ctx=document.getElementById('canvas').getContext('2d');
+        setDrawImage();
+    }
+    
+    function setDrawImage(){
+        var img=document.getElementById('demo');
+        console.log(img.height)
+        ctx.drawImage(img,0,100);
+    }
+</script>

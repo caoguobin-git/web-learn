@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+<div id="demo">
+    <input v-model="message[0]">
+    <p v-html="hello"></p>
+    <button @click="display()">adsf </button>
+</div>
+
+</body>
+</html>
+<script>
+    var demo = new Vue({
+        el: '#demo',
+        data: {
+            message: [],
+            hello:'<input v-model="message[1]">'
+        },
+        methods: {
+            display: function () {
+                console.log(this.message)
+            }
+        },
+        mounted:function () {
+
+        }
+    })
+</script>

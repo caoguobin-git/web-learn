@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>toolbar</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <style>
+        #tool-bar{
+            width: 100%;
+            height: 100%;
+            background: red;
+            position: fixed;
+            left: 0px;
+            top: 0px;
+            transition: all 2s;
+        }
+    </style>
+</head>
+<body>
+<div v-if="displayToolBar" class="container-fluid" id="tool-bar">
+    中华人民共和国万岁
+</div>
+</body>
+</html>
+<script>
+    var toolbar=new Vue({
+        el:'#tool-bar',
+        data:{
+            displayToolBar:false
+        },
+        mounted:function () {
+            window.onresize=function (e) {
+                console.log(document.getElementById('tool-bar').clientHeight)
+                console.log(document.getElementById('tool-bar').clientWidth)
+            }
+        }
+    })
+</script>

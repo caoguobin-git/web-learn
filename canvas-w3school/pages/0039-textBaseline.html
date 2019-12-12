@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>textBaseline</title>
+	</head>
+	<body>
+        <canvas id="canvas" width="800" height="800"></canvas>
+	</body>
+</html>
+
+<script type="text/javascript">
+    var ctx;
+    window.onload=function(){
+        ctx=document.getElementById('canvas').getContext('2d');
+        setTextBaseline();
+    }
+    
+    function setTextBaseline(){
+        ctx.beginPath();
+        ctx.strokeStyle='blue';
+        ctx.moveTo(0,200);
+        ctx.lineTo(800,200);
+        ctx.stroke();
+        
+        ctx.font='30px kaiti'
+        
+        ctx.textBaseline='top';
+        ctx.fillText('Top',0,200);
+        
+        ctx.textBaseline='bottom';
+        ctx.fillText('Bottom',60,200);
+        
+        ctx.textBaseline='middle';
+        ctx.fillText('Middle',170,200);
+        
+        ctx.textBaseline='alphabetic';
+        ctx.fillText('Alphabetic',275,200);
+        
+        ctx.textBaseline='hanging';
+        ctx.fillText('Hanging',430,200);
+        
+    }
+</script>

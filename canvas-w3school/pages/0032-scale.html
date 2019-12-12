@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>scale</title>
+	</head>
+	<body>
+        <canvas id="canvas" width="800" height="800"></canvas>
+	</body>
+</html>
+
+<script type="text/javascript">
+    var ctx;
+    window.onload=function(){
+        ctx=document.getElementById('canvas').getContext('2d');
+        setScale();
+    }
+    
+    function setScale(){
+        ctx.beginPath();
+        ctx.fillRect(0,0,50,50);
+        ctx.fillStyle='blue';
+        ctx.fillRect(25,16.333,50,50)
+    }
+</script>

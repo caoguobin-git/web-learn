@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>arc 圆/圆弧</title>
+	</head>
+	<body>
+        <canvas id="canvas" width="800" height="800"></canvas>
+	</body>
+</html>
+
+<script type="text/javascript">
+    var ctx;
+    window.onload=function(){
+        ctx=document.getElementById('canvas').getContext('2d');
+        setArc();
+    }
+    
+    function setArc(){
+        ctx.beginPath();
+        ctx.moveTo(40,20)
+        ctx.arc(40,40,20,0,Math.PI*1);
+        ctx.lineTo(80,30);
+        ctx.closePath();
+        ctx.stroke();
+    }
+</script>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>眩晕</title>
+        <style type="text/css">
+            img {
+                position: relative;
+                left: 400px;
+                top: 200px;
+                width: 200px;
+                height: 200px;
+                border-radius: 400px;
+                animation: myDemo 3s linear infinite;
+            }
+
+            @-webkit-keyframes myDemo {
+                0% {
+                    transform: rotate(0deg) scale(2);
+                }
+
+                50% {
+                    transform: rotate(1800deg) scale(2);
+                }
+                100% {
+                    transform: rotate(3600deg) scale(2);
+                }
+                
+            }
+        </style>
+    </head>
+    <body>
+        <img src="../img/yun.png" />
+    </body>
+</html>

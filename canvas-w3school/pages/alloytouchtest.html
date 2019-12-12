@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script src="../js/vue.js"></script>
+        <script src="../js/alloytouch.js"></script>
+        <style type="text/css">
+            
+            #demo{
+                position: relative;
+                width: 1000px;
+                height: 1000px;
+                border: 1px solid silver;
+            }
+            
+            #test{
+                position: absolute;
+                width: 100px;
+                height: 100px;
+                background-color: red;
+                border-radius: 50%;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="demo">
+            <div id="test"></div>
+        </div>
+    </body>
+</html>
+<script type="text/javascript">
+    var demo = new Vue({
+        el: '#demo',
+        data: {
+            alloy: {}
+        },
+        mounted: function() {
+            var target = document.getElementById('test');
+            console.log(target)
+            this.alloy = new AlloyTouch({
+                touch: "#demo", //反馈触摸的dom
+                vertical: true, //不必需，默认是true代表监听竖直方向touch
+                target: target, //运动的对象
+                property: "left", //被运动的属性
+                min: 100, //不必需,运动属性的最小值
+                max: 2000, //不必需,滚动属性的最大值
+                sensitivity: 1, //不必需,触摸区域的灵敏度，默认值为1，可以为负数
+                factor: 1, //不必需,表示触摸位移运动位移与被运动属性映射关系，默认值是1
+                moveFactor: 1, //不必需,表示touchmove位移与被运动属性映射关系，默认值是1
+                step: 45, //用于校正到step的整数倍
+                bindSelf: false,
+                maxSpeed: 2, //不必需，触摸反馈的最大速度限制 
+                initialValue: 0,
+                change: function(value) {},
+                touchStart: function(evt, value) {
+                    console.log(evt)
+                },
+                touchMove: function(evt, value) {},
+                touchEnd: function(evt, value) {},
+                tap: function(evt, value) {},
+                pressMove: function(evt, value) {
+                    console.log(evt)
+                },
+                animationEnd: function(value) {} //运动结束
+            })
+            
+            this.alloy.to(100)
+        }
+    })
+</script>

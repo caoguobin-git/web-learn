@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>rect</title>
+        <style type="text/css">
+            canvas{
+                border: 1px solid black;
+            }
+        </style>
+	</head>
+	<body>
+        <canvas id="canvas" width="800" height="800"></canvas>
+	</body>
+</html>
+
+<script type="text/javascript">
+    var canvas;
+    window.onload=function(){
+        canvas=document.getElementById('canvas').getContext('2d');
+        setRect();
+        createThreeRect();
+    }
+    function setRect(){
+        canvas.beginPath();
+        canvas.rect(10,10,150,100);
+        canvas.stroke();
+        
+        canvas.beginPath();
+        canvas.strokeStyle='red';
+        canvas.rect(20,20,150,100);
+        canvas.stroke();
+        
+        canvas.beginPath();
+        canvas.strokeStyle='blue';
+        canvas.rect(30,30,150,100);
+        canvas.stroke();
+        
+        canvas.beginPath();
+        canvas.strokeStyle='aqua';
+        canvas.rect(40,40,150,100);
+        canvas.stroke();
+        
+        canvas.beginPath();
+        canvas.strokeStyle='gold'
+        canvas.rect(50,50,150,100);
+        canvas.stroke();
+    }
+    
+    function createThreeRect(){
+        
+    }
+</script>

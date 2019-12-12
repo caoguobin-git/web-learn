@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>moveTo</title>
+        <style type="text/css">
+            canvas{
+                background-color: rgba(123,123,123,0.5);
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="canvas" width="800" height="800"></canvas>
+    </body>
+</html>
+
+<script type="text/javascript">
+    var canvas;
+    window.onload = function() {
+        canvas = document.getElementById('canvas').getContext('2d');
+        setMoveTo();
+    }
+    
+    function setMoveTo(){
+        canvas.beginPath();
+        canvas.moveTo(20,20);
+        canvas.lineTo(100,100);
+        canvas.stroke();
+    }
+</script>

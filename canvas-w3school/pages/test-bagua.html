@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>八卦</title>
+        <style type="text/css">
+            body{
+                background-color: rgba(255,0,0,.5);
+            }
+            img{
+                animation: myDemo 5s linear infinite;
+            }
+            
+            @-webkit-keyframes myDemo{
+                from{transform: rotate(0deg);}
+                to{transform: rotate(36000deg);}
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="canvas" width="800" height="800"></canvas>
+        <img src="../img/八卦.png" />
+    </body>
+</html>
+
+<script type="text/javascript">
+    var ctx;
+    window.onload = function() {
+        ctx = document.getElementById('canvas').getContext('2d');
+        drawBagua();
+    }
+
+    function drawBagua() {
+        ctx.beginPath();
+        // ctx.arc(400,400,200,0,Math.PI*2);
+        ctx.arc(500, 400, 100, 0, Math.PI * 1);
+        ctx.arc(300, 400, 100, 0, Math.PI * 1, true);
+        ctx.arcTo(200, 600, 400, 600, 200);
+        ctx.arcTo(600, 600, 600, 400, 200);
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.moveTo(200, 400);
+        ctx.arcTo(200, 200, 400, 200, 200);
+        ctx.arcTo(600, 200, 600, 400, 200);
+        ctx.arc(500, 400, 100, 0, Math.PI * 1);
+        ctx.arc(300, 400, 100, 0, Math.PI * 1, true);
+        ctx.fillStyle = 'white';
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke()
+
+        ctx.beginPath();
+        ctx.moveTo(530, 400);
+        ctx.fillStyle = 'black'
+        ctx.arc(500, 400, 31, 0, Math.PI * 2)
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.moveTo(330, 400);
+        ctx.fillStyle = 'white';
+        ctx.arc(300, 400, 30, 0, Math.PI * 2);
+        ctx.fill();
+
+    }
+</script>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>像素 data</title>
+    </head>
+    <body>
+        <canvas id="canvas" width="800" height="800"></canvas>
+    </body>
+</html>
+
+<script type="text/javascript">
+    var ctx;
+    window.onload = function() {
+        ctx = document.getElementById('canvas').getContext('2d');
+        setData();
+    }
+
+    function setData() {
+        
+        ctx.arc(400,400,200,0,Math.PI*2);
+        ctx.stroke();
+        ctx.clip();
+        
+        ctx.fillStyle='red'
+        ctx.fillRect(200,200,200,200);
+        
+        var img = ctx.createImageData(100, 100);
+        for (var i = 0; i < img.data.length; i += 4) {
+            img.data[i] = getRandom();
+            img.data[i + 1] = getRandom();
+            img.data[i + 2] = getRandom();
+            img.data[i + 3] = getRandom();
+        }
+        ctx.putImageData(img, 20, 20);
+        console.log(img.data)
+        var a = ctx.getImageData(200,200,200,200);
+        ctx.putImageData(a,50,50)
+        console.log(a)
+    }
+
+    function getRandom() {
+        return parseInt(Math.random() * 256);
+    }
+</script>

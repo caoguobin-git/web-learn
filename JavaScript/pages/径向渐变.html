@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <style type="text/css">
+            #ball {
+                position: relative;
+                width: 200px;
+                height: 200px;
+                margin: auto;
+                border-radius: 100px;
+                background: radial-gradient(at 60px 60px, white 1%, red 15%, black 95%);
+                filter: blur(0.55px);
+                z-index: 0;
+                transition: all 2s;
+            }
+            
+            #ball:hover{
+                transform: rotate(360deg);
+            }
+
+
+            #shadow {
+                position: relative;
+                margin: auto;
+                width: 190px;
+                height: 60px;
+                border-radius: 100%;
+                top: -35px;
+                z-index: -11;
+                background-color: black;
+                filter: blur(10px);
+                animation: myDemo 1s infinite linear;
+            }
+
+            @-webkit-keyframes myDemo {
+                0% {
+                    filter: blur(10px);
+                }
+
+                50% {
+                    filter: blur(15px);
+                }
+
+                100% {
+                    filter: blur(10px);
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div id="ball" draggable="true">
+        </div>
+        <div id="shadow"></div>
+    </body>
+</html>

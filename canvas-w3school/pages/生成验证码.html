@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>生成验证码</title>
+        <script src="../js/vue.js"></script>
+        <script src="../js/MD5.js"></script>
+        <style type="text/css">
+            canvas {
+                border: 1px solid black;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="demo">
+            <canvas id="canvas" width="100" height="40"></canvas>
+            <br>
+            <input id="userInputCode" type="text" v-model="userInputCode" />
+        </div>
+    </body>
+</html>
+
+<script type="text/javascript">
+    var canvas;
+    var ctx;
+
+    var demo = new Vue({
+        el: '#demo',
+        data: {
+            verifyCode: '',
+            userInputCode: ''
+        },
+        methods: {
+            getVerifyCode: function() {
+                let letters = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E',
+                    'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V',
+                    'W', 'X', 'Y', 'Z'
+                ];
+                let result = '';
+                for (let i = 0; i < 4; i++) {
+                    result += letters[parseInt(Math.random() * 36)].toUpperCase()
+                }
+                this.userInputCode = '';
+                this.drawVerifyCode(result);
+                this.verifyCode = hex_md5(result.toUpperCase());
+            },
+            drawVerifyCode: function(code) {
+
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.font = canvas.height * (0.6+Math.random()*0.2) + 'px SimHei';
+                ctx.textBaseline = 'middle';
+
+                //绘制干扰背景
+                for(let i=0;i<800;i++){
+                    ctx.save();
+                    ctx.fillStyle=this.getRandomColor();
+                    ctx.fillRect(Math.random()*canvas.width,Math.random()*canvas.height,Math.random()*canvas.width/50,Math.random()*canvas.height/30)
+                    ctx.restore();
+                }
+
+                //绘制干扰线
+                for (let i = 0; i < 10; i++) {
+                    let width = canvas.width;
+                    let height = canvas.height;
+                    ctx.save();
+                    ctx.beginPath();
+                    ctx.lineWidth = 0.4;
+                    ctx.strokeStyle = this.getRandomColor();
+                    ctx.moveTo(Math.random() * width, Math.random() * height);
+                    ctx.lineTo(Math.random() * width, Math.random() * height);
+                    ctx.closePath();
+                    ctx.stroke();
+                    ctx.restore();
+                }
+
+                //绘制文字
+                for (let i = 0; i < 4; i++) {
+                    ctx.save();
+                    ctx.translate(canvas.width / 8 * (i * 2 + 1) * (0.95 + Math.random() * 0.1), canvas.height /
+                        2);
+                    ctx.rotate(Math.PI * (-0.4 + Math.random() * 0.8));
+                    ctx.lineWidth=2;
+                    ctx.fillStyle = this.getRandomColor();
+                    ctx.fillText(code[i], -canvas.width / 8 * 0.8, 0);
+                    ctx.restore();
+                }
+            },
+            getRandomColor: function(val) {
+                
+                let a = '#';
+                for (let i = 0; i < 6; i++) {
+                    a += parseInt(Math.random() * 16).toString(16)
+                }
+                return a;
+            }
+        },
+        watch: {
+            userInputCode: function(val) {
+                if (val.length < 4) {
+                    return;
+                }
+                if (val.length > 4) {
+                    val = val.substr(0, 4);
+                    this.userInputCode = val;
+                }
+                val = hex_md5(val.toUpperCase());
+                if (val == this.verifyCode) {
+                    console.log('right')
+                } else {
+                    console.log('wrong');
+                }
+            }
+        },
+        mounted: function() {
+            canvas = document.getElementById('canvas');
+            ctx = canvas.getContext('2d');
+            this.getVerifyCode();
+            document.getElementById('userInputCode').focus()
+            canvas.onclick = function() {
+                demo.getVerifyCode();
+            }
+        }
+    })
+</script>

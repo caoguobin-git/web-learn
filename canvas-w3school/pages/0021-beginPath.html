@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>beginPath</title>
+
+    </head>
+    <body>
+        <canvas id="canvas" width="800" height="800"></canvas>
+    </body>
+</html>
+
+<script type="text/javascript">
+    var canvas;
+    window.onload = function() {
+        canvas = document.getElementById('canvas').getContext('2d');
+        setBeginPath();
+    }
+
+    function setBeginPath() {
+        
+        canvas.lineWidth=10;
+        canvas.shadowBlur=10;
+        canvas.shadowColor='black';
+        canvas.lineCap='round'
+        
+        canvas.beginPath();
+        canvas.strokeStyle = 'blue';
+        canvas.moveTo(20, 20);
+        canvas.lineTo(100, 100);
+        canvas.stroke();
+
+        canvas.beginPath()
+        canvas.strokeStyle = 'red';
+        canvas.moveTo(100, 20);
+        canvas.lineTo(20, 100);
+        canvas.stroke()
+    }
+</script>

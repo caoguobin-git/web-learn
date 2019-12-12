@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8">
+        <title>注册福汇账户</title>
+        <link rel="shortcut icon" href="../img/blackhole2019_pc.png" />
+        <link rel="stylesheet" type="text/css" href="../css/CSSReset.css" />
+        <link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.css" />
+        <script type="text/javascript" src="../js/jquery-3.4.1.js"></script>
+        <script type="text/javascript" src="../bootstrap/js/bootstrap.js"> </script>
+        <script type="text/javascript" src="../js/vue.js"></script>
+        <link type="text/css" rel="stylesheet" href="../css/fxcmRegister.css" />
+    </head>
+    <body>
+        <!-- <img src="../img/0.jpg" style="position: fixed;left:20px;top: 40px;box-shadow: 0 0 20px black;"> -->
+        <div id="fxcm-register" class="container">
+            <div class="row">
+                <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3  col-xs-6 col-xs-offset-3">
+                    <h3>{{title}}</h3>
+                    <div class="row">
+                        <label>手机号：</label><input type="text" v-model="fxcmRegisterMobile" placeholder="15858585858"><span> *</span>
+                    </div>
+                    <div class="row">
+                        <label>邮箱：</label><input type="text" v-model="fxcmRegisterEmail" placeholder="demo@live.com"><span> *</span>
+                    </div>
+                    <div class="row">
+                        <label>姓名：</label><input type="text" v-model="fxcmRegisterName" placeholder="张三"><span> *</span>
+                    </div>
+                    <div class="row">
+                        <label>身份证：</label><input type="text" v-model="fxcmRegisterIdentify" placeholder="110122199009092288"><span> *</span>
+                    </div>
+                    <div class="row">
+                        <label>身份证图片:</label>
+                        <p style="text-align: center;word-spacing: 220px;">正面  背面</p>
+                        <div class="col-lg-2 col-lg-offset-1 id-pic-container  col-sm-2 col-sm-offset-1 col-xs-2 col-xs-offset-1">
+                            <input class="id-pic" type="file" title="点击选择身份证人像面" @change="uploadPic($event,'fxcmRegisterIDFrontFile','fxcmRegisterIDFront')" />
+                            <img :src="fxcmRegisterIDFront" />
+                        </div>
+
+                        <div class="col-lg-2 col-lg-offset-1 id-pic-container   col-sm-2 col-sm-offset-1 col-xs-2 col-xs-offset-1">
+                            <input class="id-pic" type="file" title="点击选择身份证国徽面" @change="uploadPic($event,'fxcmRegisterIDBackFile','fxcmRegisterIDBack')" />
+                            <img :src="fxcmRegisterIDBack"  />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label >银行卡：</label><input type="text" :style="fxcmRegisterDebitStyle" v-model="fxcmRegisterDebit" placeholder="6888888888888888888">
+                        <br>
+                        <br>
+                        <div  class="col-lg-10 col-lg-offset-1 id-pic-container">
+                            <input class="id-pic" id="debit-pic" title="点击选择银行卡图片" type="file" @change="uploadPic($event,'fxcmRegisterDebitPicFile','fxcmRegisterDebitPic')" />
+                            <img :src="fxcmRegisterDebitPic" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <span class="btn btn-success btn-lg btn-block" @click="fxcmRegister()">注册</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </body>
+</html>
+<script src="../js/fxcmRegister.js"></script>

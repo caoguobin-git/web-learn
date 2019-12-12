@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>isPointInPath</title>
+	</head>
+	<body>
+        <canvas id="canvas" width="800" height="800"></canvas>
+	</body>
+</html>
+
+<script type="text/javascript">
+    var ctx;
+    window.onload=function(){
+        ctx=document.getElementById('canvas').getContext('2d');
+        setIsPointInPath();
+    }
+    function setIsPointInPath(){
+        ctx.rect(0,0,150,100);
+        ctx.fill();
+        ctx.closePath()
+        console.log(ctx.isPointInPath(100,20))
+    }
+</script>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>js使用</title>
+        <!-- head中的js -->
+        <script type="text/javascript">
+            function myDemo(){
+                document.getElementById('demo').innerHTML='调用head中的脚本';
+            }
+        </script>
+	</head>
+	<body>
+        
+        <button onclick="myDemo()">调用头部脚本</button>
+        <button onclick="bodyDemo()">调用body部脚本</button>
+        <p id="demo"></p>
+        
+        <script type="text/javascript">
+            function bodyDemo(){
+                document.getElementById('demo').innerHTML='调用body中的脚本';
+            }
+        </script>
+	</body>
+</html>

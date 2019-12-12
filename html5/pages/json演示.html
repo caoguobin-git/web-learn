@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script src="../js/vue.js"></script>
+        <style type="text/css">
+            #demo {
+                text-align: center;
+                position: relative;
+            }
+
+            .content {
+                display: inline-block;
+                border: 2px solid black;
+                border-radius: 15px;
+                margin: 5px 10px;
+                cursor: pointer;
+                position: absolute;
+            }
+
+            .content:hover {
+                animation: my-demo .5s linear 1;
+            }
+
+            @-webkit-keyframes my-demo {
+                0% {
+                    transform: rotate(0);
+                }
+
+                33% {
+                    transform: rotate(-30deg);
+                }
+
+                66% {
+                    transform: rotate(40deg);
+                }
+
+                100% {
+                    transform: rotate(0deg);
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div id="demo" title="Demo">
+            <move-div v-for="(item,key) in values.data" :item="item" :k="key" :bg-color="randomColor()" :init-position="getRandomPosition()"
+                :key="key"></move-div>
+        </div>
+    </body>
+</html>
+<script type="text/javascript">
+    Vue.component('move-div', {
+        props: ['item', 'k', 'bgColor', 'initPosition'],
+        template: '<div class="content" @mouseenter="pauseMove()" @mouseleave="continueMove()" :style="styleObject"><p>{{k}}</p><p><template v-for="(v,k) in item"><span>{{k}} :</span><span>{{v}}</span>&nbsp;&nbsp;&nbsp;&nbsp;</template></p></div>',
+        data: function() {
+            return {
+                leftDis: 0,
+                topDis: 0,
+                speedX: Math.random() * 2,
+                speedY: Math.random() * 2,
+                tempSpeedX:0,
+                tempSpeedY:0,
+                width: 1600,
+                height: 1600
+            }
+        },
+        computed: {
+            styleObject: function() {
+                return {
+                    background: this.bgColor,
+                    left: this.leftDis + 'px',
+                    top: this.topDis + 'px'
+                }
+            }
+        },
+        methods: {
+            continueMove:function(){
+                this.speedX=this.tempSpeedX;
+                this.speedY=this.tempSpeedY;
+            },
+            pauseMove:function(){
+                this.tempSpeedX=this.speedX;
+                this.speedX=0;
+                this.tempSpeedY=this.speedY;
+                this.speedY=0;
+            },
+            moveLittle: function() {
+                this.leftDis += this.speedX;
+                this.topDis += this.speedY;
+                if (this.leftDis > this.width || this.leftDis < 0) {
+                    this.speedX *= (-1 * (Math.random() + 0.5));
+                    if (this.speedX > 20) {
+                        this.speedX = 5
+                    } else if (this.speedX < -20) {
+                        this.speedX = -5
+                    }
+                }
+                if (this.topDis > this.height || this.topDis < 0) {
+                    this.speedY *= (-1 * (Math.random() + 0.5));
+                    if (this.speedY > 20) {
+                        this.speedY = 5
+                    } else if (this.speedY < -20) {
+                        this.speedY = -5
+                    }
+                }
+                requestAnimationFrame(this.moveLittle)
+            }
+        },
+        mounted: function() {
+            this.moveLittle();
+            this.leftDis=this.initPosition.x;
+            this.topDis=this.initPosition.y;
+            
+        }
+    })
+    
+    var demo = new Vue({
+        el: '#demo',
+        data: {
+            values: {},
+            index: ''
+        },
+        computed: {
+
+        },
+        mounted: function() {
+            var a = {
+                "status": "200",
+                "message": "ok",
+                "data": {
+                    "EUR/USD": {
+                        "pointVal": 0.10,
+                        "margin": 3.25
+                    },
+                    "XAU/USD": {
+                        "pointVal": 0.01,
+                        "margin": 8.50
+                    },
+                    "GBP/USD": {
+                        "pointVal": 0.10,
+                        "margin": 3.50
+                    },
+                    "UK100": {
+                        "pointVal": 0.12,
+                        "margin": 9.00
+                    },
+                    "USDOLLAR": {
+                        "pointVal": 1.00,
+                        "margin": 45.00
+                    },
+                    "XAG/USD": {
+                        "pointVal": 0.50,
+                        "margin": 10.00
+                    },
+                    "GER30": {
+                        "pointVal": 0.11,
+                        "margin": 14.00
+                    },
+                    "FRA40": {
+                        "pointVal": 0.11,
+                        "margin": 6.13
+                    },
+                    "EUR/JPY": {
+                        "pointVal": 0.09,
+                        "margin": 3.25
+                    },
+                    "USD/JPY": {
+                        "pointVal": 0.09,
+                        "margin": 2.50
+                    },
+                    "CHN50": {
+                        "pointVal": 0.10,
+                        "margin": 75.00
+                    },
+                    "EUSTX50": {
+                        "pointVal": 0.11,
+                        "margin": 4.00
+                    },
+                    "GBP/JPY": {
+                        "pointVal": 0.09,
+                        "margin": 3.50
+                    },
+                    "US2000": {
+                        "pointVal": 0.10,
+                        "margin": 16.00
+                    },
+                    "AUD/JPY": {
+                        "pointVal": 0.09,
+                        "margin": 2.00
+                    },
+                    "CHF/JPY": {
+                        "pointVal": 0.09,
+                        "margin": 24.00
+                    },
+                    "USD/CHF": {
+                        "pointVal": 0.10,
+                        "margin": 5.00
+                    },
+                    "GBP/CHF": {
+                        "pointVal": 0.10,
+                        "margin": 7.00
+                    },
+                    "AUD/USD": {
+                        "pointVal": 0.10,
+                        "margin": 2.00
+                    },
+                    "EUR/AUD": {
+                        "pointVal": 0.07,
+                        "margin": 3.25
+                    },
+                    "EUR/CHF": {
+                        "pointVal": 0.10,
+                        "margin": 6.50
+                    },
+                    "EUR/CAD": {
+                        "pointVal": 0.08,
+                        "margin": 3.25
+                    },
+                    "EUR/GBP": {
+                        "pointVal": 0.12,
+                        "margin": 3.25
+                    },
+                    "AUD/CAD": {
+                        "pointVal": 0.08,
+                        "margin": 8.00
+                    },
+                    "NZD/USD": {
+                        "pointVal": 0.10,
+                        "margin": 2.00
+                    },
+                    "USD/CAD": {
+                        "pointVal": 0.08,
+                        "margin": 2.50
+                    },
+                    "CAD/JPY": {
+                        "pointVal": 0.09,
+                        "margin": 2.25
+                    },
+                    "GBP/AUD": {
+                        "pointVal": 0.07,
+                        "margin": 3.50
+                    },
+                    "NZD/JPY": {
+                        "pointVal": 0.09,
+                        "margin": 2.00
+                    },
+                    "US30": {
+                        "pointVal": 0.10,
+                        "margin": 14.50
+                    },
+                    "GBP/CAD": {
+                        "pointVal": 0.08,
+                        "margin": 14.00
+                    },
+                    "SOYF": {
+                        "pointVal": 0.10,
+                        "margin": 30.00
+                    },
+                    "NGAS": {
+                        "pointVal": 0.10,
+                        "margin": 6.00
+                    },
+                    "WHEATF": {
+                        "pointVal": 0.10,
+                        "margin": 15.00
+                    },
+                    "CORNF": {
+                        "pointVal": 0.10,
+                        "margin": 12.00
+                    },
+                    "GBP/NZD": {
+                        "pointVal": 0.06,
+                        "margin": 3.50
+                    },
+                    "AUD/NZD": {
+                        "pointVal": 0.06,
+                        "margin": 2.00
+                    },
+                    "USD/SEK": {
+                        "pointVal": 0.01,
+                        "margin": 30.00
+                    },
+                    "EUR/SEK": {
+                        "pointVal": 0.01,
+                        "margin": 39.00
+                    },
+                    "EUR/NOK": {
+                        "pointVal": 0.01,
+                        "margin": 19.50
+                    },
+                    "USD/NOK": {
+                        "pointVal": 0.01,
+                        "margin": 15.00
+                    },
+                    "USD/MXN": {
+                        "pointVal": 0.01,
+                        "margin": 40.00
+                    },
+                    "AUD/CHF": {
+                        "pointVal": 0.10,
+                        "margin": 16.00
+                    },
+                    "EUR/NZD": {
+                        "pointVal": 0.06,
+                        "margin": 3.25
+                    },
+                    "USD/ZAR": {
+                        "pointVal": 0.01,
+                        "margin": 120.00
+                    },
+                    "USD/HKD": {
+                        "pointVal": 0.01,
+                        "margin": 25.00
+                    },
+                    "ZAR/JPY": {
+                        "pointVal": 0.09,
+                        "margin": 12.00
+                    },
+                    "BTC/USD": {
+                        "pointVal": 0.01,
+                        "margin": 20.28
+                    },
+                    "ETH/USD": {
+                        "pointVal": 0.10,
+                        "margin": 4.10
+                    },
+                    "USD/TRY": {
+                        "pointVal": 0.02,
+                        "margin": 120.00
+                    },
+                    "EUR/TRY": {
+                        "pointVal": 0.02,
+                        "margin": 156.00
+                    },
+                    "NZD/CHF": {
+                        "pointVal": 0.10,
+                        "margin": 16.00
+                    },
+                    "CAD/CHF": {
+                        "pointVal": 0.10,
+                        "margin": 18.00
+                    },
+                    "NZD/CAD": {
+                        "pointVal": 0.08,
+                        "margin": 8.00
+                    },
+                    "TRY/JPY": {
+                        "pointVal": 0.09,
+                        "margin": 24.00
+                    },
+                    "USD/CNH": {
+                        "pointVal": 0.01,
+                        "margin": 50.00
+                    },
+                    "AUS200": {
+                        "pointVal": 0.07,
+                        "margin": 4.38
+                    },
+                    "ESP35": {
+                        "pointVal": 0.11,
+                        "margin": 16.50
+                    },
+                    "HKG33": {
+                        "pointVal": 0.13,
+                        "margin": 99.00
+                    },
+                    "JPN225": {
+                        "pointVal": 0.01,
+                        "margin": 5.00
+                    },
+                    "NAS100": {
+                        "pointVal": 0.10,
+                        "margin": 4.00
+                    },
+                    "SPX500": {
+                        "pointVal": 0.10,
+                        "margin": 16.00
+                    },
+                    "Copper": {
+                        "pointVal": 0.10,
+                        "margin": 7.50
+                    },
+                    "USOil": {
+                        "pointVal": 0.10,
+                        "margin": 15.00
+                    },
+                    "UKOil": {
+                        "pointVal": 0.10,
+                        "margin": 15.00
+                    },
+                    "Bund": {
+                        "pointVal": 0.11,
+                        "margin": 8.25
+                    },
+                    "LTC/USD": {
+                        "pointVal": 0.01,
+                        "margin": 13.50
+                    }
+                }
+            };
+            this.values = a;
+        },
+
+        methods: {
+            getRandomPosition: function() {
+                return {
+                    x: Math.random() * 1600,
+                    y: Math.random() * 1600
+                }
+            },
+            getLeft: function() {
+                return Math.random() * 1750;
+            },
+            getTop: function() {
+                return parseInt(Math.random() * 830);
+            },
+            randomColor: function() {
+                return 'rgba(' + parseInt(Math.random() * 256) + ',' + parseInt(Math.random() * 256) + ',' +
+                    parseInt(Math.random() * 256) + ',' + Math.random() * 0.8 + ')';
+            }
+        }
+    })
+</script>

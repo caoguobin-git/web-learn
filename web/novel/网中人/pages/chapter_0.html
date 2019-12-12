@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>第一章</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://code.jquery.com/jquery-latest.js"></script>
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../css/stylesheet.css">
+</head>
+<body>
+<div class="container-fluid" id="container">
+
+    <div class="container" v-if="displayToolBar" id="tool-bar">
+        <div class="row">
+            <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
+                <div class="input-group">
+                    <span class="input-group-addon">字号:</span>
+                    <span @click="fontSize--" class="input-group-addon">减小</span>
+                    <input type="number" v-model="fontSize" class="form-control">
+                    <span @click="fontSize++" class="input-group-addon">增大</span>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">字体:</span>
+                    <select v-model="fontFamily" class="form-control">
+                        <option value="">默认</option>
+                        <option value="kaiti">楷体</option>
+                        <option value="Microsoft Yahei">雅黑</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">字体:</span>
+                    <select v-model="fontWeight" class="form-control">
+                        <option value="lighter">较细</option>
+                        <option value="normal">正常</option>
+                        <option value="bolder">较粗</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">字体颜色:</span>
+                    <input type="color" class="form-control" v-model="fontColor">
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">背景颜色:</span>
+                    <input type="color" class="form-control" v-model="backgroundColor">
+                </div>
+                <p style="text-align: center">
+                    <button style="margin-top:30px;padding: 3px 40px 3px 80px;letter-spacing: 60px" class="btn btn-md btn-primary" @click="displayToolBar=false">确定</button>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" @click="displayToolBar=true" >
+        <div class="col-lg-8 col-lg-offset-2 col-md-12" :style="{'font-weight':fontWeight,'background':backgroundColor,'font-size':fontSize+'px','color':fontColor,'font-family':fontFamily}">
+            <p class="calibre1" height="5em" width="0pt">
+                <span class="calibre4">
+                    <span class="calibre11">序章</span>
+                </span>
+            </p>
+            <p class="calibre7" height="5em" width="2em">阿怡今早8点离家上班时并没有想过，今天会是改变她人生的一天。</p>
+            <p class="calibre7" height="1em" width="2em">
+                她本来以为，面对一年以来不绝的苦难，只要咬紧牙关、安分守己，总有一天会否极泰来。她深信运气是个公平的使者，一个人遇上坏事，将来自然会遇上好事。然而现实却是反复无常，上天喜欢跟世人开玩笑，开很残酷的玩笑。</p>
+            <p class="calibre7" height="1em" width="2em">
+                黄昏6点多，阿怡拖着疲惫的身体，一边盘算着家中冰箱里剩余的材料还够不够弄成二人份的饭菜，一边从专线小巴站步行至屋邨大楼。近年物价涨得教人吃不消，阿怡还记得，以前一斤猪肉不过卖二十多元，今天付相同的金额却只能买半斤。那个“以前”，也不过是七八年前，这几年间菜市场里不管菜还是肉通通涨价了一倍以上，可是普罗大众的薪水却没变过。阿怡很明白，食材价格飙涨不是批发价上升那么简单，她曾听过一位上了年纪的邻居戏言，说“香港人吃的不是粮而是砖”——自从屋邨的商场和菜市场被政府卖给私营企业后，商户便面临加租的压力，商贩为了增加收入付昂贵的租金，自然将负担转嫁到顾客身上。</p>
+            <p class="calibre7" height="1em" width="2em">
+                冰箱里应该还有几两猪肉和菠菜——阿怡想。将它们弄成姜烧肉片炒菠菜，另外加一盘蒸水蛋，正好是一顿简单又富营养的晚饭。跟阿怡相差八岁的妹妹小雯自小喜欢吃蒸水蛋，每逢家中材料不足，阿怡便会用两个鸡蛋蒸出一盘又软又滑的水蛋。撒点葱花、加点酱油，端上餐桌毫不失礼。而最重要的是这菜色够便宜，过去阿怡一家经济拮据之时，鸡蛋帮助她们渡过不少难关。</p>
+            <p class="calibre7" height="1em" width="2em">
+                虽然家里够材料做晚餐，可是阿怡仍在盘算该不该去菜市场碰运气。阿怡不喜欢家里冰箱半点储粮也没有，大概是家庭环境使然，她做事总是有备无患、精打细算。而且，不少菜贩会在收摊前减价，现在去逛逛，说不定能捡便宜，明天不用再为这问题伤脑筋。</p>
+            <p class="calibre7" height="1em" width="2em">“呜——”</p>
+            <p class="calibre7" height="1em" width="2em">
+                一辆警车赫然从阿怡身边疾驰而过，在尖刺的警笛声提醒下，阿怡的思绪从菜市场某半价摊贩回到现实。她放眼向前一看，才察觉居住的奂华楼前方聚集了一群市民。</p>
+            <p class="calibre7" height="1em" width="2em">
+                是发生了什么事吗？阿怡暗自想道。她仍保持原来的步调，慢慢往前走。阿怡不是个喜欢凑热闹的人，念中学时就被不少同学暗骂她离群、孤僻、书呆子。阿怡从来没为此感到不快，她认为每个人都有选择前路的自由，勉强自己配合旁人的看法，只是另一种愚昧。</p>
+            <p class="calibre7" height="1em" id="2N-29978e27920647a99520a3c893755aba" width="2em">
+                “阿、阿怡！阿怡——”在为数十余人的人群中，一个头发鬈曲、身材略胖、年龄五十上下的大婶慌张地向阿怡招手。阿怡认得对方，那位姓陈的大婶是跟她一样住在二十二楼的住客，平日在走廊碰面会点头打招呼，可是除了知道彼此的称呼、偶尔寒暄几句外，两人没有什么来往。</p>
+            <p class="calibre7" height="1em" width="2em">
+                虽然二人相距不远，陈大婶仍向阿怡跑过来，伸手抓住阿怡胳臂，往大楼的方向拉过去。阿怡听不清楚陈大婶说的话，除了听懂自己的名字外，阿怡觉得对方嘴巴吐出来的，似是某国的方言，又像是一串串梵文咒语。阿怡花了好几秒才明白陈大婶是因为恐慌而令说话含糊不清，而当她了解这一点后，她从对方的话中听到“妹妹”两个字。</p>
+            <p class="calibre7" height="1em" width="2em">在夕阳余光映照下，阿怡走到人群旁边，看到那怪异的光景。</p>
+            <p class="calibre7" height="1em" width="2em">
+                众人围住的，是平时空无一物的水泥地，就在奂华楼正门前方十数米外。可是今天那位置上，有一个穿白色校服、十来岁的女孩仰卧着，散乱的头发半盖着脸庞，暗红色的液体在脖子旁形成一个小水洼。</p>
+            <p class="calibre7" height="1em" width="2em">那不就是跟小雯同校的校服么——这是阿怡的第一个念头。</p>
+            <p class="calibre7" height="1em" width="2em">两秒后，阿怡才醒觉，在地上一动不动的少女，就是自己的妹妹小雯。</p>
+            <p class="calibre7" height="1em" width="2em">躺在冰冷的水泥地上的，就是自己的家人。</p>
+            <p class="calibre7" height="1em" width="2em">唯一的家人。</p>
+            <p class="calibre7" height="1em" width="2em">刹那间，阿怡觉得周遭的事物好陌生。</p>
+            <p class="calibre7" height="1em" width="2em">这是做梦吗？这是做梦吧——阿怡转头望向身边的人。他们都是熟悉的脸孔，但这一刻却又很陌生。</p>
+            <p class="calibre7" height="1em" width="2em">“阿怡！阿怡！”陈大婶抓住阿怡肩膀，用力摇了两下。</p>
+            <p class="calibre7" height="1em" width="2em">“小……小雯？”阿怡吐出妹妹的名字，意识上却无法将地上的人形物体跟自己的妹妹联系起来。</p>
+            <p class="calibre7" height="1em" width="2em">小雯这时候该在家里，等待我回家煮饭给她吃啊——对阿怡来说，这才是“正常的现实”。</p>
+            <p class="calibre7" height="1em" width="2em">
+                “退后一点，退后一点！”一位穿着整齐制服的警察走进人群之中，示意众人往后退。与此同时，两个推着担架床的救护员从后方走来，经过阿怡身边，在小雯跟前蹲下。</p>
+            <p class="calibre7" height="1em" width="2em">
+                年长的救护员伸手探了探小雯的鼻息，再用指头按压对方左手手腕，然后从口袋掏出笔形手电筒，一边用左手掀起小雯的眼睑，一边用右手的手电筒往小雯的瞳孔照射。这串动作不过数秒，可是，阿怡觉得救护员的每一个动作，都像是电影定格一样。</p>
+            <p class="calibre7" height="1em" width="2em">阿怡感觉不到时间流逝。</p>
+            <p class="calibre7" height="1em" width="2em">或者换个说法，是阿怡的潜意识企图阻止自己面对接下来的情景。</p>
+            <p class="calibre7" height="1em" width="2em">救护员站直身子，向推着担架床的同伴，以及在旁边隔开人群的几位警员，摇了摇头。</p>
+            <p class="calibre7" height="1em" width="2em">“请各位往后退，别妨碍警方调查……”警员说着这句时，两位救护员表情肃穆，缓缓从小雯身边离开。</p>
+            <p class="calibre7" height="1em" width="2em">“小、小雯？小雯！小雯！”阿怡甩开抓住自己双臂的陈大婶，往倒地的小雯冲过去。</p>
+            <p class="calibre7" height="1em" width="2em">“小姐！”一位高个子警员眼明手快，拦腰抱着阿怡。</p>
+            <p class="calibre7" height="1em" width="2em">“小雯！”阿怡边挣扎边回头看着警员，焦躁地说，“那、那是我妹妹，请救救她！”</p>
+            <p class="calibre7" height="1em" width="2em">“小姐，你先冷静一点……”警员企图安抚阿怡，但他知道，他的话不会有任何效果。</p>
+            <p class="calibre7" height="1em" width="2em">
+                “请、请救救她！那边的救护员先生！”脸色苍白的阿怡忽然往另一边转身，向着正注视着自己的两位救护员喊道，“为什么你们不扶小雯上担架床？快一点啊！快点救小雯啊！”</p>
+            <p class="calibre7" height="1em" width="2em">
+                两位救护员伫立在救护车旁，一脸无奈。年长的救护员很想告诉阿怡事实，但即使每天面对生离死别，他这一刻也不忍心说出任何会伤害面前这二十来岁的女生的话。</p>
+            <p class="calibre7" height="1em" width="2em">“小姐，你是她的姐姐吗？请你先冷静一点……”抱住阿怡的警员尝试用柔和的语气说道。</p>
+            <p class="calibre7" height="1em" width="2em">
+                “小雯——”阿怡再次回头，望向地上宛如人偶的少女，却发现另外两位警员拿着墨绿色的防水塑胶布和金属支架，正在小雯身旁组合小帐篷，盖住小雯的身体，“你、你们在做什么？停手！给我停手！”</p>
+            <p class="calibre7" height="1em" width="2em">“小姐！小姐！”</p>
+            <p class="calibre7" height="1em" width="2em">
+                “别盖住她！她还有气息！她一定还有心跳的！”阿怡无力地向前倾，本来拦住她、防止她破坏现场的警员，变成扶着她的唯一支力点，“快救她！请你们救救她……我求求你们救救她……那、那是我的妹妹，是我唯一的妹妹啊……”</p>
+            <p class="calibre7" height="1em" width="2em">
+                在这个平凡的星期二黄昏，观塘乐华邨奂华楼前方的空地上，平日喜欢高谈阔论的街坊邻里都静默下来，在冰冷的屋邨大楼之间，只余下一位姐姐的悲怆哭声不断地回荡着，恍如风声般钻进每个人的耳朵里，遗下一点一滴、无法梳理的郁悒。</p>
+            <span id="filepos0000012632"></span>
+
+        </div>
+    </div>
+</div>
+<p class="footer-container"><a class="btn btn-sm btn-info"
+                               href="chapter_10.html">上一章</a>&nbsp;&nbsp;&nbsp;<a
+        class="btn btn-sm btn-info" href="chapter_1.html">下一章</a></p>
+</body>
+</html>
+<script src="../js/page_js.js"></script>

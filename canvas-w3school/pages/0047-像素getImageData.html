@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>getImageData</title>
+    </head>
+    <body>
+        <canvas id="canvas" width="800" height="800"></canvas>
+    </body>
+</html>
+
+<script type="text/javascript">
+    var ctx;
+    window.onload = function() {
+        ctx = document.getElementById('canvas').getContext('2d');
+        setGetImageData();
+        console.log(ctx)
+    }
+
+    function setGetImageData() {
+        ctx.fillStyle = 'blueviolet';
+        ctx.fillRect(0, 0, 50, 50);
+
+        var img = ctx.getImageData(0, 0, 50, 50);
+        ctx.putImageData(img, 50, 50, 0, 0, 50, 50)
+    }
+</script>

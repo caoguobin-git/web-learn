@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>strokeStyle</title>
+        <style type="text/css">
+            canvas{
+                border: 1px solid black;
+            }
+        </style>
+	</head>
+	<body>
+        <canvas id="canvas" width="800" height="800"></canvas>
+	</body>
+</html>
+
+<script type="text/javascript">
+    var canvas;
+    window.onload=function(){
+        canvas=document.getElementById('canvas').getContext('2d');
+        canvas.fillStyle='#0000FF';
+        canvas.strokeStyle='#ff0000'
+        drawRect();
+        drawGradientRect();
+    }
+    
+    function drawRect(){
+        canvas.strokeStyle="blue"
+        canvas.strokeRect(10,10,150,100);
+    }
+    
+    function drawGradientRect(){
+        var my_gradient=canvas.createLinearGradient(0,0,150,0);
+        my_gradient.addColorStop(0,'magenta');
+        my_gradient.addColorStop(0.5,'blue');
+        my_gradient.addColorStop(1,'red');
+        canvas.strokeStyle=my_gradient;
+        canvas.lineWidth=5;
+        canvas.strokeRect(10.5,120,150,100);
+        canvas.lineWidth=3;
+        canvas.font='50px kaiti';
+        canvas.strokeText("Hello World",10,300,800);
+    }
+</script>

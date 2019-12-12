@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>js面向对象</title>
+    </head>
+    <body>
+        <canvas id="canvas" width="400" height="400"></canvas>
+    </body>
+</html>
+
+<script type="text/javascript">
+    var ctx = document.getElementById('canvas').getContext('2d');
+    var canvasWidth = ctx.canvas.width;
+    var canvasHeight = ctx.canvas.height;
+
+
+    function Point(x, y) {
+        var obj = new Object();
+        obj.x = x;
+        obj.y = y;
+        obj.dx = 1;
+        obj.dy = 1;
+        obj.speed = 5;
+        obj.getDetail = function() {
+            return '{x:' + this.x + ',y:' + this.y + '}';
+        };
+        setInterval(function() {
+            ctx.clearRect(obj.x, obj.y, 5, 5);
+            obj.x += obj.dx * obj.speed;
+            if (obj.x > canvasWidth) {
+                obj.dx = -1 * obj.speed;
+            }
+            if (obj.x <= 0) {
+                obj.dx = 1 * obj.speed;
+            }
+            obj.y += obj.dy * obj.speed;
+            if (obj.y > canvasHeight) {
+                obj.dy = -1 * obj.speed;
+            }
+            if (obj.y <= 0) {
+                obj.dy = 1 * obj.speed;
+            }
+            ctx.fillRect(obj.x, obj.y, 5, 5);
+        }, 50)
+        return obj;
+    }
+
+    window.onload = function() {
+        var p1 = new Point(56, 23);
+        var p2 = new Point(20, 45);
+        var p3 = new Point(45, 23)
+    }
+</script>
