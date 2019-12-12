@@ -1,6 +1,6 @@
 body {
     width: 100%;
-    background-image: url("../img/system/background/blue-gradients.020-wh.jpg");
+    background-image: url("https://wallhell-img.oss-cn-beijing.aliyuncs.com/background/blue-gradients.020-wh.jpg");
     background-size: 100% 100%;
     background-repeat: no-repeat;
     padding-bottom: 50px;
@@ -154,6 +154,7 @@ a:hover {
     transition: all 0.2s linear;
     cursor: pointer;
     width: 100%;
+    height: 100%;
     border-radius: 5px;
 }
 
