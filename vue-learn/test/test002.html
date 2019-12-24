@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/vue.js"></script>
+    <style>
+        div {
+            padding-left: 500px;
+        }
+
+        table {
+            width: 500px;
+        }
+
+        tr {
+            display: flex;
+            width: 100%;
+            border: 1px solid silver;
+            max-height: 30px;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+
+        td, th {
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .content {
+            flex: 2;
+
+        }
+
+        td.content {
+            font-size: 12px;
+        }
+
+        .display {
+
+            color: red;
+            /*width: 600px;*/
+            max-height: 500px;
+            /*margin-left: -120px;*/
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+<div id="demo">
+    <table>
+        <thead>
+        <tr>
+            <th>货币</th>
+            <th class="content">新闻</th>
+            <th>时间</th>
+        </tr>
+        </thead>
+        <tr @click="changeCurrent(item)" v-for="item in bills" :class="{'display':item==current}">
+            <td>{{item}}</td>
+            <td class="content">
+                啊手动阀手动阀静安寺爱神的箭发送士大夫啊手动阀手动阀静安寺爱神的箭发送士大夫啊手动阀手动阀静安寺爱神的箭发送士大夫啊手动阀手动阀静安寺爱神的箭发送士大夫啊手动阀手动阀静安寺爱神的箭发送士大夫啊手动阀手动阀静安寺爱神的箭发送士大夫
+            </td>
+            <td></td>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>
+<script>
+    var demo = new Vue({
+        el: '#demo',
+        data: {
+            current: '12',
+            bills: ['XAU/USD', 'EUR/USD', 'USD/JPY', 'BTC/USD', 'AUD/USD']
+        },
+        mounted: function () {
+            console.log('mounted')
+        },
+        methods: {
+            changeCurrent: function (v) {
+                console.log(v);
+                if (this.current == v) {
+                    this.current = '';
+                } else {
+                    this.current = v
+                }
+            }
+        }
+    })
+</script>

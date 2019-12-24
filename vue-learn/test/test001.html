@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/vue.js"></script>
+    <style>
+        div{
+            display: flex;
+            flex-direction: column;
+        }
+        p{
+            width: 300px;
+            border: 1px solid black;
+            max-height: 30px;
+            line-height: 15px;
+            min-height: 30px;
+            font-size: 15px;
+            align-self: flex-end;
+            overflow: hidden;
+            white-space: pre-wrap;
+            border-radius: 3px;
+            transition: all 0.2s ;
+            margin: 8px;
+            padding: 5px 10px;
+            cursor:pointer;
+            color: gray;
+        }
+        .display{
+            max-height: 100px;
+            width: 400px;
+            color: black;
+
+        }
+        p:hover{
+            max-height: 100px;
+            width: 400px;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+<div id="demo">
+    <p :class="{ 'display': item === current }" v-for="item in 10" @click="toggleDisplay(item)">啊手动阀手动阀静安寺爱神的箭发送士大夫啊手动阀手动阀静安寺爱神的箭发送士大夫啊手动阀手动阀静安寺爱神的箭发送士大夫啊手动阀手动阀静安寺爱神的箭发送士大夫啊手动阀手动阀静安寺爱神的箭发送士大夫啊手动阀手动阀静安寺爱神的箭发送士大夫</p>
+</div>
+
+</body>
+</html>
+<script>
+    var demo =new Vue({
+        el:'#demo',
+        data:{
+            current:0
+        },
+        computed:{
+
+        }
+        ,
+        mounted:function () {
+            console.log('mounted')
+        },
+        methods:{
+            toggleDisplay:function (i) {
+               console.log(i);
+               if (this.current==i){
+                   this.current=0;
+                   return;
+               }
+               this.current=i;
+            }
+        }
+    })
+</script>
