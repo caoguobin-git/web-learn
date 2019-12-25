@@ -1,11 +1,16 @@
 <template>
-  <div id="main-container">
-    <TradePageHeader></TradePageHeader>
-    <router-link to="/test">Go to test</router-link>
-    <router-link to="/hello">Go to hello</router-link>
-    <PageFirst></PageFirst>
-    <router-view/>
-  </div>
+<!--  <div id="main-container">-->
+<!--    <TradePageHeader></TradePageHeader>-->
+<!--    <router-link to="/test">Go to test</router-link>-->
+<!--    <router-link to="/hello">Go to hello</router-link>-->
+<!--    <PageFirst></PageFirst>-->
+<!--    <router-view/>-->
+<!--  </div>-->
+  <el-container>
+    <el-header>3</el-header>
+    <el-main>2</el-main>
+    <el-footer>1</el-footer>
+  </el-container>
 </template>
 
 <script>
