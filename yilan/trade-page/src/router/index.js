@@ -10,11 +10,6 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path:'/',
-      name:'TradePage',
-      component:TradePage
-    },
-    {
       path: '/hello',
       name:'TradePage',
       component: TradePage
