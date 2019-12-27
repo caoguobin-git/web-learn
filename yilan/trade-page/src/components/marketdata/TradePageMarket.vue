@@ -4,7 +4,7 @@
         <div id="trade-page-market-title">
           市场数据
         </div>
-        <el-table :data="marketDataArray" max-height="800px"
+        <el-table :data="marketDataArray" :max-height="tableHeight+'px'"
                   empty-text="暂无数据"  :cell-style="myCellStyle"
                   stripe style="width: 98%">
           <el-table-column align="center" width="90" prop="symbol" label="货币"></el-table-column>
@@ -28,6 +28,7 @@
     props: ['marketDatas'],
     data() {
       return {
+        tableHeight:900,
         myCellStyle:{padding:'3px 0px'},
         marketRow: {
           color: 'black',
@@ -68,12 +69,13 @@
 
 <style scoped>
   #trade-page-market-container {
-    height: 875px;
-    margin: 0px 5px 5px 10px;
+    height: 80%;
+    margin: 0px 5px 10px 10px;
     border-radius: 6px;
     box-sizing: border-box;
     box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
     background: white;
+    position: relative;
   }
 
   #trade-page-market-title {

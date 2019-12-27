@@ -6,8 +6,8 @@
 
     <el-container>
 
-      <el-aside :width="widthLeft">
-        <TradePageMarket :marketDatas="marketDatas"></TradePageMarket>
+      <el-aside :width="widthLeft" :style="{height: marketHeight+'px'}">
+        <TradePageMarket style="height: 99.2%" :marketDatas="marketDatas"></TradePageMarket>
       </el-aside>
 
       <el-container direction="vertical">
@@ -59,7 +59,13 @@
       return {
         widthLeft: '427px',
         widthRight: '427px',
+        windowHeight:885,
         marketDatas: {}
+      }
+    },
+    computed:{
+      marketHeight:function () {
+        return this.windowHeight*0.915
       }
     },
     watch: {
@@ -125,6 +131,7 @@
     },
     mounted() {
       this.createMarketConnect();
+      this.windowHeight=window.innerHeight;
     }
   }
 </script>
@@ -170,8 +177,8 @@
     background: white;
     color: black;
   }
-  *::-webkit-scrollbar{
-    display: none;
-  }
+  /**::-webkit-scrollbar{*/
+  /*  display: none;*/
+  /*}*/
 
 </style>
