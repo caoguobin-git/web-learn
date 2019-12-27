@@ -26,7 +26,7 @@
     height: 580px;
     border: none;
     box-sizing: border-box;
-    margin: 0px 5px 5px 5px;
+    margin: 10px 5px 5px 5px;
     border-radius: 6px;
     box-shadow: 0px 3px 6px rgba(0,0,0,0.16);
     overflow:hidden;

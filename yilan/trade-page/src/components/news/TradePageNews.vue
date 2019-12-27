@@ -106,6 +106,7 @@
       },
       getDisplayTime: function (val) {
         console.log(val)
+        return 1;
       },
 
       getStar: function (val) {

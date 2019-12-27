@@ -1,24 +1,24 @@
 <template>
   <div id="trade-page-market-container">
-    <el-row>
-      <div id="trade-page-market-title">
-        市场数据
-      </div>
-      <el-table :data="marketDataArray" max-height="800px"
-                empty-text="暂无数据" border :cell-style="myCellStyle"
-                stripe style="width: 395px">
-        <el-table-column align="center" width="90" prop="symbol" label="货币"></el-table-column>
-        <el-table-column align="center" width="80" prop="sell" label="卖出"></el-table-column>
-        <el-table-column align="center" width="80" prop="buy" label="买入"></el-table-column>
-        <el-table-column align="center" width="80" prop="diancha" label="点差"></el-table-column>
-        <el-table-column align="center" width="80" prop="high" label="最高"></el-table-column>
-        <el-table-column align="center" width="80" prop="low" label="最低"></el-table-column>
-        <el-table-column align="center" width="100" prop="rollS" label="卖出利息"></el-table-column>
-        <el-table-column align="center" width="100" prop="rollB" label="买入利息"></el-table-column>
-        <el-table-column align="center" width="80" prop="time" label="时间"></el-table-column>
-      </el-table>
+      <el-row>
+        <div id="trade-page-market-title">
+          市场数据
+        </div>
+        <el-table :data="marketDataArray" max-height="800px"
+                  empty-text="暂无数据"  :cell-style="myCellStyle"
+                  stripe style="width: 98%">
+          <el-table-column align="center" width="90" prop="symbol" label="货币"></el-table-column>
+          <el-table-column align="center" width="80" prop="sell" label="卖出"></el-table-column>
+          <el-table-column align="center" width="80" prop="buy" label="买入"></el-table-column>
+          <el-table-column align="center" width="80" prop="diancha" label="点差"></el-table-column>
+          <el-table-column align="center" width="80" prop="high" label="最高"></el-table-column>
+          <el-table-column align="center" width="80" prop="low" label="最低"></el-table-column>
+          <el-table-column align="center" width="100" prop="rollS" label="卖出利息"></el-table-column>
+          <el-table-column align="center" width="100" prop="rollB" label="买入利息"></el-table-column>
+          <el-table-column align="center" width="80" prop="time" label="时间"></el-table-column>
+        </el-table>
 
-    </el-row>
+      </el-row>
   </div>
 </template>
 

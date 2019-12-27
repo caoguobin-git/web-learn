@@ -76,7 +76,7 @@
           console.log("您的浏览器支持WebSocket");
           //实现化WebSocket对象，指定要连接的服务器地址与端口  建立连接
           //等同于socket = new WebSocket("ws://localhost:8083/checkcentersys/websocket/20");
-          this.socketForMarket = new WebSocket('ws://192.168.0.104:8088/websocket/' + socketId);
+          this.socketForMarket = new WebSocket('ws://192.168.18.5:8088/websocket/' + socketId);
           //打开事件
           this.socketForMarket.onopen = function () {
             console.log("Socket " + socketId + "已打开");
@@ -96,7 +96,7 @@
           this.socketForMarket.onclose = function () {
             console.log("Socket已关闭");
             setTimeout(function () {
-              trade.createMarketConnect();
+              myVue.createMarketConnect();
             }, 3000)
           };
           //发生了错误事件
@@ -133,7 +133,10 @@
 
   .el-header, .el-footer, .el-container {
     padding: 0;
-    margin: 0;
+    margin: 0px;
+  }
+  .el-header{
+    margin-bottom: 5px;
   }
 
   .el-main {
@@ -144,21 +147,20 @@
     margin: 3px;
   }
 
+  .el-aside{
+    margin-top: 10px;
+  }
+  #trade-page-trader-info{
+    margin-top: 10px;
+  }
+
   html, body {
     margin: 0px;
     padding: 0px;
     background: rgba(239, 239, 239, 1);
   }
 
-  #main-container {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    margin: 0px;
-    background: rgba(0, 255, 255, 0.1);
-  }
+
 
   .el-tooltip__popper {
     max-width: 300px;
@@ -168,4 +170,8 @@
     background: white;
     color: black;
   }
+  *::-webkit-scrollbar{
+    display: none;
+  }
+
 </style>

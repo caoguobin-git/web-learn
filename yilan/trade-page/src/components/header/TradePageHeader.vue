@@ -1,6 +1,9 @@
 <template>
   <div id="trade-page-header" :style="{'height':height}">
-    <img id="trade-page-header-logo" src="./img/logo.png"/>
+
+    <el-row>
+      <img id="trade-page-header-logo" src="./img/logo.png"/>
+    </el-row>
 
   </div>
 </template>
