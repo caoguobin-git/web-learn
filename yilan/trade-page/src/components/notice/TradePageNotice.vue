@@ -4,7 +4,7 @@
       <div id="trade-page-notice-title">
         近期交易提醒
       </div>
-      <el-table :data="notice" max-height="100%"  :cell-style="noticeRow" @row-click="sayHello"
+      <el-table :data="notice" height="86%"  :cell-style="noticeRow" @row-click="sayHello"
                 row-key="date" empty-text="暂无提醒" border
                 stripe style="width: 95%">
         <!--        <el-table-column-->
@@ -40,6 +40,46 @@
         }, {
           currency: 'XAG/USD',
           notice: '尽管世界贸易方面传出乐观消息，但后续的发展仍存在不确定因素。澳大利亚放缓的经济增速和政府有意义重返预算盈余的决定使澳洲联储2020年面临进一步降息的风险。而且，当利率触及0.25%下限时，有可能启动量化宽松。虽然让澳元有暂时喘息的机会，但我行预测2020年澳元兑美元将面临新的下行压力。',
+          time: '123'
+        }, {
+          currency: 'CORN1',
+          notice: '王小虎',
+          time: '123'
+        }, {
+          currency: 'CORN1',
+          notice: '王小虎',
+          time: '123'
+        }, {
+          currency: 'CORN1',
+          notice: '王小虎',
+          time: '123'
+        }, {
+          currency: 'CORN1',
+          notice: '王小虎',
+          time: '123'
+        }, {
+          currency: 'CORN1',
+          notice: '王小虎',
+          time: '123'
+        }, {
+          currency: 'CORN1',
+          notice: '王小虎',
+          time: '123'
+        }, {
+          currency: 'CORN1',
+          notice: '王小虎',
+          time: '123'
+        }, {
+          currency: 'CORN1',
+          notice: '王小虎',
+          time: '123'
+        }, {
+          currency: 'CORN1',
+          notice: '王小虎',
+          time: '123'
+        }, {
+          currency: 'CORN1',
+          notice: '王小虎',
           time: '123'
         }, {
           currency: 'CORN1',

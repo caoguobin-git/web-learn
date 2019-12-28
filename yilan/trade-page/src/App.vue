@@ -23,7 +23,7 @@
           <el-row>
             <TradePageNotice :style="{height:noticeHeight+'px'}"></TradePageNotice>
           </el-row>
-          <el-row>
+          <el-row >
             <TradePageNews :style="{height:newsHeight+'px'}"></TradePageNews>
           </el-row>
         </el-col>
@@ -34,40 +34,6 @@
     </el-col>
   </el-row>
 
-
-
-<!--    <el-container>-->
-
-<!--      <el-aside :width="widthLeft" :style="{height: marketHeight+'px'}">-->
-<!--        <TradePageMarket style="height: 98%" :marketDatas="marketDatas"></TradePageMarket>-->
-<!--      </el-aside>-->
-
-<!--      <el-container direction="vertical">-->
-<!--        <el-row>-->
-<!--          <TradePageTrader></TradePageTrader>-->
-<!--        </el-row>-->
-<!--        <el-row>-->
-<!--          <TradePageFollower></TradePageFollower>-->
-<!--        </el-row>-->
-<!--      </el-container>-->
-
-<!--      <el-aside :width="widthRight">-->
-<!--        <el-container direction="vertical">-->
-<!--          <el-row>-->
-<!--            <TradePageNotice></TradePageNotice>-->
-<!--          </el-row>-->
-<!--          <el-row>-->
-<!--            <TradePageNews></TradePageNews>-->
-<!--          </el-row>-->
-
-<!--        </el-container>-->
-<!--      </el-aside>-->
-
-<!--    </el-container>-->
-<!--    <el-footer style="height: 30px">-->
-<!--      <TradePageFooter></TradePageFooter>-->
-<!--    </el-footer>-->
-<!--  </el-container>-->
 </template>
 
 <script>

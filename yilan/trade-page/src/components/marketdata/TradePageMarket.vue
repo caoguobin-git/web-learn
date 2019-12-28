@@ -100,8 +100,4 @@
     font-size: 12px;
   }
 
-  .el-table__body-wrapper::-webkit-scrollbar {
-    /*width: 0;宽度为0隐藏*/
-    width: 0px;
-  }
 </style>

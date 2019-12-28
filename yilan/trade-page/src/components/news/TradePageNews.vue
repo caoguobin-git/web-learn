@@ -4,10 +4,9 @@
     <div id="trade-page-news-title">
       最新新闻资讯
     </div>
-    <p style="text-indent: 5px;margin: 0px;padding: 0px;font-size: 14px"><i style="color: blue"
-                                                                            class="el-icon-date"></i>&nbsp;&nbsp;&nbsp;{{date
+    <p style="text-indent: 5px;margin: 0px;padding: 0px;font-size: 14px"><i style="color: blue" class="el-icon-date"></i>&nbsp;&nbsp;&nbsp;{{date
       | formatDate}}</p>
-    <el-table :data="news" max-height="270" :show-header=false :cell-style="newsRow" @row-click="sayHello"
+    <el-table :data="news" height="80%" :show-header=false  :cell-style="newsRow" @row-click="sayHello"
               row-key="date" empty-text="暂无新闻" border
               stripe style="width:95%">
       <el-table-column :index="0" header-align="center" type="extend" show-overflow-tooltip
@@ -64,6 +63,41 @@
         }, {
           country: 'USA',
           important: 4,
+          content: '啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀',
+          time: 15845824
+        }, {
+          country: 'USA',
+          important: 5,
+          content: '啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀',
+          time: 15845824
+        }, {
+          country: 'USA',
+          important: 5,
+          content: '啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀',
+          time: 15845824
+        }, {
+          country: 'USA',
+          important: 5,
+          content: '啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀',
+          time: 15845824
+        }, {
+          country: 'USA',
+          important: 5,
+          content: '啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀',
+          time: 15845824
+        }, {
+          country: 'USA',
+          important: 5,
+          content: '啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀',
+          time: 15845824
+        }, {
+          country: 'USA',
+          important: 5,
+          content: '啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀',
+          time: 15845824
+        }, {
+          country: 'USA',
+          important: 5,
           content: '啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀',
           time: 15845824
         }, {
@@ -162,10 +196,4 @@
     border-left: 2px solid rgba(112, 189, 199, 1);
   }
 
-  .el-table {
-    overflow: hidden;
-    text-align: center;
-    margin: auto;
-    font-size: 12px;
-  }
 </style>
