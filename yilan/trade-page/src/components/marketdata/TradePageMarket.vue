@@ -1,6 +1,6 @@
 <template>
   <div id="trade-page-market-container">
-      <el-row>
+<!--      <el-row>-->
         <div id="trade-page-market-title">
           市场数据
         </div>
@@ -18,7 +18,7 @@
           <el-table-column align="center" width="80" prop="time" label="时间"></el-table-column>
         </el-table>
 
-      </el-row>
+<!--      </el-row>-->
   </div>
 </template>
 
@@ -28,7 +28,7 @@
     props: ['marketDatas'],
     data() {
       return {
-        tableHeight:900,
+
         myCellStyle:{padding:'3px 0px'},
         marketRow: {
           color: 'black',
@@ -44,6 +44,9 @@
       // },1000)
     },
     computed: {
+      tableHeight:function(){
+        return 800;
+      },
       marketDataArray: function () {
         let arr = []
         for (let i in this.marketDatas) {
@@ -69,8 +72,9 @@
 
 <style scoped>
   #trade-page-market-container {
-    height: 80%;
-    margin: 0px 5px 10px 10px;
+    margin: 5px 5px 5px 10px;
+    height: 100%;
+    padding-top: 17px;
     border-radius: 6px;
     box-sizing: border-box;
     box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
@@ -79,7 +83,7 @@
   }
 
   #trade-page-market-title {
-    margin: 18px 17px;
+    margin: 3px 17px;
     font-size: 18px;
     height: 17px;
     line-height: 17px;

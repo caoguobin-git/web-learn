@@ -1,37 +1,37 @@
 <template>
   <div id="trade-page-news-container">
-    <el-row>
-      <div id="trade-page-news-title">
-        最新新闻资讯
-      </div>
-      <p style="text-indent: 5px;margin: 0px;padding: 0px;font-size: 14px"><i style="color: blue"
-                                                                              class="el-icon-date"></i>&nbsp;&nbsp;&nbsp;{{date
-        | formatDate}}</p>
-      <el-table :data="news" max-height="270" :show-header=false :cell-style="newsRow" @row-click="sayHello"
-                row-key="date" empty-text="暂无新闻" border
-                stripe style="width: 395px">
-        <el-table-column :index="0" header-align="center" type="extend" show-overflow-tooltip
-                         label="国家/地区"
-                         width="80">
-          <template slot-scope="scope">
-            <div style="text-align: center">
-              <span>{{scope.row.country}}</span>
-              <br>
-              <span v-html="getStar(scope.row.important)"></span>
-            </div>
-          </template>
-        </el-table-column>
-        <el-table-column :index="0" header-align="center" type="extend" show-overflow-tooltip
-                         label="新闻内容"
-                         width="204" prop="content">
-        </el-table-column>
-        <el-table-column align="center" label="时间">
-          <template slot-scope="scope">
-            {{getDisplayTime(scope.row.time)}}
-          </template>
-        </el-table-column>
-      </el-table>
-    </el-row>
+    <!--    <el-row>-->
+    <div id="trade-page-news-title">
+      最新新闻资讯
+    </div>
+    <p style="text-indent: 5px;margin: 0px;padding: 0px;font-size: 14px"><i style="color: blue"
+                                                                            class="el-icon-date"></i>&nbsp;&nbsp;&nbsp;{{date
+      | formatDate}}</p>
+    <el-table :data="news" max-height="270" :show-header=false :cell-style="newsRow" @row-click="sayHello"
+              row-key="date" empty-text="暂无新闻" border
+              stripe style="width:95%">
+      <el-table-column :index="0" header-align="center" type="extend" show-overflow-tooltip
+                       label="国家/地区"
+                       width="80">
+        <template slot-scope="scope">
+          <div style="text-align: center">
+            <span>{{scope.row.country}}</span>
+            <br>
+            <span v-html="getStar(scope.row.important)"></span>
+          </div>
+        </template>
+      </el-table-column>
+      <el-table-column :index="0" header-align="center" type="extend" show-overflow-tooltip
+                       label="新闻内容"
+                       width="204" prop="content">
+      </el-table-column>
+      <el-table-column align="center" label="时间">
+        <template slot-scope="scope">
+          {{getDisplayTime(scope.row.time)}}
+        </template>
+      </el-table-column>
+    </el-table>
+    <!--    </el-row>-->
   </div>
 </template>
 
@@ -146,6 +146,7 @@
     box-sizing: border-box;
     margin: 5px 10px 5px 5px;
     border-radius: 6px;
+    padding-top: 1px;
     box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
     background: white;
   }

@@ -24,7 +24,7 @@
   }
 
   #trade-page-follower-info {
-    height: 285px;
+    height: 100%;
     box-sizing: border-box;
     margin: 5px;
     border-radius: 6px;

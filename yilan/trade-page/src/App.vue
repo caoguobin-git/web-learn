@@ -1,41 +1,73 @@
 <template>
-  <el-container>
-    <el-header>
-      <TradePageHeader></TradePageHeader>
-    </el-header>
-
-    <el-container>
-
-      <el-aside :width="widthLeft" :style="{height: marketHeight+'px'}">
-        <TradePageMarket style="height: 99.2%" :marketDatas="marketDatas"></TradePageMarket>
-      </el-aside>
-
-      <el-container direction="vertical">
-        <el-row>
-          <TradePageTrader></TradePageTrader>
-        </el-row>
-        <el-row>
-          <TradePageFollower></TradePageFollower>
-        </el-row>
-      </el-container>
-
-      <el-aside :width="widthRight">
-        <el-container direction="vertical">
+<!--  <el-container>-->
+  <el-row>
+    <el-col :span=24>
+      <el-row id="trade-header-row">
+        <el-col :span=24>
+          <TradePageHeader></TradePageHeader>
+        </el-col>
+      </el-row>
+      <el-row id="trade-body-row" :style="{height:bodyHeight+'px'}">
+        <el-col style="height:100%" :span=4>
+          <TradePageMarket style="height: 100%" :marketDatas="marketDatas"></TradePageMarket>
+        </el-col>
+        <el-col style="height:100%" :span=13>
+          <el-row >
+            <TradePageTrader :style="{height:traderHeight+'px'}" ></TradePageTrader>
+          </el-row>
+          <el-row >
+            <TradePageFollower :style="{height:followerHeight+'px'}"></TradePageFollower>
+          </el-row>
+        </el-col>
+        <el-col :span=7>
           <el-row>
-            <TradePageNotice></TradePageNotice>
+            <TradePageNotice :style="{height:noticeHeight+'px'}"></TradePageNotice>
           </el-row>
           <el-row>
-            <TradePageNews></TradePageNews>
+            <TradePageNews :style="{height:newsHeight+'px'}"></TradePageNews>
           </el-row>
+        </el-col>
+      </el-row>
+      <el-row id="trade-footer-row">
+        <TradePageFooter></TradePageFooter>
+      </el-row>
+    </el-col>
+  </el-row>
 
-        </el-container>
-      </el-aside>
 
-    </el-container>
-    <el-footer style="height: 30px">
-      <TradePageFooter></TradePageFooter>
-    </el-footer>
-  </el-container>
+
+<!--    <el-container>-->
+
+<!--      <el-aside :width="widthLeft" :style="{height: marketHeight+'px'}">-->
+<!--        <TradePageMarket style="height: 98%" :marketDatas="marketDatas"></TradePageMarket>-->
+<!--      </el-aside>-->
+
+<!--      <el-container direction="vertical">-->
+<!--        <el-row>-->
+<!--          <TradePageTrader></TradePageTrader>-->
+<!--        </el-row>-->
+<!--        <el-row>-->
+<!--          <TradePageFollower></TradePageFollower>-->
+<!--        </el-row>-->
+<!--      </el-container>-->
+
+<!--      <el-aside :width="widthRight">-->
+<!--        <el-container direction="vertical">-->
+<!--          <el-row>-->
+<!--            <TradePageNotice></TradePageNotice>-->
+<!--          </el-row>-->
+<!--          <el-row>-->
+<!--            <TradePageNews></TradePageNews>-->
+<!--          </el-row>-->
+
+<!--        </el-container>-->
+<!--      </el-aside>-->
+
+<!--    </el-container>-->
+<!--    <el-footer style="height: 30px">-->
+<!--      <TradePageFooter></TradePageFooter>-->
+<!--    </el-footer>-->
+<!--  </el-container>-->
 </template>
 
 <script>
@@ -64,8 +96,26 @@
       }
     },
     computed:{
+      noticeHeight:function(){
+        return (this.windowHeight-120)*0.55;
+      },
+      newsHeight:function(){
+        return (this.windowHeight-120)-this.noticeHeight;
+      },
+      traderHeight:function(){
+        return (this.windowHeight-120)*0.65;
+      },
+      followerHeight:function(){
+        return (this.windowHeight-120)-this.traderHeight;
+      },
+      bodyHeight:function(){
+        return this.windowHeight-110;
+      },
+      headerHeight:function(){
+        return this.windowHeight*0.06
+      },
       marketHeight:function () {
-        return this.windowHeight*0.915
+        return this.windowHeight*0.912
       }
     },
     watch: {
@@ -82,7 +132,7 @@
           console.log("您的浏览器支持WebSocket");
           //实现化WebSocket对象，指定要连接的服务器地址与端口  建立连接
           //等同于socket = new WebSocket("ws://localhost:8083/checkcentersys/websocket/20");
-          this.socketForMarket = new WebSocket('ws://192.168.18.5:8088/websocket/' + socketId);
+          this.socketForMarket = new WebSocket('ws://192.168.0.104:8088/websocket/' + socketId);
           //打开事件
           this.socketForMarket.onopen = function () {
             console.log("Socket " + socketId + "已打开");
@@ -130,44 +180,22 @@
       }
     },
     mounted() {
-      this.createMarketConnect();
+      // this.createMarketConnect();
       this.windowHeight=window.innerHeight;
+      var that =this;
+      window.onresize=function () {
+        that.windowHeight=window.innerHeight;
+      }
     }
   }
 </script>
 
 <style>
-
-  .el-header, .el-footer, .el-container {
-    padding: 0;
-    margin: 0px;
-  }
-  .el-header{
-    margin-bottom: 5px;
-  }
-
-  .el-main {
-    padding: 0px;
-  }
-
-  .el-footer h6 {
-    margin: 3px;
-  }
-
-  .el-aside{
-    margin-top: 10px;
-  }
-  #trade-page-trader-info{
-    margin-top: 10px;
-  }
-
   html, body {
     margin: 0px;
     padding: 0px;
     background: rgba(239, 239, 239, 1);
   }
-
-
 
   .el-tooltip__popper {
     max-width: 300px;

@@ -23,10 +23,10 @@
     font-weight: bold;
   }
   #trade-page-trader-info{
-    height: 580px;
+    height: 100%;
     border: none;
     box-sizing: border-box;
-    margin: 10px 5px 5px 5px;
+    margin: 5px;
     border-radius: 6px;
     box-shadow: 0px 3px 6px rgba(0,0,0,0.16);
     overflow:hidden;

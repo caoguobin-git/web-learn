@@ -1,13 +1,12 @@
 <template>
   <div id="trade-page-notice-container">
 
-    <el-row>
       <div id="trade-page-notice-title">
         近期交易提醒
       </div>
-      <el-table :data="notice" max-height="440"  :cell-style="noticeRow" @row-click="sayHello"
+      <el-table :data="notice" max-height="100%"  :cell-style="noticeRow" @row-click="sayHello"
                 row-key="date" empty-text="暂无提醒" border
-                stripe style="width: 395px">
+                stripe style="width: 95%">
         <!--        <el-table-column-->
         <!--          type="index"-->
         <!--          :index="1">-->
@@ -21,7 +20,6 @@
         <el-table-column align="center" prop="time" label="时间"></el-table-column>
       </el-table>
 
-    </el-row>
   </div>
 </template>
 
@@ -64,9 +62,10 @@
 
 <style scoped>
   #trade-page-notice-container {
-    height: 500px;
+    /*height: 500px;*/
     box-sizing: border-box;
-    margin: 0px 10px 5px 5px;
+    padding-top: 1px;
+    margin: 5px 10px 5px 5px;
     border-radius: 6px;
     box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
     background: white;
