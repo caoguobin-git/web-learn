@@ -92,6 +92,7 @@
     background: white;
     width: 77.2%;
     margin: auto;
+    border-radius: 6px;
   }
 
   .fade-enter-active, .fade-leave-active {
@@ -106,6 +107,7 @@
     /*width: 100%;*/
     height: 100%;
     animation: myDemo linear 3s infinite;
+    border-radius: 6px;
   }
   @keyframes myDemo {
     0%{
