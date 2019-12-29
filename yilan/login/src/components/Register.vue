@@ -4,22 +4,22 @@
     <p style="height: 18px;font-size: 14px;margin-top:20px" >{{loginMsg}}</p>
     <div class="input-container">
       <i class="el-icon-user"></i>
-      <input type="text" placeholder="请输入账号" v-model="loginUsername"></input>
-      <i class="el-icon-close" @click="loginUsername=''" v-if="loginUsername!=''"></i>
+      <input type="text" placeholder="请输入账号" v-model="registerUsername"></input>
+      <i class="el-icon-close" @click="registerUsername=''" v-if="registerUsername!=''"></i>
     </div>
-    <p class="notice-msg">此账号已被占用</p>
+    <p class="notice-msg">{{registerUsernameMsg}}</p>
     <div class="input-container" >
       <i class="el-icon-lock"></i>
-      <input type="password" placeholder="请输入密码" v-model="loginPassword"></input>
-      <i class="el-icon-close" @click="loginPassword=''" v-if="loginPassword!=''"></i>
+      <input type="password" placeholder="请输入密码" v-model="registerPassword"></input>
+      <i class="el-icon-close" @click="registerPassword=''" v-if="registerPassword!=''"></i>
     </div>
-    <p class="notice-msg">密码不符合规范</p>
+    <p class="notice-msg">{{registerPasswordMsg}}</p>
     <div class="input-container" >
       <i class="el-icon-lock"></i>
-      <input type="password" placeholder="请输入密码" v-model="loginPassword"></input>
-      <i class="el-icon-close" @click="loginPassword=''" v-if="loginPassword!=''"></i>
+      <input type="password" placeholder="请确认密码" v-model="registerConfirmPassword"></input>
+      <i class="el-icon-close" @click="registerConfirmPassword=''" v-if="registerConfirmPassword!=''"></i>
     </div>
-    <p class="notice-msg">两次密码不一致</p>
+    <p class="notice-msg">{{registerConfirmPasswordMsg}}</p>
 
     <div style="margin-top: 50px;text-align: justify-all">
       已有账号?<router-link to="/login">去登录</router-link>
@@ -35,9 +35,21 @@
       data(){
           return{
             loginMsg:'Customer Documentary Management 系统注册',
-            loginUsername:'',
-            loginPassword:''
+            registerUsername:'',
+            registerPassword:'',
+            registerConfirmPassword:''
           }
+      },
+      computed:{
+        registerUsernameMsg(){
+          return (this.registerUsername.length==0)?'':'此账号已被占用';
+        },
+        registerPasswordMsg(){
+          return (this.registerPassword.length==0||this.registerPassword.length>5)?'':'密码不符合规范';
+        },
+        registerConfirmPasswordMsg(){
+          return (this.registerConfirmPassword.length==0||this.registerPassword==this.registerConfirmPassword)?'':'两次密码不一致';
+        }
       },
       mounted() {
           document.title='注册'
@@ -54,6 +66,7 @@
     text-align: left;
     font-size: 20px;
   }
+
   .input-container>input{
     border: none;
     outline: none;
@@ -62,15 +75,21 @@
     margin-left: 5px;
   }
 
+  .input-container>i{
+    font-size: 20px;
+  }
+
   input::-webkit-input-placeholder { /* WebKit browsers */
     font-size: 14px;
   }
 
   .notice-msg{
     font-size: 14px;
-    margin-left: 180px;
+    width: 362px;
+    height: 20px;
+    line-height: 20px;
+    margin:2px auto;
     text-align: left;
-    margin-top: 2px;
     color: red;
   }
 </style>
