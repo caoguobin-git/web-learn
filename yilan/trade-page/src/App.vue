@@ -37,7 +37,6 @@
 </template>
 
 <script>
-  import PageFirst from "./components/PageFirst";
   import TradePageHeader from "./components/header/TradePageHeader";
   import TradePageFooter from "./components/footer/TradePageFooter";
   import TradePageMarket from "./components/marketdata/TradePageMarket";
@@ -51,7 +50,7 @@
     components: {
       TradePageNews,
       TradePageNotice,
-      TradePageFollower, TradePageTrader, TradePageMarket, TradePageFooter, TradePageHeader, PageFirst
+      TradePageFollower, TradePageTrader, TradePageMarket, TradePageFooter, TradePageHeader
     },
     data() {
       return {
