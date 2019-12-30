@@ -15,7 +15,8 @@
           <el-table-column align="center" width="80" prop="low" label="最低"></el-table-column>
           <el-table-column align="center" width="100" prop="rollS" label="卖出利息"></el-table-column>
           <el-table-column align="center" width="100" prop="rollB" label="买入利息"></el-table-column>
-          <el-table-column align="center" width="80" prop="time" label="时间"></el-table-column>
+          <el-table-column align="center" width="200" prop="time" label="时间"></el-table-column>
+          <el-table-column align="center" width="80" prop="pipCost" label="点值"></el-table-column>
         </el-table>
 
 <!--      </el-row>-->
@@ -55,19 +56,25 @@
           a.buy = parseFloat(a.buy).toFixed(a.precision);
           a.high = parseFloat(a.high).toFixed(a.precision);
           a.low = parseFloat(a.low).toFixed(a.precision);
-          a.time=12
-          a.diancha=((a.buy-a.sell)/a.pointSize).toFixed(2)
+          a.diancha=((a.buy-a.sell)/a.pointSize).toFixed(2);
+          a.pipCost=parseFloat(a.pipCost).toFixed(5);
+          // console.log(a.time)
           arr.push(a)
         }
         return arr;
       }
     },
+    methods:{
+
+    },
+
     watch: {
       marketDatas: function (val, valOld) {
-        console.log(val)
+        // console.log(val)
       }
     }
   }
+
 </script>
 
 <style scoped>

@@ -8,10 +8,10 @@
         </el-col>
       </el-row>
       <el-row id="trade-body-row" :style="{height:bodyHeight+'px'}">
-        <el-col style="height:100%" :span=4>
+        <el-col style="height:100%" :span=14>
           <TradePageMarket style="height: 100%" :marketDatas="marketDatas"></TradePageMarket>
         </el-col>
-        <el-col style="height:100%" :span=13>
+        <el-col style="height:100%" :span=5>
           <el-row >
             <TradePageTrader :style="{height:traderHeight+'px'}" ></TradePageTrader>
           </el-row>
@@ -19,7 +19,7 @@
             <TradePageFollower :style="{height:followerHeight+'px'}"></TradePageFollower>
           </el-row>
         </el-col>
-        <el-col :span=7>
+        <el-col :span=5>
           <el-row>
             <TradePageNotice :style="{height:noticeHeight+'px'}"></TradePageNotice>
           </el-row>
@@ -58,7 +58,8 @@
         widthLeft: '427px',
         widthRight: '427px',
         windowHeight:885,
-        marketDatas: {}
+        marketDatas: {},
+        socketForMarket:{}
       }
     },
     computed:{
@@ -98,19 +99,19 @@
           console.log("您的浏览器支持WebSocket");
           //实现化WebSocket对象，指定要连接的服务器地址与端口  建立连接
           //等同于socket = new WebSocket("ws://localhost:8083/checkcentersys/websocket/20");
-          this.socketForMarket = new WebSocket('ws://192.168.0.104:8088/websocket/' + socketId);
+          this.socketForMarket = new WebSocket('ws://192.168.0.104:8090/price');
           //打开事件
           this.socketForMarket.onopen = function () {
             console.log("Socket " + socketId + "已打开");
           };
           //获得消息事件
           this.socketForMarket.onmessage = function (msg) {
-            // console.log(msg.data)
             var messages = msg.data.split(";");
+            // console.log(messages)
             if (messages[0] === "marketdata") {
 
-              myVue.handlerMarketDatas(messages)
-              // myVue.marketDatas.push(messages)
+              myVue.handleMarketDatas(messages)
+              // myVue.mark etDatas.push(messages)
             }
             // console.log(messages)
           };
@@ -129,7 +130,7 @@
 
         }
       },
-      handlerMarketDatas: function (message) {
+      handleMarketDatas: function (message) {
         // this.marketDatas[val[1]] = val
         this.$set(this.marketDatas, message[1], {
           symbol: message[1],
@@ -139,14 +140,15 @@
           low: parseFloat(message[5]),
           rollS: parseFloat(message[6]),
           rollB: parseFloat(message[7]),
-          time: parseInt(message[8]),
+          time: new Date(parseFloat(message[8])).toLocaleString(),
           pointSize: parseFloat(message[9]),
-          precision: parseInt(message[10])
+          precision: parseInt(message[10]),
+          pipCost:parseFloat(message[11])
         })
       }
     },
     mounted() {
-      // this.createMarketConnect();
+      this.createMarketConnect();
       this.windowHeight=window.innerHeight;
       var that =this;
       window.onresize=function () {

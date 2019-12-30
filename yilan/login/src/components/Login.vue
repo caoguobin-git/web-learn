@@ -13,9 +13,9 @@
       <i class="el-icon-close" @click="loginPassword=''" v-if="loginPassword!=''"></i>
     </div>
     <div style="margin-top: 50px;text-align: justify-all">
-      还没有账号?<router-link to="/register">去注册</router-link>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <el-button type="warning" round>&nbsp;&nbsp;登&nbsp;录&nbsp;&nbsp;</el-button>
+      还没有账号?<router-link to="/register" style="color: #e6a23c">去注册</router-link>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <el-button type="warning" round style="background: rgba(242,180,71,1)">&nbsp;&nbsp;登&nbsp;录&nbsp;&nbsp;</el-button>
     </div>
   </div>
 

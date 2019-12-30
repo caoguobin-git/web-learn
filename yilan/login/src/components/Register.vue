@@ -1,29 +1,29 @@
 <template>
   <div>
     <img src="../assets/logo.png"/>
-    <p style="height: 18px;font-size: 14px;margin-top:20px" >{{loginMsg}}</p>
+    <p style="height: 18px;font-size: 14px;margin-top:20px;margin-bottom: 30px" >{{loginMsg}}</p>
     <div class="input-container">
       <i class="el-icon-user"></i>
       <input type="text" placeholder="请输入账号" v-model="registerUsername"></input>
-      <i class="el-icon-close" @click="registerUsername=''" v-if="registerUsername!=''"></i>
+      <i class="el-icon-close" :style="{color:registerUsernameMsg==''?'black':'red'}" @click="registerUsername=''" v-if="registerUsername!=''"></i>
     </div>
     <p class="notice-msg">{{registerUsernameMsg}}</p>
     <div class="input-container" >
       <i class="el-icon-lock"></i>
       <input type="password" placeholder="请输入密码" v-model="registerPassword"></input>
-      <i class="el-icon-close" @click="registerPassword=''" v-if="registerPassword!=''"></i>
+      <i class="el-icon-close" :style="{color:registerPasswordMsg==''?'black':'red'}" @click="registerPassword=''" v-if="registerPassword!=''"></i>
     </div>
     <p class="notice-msg">{{registerPasswordMsg}}</p>
     <div class="input-container" >
       <i class="el-icon-lock"></i>
       <input type="password" placeholder="请确认密码" v-model="registerConfirmPassword"></input>
-      <i class="el-icon-close" @click="registerConfirmPassword=''" v-if="registerConfirmPassword!=''"></i>
+      <i class="el-icon-close" :style="{color:registerConfirmPassword!=registerPassword?'red':'black'}" @click="registerConfirmPassword=''" v-if="registerConfirmPassword!=''"></i>
     </div>
     <p class="notice-msg">{{registerConfirmPasswordMsg}}</p>
 
-    <div style="margin-top: 50px;text-align: justify-all">
-      已有账号?<router-link to="/login">去登录</router-link>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <div style="margin-top: 20px;text-align: justify-all">
+      已有账号?<router-link to="/login" style="color: #e6a23c">去登录</router-link>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <el-button type="warning" round>&nbsp;&nbsp;注&nbsp;册&nbsp;&nbsp;</el-button>
     </div>
   </div>
@@ -61,8 +61,8 @@
   .input-container{
     border-bottom: 1px solid black;
     width: 362px;
-    margin: 20px auto 0px auto;
-    padding: 10px 0px 5px 0px;
+    margin: 15px auto 0px auto;
+    padding: 5px 0px 5px 0px;
     text-align: left;
     font-size: 20px;
   }

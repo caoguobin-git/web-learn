@@ -4,7 +4,7 @@
     <div id="trade-page-news-title">
       最新新闻资讯
     </div>
-    <p style="text-indent: 5px;margin: 0px;padding: 0px;font-size: 14px"><i style="color: blue" class="el-icon-date"></i>&nbsp;&nbsp;&nbsp;{{date
+    <p style="text-indent: 5px;margin: 0px;padding: 0px;font-size: 14px"><i style="color: rgba(112,189,199,1)" class="el-icon-date"></i>&nbsp;&nbsp;&nbsp;{{date
       | formatDate}}</p>
     <el-table :data="news" height="80%" :show-header=false  :cell-style="newsRow" @row-click="sayHello"
               row-key="date" empty-text="暂无新闻" border
@@ -139,7 +139,7 @@
 
       },
       getDisplayTime: function (val) {
-        console.log(val)
+        // console.log(val)
         return 1;
       },
 
