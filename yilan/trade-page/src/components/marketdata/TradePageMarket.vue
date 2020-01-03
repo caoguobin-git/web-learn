@@ -4,10 +4,10 @@
         <div id="trade-page-market-title">
           市场数据
         </div>
-        <el-table :data="marketDataArray" :max-height="tableHeight+'px'"
+        <el-table :data="marketDataArray" height="95%"
                   empty-text="暂无数据"  :cell-style="myCellStyle"
                   stripe style="width: 98%">
-          <el-table-column align="center" width="90" prop="symbol" label="货币"></el-table-column>
+          <el-table-column align="center" width="100" prop="symbol" label="货币"></el-table-column>
           <el-table-column align="center" width="80" prop="sell" label="卖出"></el-table-column>
           <el-table-column align="center" width="80" prop="buy" label="买入"></el-table-column>
           <el-table-column align="center" width="80" prop="diancha" label="点差"></el-table-column>
