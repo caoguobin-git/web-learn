@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    var i1=0;
+    var pic = document.getElementsByTagName('img');
+    for (var i=0;i<pic.length;i++){
+        pic[i].style.border='5px solid red';
+        pic[i].style.borderRadius='20px';
+    }
+    setInterval(function () {
+        for (var i=0;i<pic.length;i++){
+            pic[i].style.transform='rotate('+(i1*10)+'deg)'
+        }
+        i1++;
+    },10)
+</script>
