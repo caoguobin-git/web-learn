@@ -15,7 +15,7 @@
     <div style="margin-top: 50px;text-align: justify-all">
       还没有账号?<router-link to="/register" style="color: #e6a23c">去注册</router-link>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <el-button type="warning" round style="background: rgba(242,180,71,1)">&nbsp;&nbsp;登&nbsp;录&nbsp;&nbsp;</el-button>
+      <el-button type="warning" @click="doLogin" :disabled="loginBtnDisabled" round >&nbsp;&nbsp;登&nbsp;录&nbsp;&nbsp;</el-button>
     </div>
   </div>
 
@@ -29,6 +29,43 @@
         loginMsg:'Customer Documentary Management 系统登录',
         loginUsername:'',
         loginPassword:''
+      }
+    },
+    methods:{
+      doLogin(){
+        console.log("do login")
+
+        var param = {
+          username: this.loginUsername,
+          password: this.loginPassword
+        }
+
+        var that=this;
+
+        $.ajax({
+          url: '/user/login',
+          dataType: 'json',
+          data: param,
+          type: 'post',
+          success: function (res) {
+            that.loginMsg='登录成功，2秒后跳转'
+            setTimeout(function () {
+              window.location.href="/tradeIndex"
+            },2000)
+          },
+          error: function (res) {
+
+            that.loginMsg=res.responseJSON.message
+            setTimeout(function () {
+              that.loginMsg='Customer Documentary Management 系统登录'
+            },1500)
+          }
+        })
+      }
+    },
+    computed:{
+      loginBtnDisabled(){
+        return this.loginUsername.trim()==''||this.loginPassword.trim()=='';
       }
     },
     mounted() {

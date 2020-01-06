@@ -36,7 +36,8 @@
 
 <script>
   export default {
-    name: "TradePageNews", data() {
+    name: "TradePageNews",
+    data() {
       return {
         date: new Date(),
         showNewsHeader: false,

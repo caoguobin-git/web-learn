@@ -1,18 +1,29 @@
 <template>
   <div id="trade-page-follower-info">
     <div id="trade-page-follower-title">我的交易信息</div>
-    <el-menu class="el-menu-demo" default-active="2" mode="horizontal">
-      <el-menu-item index="1">挂单</el-menu-item>
-      <el-menu-item index="2">开仓</el-menu-item>
-      <el-menu-item index="3">平仓</el-menu-item>
-      <el-menu-item index="4">历史</el-menu-item>
-    </el-menu>
+    <component @changeDisplayPage="changeDisplayPage($event)" :is="currentFollowerInfo"></component>
   </div>
 </template>
 
+
 <script>
+  import TradePageFollowerIndex from "./TradePageFollowerIndex";
+  import TradePageFollowerLogin from "./TradePageFollowerLogin";
+  import TradePageFollowerDisplay from "./TradePageFollowerDisplay";
   export default {
-    name: "TradePageFollower"
+    name: "TradePageFollower",
+    components: {TradePageFollowerDisplay, TradePageFollowerLogin, TradePageFollowerIndex},
+    data(){
+      return{
+        loginFxcmOk:true,
+        currentFollowerInfo:'TradePageFollowerIndex'
+      }
+    },
+    methods:{
+      changeDisplayPage(event){
+        this.currentFollowerInfo=event
+      }
+    }
   }
 </script>
 
@@ -33,7 +44,7 @@
     overflow: hidden;
   }
   #trade-page-follower-title{
-    margin: 18px 17px;
+    margin: 18px 17px 8px;
     font-size: 18px;
     height: 17px;
     line-height: 17px;

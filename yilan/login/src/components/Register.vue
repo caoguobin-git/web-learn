@@ -27,7 +27,6 @@
     <div style="margin-top: 20px;text-align: justify-all">
       已有账号?
       <router-link to="/login" style="color: #e6a23c">去登录</router-link>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <el-button @click="doRegister" :disabled="registerBtnDisabled" type="warning" round>&nbsp;&nbsp;注&nbsp;册&nbsp;&nbsp;</el-button>
     </div>
   </div>
@@ -65,7 +64,7 @@
           type: 'post',
           success: function (res) {
             console.log(res)
-            alert('注册成功');
+            alert('注册成功\n2秒后跳转到登录页面');
             setTimeout(function () {
               window.location.href="/index"
             },2000)

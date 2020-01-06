@@ -8,10 +8,10 @@
         </el-col>
       </el-row>
       <el-row id="trade-body-row" :style="{height:bodyHeight+'px'}">
-        <el-col style="height:100%" :span=14>
+        <el-col style="height:100%;overflow-x: scroll;overflow-y: hidden" :span=5>
           <TradePageMarket style="height: 100%" :marketDatas="marketDatas"></TradePageMarket>
         </el-col>
-        <el-col style="height:100%" :span=5>
+        <el-col style="height:100%" :span=14>
           <el-row >
             <TradePageTrader :style="{height:traderHeight+'px'}" ></TradePageTrader>
           </el-row>
@@ -98,13 +98,14 @@
           console.log("您的浏览器支持WebSocket");
           //实现化WebSocket对象，指定要连接的服务器地址与端口  建立连接
           //等同于socket = new WebSocket("ws://localhost:8083/checkcentersys/websocket/20");
-          this.socketForMarket = new WebSocket('ws://192.168.18.5:8090/price');
+          this.socketForMarket = new WebSocket('ws://192.168.0.104:8090/price');
           //打开事件
           this.socketForMarket.onopen = function () {
             console.log("Socket " + socketId + "已打开");
           };
           //获得消息事件
           this.socketForMarket.onmessage = function (msg) {
+            // console.log(msg)
             var messages = msg.data.split(";");
             // console.log(messages)
             if (messages[0] === "marketdata") {
@@ -139,16 +140,20 @@
           low: parseFloat(message[5]),
           rollS: parseFloat(message[6]),
           rollB: parseFloat(message[7]),
-          time: new Date(parseFloat(message[8])).toLocaleString(),
+          time: new Date(parseFloat(message[8])).toLocaleTimeString(),
           pointSize: parseFloat(message[9]),
           precision: parseInt(message[10]),
           pipCost:parseFloat(message[11])
         })
+      },
+      init(){
+        this.createMarketConnect();
+        this.windowHeight=window.innerHeight;
       }
     },
     mounted() {
-      this.createMarketConnect();
-      this.windowHeight=window.innerHeight;
+      this.init();
+
       var that =this;
       window.onresize=function () {
         that.windowHeight=window.innerHeight;
