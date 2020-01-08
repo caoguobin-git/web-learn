@@ -98,7 +98,7 @@
           console.log("您的浏览器支持WebSocket");
           //实现化WebSocket对象，指定要连接的服务器地址与端口  建立连接
           //等同于socket = new WebSocket("ws://localhost:8083/checkcentersys/websocket/20");
-          this.socketForMarket = new WebSocket('ws://192.168.0.104:8090/price');
+          this.socketForMarket = new WebSocket('ws://192.168.0.106:8090/price');
           //打开事件
           this.socketForMarket.onopen = function () {
             console.log("Socket " + socketId + "已打开");
