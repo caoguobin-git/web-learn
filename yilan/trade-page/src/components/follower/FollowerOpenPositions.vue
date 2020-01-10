@@ -1,25 +1,15 @@
 <template>
   <div class="position-main-container">
     <div class="position-title-container">
-      <div class="follower-title-tag" style="width: 8%">成交单据</div>
-      <div class="follower-title-tag" style="width: 10%">账号</div>
-      <div class="follower-title-tag" style="width: 5%">货币</div>
-      <div class="follower-title-tag" style="width: 8%">数量</div>
-      <div class="follower-title-tag" style="width: 5%">卖/买</div>
-      <div class="follower-title-tag" style="width: 10%">开仓</div>
-      <div class="follower-title-tag" style="width: 10%">平仓</div>
-      <div class="follower-title-tag" style="width: 8%">盈/亏</div>
-      <div class="follower-title-tag" style="width: 8%">总盈/亏</div>
-      <div class="follower-title-tag" style="width: 8%">保证金</div>
-      <div class="follower-title-tag" style="width: 15%">时间</div>
+      <div class="follower-title-tag" style="width: 8%">成交单据</div><div class="follower-title-tag" style="width: 8%">账号</div><div class="follower-title-tag" style="width: 8%">货币</div><div class="follower-title-tag" style="width: 5%">数量</div><div class="follower-title-tag" style="width: 5%">卖/买</div><div class="follower-title-tag" style="width: 10%">开仓</div><div class="follower-title-tag" style="width: 10%">平仓</div><div class="follower-title-tag" style="width: 8%">盈/亏</div><div class="follower-title-tag" style="width: 8%">总盈/亏</div><div class="follower-title-tag" style="width: 8%">保证金</div><div class="follower-title-tag" style="width: 14%">时间</div>
     </div>
     <div class="follower-open-position-container">
-      <FollowerOpenPositionRow v-for="item in datas" :key="item.tradeID" :openRow="item"></FollowerOpenPositionRow>
+      <FollowerOpenPositionRow  @closeTrueMarket="closeTrueMarket($event)" v-for="item in datas" :marketDatas="marketDatas" :key="item.tradeID" :openRow="item"></FollowerOpenPositionRow>
     </div>
-    <div>
-      <div style="display: inline-block;width: 64%">统计：</div>
-      <div style="display: inline-block;width: 8%;text-align: center">{{(calcPL.pl).toFixed(2)}}</div>
-      <div style="display: inline-block;width: 8%;text-align: center">{{(calcPL.totalPl).toFixed(2)}}</div>
+    <div v-if="calcPL.pl!=0">
+      <div style="display: inline-block;width: 65%;text-indent: 30px">统计：</div>
+      <div style="display: inline-block;width: 9%;text-align: center">{{(calcPL.pl).toFixed(2)}}</div>
+      <div style="display: inline-block;width: 8%;text-align: center">{{(calcPL.totalPL).toFixed(2)}}</div>
     </div>
   </div>
 </template>
@@ -30,11 +20,17 @@
   export default {
     name: "FollowerOpenPositions",
     components: {FollowerOpenPositionRow},
-    props: ['datas'],
+    props: ['datas','marketDatas'],
     mounted() {
       var that = this;
 
     },
+    methods:{
+      closeTrueMarket(data){
+        this.$emit('closeTrueMarket',data)
+      }
+    },
+
     computed: {
       calcPL() {
         var a = 0;
@@ -45,7 +41,7 @@
         }
         var x = {
           pl: a,
-          totalPl: b
+          totalPL: b
         }
         return x;
       }
@@ -56,27 +52,24 @@
 
 <style scoped>
   .position-main-container {
-    height: 90%;
+    height: 95%;
     width: 100%;
     margin: auto;
     overflow: hidden;
   }
 
   .position-main-container:hover {
-    overflow-x: scroll;
+    overflow: scroll;
   }
 
   .follower-open-position-container {
-    width: 1200px;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    height: 75%;
+    width: 1217px;
+    margin-bottom: 5px;
   }
 
   .position-title-container {
     width: 1200px;
-    padding: 5px 0px;
-    border-bottom: 1px solid silver;
+    border-top: 1px solid rgba(112,189,199,1);
   }
 
   .follower-title-tag {
@@ -84,6 +77,9 @@
     font-weight: bold;
     font-size: 14px;
     text-align: center;
+    background: rgba(246,249,252,1);
+    padding: 6px 3px;
+    border-right: 2px solid white;
   }
 
 

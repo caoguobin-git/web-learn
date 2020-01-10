@@ -1,18 +1,6 @@
 <template>
   <div class="follower-closed-row-container" style="width: 100%">
-    <div class="follower-closed-row-tag" style="width: 7%">{{closedRow.tradeID}}</div>
-    <div class="follower-closed-row-tag" style="width: 7%">{{closedRow.accountName}}</div>
-    <div class="follower-closed-row-tag" style="width: 6%">{{closedRow.instrument}}</div>
-    <div class="follower-closed-row-tag" style="width: 3%">{{closedRow.amount}}</div>
-    <div class="follower-closed-row-tag" style="width: 3%">{{closedRow.buySell}}</div>
-    <div class="follower-closed-row-tag" style="width: 7%">{{closedRow.openRate}}</div>
-    <div class="follower-closed-row-tag" style="width: 7%">{{closedRow.closeRate}}</div>
-    <div class="follower-closed-row-tag" style="width: 7%">{{(closedRow.pl).toFixed(2)}}</div>
-    <div class="follower-closed-row-tag" style="width: 7%">{{(closedRow.grossPL).toFixed(2)}}</div>
-    <div class="follower-closed-row-tag" style="width: 5%">{{closedRow.rolloverInterest}}</div>
-    <div class="follower-closed-row-tag" style="width: 7%">{{closedRow.netPL}}</div>
-    <div class="follower-closed-row-tag" style="width: 14%">{{getDisplayTime(closedRow.openTime)}}</div>
-    <div class="follower-closed-row-tag" style="width: 14%">{{getDisplayTime(closedRow.closeTime)}}</div>
+    <div class="follower-closed-row-tag" style="width: 7%">{{closedRow.tradeID}}</div><div class="follower-closed-row-tag" style="width: 7%">{{closedRow.accountName}}</div><div class="follower-closed-row-tag" style="width: 6%">{{closedRow.instrument}}</div><div class="follower-closed-row-tag" style="width: 3%">{{closedRow.amount}}</div><div class="follower-closed-row-tag" style="width: 3%">{{closedRow.buySell}}</div><div class="follower-closed-row-tag" style="width: 7%">{{closedRow.openRate}}</div><div class="follower-closed-row-tag" style="width: 7%">{{closedRow.closeRate}}</div><div class="follower-closed-row-tag" :class="gain" style="width: 7%">{{(closedRow.pl).toFixed(2)}}</div><div class="follower-closed-row-tag" :class="gain" style="width: 7%">{{(closedRow.grossPL).toFixed(2)}}</div><div class="follower-closed-row-tag" style="width: 5%">{{closedRow.rolloverInterest}}</div><div class="follower-closed-row-tag" style="width: 7%">{{closedRow.netPL}}</div><div class="follower-closed-row-tag" style="width: 12%">{{getDisplayTime(closedRow.openTime)}}</div><div class="follower-closed-row-tag" style="width: 12%">{{getDisplayTime(closedRow.closeTime)}}</div>
 
   </div>
 </template>
@@ -23,14 +11,16 @@
     props: ['closedRow'],
     methods:{
       getDisplayTime(data){
-        var date=new Date(data);
-        var a = '';
-        a+=(date.getMonth()+1)+'/';
-        a+=date.getDate()+'/';
-        a+=date.getFullYear()+' ';
-        a+=(date.getHours()<10?('0'+date.getHours()):(date.getHours()))+':';
-        a+=(date.getMinutes()<10?('0'+date.getMinutes()):(date.getMinutes()));
-        return a;
+        return new Date(data).toLocaleString()
+      }
+    },
+    computed:{
+      gain() {
+        if (this.closedRow.pl == 0) {
+          return '';
+        } else {
+          return this.closedRow.pl > 0 ? 'isGain' : 'notGain'
+        }
       }
     }
   }
@@ -38,12 +28,25 @@
 
 <style scoped>
   .follower-closed-row-tag{
+    display: inline-block;
+    font-family: "微软雅黑", sans-serif;
+    font-size: 13px;
     text-align: center;
+    padding: 2px 3px;
   }
   .follower-closed-row-container{
-    height: 30px;
+   padding: 3px 0px;
   }
-.follower-closed-row-container>div{
-  display: inline-block;
-}
+  .follower-closed-row-container:hover{
+    background: whitesmoke;
+    cursor:pointer;
+  }
+
+  .isGain {
+    color: rgba(204,73,85,1);
+  }
+
+  .notGain {
+    color: rgba(85,159,132,1);
+  }
 </style>

@@ -16,7 +16,7 @@
             <TradePageTrader :style="{height:traderHeight+'px'}" ></TradePageTrader>
           </el-row>
           <el-row >
-            <TradePageFollower :style="{height:followerHeight+'px'}"></TradePageFollower>
+            <TradePageFollower :marketDatas="marketDatas" :style="{height:followerHeight+'px'}"></TradePageFollower>
           </el-row>
         </el-col>
         <el-col :span=5>
@@ -69,7 +69,7 @@
         return (this.windowHeight-120)-this.noticeHeight;
       },
       traderHeight:function(){
-        return (this.windowHeight-120)*0.65;
+        return (this.windowHeight-120)*0.60;
       },
       followerHeight:function(){
         return (this.windowHeight-120)-this.traderHeight;
@@ -95,10 +95,9 @@
         if (typeof (WebSocket) == "undefined") {
           console.log("您的浏览器不支持WebSocket");
         } else {
-          console.log("您的浏览器支持WebSocket");
           //实现化WebSocket对象，指定要连接的服务器地址与端口  建立连接
           //等同于socket = new WebSocket("ws://localhost:8083/checkcentersys/websocket/20");
-          this.socketForMarket = new WebSocket('ws://192.168.0.106:8090/price');
+          this.socketForMarket = new WebSocket('ws://192.168.18.4:8090/price');
           //打开事件
           this.socketForMarket.onopen = function () {
             console.log("Socket " + socketId + "已打开");
@@ -176,6 +175,9 @@
     text-indent: 24px;
     background: white;
     color: black;
+  }
+  .el-menu-item{
+    border: none;
   }
   /**::-webkit-scrollbar{*/
   /*  display: none;*/

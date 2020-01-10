@@ -1,7 +1,7 @@
 <template>
   <div id="trade-page-follower-info">
     <div id="trade-page-follower-title">我的交易信息</div>
-    <component @changeDisplayPage="changeDisplayPage($event)" :is="currentFollowerInfo"></component>
+    <component @changeDisplayPage="changeDisplayPage($event)" :marketDatas="marketDatas" :is="currentFollowerInfo"></component>
   </div>
 </template>
 
@@ -12,6 +12,7 @@
   import TradePageFollowerDisplay from "./TradePageFollowerDisplay";
   export default {
     name: "TradePageFollower",
+    props:['marketDatas'],
     components: {TradePageFollowerDisplay, TradePageFollowerLogin, TradePageFollowerIndex},
     data(){
       return{

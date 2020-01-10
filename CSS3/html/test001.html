@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .container{
+            width: 60px;
+            height: 12px;
+            background: url("star.png");
+            padding: 0px;
+            position: relative;
+        }
+        .important{
+            display: inline-block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
+            background: url("star-important.png") 0 0 no-repeat;
+            height: 12px;
+        }
+        .active{
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: url("star-active.png") 0 0 no-repeat;
+            height: 12px;
+        }
+        img{
+            margin: 0px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <i class="active" style="width: 60%"></i>
+</div>
+<div class="container">
+    <div class="important" style="width: 80%"></div>
+</div>
+</body>
+</html>

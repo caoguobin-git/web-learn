@@ -20,7 +20,6 @@
     methods: {
       initSize: function () {
         this.height = window.innerHeight * 0.05 +'px';
-        console.log(this.height)
       }
     }
   }
