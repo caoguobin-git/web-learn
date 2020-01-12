@@ -7,7 +7,7 @@
       <el-menu-item style="border-bottom: none" @click="followerTag='ClosedPositions'" index="4">平仓({{Object.keys(ClosedPositionsData).length}})</el-menu-item>
       <el-menu-item style="border-bottom: none;border-radius: 0px 3px 0px 0px;" @click="followerTag='Summary'" index="5">账户总结</el-menu-item>
     </el-menu>
-    <component @closeTrueMarket="closeTrueMarket($event)" :is="followerCurrentDisplay" :marketDatas="marketDatas" :datas="currentDataBind"></component>
+    <component @closeTrueMarket="closeTrueMarket($event)" :is="followerCurrentDisplay" :marketPrecisions="marketPrecisions" :datas="currentDataBind"></component>
   </div>
 </template>
 
@@ -20,7 +20,7 @@
 
   export default {
     name: "TradePageFollowerDisplay",
-    props:['marketDatas'],
+    props:['marketDatas','marketPrecisions'],
     components: {FollowerOrders, FollowerAccount, FollowerSummary, FollowerClosedPositions, FollowerOpenPositions},
     data() {
       return {
@@ -66,7 +66,6 @@
         this.$set(this.ClosedPositionsData, data.tradeID, data)
       },
       handleOpenPositions(data) {
-        console.log(data)
         this.$set(this.OpenPositionsData, data.tradeID, data)
       },
       sengMessage(message) {
@@ -89,7 +88,7 @@
           console.log("您的浏览器支持WebSocket");
           //实现化WebSocket对象，指定要连接的服务器地址与端口  建立连接
           //等同于socket = new WebSocket("ws://localhost:8083/checkcentersys/websocket/20");
-          this.followerSocket = new WebSocket('ws://192.168.18.4:8091/follower');
+          this.followerSocket = new WebSocket('ws://192.168.0.106:8091/follower');
           //打开事件
           this.followerSocket.onopen = function () {
             console.log("Socket " + socketId + "已打开");

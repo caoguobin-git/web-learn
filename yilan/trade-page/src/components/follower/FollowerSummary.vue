@@ -4,7 +4,7 @@
         <div class="follower-summary-title-tag" style="width: 6%">商品组合</div><div class="follower-summary-title-tag" style="width: 6%">卖出盈/亏</div><div class="follower-summary-title-tag" style="width: 6%">卖出保证金</div><div class="follower-summary-title-tag" style="width: 6%">卖出数量</div><div class="follower-summary-title-tag" style="width: 6%">平均卖价</div><div class="follower-summary-title-tag" style="width: 6%">买入平仓</div><div class="follower-summary-title-tag" style="width: 6%">卖出平仓</div><div class="follower-summary-title-tag" style="width: 6%">平均买入</div><div class="follower-summary-title-tag" style="width: 6%">买入保证金</div><div class="follower-summary-title-tag" style="width: 6%">买入数量</div><div class="follower-summary-title-tag" style="width: 6%">买入盈/亏</div><div class="follower-summary-title-tag" style="width: 6%">保证金要求</div><div class="follower-summary-title-tag" style="width: 6%">数量</div><div class="follower-summary-title-tag" style="width: 6%">总盈/亏</div><div class="follower-summary-title-tag" style="width: 6%">过夜利息</div>
     </div>
     <div class="follower-summary-container">
-      <FollowerSummaryRow v-for="item in datas" :key="item.offerID" :summaryRow="item"></FollowerSummaryRow>
+      <FollowerSummaryRow v-for="item in datas" :key="item.offerID" :marketPrecision="marketPrecisions[item.instrument]" :summaryRow="item"></FollowerSummaryRow>
     </div>
   </div>
 </template>
@@ -14,7 +14,7 @@
     export default {
         name: "FollowerSummary",
       components: {FollowerSummaryRow},
-      props:['datas']
+      props:['datas','marketPrecisions']
     }
 </script>
 

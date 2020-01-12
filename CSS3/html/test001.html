@@ -6,41 +6,65 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
-        .container{
-            width: 60px;
-            height: 12px;
-            background: url("star.png");
-            padding: 0px;
-            position: relative;
+
+        .summary-instrument {
+            width: 100px;
+            text-align: center;
         }
-        .important{
-            display: inline-block;
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 2;
-            background: url("star-important.png") 0 0 no-repeat;
-            height: 12px;
-        }
-        .active{
-            position: absolute;
-            top: 0;
-            left: 0;
-            background: url("star-active.png") 0 0 no-repeat;
-            height: 12px;
-        }
-        img{
-            margin: 0px;
+        td{
+            border: 1px solid black;
         }
 
     </style>
 </head>
 <body>
-<div class="container">
-    <i class="active" style="width: 60%"></i>
-</div>
-<div class="container">
-    <div class="important" style="width: 80%"></div>
-</div>
+<table cellspacing="0">
+    <tbody>
+        <tr>
+            <td class="summary-instrument" style="border-right: 1px solid black" rowspan="2">EUR/USD</td>
+            <td style="padding-left: 20px">买入：</td>
+            <td>数量：1568.58</td>
+            <td>平均开仓：8.89536</td>
+            <td>平仓：0.00000</td>
+            <td>盈/亏：-2.11</td>
+            <td>保证金：15</td>
+            <td style="padding-left: 10px;border-left: 1px solid black">净数量：1000</td>
+        </tr>
+        <tr>
+            <td style="padding-left: 20px">卖出：</td>
+            <td>数量：1568.58</td>
+            <td>平均开仓：8.89536</td>
+            <td>平仓：0.00000</td>
+            <td>盈/亏：-2.11</td>
+            <td style="padding-right: 10px">保证金：15</td>
+            <td style="padding-left: 10px;border-left: 1px solid black">净盈亏：-1.000002</td>
+        </tr>
+    </tbody>
+
+
+    <tbody>
+    <tr>
+        <td class="summary-instrument" style="border-right: 1px solid black" rowspan="2">EUR/USD</td>
+        <td style="padding-left: 20px">买入：</td>
+        <td>数量：1568.58</td>
+        <td>平均开仓：8.89536</td>
+        <td>平仓：0.00000</td>
+        <td>盈/亏：-2.11</td>
+        <td>保证金：15</td>
+        <td style="padding-left: 10px;border-left: 1px solid black">净数量：1000</td>
+    </tr>
+    <tr>
+        <td style="padding-left: 20px">卖出：</td>
+        <td>数量：1568.58</td>
+        <td>平均开仓：8.89536</td>
+        <td>平仓：0.00000</td>
+        <td>盈/亏：-2.11</td>
+        <td style="padding-right: 10px">保证金：15</td>
+        <td style="padding-left: 10px;border-left: 1px solid black">净盈亏：-1.2</td>
+    </tr>
+    </tbody>
+
+</table>
+
 </body>
 </html>

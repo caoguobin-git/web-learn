@@ -16,7 +16,7 @@
             <TradePageTrader :style="{height:traderHeight+'px'}" ></TradePageTrader>
           </el-row>
           <el-row >
-            <TradePageFollower :marketDatas="marketDatas" :style="{height:followerHeight+'px'}"></TradePageFollower>
+            <TradePageFollower :marketPrecisions="marketPrecisions" :style="{height:followerHeight+'px'}"></TradePageFollower>
           </el-row>
         </el-col>
         <el-col :span=5>
@@ -58,6 +58,7 @@
         widthRight: '427px',
         windowHeight:885,
         marketDatas: {},
+        marketPrecisions:{},
         socketForMarket:{}
       }
     },
@@ -97,7 +98,7 @@
         } else {
           //实现化WebSocket对象，指定要连接的服务器地址与端口  建立连接
           //等同于socket = new WebSocket("ws://localhost:8083/checkcentersys/websocket/20");
-          this.socketForMarket = new WebSocket('ws://192.168.18.4:8090/price');
+          this.socketForMarket = new WebSocket('ws://192.168.0.106:8090/price');
           //打开事件
           this.socketForMarket.onopen = function () {
             console.log("Socket " + socketId + "已打开");
@@ -144,6 +145,7 @@
           precision: parseInt(message[10]),
           pipCost:parseFloat(message[11])
         })
+        this.$set(this.marketPrecisions,message[1],parseInt(message[10]))
       },
       init(){
         this.createMarketConnect();

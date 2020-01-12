@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .summary-row-container{
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: space-between;
+            align-items: center;
+            width: 1200px;
+            height: 60px;
+            border-left: 1px solid silver;
+            border-right: 1px solid silver;
+            border-bottom: 1px solid silver;
+        }
+        .summary-row-left{
+            flex-grow: 0.5;
+            height: 100%;
+            line-height: 60px;
+            text-align: center;
+            font-weight: bolder;
+            color: rgba(97, 162, 227, 1);
+            flex-shrink: 0;
+        }
+        .summary-row-center{
+            height: 100%;
+            flex-grow: 1;
+            display: flex;
+            flex-flow: column nowrap;
+            border-right: 1px solid silver;
+            border-left: 1px solid silver;
+            flex-shrink: 0;
+        }
+        .summary-row-right{
+            height: 100%;
+            flex-grow: 1;
+            flex-shrink: 0;
+
+        }
+
+        .summary-row-center-row{
+            flex-grow: 1;
+            box-sizing: border-box;
+            display: flex;
+            flex-flow: row nowrap;
+        }
+
+        .summary-row-center-row-buy{
+            padding-top: 10px;
+        }
+        .summary-row-center-row-sell{
+            padding-bottom: 10px;
+        }
+
+        .summary-row-center-row-tag{
+            width: 19%;
+            line-height: 20px;
+            overflow: hidden;
+            white-space: nowrap;
+            font-size: 13px;
+            text-indent: 20px;
+        }
+        .summary-row-center-row-amount{
+            width: 19%;
+        }
+        .summary-row-center-row-avg{
+            width: 19%;
+
+
+        }
+        .summary-row-center-row-close{
+            width: 19%;
+        }
+        .summary-row-center-row-pl{
+            width: 19%;
+        }
+        .summary-row-center-row-margin{
+            width: 19%;
+        }
+
+    </style>
+</head>
+<body>
+<div class="summary-row-container">
+    <div class="summary-row-left">EUR/USD</div>
+    <div class="summary-row-center">
+        <div class="summary-row-center-row summary-row-center-row-buy">
+            <div class="summary-row-center-row-tag summary-row-center-row-amount"><span style="color: blue">买入</span>&nbsp;&nbsp;数量:2</div>
+            <div class="summary-row-center-row-tag summary-row-center-row-avg">平均开仓:<span style="color: blue">1568.56</span></div>
+            <div class="summary-row-center-row-tag summary-row-center-row-close">平仓:1586.52</div>
+            <div class="summary-row-center-row-tag summary-row-center-row-pl">盈/亏:12.52</div>
+            <div class="summary-row-center-row-tag summary-row-center-row-margin">保证金:16</div>
+        </div>
+        <div class="summary-row-center-row summary-row-center-row-sell">
+            <div class="summary-row-center-row-tag summary-row-center-row-amount"><span style="color: red">卖出</span>&nbsp;&nbsp;数量:20000</div>
+            <div class="summary-row-center-row-tag summary-row-center-row-avg">平均开仓:<span style="color: red">1568.56</span></div>
+            <div class="summary-row-center-row-tag summary-row-center-row-close">平仓:1586.52</div>
+            <div class="summary-row-center-row-tag summary-row-center-row-pl">盈/亏:12.52</div>
+            <div class="summary-row-center-row-tag summary-row-center-row-margin">保证金:16</div>
+        </div>
+
+
+    </div>
+    <div class="summary-row-right">
+        <div class="summary-row-center-row summary-row-center-row-buy">
+            <div class="summary-row-center-row-tag summary-row-center-row-amount" style="width: 100%;text-indent: 40px">净数量:2</div>
+        </div>
+        <div class="summary-row-center-row summary-row-center-row-sell">
+            <div class="summary-row-center-row-tag summary-row-center-row-amount" style="width: 100%;text-indent: 40px">净盈亏：12345.564</div>
+        </div>
+    </div>
+</div>
+
+<div class="summary-row-container">
+    <div class="summary-row-left">EUR/USD</div>
+    <div class="summary-row-center">
+        <div class="summary-row-center-row summary-row-center-row-buy">
+            <div class="summary-row-center-row-tag summary-row-center-row-amount"><span style="color: blue">买入</span>&nbsp;&nbsp;数量:2</div>
+            <div class="summary-row-center-row-tag summary-row-center-row-avg">平均开仓:<span style="color: blue">1568.56</span></div>
+            <div class="summary-row-center-row-tag summary-row-center-row-close">平仓:1586.52</div>
+            <div class="summary-row-center-row-tag summary-row-center-row-pl">盈/亏:12.52</div>
+            <div class="summary-row-center-row-tag summary-row-center-row-margin">保证金:16</div>
+        </div>
+        <div class="summary-row-center-row summary-row-center-row-sell">
+            <div class="summary-row-center-row-tag summary-row-center-row-amount"><span style="color: red">卖出</span>&nbsp;&nbsp;数量:20000</div>
+            <div class="summary-row-center-row-tag summary-row-center-row-avg">平均开仓:<span style="color: red">1568.56</span></div>
+            <div class="summary-row-center-row-tag summary-row-center-row-close">平仓:1586.52</div>
+            <div class="summary-row-center-row-tag summary-row-center-row-pl">盈/亏:12.52</div>
+            <div class="summary-row-center-row-tag summary-row-center-row-margin">保证金:16</div>
+        </div>
+
+
+    </div>
+    <div class="summary-row-right">
+        <div class="summary-row-center-row summary-row-center-row-buy">
+            <div class="summary-row-center-row-tag summary-row-center-row-amount" style="width: 100%;text-indent: 40px">净数量:2</div>
+        </div>
+        <div class="summary-row-center-row summary-row-center-row-sell">
+            <div class="summary-row-center-row-tag summary-row-center-row-amount" style="width: 100%;text-indent: 40px">净盈亏：12345.564</div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

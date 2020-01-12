@@ -1,13 +1,13 @@
 <template>
   <div class="open-row-container" @click="closeTrueMarket(openRow.tradeID)" >
-    <div class="follower-open-row-tag" style="width: 8%;text-align: center">{{openRow.tradeID}}</div><div class="follower-open-row-tag" style="width: 8%;text-align: center">{{openRow.accountName}}</div><div class="follower-open-row-tag" style="width: 8%;text-align: center;font-weight: bold;color: rgba(97,162,227,1)">{{openRow.instrument}}</div><div class="follower-open-row-tag" style="width: 5%;text-align: center">{{openRow.amount}}</div><div class="follower-open-row-tag" style="width: 5%;text-align: center" :class="gain">{{(openRow.buySell=='B'?'BUY':'SELL')}}</div><div class="follower-open-row-tag" style="width: 10%;text-align: center">{{(openRow.openRate).toFixed(marketDatas[openRow.instrument].precision)}}</div><div class="follower-open-row-tag" style="width: 10%;text-align: center">{{(openRow.close).toFixed(marketDatas[openRow.instrument].precision)}}</div><div class="follower-open-row-tag" :class="gain" style="width: 8%;text-align: center">{{(openRow.pl).toFixed(2)}}</div><div class="follower-open-row-tag" style="width: 8%;text-align: center" :class="gain">{{openRow.grossPL}}</div><div class="follower-open-row-tag" style="width: 8%;text-align: center">{{openRow.usedMargin}}</div><div class="follower-open-row-tag" style="width: 15%;text-align: center">{{getLocalTime(openRow.openTime)}}</div>
+    <div class="follower-open-row-tag" style="width: 8%;text-align: center">{{openRow.tradeID}}</div><div class="follower-open-row-tag" style="width: 8%;text-align: center">{{openRow.accountName}}</div><div class="follower-open-row-tag" style="width: 8%;text-align: center;font-weight: bold;color: rgba(97,162,227,1)">{{openRow.instrument}}</div><div class="follower-open-row-tag" style="width: 5%;text-align: center">{{openRow.amount}}</div><div class="follower-open-row-tag" style="width: 5%;text-align: center" :class="gain">{{(openRow.buySell=='B'?'BUY':'SELL')}}</div><div class="follower-open-row-tag" style="width: 10%;text-align: center">{{(openRow.openRate).toFixed(marketPrecision)}}</div><div class="follower-open-row-tag" style="width: 10%;text-align: center">{{(openRow.close).toFixed(marketPrecision)}}</div><div class="follower-open-row-tag" :class="gain" style="width: 8%;text-align: center">{{(openRow.pl).toFixed(2)}}</div><div class="follower-open-row-tag" style="width: 8%;text-align: center" :class="gain">{{openRow.grossPL}}</div><div class="follower-open-row-tag" style="width: 8%;text-align: center">{{openRow.usedMargin}}</div><div class="follower-open-row-tag" style="width: 15%;text-align: center">{{getLocalTime(openRow.openTime)}}</div>
   </div>
 </template>
 
 <script>
   export default {
     name: "FollowerOpenPositionRow",
-    props: ['openRow','marketDatas'],
+    props: ['openRow','marketPrecision'],
     methods: {
       getLocalTime(longTime) {
         // alert(typeof longTime)
