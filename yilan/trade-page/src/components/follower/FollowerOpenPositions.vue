@@ -9,7 +9,7 @@
                                :openRow="item"></FollowerOpenPositionRow>
     </div>
     <div v-if="calcPL.pl!=0">
-      <div style="display: inline-block;width: 65%;text-indent: 30px">统计：</div>
+      <div style="display: inline-block;width: 57%;text-indent: 30px">统计：</div>
       <div style="display: inline-block;width: 9%;text-align: center">{{(calcPL.pl).toFixed(2)}}</div>
       <div style="display: inline-block;width: 8%;text-align: center">{{(calcPL.totalPL).toFixed(2)}}</div>
     </div>

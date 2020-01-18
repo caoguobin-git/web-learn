@@ -1,26 +1,20 @@
 <template>
-  <div id="trade-page-market-container">
-    <!--      <el-row>-->
-    <div id="trade-page-market-title">
-      市场数据
-    </div>
+  <div style="width: 100%;height:50%;margin: auto;overflow: hidden">
+    <div id="trade-page-market-container">
+      <!--      <el-row>-->
+      <div id="trade-page-market-title">
+        市场数据
+      </div>
 
-    <div style="width: 98%;" id="trade-page-market-caption">
-      <div style="width: 10%;font-weight: bolder;text-align: center">货币</div>
-      <div style="width: 6%;font-weight: bolder;text-align: center">卖出</div>
-      <div style="width: 6%;font-weight: bolder;text-align: center">买入</div>
-      <div style="width: 5%;font-weight: bolder;text-align: center">点差</div>
-      <div style="width: 6%;font-weight: bolder;text-align: center">最高</div>
-      <div style="width: 6%;font-weight: bolder;text-align: center">最低</div>
-      <div style="width: 10%;font-weight: bolder;text-align: center">卖出利息</div>
-      <div style="width: 10%;font-weight: bolder;text-align: center">买入利息</div>
-      <div style="width: 10%;font-weight: bolder;text-align: center">点值</div>
-      <div style="width: 10%;font-weight: bolder;text-align: center">时间</div>
+      <div style="width: 98%;" id="trade-page-market-caption">
+        <div style="width: 10%;font-weight: bolder;text-align: center">货币</div><div style="width: 6%;font-weight: bolder;text-align: center">卖出</div><div style="width: 6%;font-weight: bolder;text-align: center">买入</div>
+        &nbsp;<div style="width: 5%;font-weight: bolder;text-align: center">点差</div><div style="width: 8%;font-weight: bolder;text-align: center">最高</div><div style="width: 8%;font-weight: bolder;text-align: center">最低</div><div style="width: 11%;font-weight: bolder;text-align: center">卖出利息</div><div style="width: 11%;font-weight: bolder;text-align: center">买入利息</div><div style="width: 10%;font-weight: bolder;text-align: center">点值</div><div style="width: 10%;font-weight: bolder;text-align: center">时间</div>
+      </div>
+      <div class="market-price-container" style="width: 100%;margin: 2px auto 0px auto;overflow-y: scroll;overflow-x: hidden;height:91%">
+        <MarketDataDetail v-for="item in marketDataArray" :key="item.symbol" :market="item"></MarketDataDetail>
+      </div>
+      <!--      </el-row>-->
     </div>
-    <div style="width: 100%;margin: 2px auto 0px auto;overflow-y: scroll;overflow-x: hidden;height:93%">
-      <MarketDataDetail v-for="item in marketDataArray" :key="item.symbol" :market="item"></MarketDataDetail>
-    </div>
-    <!--      </el-row>-->
   </div>
 </template>
 
@@ -33,7 +27,6 @@
     props: ['marketDatas'],
     data() {
       return {
-
         myCellStyle: {padding: '3px 0px'},
         marketRow: {
           color: 'black',
@@ -139,7 +132,9 @@
         return arr;
       }
     },
-    methods: {},
+    methods: {
+
+    },
 
     watch: {
       marketDatas: function (val, valOld) {
@@ -167,17 +162,13 @@
   }
 
   #trade-page-market-container {
-    margin: 5px 5px 5px 10px;
-    padding:10px;
-    height: 92%;
+    /*padding: 10px;*/
+    height: 100%;
     width: 800px;
-    overflow:hidden;
-    padding-top: 17px;
+    overflow: hidden;
+    padding: 17px 10px 0px 10px;
     border-radius: 6px;
-    box-sizing: border-box;
-    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
     background: white;
-    position: relative;
   }
 
   #trade-page-market-title {
@@ -197,5 +188,6 @@
     margin: auto;
     font-size: 12px;
   }
+  .market-price-container::-webkit-scrollbar {display:none}
 
 </style>

@@ -38,7 +38,8 @@
   #trade-page-follower-info {
     height: 100%;
     box-sizing: border-box;
-    margin: 5px;
+    /*margin: 5px;*/
+    margin-top: 5px;
     border-radius: 6px;
     box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
     background: white;

@@ -13,7 +13,7 @@
     </div>
     <p style="margin: 5px auto 2px 150px">还没有账号？去<a href="http://www.baidu.com" target="_blank">注册</a></p>
     <div style="margin-top: 10px;text-align: justify-all">
-     <el-button type="success" @click="loginFxcm" :disabled="loginFxcmBtnDisabled" style="letter-spacing: 20px">&nbsp;登&nbsp;录</el-button>
+     <el-button type="primary" class="login-fxcm-btn" @click="loginFxcm" :disabled="loginFxcmBtnDisabled">&nbsp;登&nbsp;录</el-button>
     </div>
   </div>
 </template>
@@ -69,5 +69,13 @@
 
   input::-webkit-input-placeholder { /* WebKit browsers */
     font-size: 14px;
+  }
+
+  .login-fxcm-btn{
+    letter-spacing: 10px;
+    border: none;
+    border: 1px solid rgba(112,189,199,1);
+    background: rgba(112,189,199,1);
+    box-shadow: 0px 0px 6px rgba(112,189,199,1);
   }
 </style>

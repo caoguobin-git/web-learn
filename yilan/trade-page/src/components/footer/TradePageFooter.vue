@@ -12,7 +12,6 @@
 
 <style scoped>
   #trade-page-footer{
-    margin-top: 5px;
     text-align: center;
     background:rgba(0,0,0,0.55);
     height: 33px;

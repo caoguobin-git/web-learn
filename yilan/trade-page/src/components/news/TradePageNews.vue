@@ -7,37 +7,19 @@
     <p style="text-indent: 5px;margin: 0px;padding: 0px;font-size: 14px"><i style="color: rgba(112,189,199,1)"
                                                                             class="el-icon-date"></i>&nbsp;&nbsp;&nbsp;{{date
       | formatDate}}</p>
-    <el-table :data="news" height="80%" :show-header=false :cell-style="newsRow" @row-click="sayHello"
-              row-key="date" empty-text="暂无新闻" border
-              stripe style="width:95%">
-      <el-table-column :index="0" header-align="center" type="extend" show-overflow-tooltip
-                       label="国家/地区"
-                       width="80">
-        <template slot-scope="scope">
-          <div style="text-align: center">
-            <span class="news-display-country">{{scope.row.country}}</span>
-            <br>
-            <div v-html="getStar(scope.row.important)"></div>
-          </div>
-        </template>
-      </el-table-column>
-      <el-table-column :index="0" header-align="center" type="extend" show-overflow-tooltip
-                       label="新闻内容"
-                       width="204" prop="content">
-      </el-table-column>
-      <el-table-column align="center" label="时间">
-        <template slot-scope="scope">
-          {{getDisplayTime(scope.row.time)}}
-        </template>
-      </el-table-column>
-    </el-table>
+    <div class="news-container">
+      <TradePageNewsRow v-for="item in newsSort" :key="item.newsId" :news="item"></TradePageNewsRow>
+    </div>
     <!--    </el-row>-->
   </div>
 </template>
 
 <script>
+  import TradePageNewsRow from "./TradePageNewsRow";
   export default {
     name: "TradePageNews",
+    components: {TradePageNewsRow},
+    props:['newsData'],
     data() {
       return {
         date: new Date(),
@@ -46,68 +28,12 @@
           color: 'black',
           height: '12px',
           cursor: 'pointer'
-        },
-        news: [{
-          country: 'USA',
-          important: 1,
-          content: '啊手动阀手动阀',
-          time: 15845824
-        }, {
-          country: 'USA',
-          important: 2,
-          content: '啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀',
-          time: 15845824
-        }, {
-          country: 'USA',
-          important: 3,
-          content: '啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀',
-          time: 15845824
-        }, {
-          country: 'USA',
-          important: 4,
-          content: '啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀',
-          time: 15845824
-        }, {
-          country: 'USA',
-          important: 5,
-          content: '啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀',
-          time: 15845824
-        }, {
-          country: 'USA',
-          important: 5,
-          content: '啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀',
-          time: 15845824
-        }, {
-          country: 'USA',
-          important: 5,
-          content: '啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀',
-          time: 15845824
-        }, {
-          country: 'USA',
-          important: 5,
-          content: '啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀',
-          time: 15845824
-        }, {
-          country: 'USA',
-          important: 5,
-          content: '啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀',
-          time: 15845824
-        }, {
-          country: 'USA',
-          important: 5,
-          content: '啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀',
-          time: 15845824
-        }, {
-          country: '中国',
-          important: 5,
-          content: '啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀',
-          time: 15845824
-        }, {
-          country: 'USA',
-          important: 5,
-          content: '啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀',
-          time: 15845824
-        }]
+        }
+      }
+    },
+    computed:{
+      newsSort(){
+        return this.newsData
       }
     },
     filters: {
@@ -135,6 +61,11 @@
         _this.date = new Date();
       }, 1000);
     },
+    watch:{
+      newsData(val){
+        console.log(val)
+      }
+    },
     methods: {
       sayHello: function (row, column, event) {
         console.log(row)
@@ -145,31 +76,7 @@
         return 1;
       },
 
-      getStar: function (val) {
-        let result = '<div style="width: 60px;height: 12px;position: relative" class="star-container">';
 
-        switch (val) {
-          case 1:
-            result += '<i class="star-active" style="height:12px;width: 20%"></i>';
-            break;
-          case 2:
-            result += '<i class="star-active" style="height:12px;width: 40%"></i>';
-            break;
-          case 3:
-            result += '<i class="star-active" style="height:12px;width: 60%"></i>';
-            break;
-          case 4:
-            result += '<i class="star-important" style="height:12px;width: 80%"></i>';
-            break;
-          case 5:
-            result += '<i class="star-important" style="height:12px;width: 100%"></i>';
-            break;
-          default:
-            result += '<i class="star-active" style="height:12px;width: 20%"></i>';
-        }
-        result += '</div>';
-        return result;
-      }
     }
   }
 
@@ -182,7 +89,8 @@
   #trade-page-news-container {
     height: 365px;
     box-sizing: border-box;
-    margin: 5px 10px 5px 5px;
+    margin-top: 5px;
+    margin-bottom: 10px;
     border-radius: 6px;
     padding-top: 1px;
     box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
@@ -200,31 +108,11 @@
     border-left: 2px solid rgba(112, 189, 199, 1);
   }
 
-  >>> .star-container {
-    width: 60px;
-    height: 12px;
-    background: url("../../assets/star.png");
-    position: relative;
-  }
 
-  >>> .star-active {
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: url("../../assets/star-active.png") 0 0 no-repeat;
-    height: 12px;
-  }
-
-  >>> .star-important {
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: url("../../assets/star-important.png") 0 0 no-repeat;
-    height: 12px;
-  }
-
-  >>> .news-display-country{
-    font-weight: bolder;
-  }
-
+.news-container{
+  height: 75%;
+  width: 95%;
+  margin: auto;
+  overflow: scroll;
+}
 </style>

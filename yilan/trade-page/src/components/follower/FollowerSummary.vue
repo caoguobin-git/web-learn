@@ -1,11 +1,11 @@
 <template>
   <div class="follower-summary-main-container">
-    <div class="follower-summary-title-container">
-        <div class="follower-summary-title-tag" style="width: 6%">商品组合</div><div class="follower-summary-title-tag" style="width: 6%">卖出盈/亏</div><div class="follower-summary-title-tag" style="width: 6%">卖出保证金</div><div class="follower-summary-title-tag" style="width: 6%">卖出数量</div><div class="follower-summary-title-tag" style="width: 6%">平均卖价</div><div class="follower-summary-title-tag" style="width: 6%">买入平仓</div><div class="follower-summary-title-tag" style="width: 6%">卖出平仓</div><div class="follower-summary-title-tag" style="width: 6%">平均买入</div><div class="follower-summary-title-tag" style="width: 6%">买入保证金</div><div class="follower-summary-title-tag" style="width: 6%">买入数量</div><div class="follower-summary-title-tag" style="width: 6%">买入盈/亏</div><div class="follower-summary-title-tag" style="width: 6%">保证金要求</div><div class="follower-summary-title-tag" style="width: 6%">数量</div><div class="follower-summary-title-tag" style="width: 6%">总盈/亏</div><div class="follower-summary-title-tag" style="width: 6%">过夜利息</div>
-    </div>
-    <div class="follower-summary-container">
+<!--    <div class="follower-summary-title-container">-->
+<!--        <div class="follower-summary-title-tag" style="width: 6%">商品组合</div><div class="follower-summary-title-tag" style="width: 6%">卖出盈/亏</div><div class="follower-summary-title-tag" style="width: 6%">卖出保证金</div><div class="follower-summary-title-tag" style="width: 6%">卖出数量</div><div class="follower-summary-title-tag" style="width: 6%">平均卖价</div><div class="follower-summary-title-tag" style="width: 6%">买入平仓</div><div class="follower-summary-title-tag" style="width: 6%">卖出平仓</div><div class="follower-summary-title-tag" style="width: 6%">平均买入</div><div class="follower-summary-title-tag" style="width: 6%">买入保证金</div><div class="follower-summary-title-tag" style="width: 6%">买入数量</div><div class="follower-summary-title-tag" style="width: 6%">买入盈/亏</div><div class="follower-summary-title-tag" style="width: 6%">保证金要求</div><div class="follower-summary-title-tag" style="width: 6%">数量</div><div class="follower-summary-title-tag" style="width: 6%">总盈/亏</div><div class="follower-summary-title-tag" style="width: 6%">过夜利息</div>-->
+<!--    </div>-->
+    <table cellspacing="0" cellpadding="0" class="follower-summary-container">
       <FollowerSummaryRow v-for="item in datas" :key="item.offerID" :marketPrecision="marketPrecisions[item.instrument]" :summaryRow="item"></FollowerSummaryRow>
-    </div>
+    </table>
   </div>
 </template>
 
@@ -28,7 +28,7 @@
 }
 
 .follower-summary-main-container:hover {
-  overflow: scroll;
+  overflow-y: scroll;
 }
 
   .follower-summary-title-container{
@@ -36,10 +36,12 @@
 
   }
   .follower-summary-container{
+    width: 1000px;
     border-top: 1px solid rgba(112,189,199,1);
 
-    border-right: 1px solid silver;
-    border-left: 1px solid silver;
+    border-right: 1px solid rgba(226,227,231,1);
+    border-left: 1px solid rgba(226,227,231,1);
+    border-bottom: 1px solid rgba(226,227,231,1);
   }
 .follower-summary-title-tag{
   display: inline-block;
@@ -51,8 +53,5 @@
   padding: 6px 3px;
   border-right: 2px solid white;
 }
-  .follower-summary-container{
-    width: 1417px;
-    overflow: hidden;
-  }
+
 </style>

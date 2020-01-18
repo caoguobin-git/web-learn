@@ -2,13 +2,25 @@
   <div id="trade-page-trader-info">
     <p id="trade-page-trader-title">交易员信息</p>
     <el-menu default-active="2" mode="horizontal">
-      <el-menu-item index="1">挂单</el-menu-item>
-      <el-menu-item @click="currentTab='OpenPositions'" index="2">开仓</el-menu-item>
-      <el-menu-item @click="currentTab='ClosedPositions'" index="3">平仓</el-menu-item>
+      <el-menu-item @click="currentTab='OpenPositions'" index="2">开仓({{Object.keys(TraderOpenPositionsData).length}})
+      </el-menu-item>
+      <el-menu-item @click="currentTab='ClosedPositions'" index="3">
+        平仓({{Object.keys(TraderClosedPositionsData).length}})
+      </el-menu-item>
       <el-menu-item @click="currentTab='HistoryPositions'" index="4">历史</el-menu-item>
     </el-menu>
-    <component :is="traderCurrentDisplay"></component>
-    <p style="margin-bottom: 0px">盈利信息设置</p>
+    <component @getTraderHistory="getTraderHistory" :TraderHistoryData="TraderHistoryData" :is="traderCurrentDisplay"
+               :marketPrecisions="marketPrecisions" :datas="currentDisplayData"></component>
+    <div style="margin-top: 3px;height: 33px;line-height: 33px;position: relative;">
+      <div class="trader-in-out">入金: <span>{{traderBalance.in}}</span></div>
+      <div class="trader-in-out">出金:<span>{{traderBalance.out}}</span></div>
+      <div class="trader-in-out">获利:<span :class="traderGain">{{traderBalance.pl}}</span></div>
+
+      <!--      <el-button @click="changeFollowStatus" size="mini" type="primary" style="position: absolute;right:30px">开始跟单</el-button>-->
+      <div style="position: absolute;right:30px;top:4px;font-size: 8px">{{followMsg}}&nbsp;&nbsp;<el-switch
+        :disabled="followLoading"
+        v-model="followStatus"></el-switch></div>
+    </div>
   </div>
 </template>
 
@@ -19,21 +31,102 @@
 
   export default {
     name: "TradePageTrader",
+    props: ['marketPrecisions', 'TraderOpenPositionsData', 'TraderClosedPositionsData', 'TraderHistoryData', 'followerToken'],
     components: {TraderHistoryPositions, TraderClosedPositions, TraderOpenPositions},
     data() {
       return {
-        currentTab: 'OpenPositions'
+        currentTab: 'OpenPositions',
+        traderBalance: {
+          in: 1238.123,
+          out: 123.123,
+          pl: 123.1
+        },
+        followStatus: false,
+        followLoading:false
+      }
+    },
+    watch: {
+      followStatus(val) {
+        console.log(val);
+
+        for (var i in this.TraderOpenPositionsData) {
+          console.log(this.TraderOpenPositionsData[i].account + '  ' + this.followerToken)
+        }
+        this.followLoading=true;
+        var that = this;
+        setTimeout(function () {
+          that.followLoading=false;
+        },5000)
+      }
+    },
+    methods: {
+      changeFollowStatus() {
+        for (var i in this.TraderOpenPositionsData) {
+          console.log(this.TraderOpenPositionsData[i].account + '  ' + this.followerToken)
+        }
+      },
+      getTraderHistory(data) {
+        this.$emit('getTraderHistory', data)
       }
     },
     computed: {
+      followMsg() {
+        return this.followLoading?'操作中':(this.followStatus ? '取消跟单' : '开始跟单')
+      },
+      traderGain() {
+        return this.traderBalance.pl > 0 ? 'isGain' : 'notGain'
+      },
+      currentDisplayData() {
+        return this[this.traderCurrentDisplay + 'Data'];
+      },
       traderCurrentDisplay() {
         return 'Trader' + this.currentTab;
       }
+    },
+    mounted() {
+
     }
   }
 </script>
 
 <style scoped>
+  .isGain {
+    color: green;
+    font-weight: bolder;
+  }
+
+  .notGain {
+    color: red;
+    font-weight: bolder;
+  }
+
+  .trader-in-out {
+    position: absolute;
+    font-size: 14px;
+    top: 6px;
+  }
+
+  .trader-in-out:nth-child(1) {
+    right: 400px;
+  }
+
+  .trader-in-out:nth-child(1) > span {
+    color: green;
+  }
+
+  .trader-in-out:nth-child(2) {
+    right: 275px;
+  }
+
+  .trader-in-out:nth-child(2) > span {
+    color: red;
+  }
+
+  .trader-in-out:nth-child(3) {
+    right: 150px;
+  }
+
+
   .el-menu-item {
     height: 30px;
     line-height: 30px;
@@ -44,12 +137,13 @@
     height: 100%;
     border: none;
     box-sizing: border-box;
-    margin: 5px;
+    /*margin: 5px;*/
+    margin-top: 5px;
+    margin-bottom: 5px;
     border-radius: 6px;
     box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
     overflow: hidden;
     background: white;
-
   }
 
   #trade-page-trader-title {
@@ -57,7 +151,38 @@
     font-weight: bolder;
     color: #58979f;
     font-size: 22px;
-    margin: 20px 0px 12px 0px;
+    margin: 15px 0px 0px 0px;
     font-family: "微软雅黑", sans-serif;
+  }
+
+  >>> .el-menu {
+    margin-left: 10px;
+  }
+
+  >>> .el-menu-item {
+    width: 104px;
+    height: 32px;
+    line-height: 32px;
+    font-size: 15px;
+    font-weight: normal;
+    box-sizing: border-box;
+    text-align: center;
+    background: rgba(243, 243, 243, 1);
+    border-top: 2px solid rgba(112, 189, 199, 0);
+    border-left: 1px solid rgba(112, 189, 199, 0.1);
+    border-right: 1px solid rgba(112, 189, 199, 0.1);
+    border-bottom: none;
+  }
+
+  >>> .el-menu-item.is-active {
+    border-top: 2px solid rgba(112, 189, 199, 1);
+    border-left: 1px solid rgba(112, 189, 199, 1);
+    border-right: 1px solid rgba(112, 189, 199, 1);
+    color: rgba(112, 189, 199, 1);
+    border-bottom: none;
+  }
+
+  >>> .el-menu--horizontal .el-menu-item:not(.is-disabled):focus, .el-menu--horizontal .el-menu-item:not(.is-disabled):hover {
+    color: rgba(112, 189, 199, 1);
   }
 </style>

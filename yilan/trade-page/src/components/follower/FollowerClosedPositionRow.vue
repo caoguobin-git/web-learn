@@ -43,10 +43,10 @@
   }
 
   .isGain {
-    color: rgba(204,73,85,1);
+    color: rgba(85,159,132,1);
   }
 
   .notGain {
-    color: rgba(85,159,132,1);
+    color: rgba(204,73,85,1);
   }
 </style>

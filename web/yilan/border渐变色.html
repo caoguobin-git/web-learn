@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/vue.js"></script>
+    <style>
+        .color-change{
+            width: 1920px;
+            height: 5px;
+            background: linear-gradient(to right,transparent 20%,red 40%, transparent 60%);
+        }
+    </style>
+</head>
+<body>
+<div id="demo">
+    <div class="color-change" :style="{background:back}"></div>
+</div>
+</body>
+</html>
+<script>
+    var demo =new Vue({
+        el:'#demo',
+        data:{
+            pos:-30,
+            color:'red'
+        },
+        methods:{
+
+        },
+        computed:{
+            back(){
+                return 'linear-gradient(to right,transparent '+(this.pos-20)+'%,'+this.color+' '+this.pos+'%, transparent '+(this.pos+20)+'%)'
+            }
+        },
+        mounted(){
+            var that = this;
+            var i=0;
+            setInterval(function () {
+                that.pos=i;
+                i++;
+                if (i==120){
+                    i=0;
+                }
+                that.color='rgb('+255+','+0+','+255+')'
+            },10)
+        }
+    })
+</script>

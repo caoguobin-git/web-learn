@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>loading</title>
+    <style>
+        .history-loading{
+            animation: my-demo 1s linear infinite;
+            overflow: hidden;
+            height: 50px;
+            margin-left: 50%;
+            line-height: 50px;
+            font-size: 16px;
+            font-weight: bolder;
+            font-family: "微软雅黑", sans-serif;
+            word-break: break-all;
+            white-space: nowrap;
+        }
+        @keyframes my-demo {
+            0%{
+                width: 48px;
+            }
+            100%{
+                width: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="history-loading">加载中. . .</div>
+</body>
+</html>

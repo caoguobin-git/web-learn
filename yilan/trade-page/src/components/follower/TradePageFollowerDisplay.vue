@@ -1,13 +1,22 @@
 <template>
   <div style="width: 98%;height:80%;margin: auto">
     <el-menu default-active="3" mode="horizontal">
-      <el-menu-item style="border-bottom: none;border-radius: 3px 0px 0px 0px;" @click="followerTag='Account'" index="1">账户</el-menu-item>
-<!--      <el-menu-item style="border-bottom: none" @click="followerTag='Orders'" index="2">挂单({{Object.keys(OrdersData).length}})</el-menu-item>-->
-      <el-menu-item style="border-bottom: none" @click="followerTag='OpenPositions'" index="3">开仓({{Object.keys(OpenPositionsData).length}})</el-menu-item>
-      <el-menu-item style="border-bottom: none" @click="followerTag='ClosedPositions'" index="4">平仓({{Object.keys(ClosedPositionsData).length}})</el-menu-item>
-      <el-menu-item style="border-bottom: none;border-radius: 0px 3px 0px 0px;" @click="followerTag='Summary'" index="5">账户总结</el-menu-item>
+      <el-menu-item style="border-bottom: none;border-radius: 3px 0px 0px 0px;" @click="followerTag='Account'"
+                    index="1">账户
+      </el-menu-item>
+      <!--      <el-menu-item style="border-bottom: none" @click="followerTag='Orders'" index="2">挂单({{Object.keys(OrdersData).length}})</el-menu-item>-->
+      <el-menu-item style="border-bottom: none" @click="followerTag='OpenPositions'" index="3">
+        开仓({{Object.keys(OpenPositionsData).length}})
+      </el-menu-item>
+      <el-menu-item style="border-bottom: none" @click="followerTag='ClosedPositions'" index="4">
+        平仓({{Object.keys(ClosedPositionsData).length}})
+      </el-menu-item>
+      <el-menu-item style="border-bottom: none;padding-right: 12px;border-radius: 0px 3px 0px 0px;" @click="followerTag='Summary'"
+                    index="5">总结({{Object.keys(SummaryData).length}})
+      </el-menu-item>
     </el-menu>
-    <component @closeTrueMarket="closeTrueMarket($event)" :is="followerCurrentDisplay" :marketPrecisions="marketPrecisions" :datas="currentDataBind"></component>
+    <component @closeTrueMarket="closeTrueMarket($event)" :is="followerCurrentDisplay"
+               :marketPrecisions="marketPrecisions" :datas="currentDataBind"></component>
   </div>
 </template>
 
@@ -20,7 +29,7 @@
 
   export default {
     name: "TradePageFollowerDisplay",
-    props:['marketDatas','marketPrecisions'],
+    props: ['marketDatas', 'marketPrecisions'],
     components: {FollowerOrders, FollowerAccount, FollowerSummary, FollowerClosedPositions, FollowerOpenPositions},
     data() {
       return {
@@ -29,8 +38,8 @@
         OpenPositionsData: {},
         ClosedPositionsData: {},
         SummaryData: {},
-        AccountData:{},
-        OrdersData:{}
+        AccountData: {},
+        OrdersData: {}
       }
     },
     computed: {
@@ -42,17 +51,17 @@
       }
     },
     methods: {
-      closeTrueMarket(data){
+      closeTrueMarket(data) {
         console.log(data)
       },
-      handleOrderAdd(data){
+      handleOrderAdd(data) {
         this.$set(this.OrdersData, data.tradeID, data);
       },
-      handleOrderDeleted(data){
+      handleOrderDeleted(data) {
         this.$delete(this.OrdersData, data.tradeID, data);
       },
       handleAccountAdd(data) {
-        this.$set(this.AccountData,'account',data)
+        this.$set(this.AccountData, 'account', data)
       },
       handleSummaryChanged(data) {
         this.$set(this.SummaryData, data.offerID, data);
@@ -107,11 +116,11 @@
               myVue.handleSummaryDeleted(result.data);
             } else if (result.type == 'ACCOUNT_ADDED' || result.type == 'ACCOUNT_CHANGED') {
               myVue.handleAccountAdd(result.data);
-            }else if (result.type=='ORDER_ADDED'||result.type=='ORDER_CHANGED'){
+            } else if (result.type == 'ORDER_ADDED' || result.type == 'ORDER_CHANGED') {
               console.log("order add")
               console.log(result.data)
               myVue.handleOrderAdd(result.data);
-            }else if (result.type=='ORDER_DELETED'){
+            } else if (result.type == 'ORDER_DELETED') {
               console.log("order deleted")
               console.log(result.data)
               myVue.handleOrderDeleted(result.data);
@@ -146,26 +155,29 @@
     margin: 0;
   }
 
- >>> .el-menu-item {
-    height: 25px;
-    line-height: 20px;
-    font-size: 14px;
-    padding: 3px 15px;
-   background: rgba(243,243,243,1);
-   border-top: 2px solid rgba(112,189,199,0);
-   border-left: 1px solid rgba(112,189,199,0.1);
-   border-right: 1px solid rgba(112,189,199,0.1);
-   border-bottom: none;
-  }
- >>> .el-menu-item.is-active{
-    border-top: 2px solid rgba(112,189,199,1);
-    border-left: 1px solid rgba(112,189,199,1);
-    border-right: 1px solid rgba(112,189,199,1);
-    color: rgba(112,189,199,1);
+  >>> .el-menu-item {
+    width: 104px;
+    height: 32px;
+    line-height: 32px;
+    font-size: 15px;
+    box-sizing: border-box;
+    text-align: center;
+    background: rgba(243, 243, 243, 1);
+    border-top: 2px solid rgba(112, 189, 199, 0);
+    border-left: 1px solid rgba(112, 189, 199, 0.1);
+    border-right: 1px solid rgba(112, 189, 199, 0.1);
     border-bottom: none;
   }
 
-  >>> .el-menu--horizontal .el-menu-item:not(.is-disabled):focus, .el-menu--horizontal .el-menu-item:not(.is-disabled):hover{
-    color: rgba(112,189,199,1);
+  >>> .el-menu-item.is-active {
+    border-top: 2px solid rgba(112, 189, 199, 1);
+    border-left: 1px solid rgba(112, 189, 199, 1);
+    border-right: 1px solid rgba(112, 189, 199, 1);
+    color: rgba(112, 189, 199, 1);
+    border-bottom: none;
+  }
+
+  >>> .el-menu--horizontal .el-menu-item:not(.is-disabled):focus, .el-menu--horizontal .el-menu-item:not(.is-disabled):hover {
+    color: rgba(112, 189, 199, 1);
   }
 </style>

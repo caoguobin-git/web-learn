@@ -1,15 +1,7 @@
 <template>
   <div class="market-detail-container">
-    <div style="width: 10%;font-weight: bolder;">{{market.symbol}}</div>
-    <div :class="sellPriceClass" class="price-container" style="width: 6%;text-align: right">{{market.sell}}</div>
-    <div :class="buyPriceClass" class="price-container" style="width: 6%;text-align: right">{{market.buy}}</div>
-    <div :class="spreadClass" style="width: 5%">{{market.diancha}}</div>
-    <div style="width: 6%">{{market.high}}</div>
-    <div style="width: 6%">{{market.low}}</div>
-    <div style="width: 10%">{{market.rollS}}</div>
-    <div style="width: 10%">{{market.rollB}}</div>
-    <div style="width: 10%">{{market.pipCost}}</div>
-    <div style="width: 10%">{{market.time}}</div>
+    <div style="width: 10%;font-weight: bolder;">{{market.symbol}}</div><div :class="sellPriceClass" class="price-container" style="width: 6%;text-align: right">{{market.sell}}</div><div :class="buyPriceClass" class="price-container" style="width: 6%;text-align: right">{{market.buy}}</div>
+    &nbsp;<div :class="spreadClass" style="width: 5%">{{market.diancha}}</div><div style="width: 8%">{{market.high}}</div><div style="width: 8%">{{market.low}}</div><div style="width: 11%">{{market.rollS}}</div><div style="width: 11%">{{market.rollB}}</div><div style="width: 10%">{{market.pipCost}}</div><div style="width: 10%">{{market.time}}</div>
   </div>
 </template>
 
@@ -92,7 +84,7 @@
   }
 
   .market-detail-container>.price-container{
-    border:.5px solid silver;
+    border:.5px solid #dbdbdb;
     font-weight: bolder;
     border-radius: 3px;
     font-size: 5px;

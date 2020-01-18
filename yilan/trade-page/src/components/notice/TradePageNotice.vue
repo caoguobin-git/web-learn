@@ -105,7 +105,8 @@
     /*height: 500px;*/
     box-sizing: border-box;
     padding-top: 1px;
-    margin: 5px 10px 5px 5px;
+   margin-top: 5px;
+    margin-bottom: 5px;
     border-radius: 6px;
     box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
     background: white;
