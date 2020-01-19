@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+
+<div id="demo">
+    <audio id="audio" src="new_msg.mp3" preload="metadata">
+
+    </audio>
+    <button @click="play" >播放</button>
+</div>
+</body>
+</html>
+<script>
+    var demo =new Vue({
+        el:'#demo',
+        data:{
+            music:{}
+        },
+        methods:{
+            play(){
+                console.log(this.music)
+                this.music.play()
+            }
+        },
+        mounted(){
+            this.music=document.getElementById('audio')
+        }
+    })
+</script>

@@ -46,7 +46,7 @@
         重要性:
         <a-rate :style="{color:starColor}" v-model="currentNews.important"/>
       </div>
-      <textarea class="news-edit-area" v-model="currentNews.content"></textarea>
+      <a-textarea class="news-edit-area" v-model="currentNews.content"></a-textarea>
       <div style="margin-top: 10px;width: 100%;padding-left:60%">
         <a-button @click="sendNewNews" type="primary" size="small"
                   style="width: 100px;background: rgba(97, 162, 227, 1);">发布
@@ -282,13 +282,12 @@
         return this.currentNews.important < 3 ? 'rgba(255,188,0,0.43)' : (this.currentNews.important < 4 ? 'rgb(255,188,0)' : 'rgb(222,78,78)');
       },
       newsDataSort() {
-      var that =this;
+        var that = this;
         return this.newsData.sort(function (a, b) {
           var dateA = new Date(a.modifiedTime);
           var dateB = new Date(b.modifiedTime);
           return dateB.getTime() - dateA.getTime();
         }).filter(function (news) {
-
           if (that.queryRange.length == 2) {
             let start = that.queryRange[0].getTime();
             let to = that.queryRange[1].getTime();
@@ -297,11 +296,10 @@
             let tim1 = new Date(news.modifiedTime).getTime();
             console.log((tim1 >= start && tim1 <= to))
             return (tim1 >= start && tim1 <= to);
-          }else {
+          } else {
             return true
           }
         })
-
       }
     },
     mounted() {
@@ -318,14 +316,13 @@
   }
 
   .news-edit-area {
-    border-radius: 6px;
+    border-radius: 4px;
     display: block;
     margin-top: 10px;
-    outline: silver;
     line-height: 1.5;
     font-size: 15px;
     font-family: "微软雅黑", sans-serif;
-    padding: 5px;
+    /*padding: 5px;*/
     resize: none;
     width: 65%;
     height: 45%;
@@ -333,10 +330,6 @@
     box-sizing: border-box;
   }
 
-
-  >>> .el-rate__icon.el-icon-star-on, >>> .el-rate__icon.el-icon-star-off {
-    margin-right: 0px;
-  }
 
   .news-history-content-container-row-container {
     width: 100%;

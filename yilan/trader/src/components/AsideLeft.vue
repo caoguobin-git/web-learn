@@ -7,13 +7,13 @@
 
     <div class="trader-tag-container">
       <router-link to="/trader" class="trader-tag" :style="{background:selectBack(1)}" @click.native="currentTag=1">
-        <img style="position: relative;top: 2px" :src="traderIcon"/>&nbsp;&nbsp;交易员信息
+        <img style="position: relative;top: -2px" :src="traderIcon"/>&nbsp;&nbsp;交易员信息
       </router-link>
       <router-link to="/notice" class="trader-tag" :style="{background:selectBack(2)}" @click.native="currentTag=2"><img
-        style="position: relative;top: 2px" :src="strategyIcon"/>&nbsp;&nbsp;交易策略
+        style="position: relative;top: -2px" :src="strategyIcon"/>&nbsp;&nbsp;交易策略
       </router-link>
       <router-link to="/news" class="trader-tag" :style="{background:selectBack(3)}" @click.native="currentTag=3"><img
-        style="position: relative;top: 2px" :src="newsIcon"/>&nbsp;&nbsp;&nbsp;新闻资讯
+        style="position: relative;top: -2px" :src="newsIcon"/>&nbsp;&nbsp;&nbsp;新闻资讯
       </router-link>
     </div>
     </keep-alive>

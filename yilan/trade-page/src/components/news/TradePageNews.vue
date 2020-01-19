@@ -33,7 +33,16 @@
     },
     computed:{
       newsSort(){
-        return this.newsData
+        var a =[];
+        for (var i in this.newsData){
+          a.push(this.newsData[i])
+        }
+
+        return a.sort(function (a, b) {
+          var dateA = new Date(a.modifiedTime);
+          var dateB = new Date(b.modifiedTime);
+          return dateB.getTime() - dateA.getTime();
+        })
       }
     },
     filters: {
@@ -114,5 +123,10 @@
   width: 95%;
   margin: auto;
   overflow: scroll;
+  border-top: 1px solid rgba(112,189,199,.6);
+  margin-top: 4px;
 }
+  .news-container::-webkit-scrollbar{
+    display: none;
+  }
 </style>

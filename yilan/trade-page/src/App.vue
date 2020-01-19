@@ -1,24 +1,26 @@
 <template>
   <!--  <el-container>-->
-  <el-row>
-    <el-col :span=24>
-      <el-row id="trade-header-row">
-        <el-col :span=24>
-          <el-row>
+  <a-row style="position: relative;width:100%;height: 100%;box-sizing: border-box">
+    <a-col :span=24 style="width: 100%;height: 100%">
+      <audio id="new-msg-audio" muted
+             src="http://img.tukuppt.com/newpreview_music/09/00/06/5c88fa2c3c95191046.mp3"></audio>
+      <a-row id="trade-header-row">
+        <a-col :span=24>
+          <a-row>
             <TradePageHeader></TradePageHeader>
-          </el-row>
-        </el-col>
-      </el-row>
-      <el-row id="trade-body-row" :gutter="10" :style="{height:bodyHeight+'px'}">
-        <el-col class="market-data-col" :style="{height:traderHeight+followerHeight+5+'px'}" :span="marketSpan">
+          </a-row>
+        </a-col>
+      </a-row>
+      <a-row id="trade-body-row" :gutter="10" :style="{height:bodyHeight+'px'}">
+        <a-col class="market-data-col" :style="{height:traderHeight+followerHeight+5+'px'}" :span="marketSpan">
           <span :style="marketSpanStyle" class="change-market-size-btn" @click="changeMarketSize"><i
             :class="marketSpanBtnClass"></i> </span>
 
           <TradePageMarket @changeMarketSize="changeMarketSize" :style="{height:traderHeight+followerHeight+5+'px'}"
                            :marketDatas="marketDatas"></TradePageMarket>
-        </el-col>
-        <el-col class="trade-data-col" style="height:100%;padding-left: 10px" :span="17-marketSpan">
-          <el-row>
+        </a-col>
+        <a-col class="trade-data-col" style="height:100%;padding-left: 10px" :span="17-marketSpan">
+          <a-row>
             <TradePageTrader @getTraderHistory="getTraderHistory"
                              :style="{height:traderHeight-5+'px'}"
                              :followerToken="usertoken"
@@ -26,26 +28,27 @@
                              :TraderOpenPositionsData="traderOpens"
                              :TraderClosedPositionsData="traderCloseds"
                              :marketPrecisions="marketPrecisions"></TradePageTrader>
-          </el-row>
-          <el-row>
+          </a-row>
+          <a-row>
             <TradePageFollower :marketPrecisions="marketPrecisions"
                                :style="{height:followerHeight+'px'}"></TradePageFollower>
-          </el-row>
-        </el-col>
-        <el-col class="notice-data-col" style="height:100%" :span=7>
-          <el-row>
+          </a-row>
+        </a-col>
+        <a-col class="notice-data-col" style="height:100%" :span=7>
+          <a-row>
             <TradePageNotice :style="{height:noticeHeight-5+'px'}"></TradePageNotice>
-          </el-row>
-          <el-row>
+          </a-row>
+          <a-row>
             <TradePageNews :newsData="newsData" :style="{height:newsHeight+'px'}"></TradePageNews>
-          </el-row>
-        </el-col>
-      </el-row>
-      <el-row id="trade-footer-row">
+          </a-row>
+        </a-col>
+      </a-row>
+      <a-row id="trade-footer-row" style="width: 100%;">
         <TradePageFooter></TradePageFooter>
-      </el-row>
-    </el-col>
-  </el-row>
+      </a-row>
+      <button @click="playNewMsgMusic">播放音乐</button>
+    </a-col>
+  </a-row>
 
 </template>
 
@@ -67,6 +70,7 @@
     },
     data() {
       return {
+        newMsgAudio: {},
         widthLeft: '427px',
         widthRight: '427px',
         windowHeight: 885,
@@ -78,7 +82,7 @@
         traderCloseds: {},
         traderHistoryData: '<div class="history-notice">请选择查询日期进行查询</div>',
         usertoken: '123',
-        newsData:{}
+        newsData: {}
       }
     },
     computed: {
@@ -116,8 +120,15 @@
       }
     },
     methods: {
-      handleNews(data){
-        this.$set(this.newsData,data.newsId,data);
+
+      playNewMsgMusic() {
+        this.newMsgAudio.muted = false;
+        this.newMsgAudio.play()
+      },
+      handleNews(data) {
+        this.$set(this.newsData, data.newsId, data);
+        this.newMsgAudio.muted = false;
+        this.newMsgAudio.play()
       },
       handleTraderHistory(data) {
         this.traderHistoryData = data;
@@ -193,10 +204,10 @@
               myVue.handleTraderClosedDatas(messages)
             } else if (type === "traderHistory") {
               myVue.handleTraderHistory(msg.data.substring(14))
-            }else if (type==='news'){
+            } else if (type === 'news') {
               console.log()
-              var news= JSON.parse(msg.data.substring(5))
-               myVue.handleNews(news);
+              var news = JSON.parse(msg.data.substring(5))
+              myVue.handleNews(news);
             }
             // console.log(messages)
           };
@@ -238,7 +249,8 @@
       }
     },
     mounted() {
-
+      this.newMsgAudio = document.getElementById('new-msg-audio');
+      this.playNewMsgMusic();
       this.init();
       var that = this;
       window.onresize = function () {
@@ -252,8 +264,15 @@
   html, body {
     margin: 0px;
     padding: 0px;
+    height: 100%;
+    width: 100%;
     overflow: hidden;
+    position: relative;
     background: rgba(239, 239, 239, 1);
+  }
+
+  >>> .ant-rate-star {
+    margin-right: 0;
   }
 
   .market-data-col, .trade-data-col, .change-market-size-btn {
@@ -274,6 +293,11 @@
 
   #trade-body-row {
 
+  }
+
+  #trade-footer-row {
+    position: absolute;
+    bottom: 0;
   }
 
 
