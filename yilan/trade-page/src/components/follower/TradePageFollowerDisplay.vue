@@ -1,21 +1,21 @@
 <template>
-  <div style="width: 98%;height:80%;margin: auto">
-    <el-menu default-active="3" mode="horizontal">
-      <el-menu-item style="border-bottom: none;border-radius: 3px 0px 0px 0px;" @click="followerTag='Account'"
+  <div style="width: 98%;height:76%;margin: auto">
+    <a-menu default-active="3" mode="horizontal">
+      <a-menu-item style="border-bottom: none;border-radius: 3px 0px 0px 0px;" @click="followerTag='Account'"
                     index="1">账户
-      </el-menu-item>
-      <!--      <el-menu-item style="border-bottom: none" @click="followerTag='Orders'" index="2">挂单({{Object.keys(OrdersData).length}})</el-menu-item>-->
-      <el-menu-item style="border-bottom: none" @click="followerTag='OpenPositions'" index="3">
+      </a-menu-item>
+      <!--      <a-menu-item style="border-bottom: none" @click="followerTag='Orders'" index="2">挂单({{Object.keys(OrdersData).length}})</a-menu-item>-->
+      <a-menu-item style="border-bottom: none" @click="followerTag='OpenPositions'" index="3">
         开仓({{Object.keys(OpenPositionsData).length}})
-      </el-menu-item>
-      <el-menu-item style="border-bottom: none" @click="followerTag='ClosedPositions'" index="4">
+      </a-menu-item>
+      <a-menu-item style="border-bottom: none" @click="followerTag='ClosedPositions'" index="4">
         平仓({{Object.keys(ClosedPositionsData).length}})
-      </el-menu-item>
-      <el-menu-item style="border-bottom: none;padding-right: 12px;border-radius: 0px 3px 0px 0px;" @click="followerTag='Summary'"
+      </a-menu-item>
+      <a-menu-item style="border-bottom: none;padding-right: 12px;border-radius: 0px 3px 0px 0px;" @click="followerTag='Summary'"
                     index="5">总结({{Object.keys(SummaryData).length}})
-      </el-menu-item>
-    </el-menu>
-    <component @closeTrueMarket="closeTrueMarket($event)" :is="followerCurrentDisplay"
+      </a-menu-item>
+    </a-menu>
+    <component class="follower-component-container" @closeTrueMarket="closeTrueMarket($event)" :is="followerCurrentDisplay"
                :marketPrecisions="marketPrecisions" :datas="currentDataBind"></component>
   </div>
 </template>
@@ -155,7 +155,7 @@
     margin: 0;
   }
 
-  >>> .el-menu-item {
+  >>> .a-menu-item {
     width: 104px;
     height: 32px;
     line-height: 32px;
@@ -169,7 +169,7 @@
     border-bottom: none;
   }
 
-  >>> .el-menu-item.is-active {
+  >>> .a-menu-item.is-active {
     border-top: 2px solid rgba(112, 189, 199, 1);
     border-left: 1px solid rgba(112, 189, 199, 1);
     border-right: 1px solid rgba(112, 189, 199, 1);
@@ -177,7 +177,40 @@
     border-bottom: none;
   }
 
-  >>> .el-menu--horizontal .el-menu-item:not(.is-disabled):focus, .el-menu--horizontal .el-menu-item:not(.is-disabled):hover {
+  >>> .ant-menu-item {
+    width: 104px;
+    height: 32px;
+    line-height: 32px;
+    font-size: 15px;
+    font-weight: normal;
+    box-sizing: border-box;
+    text-align: center;
+    background: rgba(243, 243, 243, 1);
+    border-top: 2px solid rgba(112, 189, 199, 0);
+    border-left: 1px solid rgba(112, 189, 199, 0.1);
+    border-right: 1px solid rgba(112, 189, 199, 0.1);
+    border-bottom: none;
+  }
+
+  >>> .ant-menu-item.ant-menu-item-selected {
+    border-top: 2px solid rgba(112, 189, 199, 1);
+    border-left: 1px solid rgba(112, 189, 199, 1);
+    border-right: 1px solid rgba(112, 189, 199, 1);
+    color: rgba(112, 189, 199, 1);
+    border-bottom: none;
+  }
+
+  >>>.ant-menu-item.ant-menu-item-active:hover{
+    color: rgba(112, 189, 199, 1);
+    border-bottom: 2px solid rgba(112, 189, 199, 1);
+  }
+
+  /*.follower-component-container{*/
+  /*  width: 100px;*/
+  /*  overflow: scroll;*/
+  /*}*/
+
+  >>> .ant-menu--horizontal .ant-menu-item:not(.is-disabled):focus, .ant-menu--horizontal .ant-menu-item:not(.is-disabled):hover {
     color: rgba(112, 189, 199, 1);
   }
 </style>

@@ -11,8 +11,8 @@
       <input type="password" placeholder="请输入福汇密码" v-model="loginPassword"></input>
       <i class="el-icon-close" @click="loginPassword=''" v-if="loginPassword!=''"></i>
     </div>
-    <el-button type="success" style="margin-top: 20px;margin-left: 280px" :loading="fxcmLoding" @click="doLogin" :disabled="loginBtnDisabled">&nbsp;&nbsp;登&nbsp;录&nbsp;&nbsp;
-    </el-button>
+    <a-button type="success" style="margin-top: 20px;margin-left: 280px" :loading="fxcmLoding" @click="doLogin" :disabled="loginBtnDisabled">&nbsp;&nbsp;登&nbsp;录&nbsp;&nbsp;
+    </a-button>
   </div>
 </template>
 

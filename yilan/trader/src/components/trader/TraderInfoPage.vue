@@ -1,9 +1,29 @@
 <template>
-  <div class="trader-info-container" style="width: 105%;height: 100%">
-    <div class="trader-table-title">
-      <div class="trader-table-title-tag" style="width: 8%">成交单据</div><div class="trader-table-title-tag" style="width: 10%">账号</div><div class="trader-table-title-tag" style="width: 8%">货币</div><div class="trader-table-title-tag" style="width: 5%">数量</div><div class="trader-table-title-tag" style="width: 5%">卖/买</div><div class="trader-table-title-tag" style="width: 8%">开仓</div><div class="trader-table-title-tag" style="width: 8%">平仓</div><div class="trader-table-title-tag" style="width: 10%">盈/亏</div><div class="trader-table-title-tag" style="width: 10%">总盈/亏</div><div class="trader-table-title-tag" style="width: 5%">保证金</div><div class="trader-table-title-tag" style="width: 10%">开仓时间</div><div class="trader-table-title-tag" style="width: 8%">操作</div>
-    </div>
+  <div class="trader-info-container" style="width: 100%; height: 100%">
+    <a-row type="flex" align="middle" :gutter="2" class="trader-table-title">
+      <a-col :span="2"><div class="trader-table-title-tag">成交单据</div></a-col>
+      <a-col :span="2"><div class="trader-table-title-tag">账号</div></a-col>
+      <a-col :span="2"><div class="trader-table-title-tag">货币</div></a-col>
+      <a-col :span="1"><div class="trader-table-title-tag">数量</div></a-col>
+      <a-col :span="1"><div class="trader-table-title-tag">卖/买</div></a-col>
+      <a-col :span="2"><div class="trader-table-title-tag">开仓</div></a-col>
+      <a-col :span="2"><div class="trader-table-title-tag">平仓</div></a-col>
+      <a-col :span="2"><div class="trader-table-title-tag">盈/亏</div></a-col>
+      <a-col :span="2"><div class="trader-table-title-tag">总盈/亏</div></a-col>
+      <a-col :span="2"><div class="trader-table-title-tag">保证金</div></a-col>
+      <a-col :span="4"><div class="trader-table-title-tag">开仓时间</div></a-col>
+      <a-col :span="2"><div class="trader-table-title-tag">操作</div></a-col>
+    </a-row>
     <div class="trader-table-rows-container">
+      <TraderInfoRow></TraderInfoRow>
+      <TraderInfoRow></TraderInfoRow>
+      <TraderInfoRow></TraderInfoRow>
+      <TraderInfoRow></TraderInfoRow>
+      <TraderInfoRow></TraderInfoRow>
+      <TraderInfoRow></TraderInfoRow>
+      <TraderInfoRow></TraderInfoRow>
+      <TraderInfoRow></TraderInfoRow>
+      <TraderInfoRow></TraderInfoRow>
       <TraderInfoRow></TraderInfoRow>
       <TraderInfoRow></TraderInfoRow>
       <TraderInfoRow></TraderInfoRow>
@@ -28,18 +48,21 @@
 
 <style scoped>
   .trader-table-title-tag {
-    display: inline-grid;
-    background: rgba(232,243,255,1);
+    background: rgba(232, 243, 255, 1);
     height: 35px;
     line-height: 35px;
     font-size: 15px;
     font-weight: bolder;
     text-align: center;
-    margin-left: 2px;
   }
-.trader-table-rows-container{
-  height: 90%;
-  /*background: red;*/
-  overflow: scroll;
-}
+
+  .trader-table-rows-container {
+    height: 90%;
+    /*background: red;*/
+    width: 1200px;
+  }
+  .trader-table-title{
+    width: 1200px;
+  }
+
 </style>

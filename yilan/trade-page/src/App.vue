@@ -19,11 +19,12 @@
           <TradePageMarket @changeMarketSize="changeMarketSize" :style="{height:traderHeight+followerHeight+5+'px'}"
                            :marketDatas="marketDatas"></TradePageMarket>
         </a-col>
-        <a-col class="trade-data-col" style="height:100%;padding-left: 10px" :span="17-marketSpan">
+        <a-col class="trade-data-col" style="height:100%;padding-left: 10px" :span="18-marketSpan">
           <a-row>
             <TradePageTrader @getTraderHistory="getTraderHistory"
                              :style="{height:traderHeight-5+'px'}"
                              :followerToken="usertoken"
+                             :traderBalance="traderBalance"
                              :TraderHistoryData="traderHistoryData"
                              :TraderOpenPositionsData="traderOpens"
                              :TraderClosedPositionsData="traderCloseds"
@@ -34,9 +35,9 @@
                                :style="{height:followerHeight+'px'}"></TradePageFollower>
           </a-row>
         </a-col>
-        <a-col class="notice-data-col" style="height:100%" :span=7>
+        <a-col class="notice-data-col" style="height:100%" :span=6>
           <a-row>
-            <TradePageNotice :style="{height:noticeHeight-5+'px'}"></TradePageNotice>
+            <TradePageNotice :noticeData="noticeData" :style="{height:noticeHeight-5+'px'}"></TradePageNotice>
           </a-row>
           <a-row>
             <TradePageNews :newsData="newsData" :style="{height:newsHeight+'px'}"></TradePageNews>
@@ -77,12 +78,18 @@
         marketDatas: {},
         marketPrecisions: {},
         socketForMarket: {},
-        marketSpan: 3,
+        marketSpan: 4,
         traderOpens: {},
         traderCloseds: {},
         traderHistoryData: '<div class="history-notice">请选择查询日期进行查询</div>',
         usertoken: '123',
-        newsData: {}
+        newsData: {},
+        noticeData:{},
+        traderBalance: {
+          in: 111.123,
+          out: 123.123,
+          pl: 123.1
+        }
       }
     },
     computed: {
@@ -121,14 +128,21 @@
     },
     methods: {
 
+      handleBalance(data){
+        this.traderBalance=data;
+      },
       playNewMsgMusic() {
         this.newMsgAudio.muted = false;
         this.newMsgAudio.play()
       },
+      handleNotice(data){
+        this.$set(this.noticeData, data.noticeId, data);
+        this.playNewMsgMusic();
+        console.log(this.noticeData)
+      },
       handleNews(data) {
         this.$set(this.newsData, data.newsId, data);
-        this.newMsgAudio.muted = false;
-        this.newMsgAudio.play()
+        this.playNewMsgMusic();
       },
       handleTraderHistory(data) {
         this.traderHistoryData = data;
@@ -171,7 +185,7 @@
       },
 
       changeMarketSize() {
-        this.marketSpan = this.marketSpan == 10 ? 3 : 10;
+        this.marketSpan = this.marketSpan == 10 ? 4 : 10;
       },
       createMarketConnect: function () {
         var socketId = this.usertoken + 'market';
@@ -208,6 +222,14 @@
               console.log()
               var news = JSON.parse(msg.data.substring(5))
               myVue.handleNews(news);
+            }else if (type === 'notice') {
+              console.log()
+              var notice = JSON.parse(msg.data.substring(7))
+              myVue.handleNotice(notice);
+            }else if (type === 'balance') {
+              console.log()
+              var balance = JSON.parse(msg.data.substring(8))
+              myVue.handleBalance(balance);
             }
             // console.log(messages)
           };
@@ -236,7 +258,7 @@
           low: parseFloat(message[5]),
           rollS: parseFloat(message[6]),
           rollB: parseFloat(message[7]),
-          time: new Date(parseFloat(message[8])).toLocaleTimeString(),
+          PriceTime: parseInt(message[8]),
           pointSize: parseFloat(message[9]),
           precision: parseInt(message[10]),
           pipCost: parseFloat(message[11])

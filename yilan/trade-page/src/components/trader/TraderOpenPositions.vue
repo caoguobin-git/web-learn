@@ -1,20 +1,27 @@
 <template>
   <div class="trader-position-main-container">
-    <div class="trader-position-title-container">
-      <div class="trader-title-tag" style="width: 8%">货币</div><div class="trader-title-tag" style="width: 5%">数量</div><div class="trader-title-tag" style="width: 5%">卖/买</div><div class="trader-title-tag" style="width: 10%">开仓</div><div class="trader-title-tag" style="width: 10%">平仓</div><div class="trader-title-tag" style="width: 8%">盈/亏</div><div class="trader-title-tag" style="width: 8%">总盈/亏</div><div class="trader-title-tag" style="width: 14%">时间</div>
-    </div>
-    <div class="trader-open-position-container">
+    <a-row :gutter="2" class="trader-position-title-container">
+      <a-col :span="3"><div  class="trader-title-tag">货币</div></a-col>
+      <a-col :span="2"><div  class="trader-title-tag">数量</div></a-col>
+      <a-col :span="1"><div  class="trader-title-tag">卖/买</div></a-col>
+      <a-col :span="3"><div  class="trader-title-tag">开仓</div></a-col>
+      <a-col :span="3"><div  class="trader-title-tag">平仓</div></a-col>
+      <a-col :span="3"><div  class="trader-title-tag">盈/亏</div></a-col>
+      <a-col :span="3"><div  class="trader-title-tag">总盈/亏</div></a-col>
+      <a-col :span="4"><div  class="trader-title-tag">时间</div></a-col>
+    </a-row>
+    <div class="trader-open-position-container" style="width: 1200px">
       <TraderOpenPositionRow v-for="item in datasSort" :openRow="item" :marketPrecision="marketPrecisions[item.symbol]"
                              :key="item.tradeID"></TraderOpenPositionRow>
 
     </div>
-    <div style="margin-top: 15px" v-if="calcPL.pl!=0">
-      <div style="display: inline-block;width: 39%;text-indent: 30px">统计：</div>
-      <div style="display: inline-block;width: 9%;text-align: center" :class="gainCalc">{{(calcPL.pl).toFixed(2)}}</div>
-      <div style="display: inline-block;width: 8%;text-align: center" :class="gainCalc">
+    <a-row style="margin-top: 15px;text-align: center;width: 1200px" v-if="calcPL.pl!=0">
+      <a-col :span="12" style="text-align: right">统计：</a-col>
+      <a-col :span="3" style="text-align: center" :class="gainCalc">{{(calcPL.pl).toFixed(2)}}</a-col>
+      <a-col :span="3" style="text-align: center" :class="gainCalc">
         {{(calcPL.totalPL).toFixed(2)}}
-      </div>
-    </div>
+      </a-col>
+    </a-row>
   </div>
 </template>
 
@@ -58,18 +65,18 @@
 
 <style scoped>
   .trader-position-main-container {
-    height: 77%;
+    height: 73%;
     width: 100%;
     margin: auto;
     overflow: hidden;
   }
 
   .trader-position-main-container:hover {
-    overflow-y: scroll;
+    overflow: scroll;
   }
 
   .trader-open-position-container {
-    width: 1217px;
+    width: 1200px;
     margin-bottom: 5px;
   }
 
@@ -79,13 +86,15 @@
   }
 
   .trader-title-tag {
-    display: inline-block;
     font-weight: bold;
     font-size: 14px;
     text-align: center;
+    /*background: rgba(246, 249, 252, 1);*/
     background: rgba(246, 249, 252, 1);
-    padding: 6px 3px;
-    border-right: 2px solid white;
+    width: 100%;
+    height: 100%;
+    padding: 6px 0px;
+    box-sizing: border-box;
   }
 
   .isGain {

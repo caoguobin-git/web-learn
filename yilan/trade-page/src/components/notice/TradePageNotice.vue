@@ -1,92 +1,47 @@
 <template>
   <div id="trade-page-notice-container">
 
-      <div id="trade-page-notice-title">
-        近期交易提醒
-      </div>
-      <el-table :data="notice" height="86%"  :cell-style="noticeRow" @row-click="sayHello"
-                row-key="date" empty-text="暂无提醒" border
-                stripe style="width: 95%">
-        <!--        <el-table-column-->
-        <!--          type="index"-->
-        <!--          :index="1">-->
-        <!--        </el-table-column>-->
-        <el-table-column style="font-weight: bold" align="center" prop="currency" label="商品组合"
-                         width="80"></el-table-column>
-        <el-table-column :index="0" header-align="center" type="extend" show-overflow-tooltip
-                         label="交易策略"
-                         width="204" prop="notice">
-        </el-table-column>
-        <el-table-column align="center" prop="time" label="时间"></el-table-column>
-      </el-table>
+    <div id="trade-page-notice-title">
+      近期交易提醒
+    </div>
+    <!--      <el-table :data="notice" height="86%"  :cell-style="noticeRow" @row-click="sayHello"-->
+    <!--                row-key="date" empty-text="暂无提醒" border-->
+    <!--                stripe style="width: 95%">-->
+    <!--        &lt;!&ndash;        <el-table-column&ndash;&gt;-->
+    <!--        &lt;!&ndash;          type="index"&ndash;&gt;-->
+    <!--        &lt;!&ndash;          :index="1">&ndash;&gt;-->
+    <!--        &lt;!&ndash;        </el-table-column>&ndash;&gt;-->
+    <!--        <el-table-column style="font-weight: bold" align="center" prop="currency" label="商品组合"-->
+    <!--                         width="80"></el-table-column>-->
+    <!--        <el-table-column :index="0" header-align="center" type="extend" show-overflow-tooltip-->
+    <!--                         label="交易策略"-->
+    <!--                         width="204" prop="notice">-->
+    <!--        </el-table-column>-->
+    <!--        <el-table-column align="center" prop="time" label="时间"></el-table-column>-->
+    <!--      </el-table>-->
+    <a-row style="width: 96%;margin: auto;height: 85%;font-size: 12px;font-family: '微软雅黑', sans-serif">
+      <a-col span="22" offset="1">
+        <a-row :gutter="2" style="font-size: 14px;padding-bottom: 5px">
+          <a-col span="3" ><div class="notice-title-tag">货币</div></a-col>
+          <a-col span="14" ><div class="notice-title-tag">提醒内容</div></a-col>
+          <a-col span="7"><div class="notice-title-tag">时间</div></a-col>
+        </a-row>
+        <TradePageNoticeRow v-for="notice in noticeDataSort" :key="notice.noticeId" :notice="notice"></TradePageNoticeRow>
+      </a-col>
+    </a-row>
 
   </div>
 </template>
 
 <script>
+  import TradePageNoticeRow from "./TradePageNoticeRow";
+
   export default {
     name: "TradePageNotice",
+    components: {TradePageNoticeRow},
+    props: ['noticeData'],
     data() {
-      return {
-        noticeRow: {
-          color: 'black',
-          height: '12px',
-          cursor: 'pointer'
-        },
-        notice: [{
-          currency: 'XAU/USD',
-          notice: '王小虎',
-          time: '123'
-        }, {
-          currency: 'XAG/USD',
-          notice: '尽管世界贸易方面传出乐观消息，但后续的发展仍存在不确定因素。澳大利亚放缓的经济增速和政府有意义重返预算盈余的决定使澳洲联储2020年面临进一步降息的风险。而且，当利率触及0.25%下限时，有可能启动量化宽松。虽然让澳元有暂时喘息的机会，但我行预测2020年澳元兑美元将面临新的下行压力。',
-          time: '123'
-        }, {
-          currency: 'CORN1',
-          notice: '王小虎',
-          time: '123'
-        }, {
-          currency: 'CORN1',
-          notice: '王小虎',
-          time: '123'
-        }, {
-          currency: 'CORN1',
-          notice: '王小虎',
-          time: '123'
-        }, {
-          currency: 'CORN1',
-          notice: '王小虎',
-          time: '123'
-        }, {
-          currency: 'CORN1',
-          notice: '王小虎',
-          time: '123'
-        }, {
-          currency: 'CORN1',
-          notice: '王小虎',
-          time: '123'
-        }, {
-          currency: 'CORN1',
-          notice: '王小虎',
-          time: '123'
-        }, {
-          currency: 'CORN1',
-          notice: '王小虎',
-          time: '123'
-        }, {
-          currency: 'CORN1',
-          notice: '王小虎',
-          time: '123'
-        }, {
-          currency: 'CORN1',
-          notice: '王小虎',
-          time: '123'
-        }, {
-          currency: 'CORN1',
-          notice: '王小虎',
-          time: '123'
-        }]
-      }
+      return {}
     },
     methods: {
       sayHello: function (row, column, event) {
@@ -94,7 +49,18 @@
         console.log(row.currency)
         // console.log(column)
         // console.log(event)
-
+      }
+    },
+    computed:{
+      noticeDataSort(){
+        var a=[];
+        for(var i in this.noticeData){
+          a.push(this.noticeData[i]);
+        }
+        a.sort(function (val1,val2) {
+          return new Date(val2.modifiedTime).getTime()-new Date(val1.modifiedTime).getTime()
+        })
+        return a;
       }
     }
   }
@@ -105,11 +71,16 @@
     /*height: 500px;*/
     box-sizing: border-box;
     padding-top: 1px;
-   margin-top: 5px;
+    margin-top: 5px;
     margin-bottom: 5px;
     border-radius: 6px;
     box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
     background: white;
+    overflow: scroll;
+  }
+
+  #trade-page-notice-container:hover {
+    overflow: scroll;
   }
 
   #trade-page-notice-title {
@@ -123,16 +94,9 @@
     border-left: 2px solid rgba(112, 189, 199, 1);
   }
 
-  .el-table {
-    overflow: hidden;
+  .notice-title-tag{
     text-align: center;
-    margin: auto;
-    font-size: 12px;
-  }
-
-  .el-table__body-wrapper::-webkit-scrollbar {
-    /*width: 0;宽度为0隐藏*/
-    width: 0px;
+    font-weight: bolder;
   }
 
 </style>

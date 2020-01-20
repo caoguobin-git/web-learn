@@ -6,11 +6,20 @@
         市场数据
       </div>
 
-      <div style="width: 98%;" id="trade-page-market-caption">
-        <div style="width: 10%;font-weight: bolder;text-align: center">货币</div><div style="width: 6%;font-weight: bolder;text-align: center">卖出</div><div style="width: 6%;font-weight: bolder;text-align: center">买入</div>
-        &nbsp;<div style="width: 5%;font-weight: bolder;text-align: center">点差</div><div style="width: 8%;font-weight: bolder;text-align: center">最高</div><div style="width: 8%;font-weight: bolder;text-align: center">最低</div><div style="width: 11%;font-weight: bolder;text-align: center">卖出利息</div><div style="width: 11%;font-weight: bolder;text-align: center">买入利息</div><div style="width: 10%;font-weight: bolder;text-align: center">点值</div><div style="width: 10%;font-weight: bolder;text-align: center">时间</div>
-      </div>
-      <div class="market-price-container" style="width: 100%;margin: 2px auto 0px auto;overflow-y: scroll;overflow-x: hidden;height:91%">
+      <a-row style="width: 100%;height:30px" :gutter="2" type="flex" align="middle" id="trade-page-market-caption">
+        <a-col style="height: 100%" :span=2 ><div class="market-info-tag">货币</div></a-col>
+        <a-col style="height: 100%" :span=2 ><div class="market-info-tag">卖出</div></a-col>
+        <a-col style="height: 100%" :span=2 ><div class="market-info-tag">买入</div></a-col>
+        <a-col style="height: 100%" :span=2 ><div class="market-info-tag">点差</div></a-col>
+        <a-col style="height: 100%" :span=3 ><div class="market-info-tag">最高</div></a-col>
+        <a-col style="height: 100%" :span=3 ><div class="market-info-tag">最低</div></a-col>
+        <a-col style="height: 100%" :span=2 ><div class="market-info-tag">卖出利息</div></a-col>
+        <a-col style="height: 100%" :span=2 ><div class="market-info-tag">买入利息</div></a-col>
+        <a-col style="height: 100%" :span=2 ><div class="market-info-tag">点值</div></a-col>
+        <a-col style="height: 100%" :span=4 ><div class="market-info-tag">时间</div></a-col>
+      </a-row>
+      <div class="market-price-container"
+           style="width: 100%;margin: 2px auto 0px auto;overflow-y: scroll;overflow-x: hidden;height:91%">
         <MarketDataDetail v-for="item in marketDataArray" :key="item.symbol" :market="item"></MarketDataDetail>
       </div>
       <!--      </el-row>-->
@@ -19,7 +28,7 @@
 </template>
 
 <script>
-  import MarketDataDetail from "../marketdatadetail/MarketDataDetail";
+  import MarketDataDetail from "./MarketDataRow";
 
   export default {
     name: "TradePageMarket",
@@ -132,9 +141,7 @@
         return arr;
       }
     },
-    methods: {
-
-    },
+    methods: {},
 
     watch: {
       marketDatas: function (val, valOld) {
@@ -147,24 +154,26 @@
 
 <style scoped>
 
+  .market-info-tag{
+    text-align: center;
+    font-weight: bolder;
+    height: 100%;
+    line-height: 30px;
+    font-size: 13px;
+  }
+
   #trade-page-market-caption {
     width: 100%;
     margin: 10px auto 0px auto;
     font-size: 13px;
+    background: rgba(222, 222, 222, 0.7);
   }
 
-  #trade-page-market-caption > div {
-    display: inline-block;
-    overflow: hidden;
-    word-break: break-all;
-    white-space: pre;
-    padding: 2px 5px;
-  }
 
   #trade-page-market-container {
     /*padding: 10px;*/
     height: 100%;
-    width: 800px;
+    width: 795px;
     overflow: hidden;
     padding: 17px 10px 0px 10px;
     border-radius: 6px;
@@ -172,7 +181,7 @@
   }
 
   #trade-page-market-title {
-    margin: 3px 17px;
+    margin: 0px 17px;
     font-size: 18px;
     height: 17px;
     line-height: 17px;
@@ -188,6 +197,9 @@
     margin: auto;
     font-size: 12px;
   }
-  .market-price-container::-webkit-scrollbar {display:none}
+
+  .market-price-container::-webkit-scrollbar {
+    display: none
+  }
 
 </style>

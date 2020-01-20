@@ -5,11 +5,12 @@
         <a-rate style="font-size: 13px" :style="{color:starColor}" :value="news.important" disabled></a-rate>
       </a-col>
       <a-col class="new-row-col news-row-col-content" span="11">
-        <a-popover>
-          <template slot="content">
-            <p style="max-width: 300px;white-space: pre-line;word-break: break-all">{{news.content}}</p>
+        <a-tooltip placement="topLeft">
+          <template slot="title">
+            <span>{{news.content}}</span>
           </template>
-          <p>{{news.content}}</p></a-popover>
+          <p style="max-width: 300px;white-space: pre-line;word-break: break-all">{{news.content}}</p>
+        </a-tooltip>
       </a-col>
       <a-col class="news-row-col-time" span="8">{{news.modifiedTime}}</a-col>
     </a-row>
@@ -83,7 +84,7 @@
 
   .new-row-col.news-row-col-content {
     text-align: left;
-    height: 40px;
+    height: 38px;
     text-indent: 24px;
     white-space: pre-line;
 

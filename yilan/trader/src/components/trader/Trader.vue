@@ -42,18 +42,22 @@
   }
 
   .trader-content-container {
-    width: 80%;
-    height: 100%;
+    width: 83%;
+    height: 90%;
     background: white;
     margin-top: 20px;
     margin-left: 67px;
     position: relative;
+    overflow: hidden;
+  }
+
+  .trader-content-container:hover{
+    overflow: scroll;
   }
 
   .trader-container {
     padding-top: 20px;
     height: 99.5%;
-    overflow: hidden;
     background: white;
     /*background: red;*/
     box-sizing: border-box;

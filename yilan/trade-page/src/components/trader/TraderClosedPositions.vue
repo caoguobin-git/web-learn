@@ -32,14 +32,14 @@
 
 <style scoped>
   .trader-closed-main-container {
-    height: 77%;
+    height: 73%;
     width: 99.5%;
     margin: auto;
     overflow: hidden;
   }
 
   .trader-closed-main-container:hover {
-    overflow-y: scroll;
+    overflow: scroll;
   }
 
   .trader-closed-title-tag {

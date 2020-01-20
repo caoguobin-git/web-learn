@@ -1,72 +1,66 @@
 <template>
-  <div id="trader-notice-container">
-    <div class="trader-notice-history-container" :style="{height:noticeHistoryHeight+'%'}">
-      <div class="notice-history-title-container">
+  <a-row id="trader-news-container">
+    <a-row class="trader-news-history-container">
+      <div class="news-history-title-container">
         交易提醒<span style="font-weight: normal">-提醒管理</span>
       </div>
-      <div class="notice-history-time-selector">
+      <div class="news-history-time-selector">
         发布时间:
-        <el-tag size="medium" style="cursor:default;" @click="changeNoticeHistoryRange(1)" :effect="currentTagEffact(1)">
+        <a-tag size="medium" style="cursor:default;" @click="changeNewsHistoryRange(1)" :color="currentTagEffact(1)">
           近7天
-        </el-tag>
-        <el-tag size="medium" style="cursor:default;" @click="changeNoticeHistoryRange(2)" :effect="currentTagEffact(2)">
+        </a-tag>
+        <a-tag size="medium" style="cursor:default;" @click="changeNewsHistoryRange(2)" :color="currentTagEffact(2)">
           近30天
-        </el-tag>
+        </a-tag>
+        <a-range-picker size="small" style="width: 21%" :locale="dateLocale" v-model="newsHistoryRange"
+                        @change="changeNewsRange"/>
 
-        <el-date-picker
-          @change="changeNoticeHistoryRange(3)"
-          v-model="noticeHistoryRange"
-          type="daterange"
-          value-format="yyyy;M;d"
-          range-separator="至"
-          start-placeholder="开始日期"
-          end-placeholder="结束日期">
-        </el-date-picker>
       </div>
-      <div class="notice-history-content-container">
-        <div class="notice-history-content-container-title">
-          <div class="notice-title-tag" style="width: 10%">地区</div>
-          <div class="notice-title-tag" style="width: 12%">重要性</div>
-          <div class="notice-title-tag" style="width: 50%">提醒内容</div>
-          <div class="notice-title-tag" style="width: 14%">时间</div>
-          <div class="notice-title-tag" style="width: 11%">操作</div>
-        </div>
-        <div class="notice-history-content-container-row-container">
-          <NoticeRow @editNotice="editNotice" @deleteNotice="deleteNotice" v-for="notice in noticeData" :key="notice.noticeId" :notice="notice"></NoticeRow>
+      <div class="news-history-content-container">
+        <a-row :gutter="2" class="news-history-content-container-title">
+          <a-col span="3">
+            <div class="news-title-tag">货币</div>
+          </a-col>
+          <a-col span="12">
+            <div class="news-title-tag">提醒内容</div>
+          </a-col>
+          <a-col span="5">
+            <div class="news-title-tag">时间</div>
+          </a-col>
+          <a-col span="4">
+            <div class="news-title-tag">操作</div>
+          </a-col>
+        </a-row>
+        <div class="news-history-content-container-row-container">
+          <NoticeRow @editNotice="editNotice" @deleteNotice="deleteNotice" v-for="notice in noticeDataSort"
+                     :key="notice.noticeId"
+                     :notice="notice"></NoticeRow>
         </div>
       </div>
-    </div>
-    <div class="trader-notice-send-container" :style="{height:99-noticeHistoryHeight+'%'}">
-      <div class="notice-history-title-container">
+    </a-row>
+    <div class="trader-news-send-container">
+      <div class="news-history-title-container">
         交易提醒<span style="font-weight: normal">-提醒发布</span>
       </div>
-      <div class="notice-history-time-selector">
+      <div class="news-history-time-selector">
         选择货币:&nbsp;&nbsp;&nbsp;
-        <el-select style="width: 200px" filterable size="mini" v-model="currentNotice.instrument" placeholder="请选择">
-          <el-option
-            v-for="item in instruments"
-            :key="item"
-            :label="item"
-            :value="item">
-          </el-option>
-        </el-select>
+        <a-select v-model="currentNotice.currency" showSearch style="width: 120px">
+          <a-select-option v-for="currency in instruments"
+                           :key="currency"
+                           :value="currency">{{currency}}
+          </a-select-option>
+        </a-select>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        重要性:
-        <el-rate style="display: inline"
-                 v-model='currentNotice.important'
-                 disabled-void-color="silver"
-                 :colors="colors">
-        </el-rate>
-
-        <textarea cols="130" rows="8" class="notice-edit-area" v-model="currentNotice.content"></textarea>
-        <div style="margin-top: 8px;text-align: right;width: 66%">
-          <el-button @click="sendNewNotice" type="primary" size="mini"
-                     style="width: 100px;background: rgba(97, 162, 227, 1)">发布
-          </el-button>
-        </div>
       </div>
+      <a-textarea class="news-edit-area" v-model="currentNotice.content"></a-textarea>
+      <div style="margin-top: 10px;width: 100%;padding-left:60%">
+        <a-button @click="sendNotice" type="primary" size="small"
+                  style="width: 100px;background: rgba(97, 162, 227, 1);">发布
+        </a-button>
+      </div>
+
     </div>
-  </div>
+  </a-row>
 </template>
 
 <script>
@@ -77,47 +71,57 @@
     components: {NoticeRow},
     data() {
       return {
-
+        dateLocale: {
+          "lang": {
+            "placeholder": "Select date",
+            "rangePlaceholder": ["开始日期", "结束日期"],
+            "today": "Today",
+            "now": "Now",
+            "backToToday": "Back to today",
+            "ok": "Ok",
+            "clear": "Clear",
+            "month": "Month",
+            "year": "Year",
+            "timeSelect": "Select time",
+            "dateSelect": "Select date",
+            "monthSelect": "Choose a month",
+            "yearSelect": "Choose a year",
+            "decadeSelect": "Choose a decade",
+            "yearFormat": "YYYY",
+            "dateFormat": "M/D/YYYY",
+            "dayFormat": "D",
+            "dateTimeFormat": "M/D/YYYY HH:mm:ss",
+            "monthFormat": "MMMM",
+            "monthBeforeYear": true,
+            "previousMonth": "Previous month (PageUp)",
+            "nextMonth": "Next month (PageDown)",
+            "previousYear": "Last year (Control + left)",
+            "nextYear": "Next year (Control + right)",
+            "previousDecade": "Last decade",
+            "nextDecade": "Next decade",
+            "previousCentury": "Last century",
+            "nextCentury": "Next century"
+          },
+          "timePickerLocale": {
+            "placeholder": "Select time"
+          },
+          "dateFormat": "YYYY-MM-DD",
+          "dateTimeFormat": "YYYY-MM-DD HH:mm:ss",
+          "weekFormat": "YYYY-wo",
+          "monthFormat": "YYYY-MM"
+        },
         colors: ['rgba(255,188,0,0.43)', 'rgb(255,188,0)', 'rgb(222,78,78)'],
         currentNotice: {
           noticeId: '',
-          instrument: '',
-          important: 3,
+          currency: '',
           content: ''
         },
-        instruments: ['BTC/USD','BCH/USD','ETH/USD','LTC/USD','XRP/USD','CryptoMajor','USEquities','AUD/USD','NZD/USD','EUR/JPY','NZD/JPY','AUD/NZD','EUR/NZD','CAD/CHF','NZD/CAD','HKG33','SPX500','XAG/USD','USOil','JPYBasket','EMBasket','NAS100','JPN225','GBP/CAD','USD/NOK','AUD/JPY','GBP/JPY','AUS200','USD/CHF','WHEATF','EUR/GBP','GER30','EUSTX50','NZD/CHF','USD/SEK','USD/JPY','GBP/CHF','CHF/JPY','US30','EUR/TRY','ZAR/JPY','USDOLLAR','USD/CNH','Bund','CAD/JPY','UK100','AUD/CAD','CORNF','TRY/JPY','AUD/CHF','Copper','EUR/SEK','ESP35','USD/CAD','GBP/USD','FRA40','EUR/USD','GBP/NZD','SOYF','USD/ZAR','US2000','GBP/AUD','NGAS','EUR/AUD','EUR/CHF','CHN50','USD/TRY','EUR/CAD','USD/HKD','XAU/USD','USD/MXN','UKOil','EUR/NOK'],
-        noticeHistoryHeight: 65,
+        instruments: ['BTC/USD', 'BCH/USD', 'ETH/USD', 'LTC/USD', 'XRP/USD', 'CryptoMajor', 'USEquities', 'AUD/USD', 'NZD/USD', 'EUR/JPY', 'NZD/JPY', 'AUD/NZD', 'EUR/NZD', 'CAD/CHF', 'NZD/CAD', 'HKG33', 'SPX500', 'XAG/USD', 'USOil', 'JPYBasket', 'EMBasket', 'NAS100', 'JPN225', 'GBP/CAD', 'USD/NOK', 'AUD/JPY', 'GBP/JPY', 'AUS200', 'USD/CHF', 'WHEATF', 'EUR/GBP', 'GER30', 'EUSTX50', 'NZD/CHF', 'USD/SEK', 'USD/JPY', 'GBP/CHF', 'CHF/JPY', 'US30', 'EUR/TRY', 'ZAR/JPY', 'USDOLLAR', 'USD/CNH', 'Bund', 'CAD/JPY', 'UK100', 'AUD/CAD', 'CORNF', 'TRY/JPY', 'AUD/CHF', 'Copper', 'EUR/SEK', 'ESP35', 'USD/CAD', 'GBP/USD', 'FRA40', 'EUR/USD', 'GBP/NZD', 'SOYF', 'USD/ZAR', 'US2000', 'GBP/AUD', 'NGAS', 'EUR/AUD', 'EUR/CHF', 'CHN50', 'USD/TRY', 'EUR/CAD', 'USD/HKD', 'XAU/USD', 'USD/MXN', 'UKOil', 'EUR/NOK'],
         radio1: '',
-        noticeHistoryRange: [],
+        newsHistoryRange: [],
+        queryRange: [],
         currentTagIndex: 0,
-        noticeData: [
-          {
-            noticeId: '123123',
-            instrument: 'USA',
-            important: 1,
-            content: '啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀',
-            time: 1584585555524
-          },
-          {noticeId: '123223', instrument: 'CHINA', important: 2, content: '啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀', time: 15845824},
-          {noticeId: '123323', instrument: 'JAPAN', important: 3, content: '啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀', time: 15845824},
-          {noticeId: '123423', instrument: 'USA', important: 5, content: '啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀', time: 15845824},
-          {
-            noticeId: '123523',
-            instrument: 'USA',
-            important: 3,
-            content: '啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀',
-            time: 15845824
-          },
-          {noticeId: '123623', instrument: 'AUS', important: 5, content: '啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀', time: 15845824},
-          {noticeId: '123723', instrument: 'TIANJIN', important: 4, content: '啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀', time: 15845824},
-          {noticeId: '123823', instrument: 'USA', important: 5, content: '啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀', time: 15845824},
-          {noticeId: '123923', instrument: 'USA', important: 2, content: '啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀', time: 15845824},
-          {noticeId: '1231023', instrument: 'USA', important: 5, content: '啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀', time: 15845824},
-          {noticeId: '1231121', instrument: 'USA', important: 3, content: '啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀', time: 15845824},
-          {noticeId: '1231122', instrument: 'USA', important: 3, content: '啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀', time: 15845824},
-          {noticeId: '12311233', instrument: 'USA', important: 3, content: '啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀', time: 15845824},
-          {noticeId: '12311234', instrument: 'USA', important: 3, content: '啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀啊手动阀手动阀', time: 15845824},
-        ]
+        noticeData: []
       }
     },
     watch: {
@@ -127,33 +131,55 @@
       }
     },
     methods: {
-      deleteNotice(data){
+      changeNewsRange(a, b) {
+        this.currentTagIndex = 3;
+        this.queryRange.splice(0, this.queryRange.length);
+        this.queryRange.push(a[0]._d)
+        this.queryRange.push(a[1]._d)
+      },
+      changeCurrentImportant(val) {
+        this.currentNews.important = val;
+      },
+      getNotice() {
+        var url = "/notice/all";
+        this.sendAJAX(url, 'get', 'application/json', null);
+
+      },
+      deleteNotice(data) {
+        let url = '/notice/' + data;
+        this.sendAJAX(url, "delete", "application/json", null);
         for (var i in this.noticeData) {
           if (this.noticeData[i].noticeId == data) {
-            this.noticeData.splice(i,1)
+            this.noticeData.splice(i, 1)
             break;
           }
         }
+
       },
-      sendNewNotice() {
+      sendNotice() {
         var a = this.currentNotice;
-        a.time = new Date().getTime();
-        console.log(a)
+        if (a.currency == '' || a.content == '') {
+          this.$message.error('提醒货币和内容不能为空');
+          return;
+        }
+
         if (a.noticeId != null && a.noticeId != '') {
-          alert('更改新闻')
+
+          let x = JSON.stringify(a)
+          this.sendAJAX("/notice/", "patch", "application/json", x);
+          this.$message.success('交易提醒修改成功')
+
         } else {
-          alert('发送新新闻')
-          this.noticeData.push(a)
+          let x = JSON.stringify(a)
+          this.sendAJAX("/notice/", "post", "application/json", x);
         }
         this.currentNotice = {
           noticeId: '',
-          instrument: '',
-          important: 3,
+          currency: '',
           content: ' '
         }
       },
       editNotice(data) {
-        console.log(data)
         for (var i in this.noticeData) {
           if (this.noticeData[i].noticeId == data) {
             this.currentNotice = this.noticeData[i];
@@ -161,71 +187,114 @@
           }
         }
       },
-      changeNoticeHistoryRange(data) {
+      changeNewsHistoryRange(data) {
         this.currentTagIndex = data;
         if (data == 1) {
           this.setSelectedDate(7);
         } else if (data == 2) {
           this.setSelectedDate(30);
+        } else if (data == 3) {
+
         }
       },
       setSelectedDate(days) {
-        this.noticeHistoryRange.splice(0, this.noticeHistoryRange.length);
-        let today = new Date();
-        let before = new Date();
-        before.setTime(today.getTime() - 1000 * 60 * 60 * 24 * days);
-        let beforeStr = '';
-        beforeStr += before.getFullYear();
-        beforeStr += ';';
-        beforeStr += (before.getMonth() + 1);
-        beforeStr += ';';
-        beforeStr += before.getDate();
-
-        let todayStr = '';
-        todayStr += today.getFullYear();
-        todayStr += ';';
-        todayStr += (today.getMonth() + 1);
-        todayStr += ';';
-        todayStr += today.getDate();
-
-        this.noticeHistoryRange.push(beforeStr)
-        this.noticeHistoryRange.push(todayStr)
+        this.newsHistoryRange.splice(0, this.newsHistoryRange.length);
+        this.queryRange.splice(0, this.queryRange.length)
+        var today = new Date();
+        var from = new Date();
+        var sp = today.getTime() - days * 24 * 60 * 60 * 1000;
+        from.setTime(sp);
+        this.queryRange.push(from)
+        this.queryRange.push(today)
       },
       currentTagEffact(index) {
-        return this.currentTagIndex == index ? 'dark' : 'light'
+        return this.currentTagIndex == index ? '#2db7f5' : '#cbcbcb'
+      },
+      sendAJAX(url, type, contentType, param) {
+        var that = this;
+        console.log(param)
+        $.ajax({
+          url: url,
+          type: type,
+          data: param,
+          dataType: 'json',
+          contentType: contentType,
+          success: function (res) {
+            console.log(res)
+            if (type == 'post') {
+              that.$message.success('交易提醒发送成功');
+              console.log(res.data)
+              that.noticeData.push(res.data)
+            } else if (type == 'delete') {
+              that.$message.success('交易提醒删除成功');
+            } else if (type == 'get') {
+              console.log(res);
+              for (var i in res.data) {
+                that.noticeData.push(res.data[i])
+              }
+            } else {
+              console.log("新闻修改成功")
+              that.$message.success('新闻修改成功');
+            }
+          },
+          error: function (jqXHR, textStatus, errorThrown) {
+            // /*弹出jqXHR对象的信息*/
+            // alert(jqXHR.responseText);
+            // alert(jqXHR.status);
+            // alert(jqXHR.readyState);
+            // alert(jqXHR.statusText);
+            // /*弹出其他两个参数的信息*/
+            // alert(textStatus);
+            // alert(errorThrown);
+          }
+        })
       }
     },
-    computed: {}
+    computed: {
+      starColor() {
+        console.log(this.currentNews.important)
+        return this.currentNews.important < 3 ? 'rgba(255,188,0,0.43)' : (this.currentNews.important < 4 ? 'rgb(255,188,0)' : 'rgb(222,78,78)');
+      },
+      noticeDataSort() {
+        var that = this;
+        return this.noticeData.sort(function (a, b) {
+          var dateA = new Date(a.modifiedTime);
+          var dateB = new Date(b.modifiedTime);
+          return dateB.getTime() - dateA.getTime();
+        }).filter(function (news) {
+          if (that.queryRange.length == 2) {
+            let start = that.queryRange[0].getTime();
+            let to = that.queryRange[1].getTime();
+            console.log(start)
+            console.log(to)
+            let tim1 = new Date(news.modifiedTime).getTime();
+            console.log((tim1 >= start && tim1 <= to))
+            return (tim1 >= start && tim1 <= to);
+          } else {
+            return true
+          }
+        })
+      }
+    },
+    mounted() {
+      this.getNotice();
+    }
   }
 </script>
 
 <style scoped>
 
-  .notice-edit-area {
-    border-radius: 6px;
-    display: block;
-    margin-top: 10px;
-    outline: silver;
-    line-height: 1.5;
-    font-size: 15px;
-    font-family: "微软雅黑", sans-serif;
-    padding: 5px;
-    resize: none;
-    box-sizing: border-box;
+  >>> .ant-rate-star {
+    margin-right: 0;
   }
 
-
-  >>> .el-rate__icon.el-icon-star-on, >>> .el-rate__icon.el-icon-star-off {
-    margin-right: 0px;
-  }
-
-  .notice-history-content-container-row-container {
+  .news-history-content-container-row-container {
     width: 100%;
     height: 100%;
     overflow-y: scroll;
   }
 
-  .notice-history-content-container {
+  .news-history-content-container {
     margin-left: 67px;
     margin-top: 20px;
     border-top: 2px solid rgba(97, 162, 227, 1);
@@ -233,7 +302,7 @@
     height: 75%;
   }
 
-  .notice-history-content-container-title {
+  .news-history-content-container-title {
     height: 40px;
     width: 100%;
     font-family: "微软雅黑", sans-serif;
@@ -241,12 +310,24 @@
 
   }
 
-  #trader-notice-container {
+  #trader-news-container {
     height: 100%;
+    width: 100%;
     background: transparent;
   }
 
-  .trader-notice-history-container, .trader-notice-send-container {
+  .trader-news-history-container {
+    height: 60%;
+  }
+
+  .trader-news-send-container {
+    height: 50%;
+    width: 100%;
+    background: white;
+    margin-top: 5px;
+  }
+
+  .trader-news-history-container, .trader-news-send-container {
     background: white;
     padding-top: 20px;
     font-family: "微软雅黑", sans-serif;
@@ -254,12 +335,8 @@
     box-sizing: border-box;
   }
 
-  .trader-notice-send-container {
-    background: white;
-    margin-top: 5px;
-  }
 
-  .notice-history-title-container {
+  .news-history-title-container {
     font-size: 16px;
     font-weight: bolder;
     color: rgba(92, 102, 126, 1);
@@ -268,21 +345,105 @@
     border-left: 3px solid rgba(112, 189, 199, 1);
   }
 
-  .notice-history-time-selector {
+  .news-history-time-selector {
     padding-left: 10px;
     margin-left: 67px;
     margin-top: 20px;
   }
 
-  .notice-title-tag {
+  .news-title-tag {
     text-align: center;
     font-size: 14px;
     font-weight: bold;
-    display: inline-block;
     line-height: 39px;
     font-family: "微软雅黑", sans-serif;
     color: rgba(93, 103, 127, 1)
   }
+
+
+  >>> .ant-rate-star {
+    margin-right: 0;
+  }
+
+  .news-edit-area {
+    border-radius: 4px;
+    display: block;
+    margin-top: 10px;
+    line-height: 1.5;
+    font-size: 15px;
+    font-family: "微软雅黑", sans-serif;
+    /*padding: 5px;*/
+    resize: none;
+    width: 65%;
+    height: 45%;
+    margin-left: 4%;
+    box-sizing: border-box;
+  }
+
+
+  .news-history-content-container-row-container {
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+  }
+
+  .news-history-content-container {
+    margin-left: 67px;
+    margin-top: 20px;
+    border-top: 2px solid rgba(97, 162, 227, 1);
+    width: 75%;
+    height: 75%;
+  }
+
+  .news-history-content-container-title {
+    height: 40px;
+    width: 100%;
+    font-family: "微软雅黑", sans-serif;
+    background: rgba(245, 250, 255, 1);
+
+  }
+
+  #trader-news-container {
+    height: 100%;
+    width: 100%;
+    background: transparent;
+  }
+
+  .trader-news-history-container {
+    height: 60%;
+  }
+
+  .trader-news-send-container {
+    height: 50%;
+    width: 100%;
+    background: white;
+    margin-top: 5px;
+  }
+
+  .trader-news-history-container, .trader-news-send-container {
+    background: white;
+    padding-top: 20px;
+    font-family: "微软雅黑", sans-serif;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+
+  .news-history-title-container {
+    font-size: 16px;
+    font-weight: bolder;
+    color: rgba(92, 102, 126, 1);
+    margin-left: 67px;
+    padding-left: 6px;
+    border-left: 3px solid rgba(112, 189, 199, 1);
+  }
+
+  .news-history-time-selector {
+    padding-left: 10px;
+    margin-left: 67px;
+    margin-top: 20px;
+  }
+
 
 </style>
 

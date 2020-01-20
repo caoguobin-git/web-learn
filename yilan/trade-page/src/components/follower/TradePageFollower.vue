@@ -45,6 +45,8 @@
     background: white;
     overflow: hidden;
   }
+  #trade-page-follower-info:hover{
+  }
   #trade-page-follower-title{
     margin: 18px 17px 8px;
     font-size: 18px;

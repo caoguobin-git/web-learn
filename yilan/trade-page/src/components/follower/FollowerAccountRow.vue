@@ -1,13 +1,57 @@
 <template>
-  <div style="width: 100%" class="follower-account-row-container">
-    <div class="follower-account-row-tag" style="width: 8%">{{account.accountName}}</div><div class="follower-account-row-tag" style="width: 7%">{{account.balance}}</div><div class="follower-account-row-tag" style="width: 6%">{{(account.equity).toFixed(2)}}</div><div class="follower-account-row-tag" :class="grossGain" style="width: 4%">{{(account.grossPL).toFixed(2)}}</div><div class="follower-account-row-tag" :class="dayGain" style="width: 5%">{{account.dayPL}}</div><div class="follower-account-row-tag" style="width: 7%">{{(account.usedMargin).toFixed(3)}}</div><div class="follower-account-row-tag" style="width: 7%">{{account.usableMargin}}</div><div class="follower-account-row-tag " style="width: 12%">
-      <div class="percent-container">
-        <div class="inner-display-percent-container">
-          <div class="inner-display-percent" :style="useableMarginPer">{{account.usableMarginInPercentage}}%</div>
+  <a-row style="width: 100%;padding:5px 0px" class="follower-account-row-container">
+    <a-col :span="2">
+      <div class="follower-account-row-tag">{{account.accountName}}</div>
+    </a-col>
+    <a-col :span="2">
+      <div class="follower-account-row-tag">{{account.balance}}</div>
+    </a-col>
+    <a-col :span="2">
+      <div class="follower-account-row-tag">{{(account.equity).toFixed(2)}}</div>
+    </a-col>
+    <a-col :span="2">
+      <div class="follower-account-row-tag" :class="grossGain">{{(account.grossPL).toFixed(2)}}</div>
+    </a-col>
+    <a-col :span="2">
+      <div class="follower-account-row-tag" :class="dayGain">{{account.dayPL}}</div>
+    </a-col>
+    <a-col :span="2">
+      <div class="follower-account-row-tag">{{(account.usedMargin).toFixed(3)}}</div>
+    </a-col>
+    <a-col :span="2">
+      <div class="follower-account-row-tag">{{account.usableMargin}}</div>
+    </a-col>
+    <a-col :span="2">
+      <div class="follower-account-row-tag">
+        <div class="percent-container">
+          <div class="inner-display-percent-container">
+            <div class="inner-display-percent" :style="useableMarginPer">{{account.usableMarginInPercentage}}%</div>
+          </div>
         </div>
-      </div></div><div class="follower-account-row-tag" style="width: 7%">{{(account.usedMargin3).toFixed(3)}}</div><div class="follower-account-row-tag" style="width: 7%">{{account.usableMargin}}</div><div class="follower-account-row-tag" style="width: 12%"><div class="percent-container"><div class="inner-display-percent-container"><div class="inner-display-percent" :style="useableMarginPer">{{account.usableMaintMarginInPercentage}}%</div></div>
-      </div></div><div class="follower-account-row-tag" style="width: 5%">N</div>
-  </div>
+      </div>
+    </a-col>
+
+    <a-col :span="2">
+      <div class="follower-account-row-tag">{{(account.usedMargin3).toFixed(3)}}</div>
+    </a-col>
+    <a-col :span="2">
+      <div class="follower-account-row-tag">{{account.usableMargin}}</div>
+    </a-col>
+    <a-col :span="2">
+      <div class="follower-account-row-tag">
+        <div class="percent-container">
+          <div class="inner-display-percent-container">
+            <div class="inner-display-percent" :style="useableMarginPer">{{account.usableMaintMarginInPercentage}}%
+            </div>
+          </div>
+        </div>
+      </div>
+    </a-col>
+    <a-col :span="2">
+      <div class="follower-account-row-tag">N</div>
+    </a-col>
+
+  </a-row>
 </template>
 
 <script>
@@ -53,24 +97,23 @@
 <style scoped>
 
   .isGain {
-    color: rgba(204,73,85,1);
+    color: rgba(204, 73, 85, 1);
   }
 
   .notGain {
-    color: rgba(85,159,132,1);
+    color: rgba(85, 159, 132, 1);
   }
 
-  .follower-account-row-container:hover{
+  .follower-account-row-container:hover {
     cursor: pointer;
     background: whitesmoke;
   }
+
   .follower-account-row-tag {
-    display: inline-block;
     font-family: "微软雅黑", sans-serif;
     font-size: 13px;
     text-align: center;
     padding: 2px 3px;
-    border-right: 2px solid transparent;
   }
 
   .percent-container {
@@ -87,9 +130,9 @@
   }
 
   .inner-display-percent-container {
-    display: inline-block;
-    width: 80%;
-    margin-left: 10%;
-    background: rgba(238,238,238,1);
+    /*display: inline-block;*/
+    width: 100%;
+    margin: auto;
+    background: rgba(238, 238, 238, 1);
   }
 </style>
