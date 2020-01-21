@@ -15,7 +15,7 @@
                     index="5">总结({{Object.keys(SummaryData).length}})
       </a-menu-item>
     </a-menu>
-    <component class="follower-component-container" @closeTrueMarket="closeTrueMarket($event)" :is="followerCurrentDisplay"
+    <component class="follower-component-container" @closeTrueMarket="closeTrueMarket" :is="followerCurrentDisplay"
                :marketPrecisions="marketPrecisions" :datas="currentDataBind"></component>
   </div>
 </template>
@@ -29,17 +29,17 @@
 
   export default {
     name: "TradePageFollowerDisplay",
-    props: ['marketDatas', 'marketPrecisions'],
+    props: ['marketDatas', 'marketPrecisions','OrdersData','AccountData','SummaryData','usertoken','OpenPositionsData','ClosedPositionsData'],
     components: {FollowerOrders, FollowerAccount, FollowerSummary, FollowerClosedPositions, FollowerOpenPositions},
     data() {
       return {
         followerSocket: {},
         followerTag: 'OpenPositions',
-        OpenPositionsData: {},
-        ClosedPositionsData: {},
-        SummaryData: {},
-        AccountData: {},
-        OrdersData: {}
+        // OpenPositionsData: {},
+        // ClosedPositionsData: {},
+        // SummaryData: {},
+        // AccountData: {},
+        // OrdersData: {}
       }
     },
     computed: {
@@ -52,99 +52,13 @@
     },
     methods: {
       closeTrueMarket(data) {
-        console.log(data)
-      },
-      handleOrderAdd(data) {
-        this.$set(this.OrdersData, data.tradeID, data);
-      },
-      handleOrderDeleted(data) {
-        this.$delete(this.OrdersData, data.tradeID, data);
-      },
-      handleAccountAdd(data) {
-        this.$set(this.AccountData, 'account', data)
-      },
-      handleSummaryChanged(data) {
-        this.$set(this.SummaryData, data.offerID, data);
-      },
-      handleSummaryDeleted(data) {
-        this.$delete(this.SummaryData, data.offerID)
-
-      },
-      handleClosedPositions(data) {
-        this.$delete(this.OpenPositionsData, data.tradeID)
-        this.$set(this.ClosedPositionsData, data.tradeID, data)
-      },
-      handleOpenPositions(data) {
-        this.$set(this.OpenPositionsData, data.tradeID, data)
-      },
-      sengMessage(message) {
-        var a = JSON.stringify(message);
-        this.followerSocket.send(a);
-      },
-      registerFollowerChannel() {
-        var param = {
-          type: 'register',
-          usertoken: '123'
-        }
-        this.sengMessage(param);
-      },
-      createFollowerConnect() {
-        var socketId = 'asdfasdfasdfasdf' + 'market';
-        var myVue = this;
-        if (typeof (WebSocket) == "undefined") {
-          console.log("您的浏览器不支持WebSocket");
-        } else {
-          console.log("您的浏览器支持WebSocket");
-          //实现化WebSocket对象，指定要连接的服务器地址与端口  建立连接
-          //等同于socket = new WebSocket("ws://localhost:8083/checkcentersys/websocket/20");
-          this.followerSocket = new WebSocket('ws://192.168.0.106:8091/follower');
-          //打开事件
-          this.followerSocket.onopen = function () {
-            console.log("Socket " + socketId + "已打开");
-            myVue.registerFollowerChannel();
-          };
-          //获得消息事件
-          this.followerSocket.onmessage = function (msg) {
-            let result = JSON.parse(msg.data);
-            if (result.type == 'OPEN_ADDED' || result.type == 'OPEN_CHANGED') {
-              myVue.handleOpenPositions(result.data);
-            } else if (result.type == 'CLOSED_ADDED' || result.type == 'CLOSED_CHANGED') {
-              myVue.handleClosedPositions(result.data);
-            } else if (result.type == 'SUMMARY_ADDED' || result.type == 'SUMMARY_CHANGED') {
-              myVue.handleSummaryChanged(result.data);
-            } else if (result.type == 'SUMMARY_DELETED') {
-              myVue.handleSummaryDeleted(result.data);
-            } else if (result.type == 'ACCOUNT_ADDED' || result.type == 'ACCOUNT_CHANGED') {
-              myVue.handleAccountAdd(result.data);
-            } else if (result.type == 'ORDER_ADDED' || result.type == 'ORDER_CHANGED') {
-              console.log("order add")
-              console.log(result.data)
-              myVue.handleOrderAdd(result.data);
-            } else if (result.type == 'ORDER_DELETED') {
-              console.log("order deleted")
-              console.log(result.data)
-              myVue.handleOrderDeleted(result.data);
-            }
-          };
-          //关闭事件
-          this.followerSocket.onclose = function () {
-            if (confirm("连接断开，点击重连？")) {
-              myVue.createFollowerConnect();
-            }
-          };
-          //发生了错误事件
-          this.followerSocket.onerror = function (e) {
-            console.log("follower socket error")
-            console.log(e)
-          }
-        }
+        this.$emit('closeTrueMarket', data)
       }
     },
+    watch:{
+
+    },
     mounted() {
-      console.log("跟随者登录fxcm完成 建立socket连接");
-      //1.建立连接
-      //2.通过token注册连接
-      this.createFollowerConnect();
     }
 
   }

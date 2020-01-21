@@ -36,7 +36,6 @@
     data() {
       return {
         currentTab: 'OpenPositions',
-
         followStatus: false,
         followLoading:false
       }
@@ -50,17 +49,15 @@
         }
         this.followLoading=true;
         var that = this;
-        setTimeout(function () {
-          that.followLoading=false;
-        },5000)
+        let param={
+          traderAccount:'1001195792',
+          status:val,
+          followerToken:this.followerToken
+        }
+        this.$root.$emit('changeFollow', param)
       }
     },
     methods: {
-      changeFollowStatus() {
-        for (var i in this.TraderOpenPositionsData) {
-          console.log(this.TraderOpenPositionsData[i].account + '  ' + this.followerToken)
-        }
-      },
       getTraderHistory(data) {
         this.$emit('getTraderHistory', data)
       }
@@ -81,7 +78,18 @@
     },
     mounted() {
 
-    }
+    },
+    created() {
+      var that = this;
+      this.$root.$on('noticeTraderFollowStatus', (value) => {
+        console.log(value)
+        that.followLoading=false;
+        that.followStatus=value;
+      })
+    },
+    beforeDestroy() {
+      this.$root.Bus.$off('noticeTraderFollowStatus')
+    },
   }
 </script>
 

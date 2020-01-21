@@ -1,81 +1,118 @@
 <template>
-  <div style="text-align: center">
-    <p style="height: 18px;font-size: 16px;margin: 5px auto;color:silver">{{loginFxcmMsg}}</p>
-    <div class="input-container">
-      <i class="el-icon-user"></i>
-      <input type="text" placeholder="请输入账号" v-model="loginFxcmUsername"></input>
-      <i class="el-icon-close" @click="loginFxcmUsername=''" v-if="loginFxcmUsername!=''"></i>
-    </div>
-    <div class="input-container">
-      <i class="el-icon-lock"></i>
-      <input type="password" placeholder="请输入密码" v-model="loginFxcmPassword"></input>
-      <i class="el-icon-close" @click="loginFxcmPassword=''" v-if="loginFxcmPassword!=''"></i>
-    </div>
-    <p style="margin: 5px auto 2px 150px">还没有账号？去<a href="http://www.baidu.com" target="_blank">注册</a></p>
-    <div style="margin-top: 10px;text-align: justify-all">
-     <a-button type="primary" class="login-fxcm-btn" @click="loginFxcm" :disabled="loginFxcmBtnDisabled">登录</a-button>
-    </div>
-  </div>
+  <a-row style="margin-top: 10px">
+    <a-col span="6" offset="9">
+      <a-row  class="row-container">
+        <a-col span="24" style="text-align: center">
+          <span style="text-align: center">{{loginFxcmMsg}}</span>
+        </a-col>
+      </a-row>
+      <a-row class="row-container">
+        <a-col span="24">
+          <a-input placeholder="请输入账号" v-model="loginFxcmUsername" ref="userNameInput">
+            <a-icon slot="prefix" type="user" />
+            <a-icon slot="suffix" style="font-size: 12px;color: #aaaaaa" v-if="loginFxcmUsername!=''" @click="loginFxcmUsername=''" type="close"/>
+
+          </a-input>
+        </a-col>
+      </a-row>
+      <a-row class="row-container">
+        <a-col span="24">
+          <a-input-password  placeholder="请输入密码" v-model="loginFxcmPassword" ref="passWordInput">
+            <a-icon slot="prefix" type="lock" />
+            <a-icon slot="suffix" style="font-size: 12px;color: #aaaaaa" v-if="loginFxcmPassword!=''" @click="loginFxcmPassword=''" type="close"/>
+          </a-input-password >
+        </a-col>
+      </a-row>
+      <a-row class="row-container">
+        <a-col span="24">
+          <a-select  v-model="accountType" style="width: 100%">
+            <a-select-option value="Demo">模拟账号</a-select-option>
+            <a-select-option value="Real">真实账号</a-select-option>
+          </a-select>
+        </a-col>
+      </a-row>
+      <a-row class="row-container">
+        <a-col span="24">
+          <a-button type="primary" @click="loginFxcm" :loading="loading" :disabled="loginFxcmBtnDisabled" style="width: 100%">{{loginBtnMsg}}</a-button>
+        </a-col>
+      </a-row>
+      <a-row >
+        <a-col span="24" style="text-align: right">
+          <span>还没有账号？<a href="http://www.baidu.com" target="_blank">去注册</a></span>
+        </a-col>
+      </a-row>
+    </a-col>
+  </a-row>
 </template>
 
 <script>
   export default {
     name: "TradePageFollowerLogin",
+    props:['usertoken'],
     data() {
       return {
         loginFxcmUsername: '',
         loginFxcmMsg: '请登入交易平台进行交易',
-        loginFxcmPassword: ''
+        loginFxcmPassword: '',
+        accountType:'Demo',
+        loading:false
       }
     },
-    computed:{
-      loginFxcmBtnDisabled(){
-        return this.loginFxcmUsername.trim()==''||this.loginFxcmPassword.trim()==''
+    computed: {
+      loginFxcmBtnDisabled() {
+        return this.loginFxcmUsername.trim() == '' || this.loginFxcmPassword.trim() == ''
+      },
+      loginBtnMsg(){
+        return this.loading?'登录中':(this.loginFxcmBtnDisabled?'请输入账号密码':'登录')
       }
     },
-    methods:{
+    methods: {
       loginFxcm(){
-        //执行福汇登录
-        //成功
-        this.$emit('changeDisplayPage','TradePageFollowerDisplay')
-        //失败
-        this.loginFxcmMsg='登录失败';
+
+        this.loading=true;
+        this.loginFxcmMsg='登录中....'
+        var url='/fxcm/login';
+        var param={
+          account:this.loginFxcmUsername,
+          password:this.loginFxcmPassword,
+          type:this.accountType,
+          usertoken:this.usertoken
+        }
+
         var that=this;
-        setTimeout(function () {
-          that.loginFxcmMsg='请登入交易平台进行交易'
-        },1500)
+        $.ajax({
+          url:url,
+          data:param,
+          type:'post',
+          dataType:'json',
+          success:function (res) {
+            console.log(res)
+            that.loginFxcmMsg='登录成功';
+            that.loading=false;
+            that.$emit('changeDisplayPage','TradePageFollowerDisplay')
+          },
+          error:function (a,b,c) {
+            console.log(a)
+            that.loginFxcmMsg=res.responseJSON.message;
+            console.log(b)
+            console.log(c)
+          }
+        })
       }
+    },
+    mounted() {
+      //init 数据 判断是否已经登录
     }
   }
 </script>
 
 <style scoped>
-  .input-container {
-    border-bottom: 1px solid black;
-    width: 300px;
-    margin: 5px auto 0px auto;
-    padding: 5px 0px 5px 0px;
-    text-align: left;
-    font-size: 20px;
-  }
-
-  .input-container > input {
-    border: none;
-    outline: none;
-    width: 240px;
-    font-size: 14px;
-    margin-left: 5px;
-  }
 
   input::-webkit-input-placeholder { /* WebKit browsers */
     font-size: 14px;
   }
 
-  .login-fxcm-btn{
-    border: none;
-    width: 100px;
-    border: 1px solid rgba(112,189,199,1);
-    background: rgba(112,189,199,1);
-    box-shadow: 0px 0px 6px rgba(112,189,199,1);
+  .row-container{
+    margin-top: 10px;
   }
 </style>

@@ -48,7 +48,8 @@
           data: param,
           type: 'post',
           success: function (res) {
-            that.loginMsg='登录成功，2秒后跳转'
+            that.loginMsg='登录成功，2秒后跳转';
+            window.localStorage.setItem('yilan-token',res.data)
             setTimeout(function () {
               window.location.href="/tradeIndex"
             },2000)

@@ -4,7 +4,7 @@
       <a-col span="2" ><div class="follower-title-tag" >成交单据</div></a-col>
       <a-col span="2" ><div class="follower-title-tag" >账号</div></a-col>
       <a-col span="2" ><div class="follower-title-tag" >货币</div></a-col>
-      <a-col span="2" ><div class="follower-title-tag" >数量</div></a-col>
+      <a-col span="1" ><div class="follower-title-tag" >数量</div></a-col>
       <a-col span="1" ><div class="follower-title-tag" >卖/买</div></a-col>
       <a-col span="2" ><div class="follower-title-tag" >开仓</div></a-col>
       <a-col span="2" ><div class="follower-title-tag" >平仓</div></a-col>
@@ -12,17 +12,18 @@
       <a-col span="2" ><div class="follower-title-tag" >总盈/亏</div></a-col>
       <a-col span="2" ><div class="follower-title-tag" >保证金</div></a-col>
       <a-col span="4" ><div class="follower-title-tag" >时间</div></a-col>
+      <a-col span="2" ><div class="follower-title-tag" >操作</div></a-col>
     </a-row>
 
     <div class="follower-open-position-container">
-      <FollowerOpenPositionRow @closeTrueMarket="closeTrueMarket($event)" v-for="item in datas"
+      <FollowerOpenPositionRow @closeTrueMarket="closeTrueMarket" v-for="item in datas"
                                :marketPrecision="marketPrecisions[item.instrument]" :key="item.tradeID"
                                :openRow="item"></FollowerOpenPositionRow>
     </div>
 
 
     <a-row v-if="calcPL.pl!=0" :gutter="2" style="width: 1200px">
-      <a-col span="13" style="text-align: right" ><div>统计：</div></a-col>
+      <a-col span="12" style="text-align: right" ><div>统计：</div></a-col>
       <a-col span=2 style="text-align: center" ><div>{{(calcPL.pl).toFixed(2)}}</div></a-col>
       <a-col span="2" style="text-align: center" ><div>{{(calcPL.totalPL).toFixed(2)}}</div></a-col>
     </a-row>

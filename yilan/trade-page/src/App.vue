@@ -31,7 +31,7 @@
                              :marketPrecisions="marketPrecisions"></TradePageTrader>
           </a-row>
           <a-row>
-            <TradePageFollower :marketPrecisions="marketPrecisions"
+            <TradePageFollower :usertoken="usertoken" :marketPrecisions="marketPrecisions"
                                :style="{height:followerHeight+'px'}"></TradePageFollower>
           </a-row>
         </a-col>
@@ -61,6 +61,7 @@
   import TradePageFollower from "./components/follower/TradePageFollower";
   import TradePageNotice from "./components/notice/TradePageNotice";
   import TradePageNews from "./components/news/TradePageNews";
+  import Vue from 'Vue';
 
   export default {
     name: 'App',
@@ -71,6 +72,7 @@
     },
     data() {
       return {
+        Bus:new Vue({}),
         newMsgAudio: {},
         widthLeft: '427px',
         widthRight: '427px',
@@ -267,7 +269,9 @@
       },
       init() {
         this.createMarketConnect();
+        this.usertoken= window.localStorage.getItem('yilan-token');
         this.windowHeight = window.innerHeight * 0.99;
+        // this.usertoken='123'
       }
     },
     mounted() {
