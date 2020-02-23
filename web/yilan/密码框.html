@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="text" id="demo">
+<button id="button">切换</button>
+
+</body>
+</html>
+
+<script>
+    window.onload = function () {
+        document.getElementById('button').onclick = function (e) {
+            console.log(e)
+            let elementById = document.getElementById('demo');
+            elementById.setAttribute('type', elementById.getAttribute('type') == 'text' ? 'password' : 'text')
+
+        }
+    }
+</script>

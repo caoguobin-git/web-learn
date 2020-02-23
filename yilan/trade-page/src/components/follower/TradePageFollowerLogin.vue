@@ -96,6 +96,7 @@
             that.loginFxcmMsg=res.responseJSON.message;
             console.log(b)
             console.log(c)
+            that.loading=false;
           }
         })
       }

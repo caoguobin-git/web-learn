@@ -17,7 +17,7 @@
             :class="marketSpanBtnClass"></i> </span>
 
           <TradePageMarket @changeMarketSize="changeMarketSize" :style="{height:traderHeight+followerHeight+5+'px'}"
-                           :marketDatas="marketDatas"></TradePageMarket>
+                           :marketDatas="marketMap"></TradePageMarket>
         </a-col>
         <a-col class="trade-data-col" style="height:100%;padding-left: 10px" :span="18-marketSpan">
           <a-row>
@@ -72,7 +72,7 @@
     },
     data() {
       return {
-        Bus:new Vue({}),
+        Bus: new Vue({}),
         newMsgAudio: {},
         widthLeft: '427px',
         widthRight: '427px',
@@ -86,11 +86,87 @@
         traderHistoryData: '<div class="history-notice">请选择查询日期进行查询</div>',
         usertoken: '123',
         newsData: {},
-        noticeData:{},
+        noticeData: {},
         traderBalance: {
           in: 111.123,
           out: 123.123,
           pl: 123.1
+        },
+        socketForMarket: 'ws://192.168.0.106:8090/price',
+        marketMap: {
+          "EUR/USD": {},
+          "USD/JPY": {},
+          "GBP/USD": {},
+          "USD/CHF": {},
+          "EUR/CHF": {},
+          "AUD/USD": {},
+          "USD/CAD": {},
+          "NZD/USD": {},
+          "EUR/GBP": {},
+          "EUR/JPY": {},
+          "GBP/JPY": {},
+          "CHF/JPY": {},
+          "GBP/CHF": {},
+          "EUR/AUD": {},
+          "EUR/CAD": {},
+          "AUD/CAD": {},
+          "AUD/JPY": {},
+          "CAD/JPY": {},
+          "NZD/JPY": {},
+          "GBP/CAD": {},
+          "GBP/NZD": {},
+          "GBP/AUD": {},
+          "AUD/NZD": {},
+          "USD/SEK": {},
+          "EUR/SEK": {},
+          "EUR/NOK": {},
+          "USD/NOK": {},
+          "USD/MXN": {},
+          "AUD/CHF": {},
+          "EUR/NZD": {},
+          "USD/ZAR": {},
+          "USD/HKD": {},
+          "ZAR/JPY": {},
+          "USD/TRY": {},
+          "EUR/TRY": {},
+          "NZD/CHF": {},
+          "CAD/CHF": {},
+          "NZD/CAD": {},
+          "TRY/JPY": {},
+          "USD/CNH": {},
+          "AUS200": {},
+          "ESP35": {},
+          "FRA40": {},
+          "GER30": {},
+          "HKG33": {},
+          "JPN225": {},
+          "NAS100": {},
+          "SPX500": {},
+          "UK100": {},
+          "US30": {},
+          "Copper": {},
+          "CHN50": {},
+          "EUSTX50": {},
+          "USDOLLAR": {},
+          "US2000": {},
+          "USOil": {},
+          "UKOil": {},
+          "SOYF": {},
+          "NGAS": {},
+          "WHEATF": {},
+          "CORNF": {},
+          "Bund": {},
+          "XAU/USD": {},
+          "XAG/USD": {},
+          "BTC/USD": {},
+          "ETH/USD": {},
+          "LTC/USD": {},
+          "BCH/USD": {},
+          "XRP/USD": {},
+          "EMBasket": {},
+          "JPYBasket": {},
+          "CryptoMajor": {},
+          "USEquities": {}
         }
       }
     },
@@ -130,14 +206,14 @@
     },
     methods: {
 
-      handleBalance(data){
-        this.traderBalance=data;
+      handleBalance(data) {
+        this.traderBalance = data;
       },
       playNewMsgMusic() {
         this.newMsgAudio.muted = false;
         this.newMsgAudio.play()
       },
-      handleNotice(data){
+      handleNotice(data) {
         this.$set(this.noticeData, data.noticeId, data);
         this.playNewMsgMusic();
         console.log(this.noticeData)
@@ -197,7 +273,7 @@
         } else {
           //实现化WebSocket对象，指定要连接的服务器地址与端口  建立连接
           //等同于socket = new WebSocket("ws://localhost:8083/checkcentersys/websocket/20");
-          this.socketForMarket = new WebSocket('ws://192.168.0.106:8090/price');
+          this.socketForMarket = new WebSocket(this.socketForMarket);
           //打开事件
           this.socketForMarket.onopen = function () {
             console.log("已建立市场连接：" + myVue.usertoken);
@@ -224,11 +300,11 @@
               console.log()
               var news = JSON.parse(msg.data.substring(5))
               myVue.handleNews(news);
-            }else if (type === 'notice') {
+            } else if (type === 'notice') {
               console.log()
               var notice = JSON.parse(msg.data.substring(7))
               myVue.handleNotice(notice);
-            }else if (type === 'balance') {
+            } else if (type === 'balance') {
               console.log()
               var balance = JSON.parse(msg.data.substring(8))
               myVue.handleBalance(balance);
@@ -252,7 +328,9 @@
       },
       handleMarketDatas: function (message) {
         // this.marketDatas[val[1]] = val
-        this.$set(this.marketDatas, message[1], {
+
+
+        this.$set(this.marketMap, message[1], {
           symbol: message[1],
           sell: parseFloat(message[2]),
           buy: parseFloat(message[3]),
@@ -265,11 +343,12 @@
           precision: parseInt(message[10]),
           pipCost: parseFloat(message[11])
         })
+
         this.$set(this.marketPrecisions, message[1], parseInt(message[10]))
       },
       init() {
         this.createMarketConnect();
-        this.usertoken= window.localStorage.getItem('yilan-token');
+        this.usertoken = window.localStorage.getItem('yilan-token');
         this.windowHeight = window.innerHeight * 0.99;
         // this.usertoken='123'
       }

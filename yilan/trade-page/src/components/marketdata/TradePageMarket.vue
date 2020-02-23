@@ -7,16 +7,36 @@
       </div>
 
       <a-row style="width: 100%;height:30px" :gutter="2" type="flex" align="middle" id="trade-page-market-caption">
-        <a-col style="height: 100%" :span=2 ><div class="market-info-tag">货币</div></a-col>
-        <a-col style="height: 100%" :span=2 ><div class="market-info-tag">卖出</div></a-col>
-        <a-col style="height: 100%" :span=2 ><div class="market-info-tag">买入</div></a-col>
-        <a-col style="height: 100%" :span=2 ><div class="market-info-tag">点差</div></a-col>
-        <a-col style="height: 100%" :span=3 ><div class="market-info-tag">最高</div></a-col>
-        <a-col style="height: 100%" :span=3 ><div class="market-info-tag">最低</div></a-col>
-        <a-col style="height: 100%" :span=2 ><div class="market-info-tag">卖出利息</div></a-col>
-        <a-col style="height: 100%" :span=2 ><div class="market-info-tag">买入利息</div></a-col>
-        <a-col style="height: 100%" :span=2 ><div class="market-info-tag">点值</div></a-col>
-        <a-col style="height: 100%" :span=4 ><div class="market-info-tag">时间</div></a-col>
+        <a-col style="height: 100%" :span=2>
+          <div class="market-info-tag">货币</div>
+        </a-col>
+        <a-col style="height: 100%" :span=2>
+          <div class="market-info-tag">卖出</div>
+        </a-col>
+        <a-col style="height: 100%" :span=2>
+          <div class="market-info-tag">买入</div>
+        </a-col>
+        <a-col style="height: 100%" :span=2>
+          <div class="market-info-tag">点差</div>
+        </a-col>
+        <a-col style="height: 100%" :span=3>
+          <div class="market-info-tag">最高</div>
+        </a-col>
+        <a-col style="height: 100%" :span=3>
+          <div class="market-info-tag">最低</div>
+        </a-col>
+        <a-col style="height: 100%" :span=2>
+          <div class="market-info-tag">卖出利息</div>
+        </a-col>
+        <a-col style="height: 100%" :span=2>
+          <div class="market-info-tag">买入利息</div>
+        </a-col>
+        <a-col style="height: 100%" :span=2>
+          <div class="market-info-tag">点值</div>
+        </a-col>
+        <a-col style="height: 100%" :span=4>
+          <div class="market-info-tag">时间</div>
+        </a-col>
       </a-row>
       <div class="market-price-container"
            style="width: 100%;margin: 2px auto 0px auto;overflow-y: scroll;overflow-x: hidden;height:91%">
@@ -42,7 +62,14 @@
           height: '12px',
           cursor: 'pointer'
         },
-        marketDataMap: {
+      }
+    },
+    mounted() {
+
+    },
+    computed: {
+      marketDataMap() {
+        let x =  {
           "EUR/USD": {},
           "USD/JPY": {},
           "GBP/USD": {},
@@ -117,12 +144,20 @@
           "CryptoMajor": {},
           "USEquities": {}
         }
-      }
-    },
-    mounted() {
 
-    },
-    computed: {
+        for (let i in this.marketDatas) {
+          var a = this.marketDatas[i];
+          a.sell = parseFloat(a.sell).toFixed(a.precision);
+          a.buy = parseFloat(a.buy).toFixed(a.precision);
+          a.high = parseFloat(a.high).toFixed(a.precision);
+          a.low = parseFloat(a.low).toFixed(a.precision);
+          a.diancha = ((a.buy - a.sell) / a.pointSize).toFixed(2);
+          a.pipCost = parseFloat(a.pipCost).toFixed(2);
+          x[a.symbol]=a;
+        }
+        return x;
+      },
+
       tableHeight: function () {
         return 800;
       },
@@ -154,7 +189,7 @@
 
 <style scoped>
 
-  .market-info-tag{
+  .market-info-tag {
     text-align: center;
     font-weight: bolder;
     height: 100%;

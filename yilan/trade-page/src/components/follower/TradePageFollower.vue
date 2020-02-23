@@ -9,7 +9,7 @@
       :AccountData="AccountData"
       :OrdersData="AccountData"
       :usertoken="usertoken" :followStatus="followStatus" @changeDisplayPage="changeDisplayPage($event)"
-               :marketPrecisions="marketPrecisions" :is="currentFollowerInfo"></component>
+      :marketPrecisions="marketPrecisions" :is="currentFollowerInfo"></component>
   </div>
 </template>
 
@@ -21,7 +21,7 @@
 
   export default {
     name: "TradePageFollower",
-    props: ['marketPrecisions', 'usertoken'],
+    props: ['marketPrecisions', 'usertoken', 'traderAccounts'],
     components: {TradePageFollowerDisplay, TradePageFollowerLogin, TradePageFollowerIndex},
     data() {
       return {
@@ -33,27 +33,49 @@
         ClosedPositionsData: {},
         SummaryData: {},
         AccountData: {},
-        OrdersData: {}
+        OrdersData: {},
+        TraderAccounts: [],
+        followerSocketUrl:'ws://192.168.0.101:8091/follower'
       }
     },
     methods: {
-      closeTrueMarket(data){
-        console.log('我收到了信息啦'+data)
-        var param={
-          type:'closeTrueMarket',
-          tradeId:data,
-          usertoken:this.usertoken,
+      handleTraderAccounts(data) {
+        console.log(data)
+        let parse = JSON.parse(data);
+        for (var i in parse){
+          this.TraderAccounts.push(parse[i]+'')
+        }
+      },
+      getTraderAccounts() {
+        var param = {
+          type: 'getTraderAccounts',
+          usertoken: this.usertoken,
+        }
+        this.sendMessage(param)
+      },
+      closeTrueMarket(data) {
+        console.log('我收到了信息啦' + data)
+        var param = {
+          type: 'closeTrueMarket',
+          tradeId: data,
+          usertoken: this.usertoken,
         }
         console.log(param)
         this.sendMessage(param)
       },
-      noticeTraderFollowStatus(data){
+      noticeTraderFollowStatus(data) {
         this.$root.$emit('noticeTraderFollowStatus', data)
       },
-      changeFollow(data){
+      changeFollow(data) {
         console.log(data)
-        data.type='changeFollowStatus';
-        this.sendMessage(data)
+        data.type = 'changeFollowStatus';
+        if (this.TraderAccounts.length == 0) {
+          alert('没有交易员登录');
+          return;
+        } else {
+          data.traderAccount = this.TraderAccounts[0];
+          this.sendMessage(data)
+        }
       },
       handleOrderAdd(data) {
         this.$set(this.OrdersData, data.tradeID, data);
@@ -101,11 +123,13 @@
           console.log("您的浏览器支持WebSocket");
           //实现化WebSocket对象，指定要连接的服务器地址与端口  建立连接
           //等同于socket = new WebSocket("ws://localhost:8083/checkcentersys/websocket/20");
-          this.followerSocket = new WebSocket('ws://192.168.0.106:8091/follower');
+          this.followerSocket = new WebSocket(this.followerSocketUrl);
           //打开事件
           this.followerSocket.onopen = function () {
             console.log("Socket " + socketId + "已打开");
             myVue.registerFollowerChannel();
+            //todo 多次尝试获取交易员数据
+            myVue.getTraderAccounts();
           };
           //获得消息事件
           this.followerSocket.onmessage = function (msg) {
@@ -140,10 +164,13 @@
               console.log(result)
               myVue.noticeTraderFollowStatus(false)
               myVue.$message.success('停止跟单成功')
-            }else if (result.type=='LOGIN_STATUS'){
-              myVue.currentFollowerInfo='TradePageFollowerDisplay';
-            }else if (result.type=='FOLLOW_STATUS'){
-              myVue.noticeTraderFollowStatus(result.data=='YES')
+            } else if (result.type == 'LOGIN_STATUS') {
+              myVue.currentFollowerInfo = 'TradePageFollowerDisplay';
+            } else if (result.type == 'FOLLOW_STATUS') {
+              myVue.noticeTraderFollowStatus(result.data == 'YES')
+            } else if (result.type == 'TRADER_ACCOUNTS') {
+              console.log(result)
+              myVue.handleTraderAccounts(result.data)
             }
           };
           //关闭事件
@@ -174,7 +201,7 @@
       console.log("跟随者登录fxcm完成 建立socket连接");
       //1.建立连接
       //2.通过token注册连接
-      this.createFollowerConnect();
+      this.createFollowerConnect()
     }
   }
 </script>
