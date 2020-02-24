@@ -92,7 +92,7 @@
           out: 123.123,
           pl: 123.1
         },
-        socketForMarket: 'ws://192.168.0.106:8090/price',
+        socketForMarket: 'ws://192.168.18.4:8090/price',
         marketMap: {
           "EUR/USD": {},
           "USD/JPY": {},

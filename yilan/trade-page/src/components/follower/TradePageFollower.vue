@@ -35,7 +35,7 @@
         AccountData: {},
         OrdersData: {},
         TraderAccounts: [],
-        followerSocketUrl:'ws://192.168.0.101:8091/follower'
+        followerSocketUrl:'ws://192.168.18.4:8091/follower'
       }
     },
     methods: {
