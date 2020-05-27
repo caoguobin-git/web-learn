@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        body,html{
+            height:100%;
+            margin:0;
+            padding:0;
+        }
+        .hello{
+            animation: myDemo 30s infinite;
+            height: 100%;
+            width: 100%;
+            position: absolute;
+
+        }
+
+        @keyframes myDemo {
+            0%{background: red}
+            17%{background: orange}
+            34%{background: yellow}
+            50%{background: green}
+            66%{background: deepskyblue}
+            83%{background: blue}
+            100%{background: purple}
+        }
+    </style>
+</head>
+<body>
+<div class="hello"></div>
+<p style="position: absolute;bottom: 0;text-align: right;width: 100%">
+    <a href="http://beian.miit.gov.cn/" target="_blank" style="font-size: 10px">津ICP备20003830号-1</a>
+</p>
+</body>
+</html>
