@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        user test page</title>
+    <script type="text/javascript" src="../js/jquery-3.5.1.js"></script>
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        html,body{
+            width: 100%;
+            height: 100%;
+        }
+        #user{
+            width: 100%;
+            height: 100%;
+            background: #ddcfe8;
+        }
+    </style>
+</head>
+<body>
+<div id="user">
+
+    <button @click="getToken()">获取token</button>
+    <button @click="refreshToken()">刷新token</button>
+    <button @click="getUser()">请求用户信息</button>
+    <button @click="logout()">退出登录</button>
+</div>
+</body>
+</html>
+
+<script>
+
+
+    var user=new Vue({
+        el:'#user',
+        data:{
+            hello:'hello world',
+            host:'http://localhost',
+            access_token:'',
+            refresh_token:'',
+        },
+        methods:{
+            getToken:function () {
+                fetch('http://localhost/oauth/token?client_id=admin&client_secret=123456&grant_type=password&username=caoguobin&password=123123')
+                    .then(function(response) {
+                        return response.json();
+                    })
+                    .then(function(myJson) {
+                        console.log(myJson);
+                    });
+            },
+
+            refreshToken:function(){
+                var that=this;
+                var datas={
+                    client_id:'admin',
+                    client_secret:'123456',
+                    grant_type:'refresh_token',
+                    refresh_token:that.refresh_token,
+                }
+
+
+                var url=that.host+'/oauth/token';
+                $.ajax({
+                    type:'POST',
+                    data:datas,
+                    url:url,
+                    success:function (result) {
+                        console.log(result)
+                        that.access_token=result.access_token;
+                        that.refresh_token=result.refresh_token;
+                    }
+                })
+                console.log(this.access_token)
+            },
+            getUser:function () {
+                var that=this;
+
+                $.ajax({
+                    url:that.host+'/currentUser',
+                    headers: {
+                        'Authorization': 'Bearer '+that.access_token
+                    },
+                    type:'get',
+                    success:function (result) {
+                        console.log(result)
+                    }
+                })
+            },
+            logout:function () {
+                var that=this;
+                // fetch('/oauth/logout', {
+                //     headers: {
+                //         'Authorization': 'Bearer '+that.access_token
+                //     },
+                //     method: 'DELETE', // *GET, POST, PUT, DELETE, etc.
+                // })
+                //     .then(response => response.json()) // parses response to JSON
+                //
+                $.ajax({
+                    url:that.host+'/oauth/logout',
+                    headers: {
+                        'Authorization': 'Bearer '+that.access_token
+                    },
+                    type:'delete',
+                    success:function (result) {
+                        console.log(result)
+                    }
+                })
+            }
+        },
+        mounted(){
+            console.log("hello world")
+        }
+    })
+</script>

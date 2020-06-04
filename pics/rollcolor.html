@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .hello {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: red;
+            border-radius: 50px;
+            box-shadow: black 5px 5px 5px;
+            animation: myDemo infinite 10s linear alternate;
+        }
+
+        .hello:hover{
+            animation: myDemo infinite 10s linear alternate paused;
+            -webkit-animation-play-state:paused;
+        }
+
+        @keyframes myDemo {
+            0% {
+                top: 0px;
+                left:0px;
+            }
+
+            50%{
+                top: 800px;
+                left: 400px;
+            }
+
+            100%{
+                top: 0px;
+                left: 0px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="hello" onmouseover="alert('hello world')">asdfasdf</div>
+
+</body>
+</html>

@@ -21,20 +21,41 @@
             position: absolute;
 
         }
+        .hello1{
+            animation: myDemo1 30s infinite linear;
+            height: 100%;
+            width: 100%;
+            top: 50%;
+            position: absolute;
+        }
+        @keyframes myDemo1 {
+            0%{background: #FF7D00}
+            14.29%{background: #FFFF00}
+            28.58%{background: #00FF00}
+            42.87%{background: #00FFFF}
+            57.16%{background: #0000FF}
+            71.45%{background: #FF00FF}
+            85.74%{background: #FF0000}
+            100%{background:#FF7D00}
+        }
+
 
         @keyframes myDemo {
-            0%{background: red}
-            17%{background: orange}
-            34%{background: yellow}
-            50%{background: green}
-            66%{background: deepskyblue}
-            83%{background: blue}
-            100%{background: purple}
+            0%{background: #FF0000}
+            14.29%{background: #FF7D00}
+            28.58%{background: #FFFF00}
+            42.87%{background: #00FF00}
+            57.16%{background: #00FFFF}
+            71.45%{background: #0000FF}
+            85.74%{background: #FF00FF}
+            100%{background:#FF0000}
         }
+
     </style>
 </head>
 <body>
-<div class="hello"></div>
+<div class="hello" style="height: 50%"></div>
+<div class="hello1" style="height: 50%"></div>
 <p style="position: absolute;bottom: 0;text-align: right;width: 100%">
     <a href="http://beian.miit.gov.cn/" target="_blank" style="font-size: 10px">津ICP备20003830号-1</a>
 </p>
