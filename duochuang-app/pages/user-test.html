@@ -40,18 +40,21 @@
         el:'#user',
         data:{
             hello:'hello world',
-            host:'http://localhost',
+            host:'http://localhost:9090',
             access_token:'',
             refresh_token:'',
         },
         methods:{
             getToken:function () {
-                fetch('http://localhost/oauth/token?client_id=admin&client_secret=123456&grant_type=password&username=caoguobin&password=123123')
+                var that=this;
+                fetch(that.host+'/oauth/token?client_id=admin&client_secret=123456&grant_type=password&username=caoguobin&password=123123')
                     .then(function(response) {
                         return response.json();
                     })
                     .then(function(myJson) {
-                        console.log(myJson);
+                        console.log(myJson)
+                        that.access_token=myJson.access_token;
+                        that.refresh_token=myJson.refresh_token;
                     });
             },
 
