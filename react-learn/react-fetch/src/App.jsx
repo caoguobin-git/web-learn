@@ -3,6 +3,7 @@ import React
 import qs from 'querystring'
 import ProxyDemo
     from "./ProxyDemo";
+import api from "./api";
 
 class App extends React.Component {
 
@@ -57,6 +58,23 @@ class App extends React.Component {
             .then(res => res.json()).then(data => {
             console.log(data);
         })
+
+        api.getChengpin().then(res=>res.json())
+            .then(data=>{
+                console.log("api调用")
+                console.log(data)
+            })
+        var loginParams={
+            user_id: 'iwen@qq.com',
+            password: 'iwen123',
+            verification_code: 'crfvw'
+        }
+        api.getLogin(loginParams)
+            .then(res=>res.json())
+            .then(data=>{
+                console.log('登录')
+                console.log(data)
+            })
     }
 
     render() {
