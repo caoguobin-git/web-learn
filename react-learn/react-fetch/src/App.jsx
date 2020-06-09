@@ -21,7 +21,6 @@ class App extends React.Component {
          */
         fetch("http://iwenwiki.com/api/blueberrypai/getIndexBanner.php")
             .then(res => {
-                console.log(res)
                 return res.json();
             })
             .then(data => {
@@ -45,15 +44,18 @@ class App extends React.Component {
                 },
                 //第一种方式
                 // body: "user_id=iwen@qq.com&password=iwen123&verification_code=crfvw"
-                //第二种方式
-                body:qs.stringify({
-                    user_id:'iwen@qq.com',
-                    password:'iwen123',
-                    verification_code:'crfvw'
+                /**
+                 * 第二种方式
+                 * 不能使用JSON.stringify处理，否则参数传递失败，后台可能未设置相关参数
+                 */
+                body: qs.stringify({
+                    user_id: 'iwen@qq.com',
+                    password: 'iwen123',
+                    verification_code: 'crfvw'
                 })
             })
             .then(res => res.json()).then(data => {
-            console.log(data)
+            console.log(data);
         })
     }
 
@@ -70,7 +72,7 @@ class App extends React.Component {
                                     banners.map((content, index) => {
                                         return <div
                                             key={index}>
-                                            <h3>{content.title}</h3>
+                                            <h3 style={{color:"red"}}>{content.title}</h3>
                                             <p>{content.content}</p>
                                         </div>
                                     })
@@ -80,7 +82,10 @@ class App extends React.Component {
                             <div>there's
                                 no
                                 data</div>
-                                                                                                                                                                                                                                                                                                                                                       }
+                    }
+                </div>
+                <hr/>
+                <div>
                     <ProxyDemo/>
                 </div>
             </div>
