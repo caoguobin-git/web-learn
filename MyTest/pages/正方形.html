@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>
+		Title</title>
+	<style>
+		.zfx{
+			width: 200px;
+			display: inline-block;
+			height: 200px;
+			margin: 20px;
+		}
+		.zfx:nth-child(1){background: pink;}
+		.zfx:nth-child(2){background: blue;}
+		.zfx:nth-child(3){background: black;}
+		.zfx:nth-child(4){background: red;}
+		.zfx:nth-child(5){background: purple;}
+		.zfx:nth-child(6){animation: demo .5s infinite linear}
+		@keyframes demo {
+			0%{
+				background: red;
+			}
+			
+			50%{
+				background: black;
+			}
+			
+			100%{
+				background: red;
+			}
+		}
+	</style>
+</head>
+<body>
+<div class="zfx"></div>
+<div class="zfx"></div>
+<div class="zfx"></div>
+<div class="zfx"></div>
+<div class="zfx"></div>
+<div class="zfx"></div>
+</body>
+</html>
+
+<script>
+	setInterval(function () {
+		let a = Math.floor(Math.random()*30)/10
+
+        document.getElementsByTagName("video")[0].playbackRate=a
+		console.log(a)
+    },3000)
+</script>
