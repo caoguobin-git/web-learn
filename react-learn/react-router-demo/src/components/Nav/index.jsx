@@ -12,20 +12,20 @@ const Nav=()=>{
 
     return(
         <div>
-            <ul>
-                <li>
+            <div>
+                <span>
                     <NavLink exact to="/">Home页面</NavLink>
-                </li>
-                <li>
+                </span>
+                <span>
                     <NavLink exact to="/mine">Mine页面</NavLink>
-                </li>
-                <li>
+                </span>
+                <span>
                     <NavLink exact to="/mine/ucenter">我的页面</NavLink>
-                </li>
-                <li>
+                </span>
+                <span>
                     <NavLink exact to="/demo">demo</NavLink>
-                </li>
-            </ul>
+                </span>
+            </div>
         </div>
     )
 }
