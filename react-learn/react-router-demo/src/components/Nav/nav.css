@@ -1,3 +1,11 @@
 .active{
     color: red;
+    background: red;
+    color: white;
+}
+p{
+    padding: 0px;
+}
+a{
+    text-decoration: none;
 }
