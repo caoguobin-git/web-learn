@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>select 标签</title>
+</head>
+<body>
+<form action="success.html">
+    <select multiple id="select-test" name="edu">
+        <optgroup label="a">
+            <option value="a">a</option>
+            <option value="b">b</option>
+            <option value="c">c</option>
+        </optgroup>
+        <optgroup label="b">
+            <option selected value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+        </optgroup>
+    </select>
+    <textarea style="resize: none;border: 1px solid #7bf5ff" rows="10" cols="30"></textarea>
+    <br/>
+    <input type="submit">
+</form>
+</body>
+</html>
+<script>
+    window.onload = function () {
+        document.getElementById('select-test').onchange = function (e) {
+            console.log(e.target.value);
+        }
+    }
+</script>

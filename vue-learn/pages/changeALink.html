@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/vue.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="app">
+    <a :href="url" target="_blank" @click="changeUrl">点击</a>
+</div>
+</body>
+
+</html>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            webs: ['http://www.baidu.com', 'http://www.sina.com.cn', 'http://www.bing.com.cn', 'http://www.sohu.com', 'http://www.163.com', 'http://www.aliyun.com', 'http://www.qq.com', 'http://www.kuaishou.com'],
+            current: -1
+        },
+        methods: {
+            changeUrl() {
+                this.current++;
+                if (this.current >= this.webs.length) {
+                    this.current = 0;
+                }
+            }
+        },
+        computed: {
+            url() {
+                return this.webs[this.current === -1 ? 0 : this.current];
+            }
+        }
+    })
+</script>
+
