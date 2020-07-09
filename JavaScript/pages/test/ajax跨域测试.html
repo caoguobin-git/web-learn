@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax跨域测试</title>
+    <script src="../../js/jquery-3.4.1.js" type="text/javascript"></script>
+</head>
+<body>
+<input type="button" value="getAllUsers" onclick="getAllUsers()">
+<script>
+
+    function getAllUsers() {
+        $.ajax({
+            url:'http://localhost:8080/users',
+            method:'get',
+            success:function (res) {
+                console.log(res)
+            }
+        })
+    }
+</script>
+</body>
+</html>
