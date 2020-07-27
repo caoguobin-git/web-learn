@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/vue.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <!-- 第一种方式：双重循环，可以获取key -->
+    <h1>{{message}}</h1>
+    <div v-for="user in userList" :key="user.username">
+        <div><span v-for="(value,key) in user" :key="key">
+            {{key}}: {{value}}
+        </span>
+        </div>
+    </div>
+    <!-- 第二种方式：单重循环，不可以获取key -->
+    <h1>{{message}}</h1>
+    <div v-for="user in userList" :key="user.username">
+        <p>{{user.username}} {{user.password}} {{user.birthday}}</p>
+    </div>
+    <p>{{bindMessage}}</p>
+    <p>{{reverseMessage}}</p>
+    <input type="text" v-model="bindMessage">
+    <div style="text-indent: 2rem">{{userList}}</div>
+</div>
+</body>
+
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            bindMessage:'',
+            message:'你好啊',
+            userList: [
+                {username: 'test001', password: '123456', birthday: '2011-12-12'},
+                {username: 'test002', password: '654321', birthday: '2012-12-12'},
+                {username: 'test003', password: '11111', birthday: '2013-12-12'},
+                {username: 'test004', password: '22222', birthday: '2014-12-12'},
+            ]
+        },
+        computed:{
+            reverseMessage:function () {
+                console.log(this.bindMessage.split())
+                console.log(this.bindMessage.split(''))
+                return this.bindMessage.split('').reverse().join('');
+            }
+        }
+    })
+</script>
+</html>

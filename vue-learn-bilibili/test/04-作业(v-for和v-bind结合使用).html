@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    .active{
+      color:red;
+    }
+    .display-class{
+      width: 200px;
+      height: 200px;
+      border: 1px solid black;
+      display: inline-block;
+      margin: 10px;
+    }
+    .active-background{
+      background: red;
+      transition: 1s linear;
+    }
+  </style>
+</head>
+<body>
+
+<script src="../js/vue.min.js"></script>
+
+<div id="app">
+  <ul>
+    <li style="cursor:pointer" :class="{'active':index==num}" @click="num=index" v-for="(movie,index) in movies" :key="index">{{movie}}</li>
+  </ul>
+
+  <div :class="{'active-background':(item-1)==num}" @click="num=item-1" v-for="item in 4" class="display-class"></div>
+</div>
+
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'hello world',
+      movies:['西游记','水浒传','三国演义','红楼梦'],
+      num:0
+    }
+  })
+</script>
+
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" type="text/css" href="../css/animate.css">
+  <style>
+    .active {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+<script src="../js/vue.min.js"></script>
+
+
+<div id="app">
+  <h2 :style="{background:bgColor,fontSize:myFontSize+'px'}">{{message}}</h2>
+  <button @click="myFontSize++">变大</button>
+  <button @click="myFontSize--">变小</button>
+</div>
+
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message:'Hello World',
+      bgColor:'red',
+      myFontSize:12
+    }
+  })
+</script>
+
+</body>
+</html>

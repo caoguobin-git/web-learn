@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<script src="../js/vue.min.js"></script>
+
+<div id="app">
+  {{books}}
+  <p>总价格：{{total}}</p>
+</div>
+
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      books:[
+        {id:110,name:'Unix',price:119},
+        {id:111,name:'代码大全',price:123},
+        {id:112,name:'深入理解计算机原理',price:143},
+        {id:113,name:'现代操作系统',price:99}
+      ]
+    },
+    computed:{
+      total(){
+        let total=0;
+        <!-- foreach语法 -->
+        // this.books.forEach(item => {total+=item.price});
+
+        <!-- ES6  for循环 -->
+        //拿到index，通过index遍历
+        for (let i in this.books){
+        }
+
+        //直接拿到book对象，通过book对象遍历
+        for (let book of this.books){
+        }
+
+        return total;
+      }
+    }
+  })
+</script>
+
+</body>
+</html>

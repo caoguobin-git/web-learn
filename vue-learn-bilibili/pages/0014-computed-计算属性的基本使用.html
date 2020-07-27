@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<script src="../js/vue.min.js"></script>
+
+<div id="app">
+  <h2>{{message}}</h2>
+  <h2 @click="display($event)">{{fullName}}</h2>
+</div>
+
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'hello world',
+      firstName: 'Kobe',
+      lastName: 'Bryant'
+    },
+    computed: {
+      fullName: function () {
+        return this.firstName + ' ' + this.lastName;
+      }
+    },
+    methods: {
+      display(e) {
+        console.log(e)
+      }
+    }
+  })
+</script>
+
+</body>
+</html>

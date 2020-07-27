@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" type="text/css" href="../css/animate.css">
+  <style>
+    .active {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+<script src="../js/vue.min.js"></script>
+
+
+<div id="app">
+  <h2 class="active">{{message}}</h2>
+  <h2 :class="{active:active1,animated:animate1}">{{message}}</h2>
+  <h2 :class="displayClass">{{message}}</h2>
+  <button @click="changeColor">变色</button>
+</div>
+
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'hello world',
+      animate1: true,
+      active1: false
+    },
+    methods: {
+      changeColor: function () {
+        this.active1 = !this.active1;
+      }
+    },
+    computed: {
+      displayClass: function () {
+        return {active: this.active1, animated: this.animate1};
+      }
+    }
+  })
+</script>
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+
+<script src="../js/vue.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/animate.css"/>
+<style>
+  * {
+    overflow: hidden;
+  }
+</style>
+
+<div id="app">
+  <img class="animated" :class="displayAnimate" :src="imageUrl" alt="hello world" title="图片啊">
+  <a :href="baidu">百度一下</a>
+</div>
+
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'hello world',
+      imgUrls: [
+        'https://img10.360buyimg.com/ceco/s300x300_jfs/t1/142300/40/3238/162427/5f12b58bEd8109aa9/6d9653b0affb5554.png',
+        'https://img11.360buyimg.com/ceco/s300x300_jfs/t1/127222/1/2703/229917/5ec898e7Efda9083e/863f9968e5460a25.jpg!q70.jpg',
+        'https://img12.360buyimg.com/ceco/s300x300_jfs/t1/127821/30/6830/230978/5f07cc11E789e9ae2/2cd2f486e7b5945a.jpg!q70.jpg'],
+      displayAnimate: 'bounceInRight',
+      imageSort: 0,
+      baidu:'http://www.baidu.com'
+    },
+    methods: {
+      setImgUrl: function () {
+        let that=this;
+        setInterval(function () {
+          that.displayAnimate='bounceOutLeft';
+          that.imageSort++;
+          setTimeout(function () {
+            that.displayAnimate='bounceInRight';
+          },500)
+          if (that.imageSort==that.imgUrls.length){
+            that.imageSort=0;
+          }
+        },3000)
+      }
+    },
+    computed: {
+      imageUrl: function () {
+        return this.imgUrls[this.imageSort];
+      }
+    },
+    mounted() {
+      this.setImgUrl();
+    }
+  })
+</script>
+
+</html>
