@@ -1,30 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Title</title>
+	<meta charset="UTF-8">
+	<title>
+		Title</title>
 </head>
 <body>
+<button>
+	第一个按钮
+</button>
+<button>
+	第二个按钮
+</button>
+<button>
+	第三个按钮
+</button>
+<button>
+	第四个按钮
+</button>
+<button>
+	第五个按钮
+</button>
 <script>
-  //<!-- 1.  变量作用域: 变量在什么范围内是可用的-->
-  // {
-  //   let name = "why";
-  //   console.log(name);
-  // }
-  // console.log(name);
-  // console.error(name)
-  //<!-- 2.没有块级作用域引起的问题:if的块级 -->
-  // var func;
-  // if (true) {
-  //   var name = 'why';
-  //   func = function () {
-  //     console.log(name);
-  //   }
-  // }
-  //
-  // name = 'kobe';
-  // func();
-  //3.没有块级作用域引起的问题：for的块级
+  //因为在ES5之前if和for都没有块级作用域的概念，所以在很多时候，我们必须借助于function的作用域来解决应用外面变量的问题
+  //在ES6中，加入了let，let是有if和for的块级作用域的。
+    //<!-- 1.  变量作用域: 变量在什么范围内是可用的-->
+    // {
+    //   let name = "why";
+    //   console.log(name);
+    // }
+    // console.log(name);
+    // console.error(name)
+    //<!-- 2.没有块级作用域引起的问题:if的块级 -->
+    // var func;
+    // if (true) {
+    //   var name = 'why';
+    //   func = function () {
+    //     console.log(name);
+    //   }
+    // }
+    //
+    // name = 'kobe';
+    // func();
+    //3.没有块级作用域引起的问题：for的块级，如果将i声明为let，则不会出错
+    var btns = document.getElementsByTagName('button');
+    for (var i = 0; i < btns.length; i++) {
+        // btns[i].addEventListener('click', function () {
+        //     console.log('第' + (i + 1) + '个按钮被点击');
+        // })
+      (function (x) {
+        btns[x].addEventListener('click', function () {
+               console.log('第' + (x + 1) + '个按钮被点击');
+           })
+      })(i)
+    }
+
 </script>
 </body>
 </html>

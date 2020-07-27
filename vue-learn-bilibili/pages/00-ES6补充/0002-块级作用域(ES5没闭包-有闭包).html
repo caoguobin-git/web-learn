@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>
+		Title</title>
+</head>
+<body>
+<button>
+	第一个按钮
+</button>
+<button>
+	第二个按钮
+</button>
+<button>
+	第三个按钮
+</button>
+<button>
+	第四个按钮
+</button>
+<button>
+	第五个按钮
+</button>
+<script>
+	//1.没有块级作用域引起的问题：for的块级
+	//为什么闭包可以解决问题：函数是一个作用域
+	
+	//情况一：ES5中没有使用闭包（错误的方式）
+	var btns=document.getElementsByTagName('button');
+	for(var i=0;i<btns.length;i++){
+	    btns[i].addEventListener('click',function () {
+			console.log('没使用闭包：第'+i+'个按钮被点击了')
+        });
+	}
+	
+	//情况二：ES5中使用闭包
+    for(var i=0;i<btns.length;i++){
+		(function (num) {
+            btns[num].addEventListener('click',function () {
+                console.log('使用闭包：第'+num+'个按钮被点击了')
+            });
+        })(i)
+    }
+    
+    //情况三：ES6使用let声明变量
+    for(let i=0;i<btns.length;i++){
+        btns[i].addEventListener('click',function () {
+            console.log('没使用闭包：第'+i+'个按钮被点击了')
+        });
+    }
+</script>
+</body>
+</html>
