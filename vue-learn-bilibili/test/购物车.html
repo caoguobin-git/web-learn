@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>
+		购物车</title>
+	<style>
+		td,th{
+				border: 1px solid black;
+		}
+	</style>
+</head>
+<body>
+
+<script src="../js/vue.min.js"></script>
+
+<div id="app">
+	<h1 v-if="cart.books.length==0">购物车为空</h1>
+  <table cellspacing="0" v-if="cart.books.length>0">
+		<thead>
+			<tr>
+				<th></th>
+				<th>书籍名称</th>
+				<th>出版日期</th>
+				<th>价格</th>
+				<th>购买数量</th>
+				<th>操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr v-for="(book,index) in displayBooks" :key="book.price">
+				<td>{{index+1}}</td>
+				<td>{{book.name}}</td>
+				<td>{{book.date}}</td>
+				<td>{{book.price}}</td>
+				<td><button @click="cart.books[index].num--">-</button>{{book.num}}<button @click="cart.books[index].num++">+</button></td>
+				<td><button @click="cart.books.splice(index,1)">移除</button></td>
+			</tr>
+		<tr>
+			<td colspan="7">总价：￥{{total}}</td>
+		</tr>
+		</tbody>
+		
+	</table>
+</div>
+
+<script>
+
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'hello world',
+			cart:{
+        books:[
+					{name:'《算法导论》',date:'2006-9',price:85.00,num:1},
+					{name:'《UNIX编程艺术》',date:'2006-2',price:59.00,num:1},
+					{name:'《编程珠玑》',date:'2008-10',price:39.00,num:1},
+					{name:'《代码大全》',date:'2006-3',price:128.00,num:1},
+				]
+			}
+    },
+		computed:{
+      total(){
+        let total=0;
+        this.displayBooks.forEach(item=>(total+=(item.price*item.num)));
+        return total;
+			},
+			displayBooks(){
+        return this.cart.books.filter(function (item){
+          console.log(item);
+          return item.num>0;
+				})
+			}
+		}
+  })
+  
+</script>
+
+</body>
+</html>

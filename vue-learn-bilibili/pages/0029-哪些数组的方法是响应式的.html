@@ -7,15 +7,18 @@
 </head>
 <body>
 
-<script src="../js/vue.min.js"></script>
+<script src="../js/vue.js"></script>
 
 <div id="app">
 	<p>
+		<button @click="indexArr">INDEX</button>
 		<button @click="pushArr">PUSH</button>
 		<button @click="popArr">POP</button>
 		<button @click="shiftArr">SHIFT</button>
 		<button @click="unshiftArr">UNSHIFT</button>
 		<button @click="spliceArr">SPLICE</button>
+		<button @click="sortArr">SORT</button>
+		<button @click="reverseArr">REVERSE</button>
 	</p>
 	<div style="color:red"></div>
 	<ul>
@@ -34,25 +37,45 @@
       letters: ['A', 'B', 'C', 'D', 'E']
     },
     methods: {
-      pushArr:function () {
-				console.log('hello')
+      pushArr() {
+        //1.push方法可以是响应式的
+				//在尾部添加一个元素
+        this.letters.push('A');
       },
-			popArr(){
-   
-			},
-			shiftArr(){
-   
-			},
-			unshiftArr(){
-   
-			},
-			spliceArr(){
-   
-			}
-    },
-		mounted(){
-      this.pushArr();
-		}
+      popArr() {
+        //从尾部取出一个元素
+        console.log(this.letters.pop());
+      },
+      shiftArr() {
+        //从头部取出一个元素
+        this.letters.shift();
+      },
+      unshiftArr() {
+        //从头部添加n个元素
+        this.letters.unshift('Z');
+      },
+      spliceArr() {
+        //start,nums,...elements
+        this.letters.splice(1, 1, 'B', 'N');
+      },
+      sortArr() {
+        this.letters.sort((a, b) => {
+          console.log(a.toString()-b.toString());
+          return a.toString()-b.toString();
+				});
+      },
+      reverseArr() {
+        this.letters.reverse();
+      },
+      indexArr() {
+        console.log(465)
+        //这种方法不是能实现响应式
+				
+        this.letters[3] = 'BBBB';
+        //添加此方法，可以实现更改 为什么上一句也实现了？TODO
+        this.$set(this.letters,0,'BBB')
+      }
+    }
   })
 
 </script>

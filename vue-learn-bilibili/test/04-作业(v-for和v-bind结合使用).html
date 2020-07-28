@@ -26,10 +26,10 @@
 
 <div id="app">
   <ul>
-    <li style="cursor:pointer" :class="{'active':index==num}" @click="num=index" v-for="(movie,index) in movies" :key="index">{{movie}}</li>
+    <li style="cursor:pointer" :class="{'active':index===num}" @click="num=index" v-for="(movie,index) in movies" :key="index">{{movie}}</li>
   </ul>
 
-  <div :class="{'active-background':(item-1)==num}" @click="num=item-1" v-for="item in 4" class="display-class"></div>
+  <div :class="{'active-background':(item-1)===num}" @click="num=item-1" v-for="item in 4" class="display-class"></div>
 </div>
 
 <script>
