@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>
+		Title</title>
+</head>
+<body>
+
+<script src="../../js/vue.min.js"></script>
+
+<div id="app">
+	{{message}}
+</div>
+
+<script>
+
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'hello world',
+      numbers: [10, 123, 123, 12, 200]
+    },
+    methods: {
+      calc() {
+        // let total=0;
+        //常规写法
+        //1. 实现过滤,回调函数每次都会执行,回调函数有一个要求：必须返回bool值
+        // return this.numbers.filter(function (n) {
+        //   return n < 100;
+        // });
+        //lambda写法
+        // return this.numbers.filter(n => n < 100);
+        
+				
+				//2.map函数的使用
+        //常规写法
+        // return this.numbers.map(function (n){
+        //   return n*2;
+        // });
+        //lambda写法
+        // return this.numbers.map(k=>k*2);
+        
+				//3.reduce的使用
+				//常规写法
+        // return this.numbers.reduce(function (total, n) {
+        //   return total + n;
+        // });
+				//lambda写法
+        // return this.numbers.reduce((total,n) =>(total+n));
+      }
+    }
+  })
+
+</script>
+
+</body>
+</html>
