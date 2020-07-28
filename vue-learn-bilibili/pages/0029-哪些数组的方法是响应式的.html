@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>
+		Title</title>
+</head>
+<body>
+
+<script src="../js/vue.min.js"></script>
+
+<div id="app">
+	<p>
+		<button @click="pushArr">PUSH</button>
+		<button @click="popArr">POP</button>
+		<button @click="shiftArr">SHIFT</button>
+		<button @click="unshiftArr">UNSHIFT</button>
+		<button @click="spliceArr">SPLICE</button>
+	</p>
+	<div style="color:red"></div>
+	<ul>
+		<li v-for="letter in letters"
+				:key="letter">
+			{{letter}}
+		</li>
+	</ul>
+</div>
+<script>
+
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'hello world',
+      letters: ['A', 'B', 'C', 'D', 'E']
+    },
+    methods: {
+      pushArr() {
+
+      },
+    }
+  })
+
+</script>
+
+</body>
+</html>
