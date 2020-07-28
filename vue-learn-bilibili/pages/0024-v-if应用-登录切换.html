@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>登录切换</title>
+</head>
+<body>
+
+<script src="../js/vue.min.js"></script>
+
+<div id="app">
+  <p v-if="loginType" key="email">
+    <label for="email">用户邮箱：</label>
+    <input id="email" type="text" placeholder="输入邮箱号"></p>
+  <p v-else key="username">
+    <label for="username">用户账号：</label>
+    <input id="username" type="text" placeholder="输入用户账号"></p>
+  <button @click="loginType=!loginType">切换</button>
+</div>
+
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'hello world',
+      loginType: true
+    }
+  })
+</script>
+
+</body>
+</html>

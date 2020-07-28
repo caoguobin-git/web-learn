@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  // const obj=new Object();
+  //1. 属性的增强写法
+  const name = 'why';
+  const age = 18;
+  const height = 1.88;
+  //ES5的写法
+  // const obj={
+  //   name:name,
+  //   age:age,
+  //   height:height
+  // }
+  //ES6的写法，会自动匹配相同名称（对象解构）
+  // const obj={name,age,height};
+
+  //2.函数的增强写法
+  //ES5的写法
+  // const obj={
+  //   run:function (){
+  //     console.log('run');
+  //   },
+  //   eat:function (){
+  //     console.log('eat');
+  //   }
+  // }
+  //ES6中的写法
+  const obj = {
+    name, age,
+    run() {
+      console.log(name + ' is running');
+    },
+    eat() {
+      console.log(name + ' is eating');
+    }
+  }
+
+</script>
+</body>
+</html>

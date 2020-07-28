@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<script src="../js/vue.min.js"></script>
+<!--
+  事件修饰符：
+    1.stop:阻止单击事件继续传播(调用event.stopPropagation())
+    2.prevent：提交事件不再重载界面（调用event.preventDefault()）
+    3.native：监听组件根元素的原生事件。
+    4.once：只触发一次回调。
+    5.{keyCode | keyAlias}：只有当事件是从特定键触发的时候才触发回调
+-->
+<div id="app">
+  <div @click="divClick">
+    <button @click="btnClick">按钮</button>
+    <button @click.stop="btnClick">按钮</button>
+  </div>
+  <!-- 只执行一次 -->
+  <button @click.once="test1">once</button>
+  <input type="text" @keyup.enter="inputOk">
+  <input type="text" @keyup.37.38.39.40="inputOk">
+  <form action="baidu">
+    <button type="submit" @click.prevent="submitClick">提交</button>
+  </form>
+</div>
+
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'hello world'
+    },
+    methods:{
+      divClick(){
+        console.log('DIV被点击了')
+      },
+      btnClick(){
+        console.log('Button被点击了');
+      },
+      inputOk(e){
+        console.log(e.target.value);
+      },
+      test1(){
+        console.log('只执行一次');
+      },
+      submitClick(e){
+        console.log(e)
+      }
+    }
+  })
+</script>
+
+</body>
+</html>

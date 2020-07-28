@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>v-for遍历数组</title>
+</head>
+<body>
+
+<script src="../js/vue.min.js"></script>
+
+<div id="app">
+  <ul style="list-style: url('https://cn.vuejs.org/images/logo.png?_sw-precache=cf23526f451784ff137f161b8fe18d5a')">
+    <li v-for="movie in movies">{{movie}}</li>
+  </ul>
+  <hr>
+  <ul style="list-style: none">
+    <li v-for="(movie,index) in movies">{{index + 1}}.{{movie}}</li>
+  </ul>
+</div>
+
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'hello world',
+      movies: ['变形金刚', '数码宝贝', '速度与激情', '僵尸世界大战']
+    }
+  })
+</script>
+
+</body>
+</html>
