@@ -9,8 +9,9 @@
 <script src="../../js/vue.min.js"></script>
 
 <div id="app">
-  <h2>{{message}} 哈哈哈</h2>
-  <h2 v-text="message"></h2>
+  <h2 v-if="message=='aa'">message是：{{message}}</h2>
+  <h2 v-else-if="message.length>0">{{message}}</h2>
+  <h2 v-else>没有message</h2>
 </div>
 
 <script>

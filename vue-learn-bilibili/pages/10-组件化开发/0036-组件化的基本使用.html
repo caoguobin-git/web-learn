@@ -2,16 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
+  <title>0036-组件化的基本使用</title>
 </head>
 <body>
 
-<script src="../js/vue.min.js"></script>
+<script src="../../js/vue.min.js"></script>
 
 <div id="app">
-  <h2 v-if="message=='aa'">message是：{{message}}</h2>
-  <h2 v-else-if="message.length>0">{{message}}</h2>
-  <h2 v-else>没有message</h2>
+  {{message}}
 </div>
 
 <script>
