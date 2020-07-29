@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<script src="../../js/vue.min.js"></script>
+
+<div id="app">
+  {{message}}
+  <!--这里绑定的时候必须使用短横线连接，否则传递失败-->
+  <cpn :user-info="info"></cpn>
+</div>
+<template id="demo1">
+  <div>
+    <h2>{{userInfo.name}}</h2>
+    <h2>{{userInfo.height}}</h2>
+    <h2>{{userInfo.age}}</h2>
+  </div>
+</template>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'hello world',
+      info:{
+        name:'why',
+        height:1.88,
+        age:18
+      }
+    },
+    components:{
+      cpn:{
+        template:'#demo1',
+        props:{
+          userInfo:{
+            type:Object,
+            default(){
+              return {
+                name:'username',
+                height:1.8,
+                age:18
+              }
+            }
+          }
+        }
+      }
+    }
+  })
+</script>
+
+</body>
+</html>

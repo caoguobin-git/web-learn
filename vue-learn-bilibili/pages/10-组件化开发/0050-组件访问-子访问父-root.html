@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>组件访问-子访问父-root</title>
+</head>
+<body>
+
+<script src="../../js/vue.js"></script>
+
+<div id="app">
+  {{message}}
+  <son></son>
+</div>
+<template id="demo1">
+  <div>
+    <h2>子组件一</h2>
+    <p>我是子组件一</p>
+    <grand-son></grand-son>
+  </div>
+</template>
+
+<template id="demo2">
+  <div>
+    <h2>子组件二</h2>
+    <p>我是子组件二</p>
+    <button @click="getRoot">getRoot</button>
+  </div>
+</template>
+
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'hello world'
+    },
+    components:{
+      son:{
+        template:'#demo1',
+        data(){
+          return {
+            message:'son message'
+          }
+        },
+        components:{
+          //这种定义方式，在调用的时候仍然需要使用横线访问
+          grandSon:{
+            template:'#demo2',
+            methods:{
+              getRoot(){
+                //$root是直接访问根组件（Vue实例，使用的）
+                console.log(this.$root.message='hahahah');
+                console.log(this.$parent);
+                console.log(this.$root);
+              }
+            }
+          }
+        }
+      }
+    }
+  })
+</script>
+
+</body>
+</html>

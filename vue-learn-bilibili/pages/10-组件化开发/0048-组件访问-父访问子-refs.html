@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>组件访问-父访问子-children</title>
+</head>
+<body>
+
+<script src="../../js/vue.min.js"></script>
+
+<div id="app">
+  <cpn ref="one" :message="'hello'" :name="'子组件一'"></cpn>
+  <cpn ref="two" :message="'你好'" :name="'子组件二'"></cpn>
+  <button @click="btnClick">按钮</button>
+</div>
+<template id="demo1">
+  <div>
+    <h2 @click="show=!show">我是子组件</h2>
+    <div v-if="show" style="width: 200px;height: 200px;background: blue"></div>
+  </div>
+</template>
+
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'hello world'
+    },
+    methods:{
+      btnClick(){
+        console.log(this.$children);
+        //常用
+        //$refs => 对象类型，默认是一个空的对象 需要在组件上添加ref属性，才能获取到对象
+        this.$refs.one.showMessage('第一个组件');
+        console.log('name：'+this.$refs.one.name);
+        this.$refs.two.showMessage('第二个组件');
+        console.log('name: '+this.$refs.two.name);
+      }
+    },
+    components:{
+      cpn:{
+        template:'#demo1',
+        props:{
+          message:{},
+          name:{}
+        },
+        methods:{
+          showMessage(val){
+            console.log('showMessage: '+this.message+'  '+val);
+          }
+        },
+        data(){
+          return {
+            show:false,
+            cnpName:'123'
+          }
+        }
+      }
+    }
+  })
+</script>
+
+</body>
+</html>

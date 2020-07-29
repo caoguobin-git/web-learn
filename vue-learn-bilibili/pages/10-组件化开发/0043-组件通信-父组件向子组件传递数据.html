@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>父组件向子组件传递数据</title>
+</head>
+<body>
+
+<script src="../../js/vue.min.js"></script>
+
+<div id="app">
+  {{message}}
+  <cpn :c-movies="movies" :c-message="message"></cpn>
+</div>
+<template id="demo1">
+  <div>
+    <h2>{{cMessage}}</h2>
+    <ul>
+      <li v-for="movie in cMovies">{{movie}}</li>
+    </ul>
+  </div>
+</template>
+
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'hello world111',
+      movies: ['海贼王', '加勒比海盗', '盗墓笔记']
+    },
+    components: {
+      'cpn': {
+        //props: ['cMovies', 'cMessage'],
+        props: {
+          'cMovies': Array,
+          'cMessage': {
+            type: String,
+            default: 'Hello World',
+            required: false,
+            validator: function (val) {
+              return true;
+            }
+          }
+        },
+        template: '#demo1'
+      }
+    }
+  })
+</script>
+</body>
+</html>

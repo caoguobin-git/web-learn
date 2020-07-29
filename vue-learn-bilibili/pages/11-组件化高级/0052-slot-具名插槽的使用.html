@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>slot-插槽的基本使用</title>
+</head>
+<body>
+
+<script src="../../js/vue.min.js"></script>
+<!--
+  具名插槽的使用：
+  1.定义插槽：给定name，<slot name="header"></slot>
+  2.使用插槽：在template中使用v-slot:name指定相应的插槽插入
+-->
+
+<div id="app">
+  <cpn>
+    <template v-slot:header>
+      <span>你好啊</span>
+    </template>
+    <template>
+      <h3>你好世界</h3>
+    </template>
+    <template v-slot:footer>
+      <button>点击</button>
+    </template>
+  </cpn>
+</div>
+
+<template id="demo1">
+  <div>
+    <slot name="header">第一个</slot>
+    <h2>我是组件</h2>
+    <slot>第二个</slot>
+    <p>我是组件，哈哈哈</p>
+    <slot name="footer">第三个</slot>
+  </div>
+</template>
+
+<script>
+
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'hello world'
+    },components:{
+      cpn:{
+        template:'#demo1'
+      }
+    }
+  })
+</script>
+
+</body>
+</html>

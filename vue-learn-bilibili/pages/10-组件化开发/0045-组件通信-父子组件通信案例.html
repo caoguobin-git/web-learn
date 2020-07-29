@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>父子组件通信案例</title>
+</head>
+<body>
+
+<script src="../../js/vue.js"></script>
+
+<div id="app">
+  {{message}}
+  <p>{{num1}}</p>
+  <my-demo @num2change="num2change" @num1change="num1change" :number1="num1" :number2="num2"></my-demo>
+</div>
+<template id="demo1">
+  <div>
+    <h2>子组件</h2>
+    <p>props:{{number1}}</p>
+    <p>props:{{number2}}</p>
+    <p>data:{{dNumber1}}</p>
+    <p>data:{{dNumber2}}</p>
+    <input type="text" name="input" :value="dNumber1" @input="num1Input" id="input1">
+    <input type="text" name="input" :value="dNumber2" @input="num2Input" id="input2">
+  </div>
+</template>
+<script>
+
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'hello world',
+      num1: 1,
+      num2: 0
+    },
+    components: {
+      'my-demo': {
+        template: '#demo1',
+        props: {
+          number1: {
+            type: Number
+          },
+          number2: {
+            type: Number,
+            default() {
+              return 4;
+            }
+          }
+        },
+        data() {
+          return {
+            dNumber1: this.number1,
+            dNumber2: this.number2,
+          }
+        },
+        methods: {
+          num1Input(e) {
+            this.dNumber1 = e.target.value;
+            this.dNumber2=this.dNumber1*100;
+            this.$emit('num1change', this.dNumber1);
+            this.$emit('num2change', this.dNumber2);
+          },
+          num2Input(e) {
+            this.dNumber2 = e.target.value;
+            this.dNumber1=this.dNumber2/100;
+            this.$emit('num2change', this.dNumber2);
+            this.$emit('num1change', this.dNumber1);
+          }
+        }
+      }
+    },
+    methods: {
+      num1change(value) {
+        this.num1 = Number(value);
+      },
+      num2change(value) {
+        this.num2 = parseInt(value);
+      }
+    }
+  })
+</script>
+
+</body>
+</html>

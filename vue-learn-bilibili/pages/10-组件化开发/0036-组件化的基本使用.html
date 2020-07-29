@@ -7,16 +7,46 @@
 <body>
 
 <script src="../../js/vue.min.js"></script>
-
 <div id="app">
-  {{message}}
+  <!--3.使用组件-->
+  <my-cpn :message="'GOLD'"></my-cpn>
+  <my-cpn :message="'SILVER'"></my-cpn>
+  <div style="text-align: center">
+    <my-cpn v-for="i in 4" :message="'第'+i+'个组件'"></my-cpn>
+  </div>
 </div>
 
 <script>
+  //ES6 ``定义字符串
+  //1.创建组件构建器对象
+  const cpnC = Vue.extend({
+    props: ['message'],
+    template: `
+      <div>
+      <h2>我是{{ message }}</h2>
+      <p>我是内容，哈哈哈哈</p>
+      </div>
+    `
+  });
+  //2.注册组件(调用时的名称，使用的组件)
+  Vue.component('my-cpn', cpnC);
+
   const app = new Vue({
     el: '#app',
     data: {
       message: 'hello world'
+    },
+    methods:{
+      testGet(){
+        fetch('https://api.apiopen.top/getJoke?page=1&count=20&type=video')
+            .then(function(response) {
+              console.log(response)
+              return response.json();
+            })
+            .then(function(myJson) {
+              console.log(myJson.result);
+            });
+      }
     }
   })
 </script>

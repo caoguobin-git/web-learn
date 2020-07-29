@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<script src="../js/vue.min.js"></script>
+
+<div id="app">
+  <p style="text-align: center">
+    <button :disabled="pageCurrent===1" @click="pageCurrent--">上一页</button>
+    第{{pageCurrent}}页
+    <button @click="pageCurrent++">下一页</button>
+  </p>
+  <my-video v-for="video in videoList" :video="video" :key="video"></my-video>
+
+</div>
+
+<template id="video-demo">
+  <div style="vertical-align: middle;display: inline-block;width: 30%;height: 100%;margin:10px 10%">
+    <p style="vertical-align: middle"><img style="width:30px;border-radius: 50%;vertical-align: middle"
+                                           :src="video.header">@{{ video.name }} </p>
+    <video  loop style="width: 100%;vertical-align: middle" :src="video.video" controls></video>
+    <p>描述：{{ video.text }}</p>
+    <div><span @click="video.up++">赞</span>:{{ video.up }} <span @click="video.down++">踩:</span>{{ video.down }}</div>
+    <div v-if="video.top_comments_uid != null">热门评论：
+      <br>
+      <p>
+        <img style="width: 30px;border-radius: 50%;vertical-align: middle" :src="video.top_comments_header">
+        @{{ video.top_comments_name }}:<br> {{ video.top_comments_content }}
+      </p>
+    </div>
+  </div>
+</template>
+
+<script>
+  //1.声明video组件，在里面配置内容，格式等
+  const videoCpn = Vue.extend({
+    props: ['video'],
+    template: '#video-demo'
+  });
+
+  //2.将video组件注册到vue
+  Vue.component('my-video', videoCpn);
+
+  //初始化vue
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'hello world',
+      //保存video列表
+      videoList: [],
+      //当前页码
+      pageCurrent: 1
+    },
+    methods: {
+      //获取新的video的方法
+      getVideoPage() {
+        let that = this;
+        //通过api接口获取数据（传递当前页为参数，每页10条数据）
+        fetch('https://api.apiopen.top/getJoke?page=' + this.pageCurrent + '&count=10&type=video')
+            .then(function (response) {
+              return response.json();
+            })
+            .then(function (myJson) {
+              //清空video列表
+              that.videoList.splice(0, 20);
+              //将新数据放到video列表里面
+              for (let video of myJson.result) {
+                that.videoList.push(video);
+              }
+            });
+      }
+    },
+    mounted() {
+      //加载完成，初始化数据
+      this.getVideoPage();
+    },
+    watch: {
+      //监听当前页码改变，重新获取数据
+      pageCurrent() {
+        this.getVideoPage();
+      }
+    }
+  })
+</script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>组件注册语法糖</title>
+</head>
+<body>
+
+<script src="../../js/vue.min.js"></script>
+
+<div id="app">
+  {{message}}
+  <cpn1></cpn1>
+  <cpn2></cpn2>
+</div>
+
+<script>
+  //1.创建组件构造器,可以直接执行第二步
+  //const cpnC1 = Vue.extend({
+  //  template: `
+  //    <div>
+  //      <h2>我是标题11111</h2>
+  //      <p>我是内容哈哈哈</p>
+  //    </div>
+  //  `
+  //})
+
+  //2.全局注册组件（本质上还是调用extend）
+  Vue.component('cpn1', {
+    template: `
+      <div>
+        <h2>我是标题11111</h2>
+        <p>我是内容哈哈哈</p>
+      </div>
+    `
+  });
+
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'hello world'
+    },
+    components: {
+      //注册局部组件
+      cpn2: {
+        template: `
+          <div>
+            <h2>我是标题22222</h2>
+            <p>我是内容222222哈哈哈</p>
+            <cpnOne></cpnOne>
+          </div>`,
+        components:{
+          cpnOne:{
+            template: `
+      <div>
+        <h2>我是标题11111</h2>
+        <p>我是内容哈哈哈</p>
+      </div>
+    `
+          }
+        }
+      }
+    }
+  })
+</script>
+
+</body>
+</html>
