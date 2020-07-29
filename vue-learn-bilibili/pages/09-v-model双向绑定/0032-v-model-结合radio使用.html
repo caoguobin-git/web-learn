@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<script src="../js/vue.min.js"></script>
+
+<div id="app">
+  <label for="male">男</label>
+  <input type="radio" v-model="gender" name="gender" id="male" value="男">
+  <label for="female">女</label>
+  <input type="radio" v-model="gender" name="gender" id="female" value="女">
+  <h3>性别: {{gender}}</h3>
+</div>
+
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'hello world',
+      gender:'男'
+    }
+  })
+</script>
+
+</body>
+</html>

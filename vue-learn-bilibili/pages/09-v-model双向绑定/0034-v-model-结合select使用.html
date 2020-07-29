@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>v-model结合select使用</title>
+</head>
+<body>
+
+<script src="../js/vue.min.js"></script>
+
+<div id="app">
+  <h2>{{city}}</h2>
+  <select v-model="city" name="city">
+    <option :value="city.value" v-for="city in cities">{{city.name}}</option>
+  </select>
+  <h2>爱好：{{hobby}}</h2>
+  <select v-model="hobby" name="hobby" multiple>
+    <option :value="hobby.value" v-for="hobby in hobbies">{{hobby.name}}</option>
+  </select>
+</div>
+
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'hello world',
+      city: 'bj',
+      hobby: [],
+      hobbies: [
+        {name: '篮球', value: 'basketball'},
+        {name: '足球', value: 'football'},
+        {name: '棒球', value: 'baseball'}
+      ],
+      cities: [
+        {name: '北京', value: 'bj'},
+        {name: '上海', value: 'sh'},
+        {name: '广州', value: 'gz'},
+        {name: '深圳', value: 'sz'}
+      ]
+    }
+  })
+</script>
+
+</body>
+</html>

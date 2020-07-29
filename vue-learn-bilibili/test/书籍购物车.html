@@ -64,6 +64,7 @@
         let total=0;
         this.displayBooks.forEach(item=>(total+=(item.price*item.num)));
         return total;
+
 			},
 			displayBooks(){
         return this.cart.books.filter(function (item){

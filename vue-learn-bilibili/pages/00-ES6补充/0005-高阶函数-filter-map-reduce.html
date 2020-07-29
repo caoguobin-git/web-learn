@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>
-		Title</title>
+  <meta charset="UTF-8">
+  <title>
+    Title</title>
 </head>
 <body>
 
 <script src="../../js/vue.min.js"></script>
 
 <div id="app">
-	{{message}}
+  {{message}}
 </div>
 
 <script>
@@ -31,23 +31,24 @@
         // });
         //lambda写法
         // return this.numbers.filter(n => n < 100);
-        
-				
-				//2.map函数的使用
+
+
+        //2.map函数的使用
         //常规写法
         // return this.numbers.map(function (n){
         //   return n*2;
         // });
         //lambda写法
         // return this.numbers.map(k=>k*2);
-        
-				//3.reduce的使用
-				//常规写法
+
+        //3.reduce的使用
+        //常规写法
         // return this.numbers.reduce(function (total, n) {
         //   return total + n;
         // });
-				//lambda写法
-        // return this.numbers.reduce((total,n) =>(total+n));
+        //lambda写法(10为初始值,如果默认不传则为默认值0？)
+        // return this.numbers.reduce((total,n) =>(total+n),10);
+        return this.numbers.filter(n => n < 100).map(k=>k*2).reduce((pre,current)=>(pre+current),10);
       }
     }
   })

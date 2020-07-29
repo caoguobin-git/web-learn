@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>v-model-结合checkbook使用</title>
+</head>
+<body>
+
+<script src="../js/vue.min.js"></script>
+
+<div id="app">
+  <input v-model="ready" type="checkbox" name="ready" id="ready" value="ready">
+  <label for="ready">作业完成了？</label>
+
+  <h2>爱好：{{hobby}}</h2>
+  <input v-model="hobby" type="checkbox" name="hobby" id="basketball" value="basketball">
+  <label for="basketball">篮球</label>
+  <input  v-model="hobby" type="checkbox" name="hobby" id="football" value="football">
+  <label for="football">足球</label>
+  <input v-model="hobby" type="checkbox" name="hobby" id="baseball" value="baseball">
+  <label for="baseball">棒球</label>
+</div>
+
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      hobby:[],
+      ready:false
+    }
+  })
+</script>
+
+</body>
+</html>
