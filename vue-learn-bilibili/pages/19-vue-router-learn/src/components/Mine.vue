@@ -1,16 +1,22 @@
 <template>
   <div>
-    <p>这是Mine.vue</p>
-    <router-link to="/">转到主页</router-link>
+    <p>{{message}}</p>
+    <router-link to="/">主页</router-link>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Mine"
+  name: 'Mine',
+  data () {
+    return {
+      msg: 'mine page'
+    }
+  }
 }
 </script>
 
+<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
 </style>

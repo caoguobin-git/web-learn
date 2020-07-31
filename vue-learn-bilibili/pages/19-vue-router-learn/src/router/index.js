@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
-import Mine from "../components/Mine";
+import Mine
+  from "../components/Mine";
 
 Vue.use(Router)
 
@@ -16,6 +17,6 @@ export default new Router({
       path: '/mine',
       name: 'Mine',
       component: Mine
-    },
+    }
   ]
 })

@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
-    <p>这是HelloWorld.vue</p>
-    <router-link to="/mine">转到我的</router-link>
+    <h1>{{ msg }}</h1>
+    <router-link to="/mine">mine</router-link>
   </div>
 </template>
 
