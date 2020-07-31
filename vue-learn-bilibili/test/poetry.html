@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<div id="app"></div>
+
+<template id="demo1">
+  <div class="hello-world">
+    <button @click="getPoetry">更新</button>
+    <p>{{poetry.type}}</p>
+    <p>{{poetry.name}}</p>
+    <p>{{poetry.author}}</p>
+    <p>{{poetry.content}}</p>
+  </div>
+</template>
+
+<script>
+
+  const App = {
+    //设置模板
+    template:'#demo1',
+    //设置数据
+    data() {
+      return {
+        poetryUrl:'http://poetry.rainbase.cn/poetry/random',
+        poetry: {type: '', name: '', author: '', content: ''}
+      }
+    },
+    methods: {
+      //获取诗词方法
+      getPoetry() {
+        let _this = this;
+        //发起http请求，处理结果
+        fetch(this.poetryUrl)
+            .then(response => response.json())
+            .then(responseJson => responseJson.data)
+            .then(data => {
+              _this.poetry.type = data.type;
+              _this.poetry.name = data.name;
+              _this.poetry.author = data.author;
+              _this.poetry.content = data.content;
+            });
+      }
+    },
+    //加载后执行一次获取
+    mounted() {
+      this.getPoetry();
+    }
+  }
+
+  //声明Vue实例
+  new Vue({
+    //渲染App组件
+    render: h => h(App)
+    //挂载点选择#app
+  }).$mount('#app')
+
+</script>
+</body>
+</html>

@@ -38,7 +38,7 @@
     },
     computed:{
       styleContent(){
-        let split = this.poetry.content.split(/[\；,\，,\。,\!,\？]/g);
+        let split = this.poetry.content.split(/[\！,\；,\，,\。,\!,\？]/g);
         let result = '';
         split.forEach(k=>{
           result += ('<p>'+k+'</p>')
