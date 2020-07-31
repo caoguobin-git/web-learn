@@ -23,11 +23,11 @@
 
   const App = {
     //设置模板
-    template:'#demo1',
+    template: '#demo1',
     //设置数据
     data() {
       return {
-        poetryUrl:'http://poetry.rainbase.cn/poetry/random',
+        poetryUrl: 'http://poetry.rainbase.cn/poetry/random',
         poetry: {type: '', name: '', author: '', content: ''}
       }
     },
@@ -37,9 +37,13 @@
         let _this = this;
         //发起http请求，处理结果
         fetch(this.poetryUrl)
-            .then(response => response.json())
+            .then(response => {
+              console.log(response);
+              return response.json()
+            })
             .then(responseJson => responseJson.data)
             .then(data => {
+              //设置数据
               _this.poetry.type = data.type;
               _this.poetry.name = data.name;
               _this.poetry.author = data.author;
