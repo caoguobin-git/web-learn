@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<div id="app">
+  <button @click="getPoetry">换一首</button>
+  <poetry-test :poetryson="poetry"></poetry-test>
+</div>
+
+<template id="demo1">
+  <div style="text-align: center">
+    <p>{{poetryson.name}} <small>{{poetryson.type}}</small></p>
+    <h4>作者：{{poetryson.author}}</h4>
+    <span v-html="styleContent"></span>
+  </div>
+</template>
+
+<script>
+  Vue.component('poetry-test', {
+    template: '#demo1',
+    props: ['poetryson'],
+    data(){
+      return {
+        poetry:this.poetryson
+      }
+    },
+    filters:{
+      contentFilter(val){
+        return 'hello world<br>hello world'
+      }
+    },
+    computed:{
+      styleContent(){
+        let split = this.poetry.content.split(/[\；,\，,\。,\!,\？]/g);
+        let result = '';
+        split.forEach(k=>{
+          result += ('<p>'+k+'</p>')
+        })
+
+        return  result;
+      }
+    }
+  })
+
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'hello world',
+      poetry: {
+        type: '五言',
+        name: '静夜思',
+        author: '李白',
+        content: '床前明月光，疑是地上霜。举头望明月，低头思故乡。'
+      }
+    },
+    methods: {
+      getPoetry() {
+        let _this = this;
+        fetch('http://poetry.rainbase.cn/poetry/random')
+            .then(function (response) {
+              return response.json();
+            })
+            .then(function (myJson) {
+              console.log(myJson.data);
+              _this.poetry.type = myJson.data.type;
+              _this.poetry.name = myJson.data.name;
+              _this.poetry.author = myJson.data.author;
+              _this.poetry.content = myJson.data.content;
+            });
+      }
+    },
+    mounted() {
+      this.getPoetry();
+    }
+  })
+</script>
+
+</body>
+</html>

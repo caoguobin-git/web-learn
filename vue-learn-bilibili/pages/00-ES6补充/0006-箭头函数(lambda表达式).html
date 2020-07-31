@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>lambda表达式的基本使用</title>
+</head>
+<body>
+<script>
+  //箭头函数：也是一种定义函数的方式
+  //定义函数的方式：
+  //1.通过function()定义
+  const a = function () {
+
+  }
+  //2.对象字面量中定义函数
+  const obj = {
+    bbb: function () {
+
+    },
+    ccc() {
+
+    }
+  }
+
+  //3.ES6中的箭头函数
+  //3.1 没有参数
+  const ccc = () => {
+  }
+  //3.1 一个参数（默认会返回a*a）
+  const power = a => a * a;
+  //3.3 多个参数
+  const ddd = (a, b) => {
+    return a + b;
+  }
+
+</script>
+</body>
+</html>
