@@ -175,5 +175,5 @@
 - 先点击'B'再输入内容这种形式，前期先支持 webkit 和 IE，火狐的支持后面再加上
 - 图片压缩 canvas https://github.com/think2011/localResizeIMG 
 - github 徽章 https://github.com/EyreFree/GitHubBadgeIntroduction
-- 将代码在进行拆分，做到“每个程序只做一件事”，不要出现过长的代码文件。例如 `src/js/command/index.js` 和 `src/js/selection/index.js`
+- 将代码在进行拆分，做到“每个程序只做一件事”，不要出现过长的代码文件。例如 `src/js/command/router.js` 和 `src/js/selection/router.js`
 

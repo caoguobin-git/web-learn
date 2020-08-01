@@ -19,7 +19,7 @@
     - 开始节点 `editor.selection.getSelectionStartElem()[0]`
     - 结束节点 `editor.selection.getSelectionEndElem()[0]`
 - 折叠选取 `editor.selection.collapseRange()`
-- 更多可参见[源码中](https://github.com/wangfupeng1988/wangEditor/blob/master/src/js/selection/index.js)定义的方法
+- 更多可参见[源码中](https://github.com/wangfupeng1988/wangEditor/blob/master/src/js/selection/router.js)定义的方法
 
 ### 编辑内容操作
 
