@@ -12,21 +12,6 @@
       <li>新闻4</li>
       <li>新闻4</li>
       <li>新闻4</li>
-      <li>新闻4</li>
-      <li>新闻4</li>
-      <li>新闻4</li>
-      <li>新闻4</li>
-      <li>新闻4</li>
-      <li>新闻4</li>
-      <li>新闻4</li>
-      <li>新闻4</li>
-      <li>新闻4</li>
-      <li>新闻4</li>
-      <li>新闻4</li>
-      <li>新闻4</li>
-      <li>新闻4</li>
-      <li>新闻4</li>
-      <li>新闻4</li>
     </ul>
   </div>
 </template>

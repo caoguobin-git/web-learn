@@ -10,9 +10,6 @@
 <script>
 export default {
   name: "About",
-  mounted() {
-    document.title='关于'
-  }
 }
 </script>
 

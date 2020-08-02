@@ -5,7 +5,9 @@
 <!--    <router-link to="/home/news">新闻</router-link>-->
     <router-link to="/home/news">新闻</router-link>
     <router-link to="/home/message">消息</router-link>
+<!--    <keep-alive>-->
       <router-view/>
+<!--    </keep-alive>-->
   </div>
 </template>
 
@@ -17,8 +19,11 @@ export default {
       message:'Hello World',
     }
   },
-  mounted() {
-    document.title='主页'
+  created() {
+    console.log('home created');
+  },
+  destroyed() {
+    console.log('home destroyed')
   }
 }
 </script>

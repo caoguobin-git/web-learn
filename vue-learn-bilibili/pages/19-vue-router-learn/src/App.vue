@@ -1,8 +1,10 @@
 <template>
   <div id="app">
-    <div style="border: 1px solid black">
-      <router-view/>
-    </div>
+<!--    <div style="border: 1px solid black">-->
+        <keep-alive>
+          <router-view/>
+        </keep-alive>
+<!--    </div>-->
     <div style="position: fixed;bottom: 0px;width: 100%;text-align: center">
       <router-link replace tag="button" to="/home">主页</router-link>
       <router-link replace tag="button" to="/about">关于</router-link>
