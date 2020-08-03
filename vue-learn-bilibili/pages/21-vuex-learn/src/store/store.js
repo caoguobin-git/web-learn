@@ -16,11 +16,15 @@ const store = new Vuex.Store({
     ]
   },
   mutations: {
-    incrementCounter(state) {
-      state.counter++;
+    incrementCounter(state, payload) {
+      console.log(payload)
+      state.counter += payload.val;
     },
     decrementCounter(state) {
       state.counter--;
+    },
+    insertStudent(state,stu){
+      state.students.push(stu)
     }
   },
   actions: {},
