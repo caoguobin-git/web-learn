@@ -1989,5 +1989,37 @@ this.$store.commit('updateName',payload)
 
 
 
-## 二十二、 网络请求的封装
+## 二十二、 网络请求模块的封装
 
+### 22.1 选择什么网络模块
+
+> **Vue中发送网络请求有非常多的方式，那么在开发中如何选择呢？**
+>
+> * 选择一：传统的Ajax时基于XMLHttpRequest（XHR）的，为什么不选择它呢？
+>   * 非常好解释，配置和调用方式非常混乱
+>   * 编码看起来非常蛋疼
+>   * 真实开发中很少直接使用，而是使用jQuery-Ajax
+> * 选择二：jQuery-Ajax，为什么不选择它呢？
+>   * 首先：在Vue的整个开发中都是不需要使用jQuery的
+>   * 如果为了一个网络请求引入一个jQuery，不合理
+>
+> **为什么选择axios，作者推荐和功能特点：**
+>
+> * 在浏览器发送XMLHttpRequest请求
+> * 在node.js中发送http请求
+> * 支持Promise API
+> * 可以拦截请求和响应
+> * 转换请求和响应数据
+
+### 22.2 Axios的基本使用
+
+#### 22.2.1 Axios请求方式
+
+> 1. axios(config)
+> 2. axios.request(config)
+> 3. axios.get(url[,config])
+> 4. axios.post(url[,data[,config]])
+> 5. axios.put(url[,data[,config]])
+> 6. axios.delete(url[,config])
+> 7. axios.head(url[,config])
+> 8. axios.patch(url[,data[,config]])
