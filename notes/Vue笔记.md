@@ -1685,7 +1685,9 @@ store.getters.getTodoById(2) // -> { id: 2, text: '... false }
 greaterAges: (state) => age => state.students.filter(s => s.age >= age)
 ~~~
 
-#### 21.6.3 Mutations状态更新
+#### 21.6.3 Mutation
+
+##### 21.6.3.1 Mutations状态更新
 
 > **Vuex的store状态的更新唯一方式：提交Mutation：**
 >
@@ -1712,7 +1714,7 @@ greaterAges: (state) => age => state.students.filter(s => s.age >= age)
 > }
 > ~~~
 
-#### 21.6.3 Mutations携带参数
+##### 21.6.3.2 Mutations携带参数
 
 > **在通过mutation更新数据的时候，有可能我们希望携带一些额外的参数**
 >
@@ -1748,7 +1750,7 @@ mutations: {
 
 > **传递多个参数：使用对象封装即可**
 
-#### 21.6.4 Mutations的提交风格
+##### 21.6.3.3 Mutations的提交风格
 
 > 上面提到的通过commit提交是一种普通的方式。
 >
@@ -1770,7 +1772,7 @@ this.$store.commit({
   }
 ~~~
 
-#### 21.6.5 Mutations的响应规则
+##### 21.6.3.4 Mutations的响应规则
 
 > **Vuex的store中的state是响应式的，当state中的数据发生改变时，Vue组件会自动更新。**
 >
@@ -1783,7 +1785,207 @@ this.$store.commit({
 
 ~~~javascript
 //示例代码
+//添加新的根属性
+Vue.set(state,'infoTest',{text:'hello world'})
+//删除原有属性
+Vue.delete(state.info,name)
+//修改原有根属性
+state.info={time:'123123',name:'hello world'}
 ~~~
+
+##### 21.6.3.5 Mutation中的常量类型【<span style="color:red">可选</span>】
+
+> 在Mutation中声明常量，作为方法名称：可以防止名称写错
+>
+> **我们来考虑下面的问题：**
+>
+> * 在mutation中，我们定义了很多事件类型（也就是其中的方法名称）
+> * 当我们的项目增大时，Vuex管理的状态越来越多，需要更新状态的情况越来越多，那么意味着Mutation中的方法越来越多。
+> * 方法过多，使用者需要花费大量的精力去记住这些方法，甚至是在多个文件间来回切换，查看方法名称，如果不是复制的情况下，可能还会出现写错的情况。
+
+~~~javascript
+//mutation-types.js
+export const INCREMENT = 'increment';
+
+//App.vue
+import {INCREMENT} from "./store/mutation-types";
+methods:{
+    increment(val){
+      this.$store.commit(INCREMENT,val)
+}
+
+//store.js
+import {INCREMENT} from "./store/mutation-types";
+mutations: {
+    [INCREMENT](state,val){
+      state.info.name=val;
+    }, 
+}
+~~~
+
+### 21.6.4 Action基本概念
+
+> **通常情况下，Vuex要求我们Mutation中的方法必须是同步方法。**
+>
+> * 主要的原因是当我们使用devtools，devtools可以帮助我们捕捉mutation的快照。
+> * 但是如果是异步操作，那么devtools将不能很号的跟踪这个操作什么时候会被完成。
+> * **通常情况下，不要在mutation中进行异步操作**
+>
+> **我们强调：不要再Mutation中进行异步操作。**
+>
+> * 虽然在某些情况下，我们确实希望在Vuex中进行一些异步操作，比如网络请求，必然是异步的，这个时候怎么处理呢？
+> * Action类似于Mutation，但是是用来替代Mutation进行异步操作的
+> * 使用Action需要调用this.$store.dispatch()方法
+
+##### 21.6.4.1 Action的基本使用代码
+
+> 第一种方式：使用回调函数
+
+~~~javascript
+//store.js
+mutations: {
+    updateInfo(state,info){
+      state.info.name='Jordan'+info;
+    }
+  },
+actions: {
+    //action中没有state，有默认的上下文context
+    aUpdateInfo(context,payload){
+      setTimeout(()=>{
+          context.commit('updateInfo',payload.message);
+          payload.success();
+      },1000)
+    }
+  }
+//App.vue中
+methods:{
+    updateInfo(){this.$store.dispatch('aUpdateInfo',{
+        message:'我是携带的信息'，
+        success:()=>{
+        //回调函数
+        console.log('修改完成')
+    }
+    })
+    }
+}
+~~~
+
+> 第二种方式：使用Promise<strong style="color:red">推荐</strong>
+
+~~~javascript
+//App.vue
+updateInfo(){
+    this.$store.dispatch('aUpdateInfo',{
+        message:'我是参数'
+      }).then((data)=>{
+        console.log('执行成功了'+data)
+      })
+}
+
+//store.js
+active:{
+    aUpdateInfo(context,payload){
+      console.log(payload.message);
+      return new Promise((resolve, reject) => {
+        setTimeout(()=>{
+          context.commit('updateInfo',payload.message);
+          resolve('执行完毕了')
+        },1000)
+      })
+    }
+}
+~~~
+
+#### 21.6.5 Module详解
+
+> **Module是模块的意思，为什么在Vuex中我们要使用模块呢？**
+>
+> * Vuex使用单一状态树，那么也以为着很多状态都会交给Vuex来管理。
+> * 当应用变得非常复杂时，store对象就有可能变得相当臃肿。
+> * 为了解决这个问题，Vuex允许我们将store分割成模块（module）,而每个模块拥有自己的state、mutations、actions、getters等。
+
+~~~javascript
+const moduleA={
+  state:{},
+  mutations:{},
+  getters:{
+      fullname(state){
+          return state.name + '111';
+      },
+      fullname2(state,getters){
+          return getters.fullname+'222';
+      },
+      //可以利用第三个参数传递rootState
+      fullname3(state,getters,rootState){
+          return getters.fullname2+rootState.counter;
+      }
+  }，
+  actions:{
+    //这个context只是当前的上下文，只能修改调用muduleA中的mutations
+  	aUpdateName(context)  {
+    	context.commit('updateName','name11')
+  }
+}
+
+const moduleB={
+  state:{},
+  mutations:{},
+  actions:{},
+  getters:{}
+}
+
+const store = new Vuex.Store({
+  modules:{
+    a:moduleA,
+    b:moduleB
+  }
+})
+//在调用的时候采用这种方式就可以了
+store.state.a //moduleA的状态
+store.state.b //moduleB的状态
+//{{$store.state.a.name}}
+//提交方式，会查询对应的name，所以最好不要重名
+this.$store.commit('updateName',payload)
+{{$store.getters.fullname}}
+
+~~~
+
+#### 21.6.6 Vuex-store文件夹的目录组织
+
+> Actions的写法呢？接收一个context参数对象
+>
+> * 局部状态通过context.state暴漏出来，根节点状态则为context.rootState
+>
+>   ~~~javaxcript
+>   const moduleA={
+>   	actions:{
+>   		increment({state,commit,rootState}){
+>   			if((state.count + rootState.count) % 2 ===1){
+>   				commit('increment')
+>   			}
+>   		}
+>   	}
+>   }
+>   ~~~
+>   
+> * 如果getters中也需要使用全局的状态，可以接受更多的参数
+>
+>    ~~~javascript
+> 	const moduleA = {
+> 		getters:{
+> 		sum({state,getters,rootState}){
+>                return state.count + rootState.count;
+> 	        }
+>       }
+>    }
+>    ~~~
+>
+
+> **当我们的Vuex帮助我们管理过多的内容时，好的项目结构可以让我们的代码更加清晰：**
+
+![image-20200803225143085](pic/Vue笔记/image-20200803225143085.png)
+
+
 
 
 

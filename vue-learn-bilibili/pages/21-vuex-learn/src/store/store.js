@@ -1,6 +1,7 @@
 //1.导入依赖
 import Vue from "vue";
 import Vuex from 'vuex'
+import {INCREMENT} from "./mutation-types";
 //2.安装插件
 Vue.use(Vuex)
 
@@ -13,9 +14,17 @@ const store = new Vuex.Store({
       {id: 110, name: 'why', age: 18},
       {id: 111, name: 'kobe', age: 21},
       {id: 112, name: 'likei', age: 20},
-    ]
+    ],
+    info:{
+      name:'kobe',
+      age:40,
+      height:1.88
+    }
   },
   mutations: {
+    [INCREMENT](state,val){
+      state.info.name=val;
+    },
     incrementCounter(state, payload) {
       console.log(payload)
       state.counter += payload.val;
@@ -25,9 +34,35 @@ const store = new Vuex.Store({
     },
     insertStudent(state,stu){
       state.students.push(stu)
+    },
+    updateInfo(state,info){
+      state.info.name='Jordan'
+      // //添加新的根属性
+      // Vue.set(state,'infoTest',{text:'hello world'})
+      // //删除原有属性
+      // Vue.delete(state.info,name)
+      // //修改原有根属性
+      // state.info={time:'123123',name:'hello world'}
     }
   },
-  actions: {},
+  actions: {
+    //action中没有state，有默认的上下文context
+    aUpdateInfo(context,payload){
+      // console.log(payload.message)
+      // setTimeout(()=>{
+      //   context.commit('updateInfo');
+      //   payload.success()
+      // },1000)
+
+      console.log(payload.message);
+      return new Promise((resolve, reject) => {
+        setTimeout(()=>{
+          context.commit('updateInfo',payload.message);
+          resolve('执行完毕了');
+        },1000)
+      })
+    }
+  },
   getters: {
     greaterAgesCount: (state, getters) => {
       return getters.greaterAges.length
