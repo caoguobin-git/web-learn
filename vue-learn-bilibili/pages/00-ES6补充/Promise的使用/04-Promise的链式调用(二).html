@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  //网络请求：aaa -> 自己处理
+  //在aaa后面拼接111 -> 自己处理
+  //再拼接222
+  //处理aaa111222
+  //new Promise((resolve, reject) => {
+  //  setTimeout(() => {
+  //    resolve('aaa')
+  //  }, 1000)
+  //}).then(data => {
+  //  //处理data
+  //  console.log('第一层的处理代码', data)
+  //  return new Promise(resolve => {
+  //      resolve(data + '111');
+  //  })
+  //}).then(data => {
+  //  console.log('第二层处理：' + data);
+  //  return new Promise(resolve => {
+  //      resolve(data + '222');
+  //  })
+  //}).then(data => {
+  //  console.log('第三次处理：' + data)
+  //})
+
+  //第二种方式：使用Promise.resolve()
+  //new Promise((resolve, reject) => {
+  //  setTimeout(() => {
+  //    resolve('aaa')
+  //  }, 1000)
+  //}).then(data => {
+  //  //处理data
+  //  console.log('第一层的处理代码', data)
+  //  return Promise.resolve(data+'111');
+  //处理出错的方式
+  //return Promise.reject(data+'111');
+  //}).then(data => {
+  //  console.log('第二层处理：' + data);
+  //  return Promise.resolve(data+'222');
+  //}).then(data => {
+  //  console.log('第三次处理：' + data)
+  //})
+
+  //第三种方式
+  new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve('aaa')
+      reject('error hahah')
+    }, 1000)
+  }).then(data => {
+    //处理data
+    console.log('第一层的处理代码', data)
+    return data+'111';
+  }).then(data => {
+    console.log('第二层处理：' + data);
+    //处理出错的方式
+    throw 'error message'
+    //return data+'222';
+  }).then(data => {
+    console.log('第三次处理：' + data)
+  }).catch(err=>{
+    console.log(err)
+  })
+</script>
+</body>
+</html>

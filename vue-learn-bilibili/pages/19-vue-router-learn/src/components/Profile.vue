@@ -13,6 +13,12 @@ export default {
   mounted() {
     console.log(this.$route.query.name)
     console.log(this.$route.query.age)
+  },
+  created() {
+    console.log('Profile被创建');
+  },
+  destroyed() {
+    console.log('Profile被销毁');
   }
 }
 </script>

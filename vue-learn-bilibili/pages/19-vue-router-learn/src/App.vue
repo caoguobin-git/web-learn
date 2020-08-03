@@ -1,7 +1,7 @@
 <template>
   <div id="app">
 <!--    <div style="border: 1px solid black">-->
-        <keep-alive>
+        <keep-alive include="*" exclude="Profile,User">
           <router-view/>
         </keep-alive>
 <!--    </div>-->

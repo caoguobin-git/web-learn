@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Promise的all()方法</title>
+</head>
+<body>
+<script>
+  //需求场景
+  //请求一：
+  //请求二：
+  //需求本身需要两个请求全部返回正确数据才可以完成
+  Promise.all([
+    new Promise(resolve => {
+      setTimeout(()=>{
+        resolve(123);
+      },1000)
+    }),
+    new Promise((resolve) => {
+      setTimeout(()=>{
+        resolve({name:'hello',age:28})
+      },3000)
+    })
+  ]).then(results=>{
+    //results为参数中的结果集合
+    console.log(results);
+  })
+</script>
+</body>
+</html>

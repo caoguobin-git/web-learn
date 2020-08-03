@@ -5,9 +5,9 @@
 <!--    <router-link to="/home/news">新闻</router-link>-->
     <router-link to="/home/news">新闻</router-link>
     <router-link to="/home/message">消息</router-link>
-<!--    <keep-alive>-->
+    <keep-alive include="*">
       <router-view/>
-<!--    </keep-alive>-->
+    </keep-alive>
   </div>
 </template>
 

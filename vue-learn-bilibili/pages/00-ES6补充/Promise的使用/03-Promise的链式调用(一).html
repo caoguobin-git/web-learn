@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  new Promise((resolve, reject) => {
+    console.log('第一次发送请求')
+
+    setTimeout(() => {
+      //发起第一次请求
+      resolve({message:'第一次请求成功',nextUrl:'第二次请求url'})
+    }, 1000)
+
+  }).then(data => {
+    //处理第一次的结果
+    console.log(data.message)
+    return new Promise(((resolve, reject) => {
+      //发起第二次请求
+      console.log('发送请求：'+data.nextUrl)
+      setTimeout(()=>{
+        resolve({message:'第二次请求成功',nextUrl:'第三次请求url'});
+      },1000)
+    }))
+  }).then(data=>{
+    //处理第二次请求处理结果
+    console.log(data.message)
+    return new Promise((resolve, reject) => {
+      //发起第三次请求
+      console.log('发送请求：'+data.nextUrl)
+      setTimeout(()=>{
+        resolve({message:'第三次请求成功',nextUrl:'第三次请求url'});
+      },1000)
+    })
+  }).then(data=>{
+    //处理第三次结果
+    console.log(data.message);
+  })
+</script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Promise的基本使用</title>
+</head>
+<body>
+
+<script>
+  //1.使用timeout
+  //setTimeout(() => {
+  //  console.log('Hello World');
+  //}, 1000)
+
+  //2.使用Promise进行封装(链式编程)
+  new Promise((resolve, reject) => {
+    console.log('第一次发送请求')
+
+    setTimeout(() => {
+      //发起第一次请求
+      resolve({message: '第一次请求成功', nextUrl: '第二次请求url'})
+    }, 1000)
+
+  }).then(data => {
+    //处理第一次的结果
+    console.log(data.message)
+    return new Promise(((resolve, reject) => {
+      //发起第二次请求
+      console.log('发送请求：' + data.nextUrl)
+      setTimeout(() => {
+        resolve({message: '第二次请求成功', nextUrl: '第三次请求url'});
+      }, 1000)
+    }))
+  }).then(data => {
+    //处理第二次请求处理结果
+    console.log(data.message)
+    return new Promise((resolve, reject) => {
+      //发起第三次请求
+      console.log('发送请求：' + data.nextUrl)
+      setTimeout(() => {
+        resolve({message: '第三次请求成功', nextUrl: '第三次请求url'});
+      }, 1000)
+    })
+  }).then(data => {
+    //处理第三次结果
+    console.log(data.message);
+  })
+  //3.什么情况用到Promise
+  //一般，在出现异步调用或请求的情况下需要使用Promise
+  new Promise((resolve, reject) => {
+    setTimeout(() => {
+      //成功的调用
+      let data = 'Hello World';
+      resolve(data);
+      //失败的时候调用reject
+      reject('error message');
+    },3000)
+  }).then(data => {
+    console.log(data)
+  }).catch(errMsg=>{
+    console.error(errMsg)
+  })
+</script>
+</body>
+</html>
