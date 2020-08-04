@@ -45,6 +45,7 @@ export default {
   line-height: 40px;
   font-size: 14px;
   background: #fff;
+  z-index: 999;
 }
 
 .tab-control-item {
