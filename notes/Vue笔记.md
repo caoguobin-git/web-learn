@@ -2011,6 +2011,20 @@ this.$store.commit('updateName',payload)
 > * 可以拦截请求和响应
 > * 转换请求和响应数据
 
+### 22.2 Axios的安装
+
+> 通过npm安装
+>
+> 官方网站：
+>
+> 模拟网站：httpbin.org
+
+~~~shell
+npm install axios --save
+~~~
+
+
+
 ### 22.2 Axios的基本使用
 
 #### 22.2.1 Axios请求方式
@@ -2023,3 +2037,390 @@ this.$store.commit('updateName',payload)
 > 6. axios.delete(url[,config])
 > 7. axios.head(url[,config])
 > 8. axios.patch(url[,data[,config]])
+
+~~~javascript
+//axios(config)
+Axios({
+  method: 'get',
+  url: dataUrl
+}).then(data => console.log(data))
+
+//axios.get('url',[{config:config}])
+const poetryUrl = 'http://poetry.rainbase.cn/poetry/random'
+Axios.get(poetryUrl).then(data=>console.log(data))
+
+//拼接query
+Axios({
+  method: 'get',
+  url: baseURL+dataUrl+'?type=pop&page=1'
+}).then(data => {
+  console.log(data)
+})
+console.log(baseURL+dataUrl+'?type=pop&page=1')
+//对象传递query
+Axios({
+  url:baseURL+dataUrl,
+  params:{
+    type:'pop',
+    page:1
+  }
+}).then(res=>{
+  console.log(res)
+})
+~~~
+
+#### 22.2.2 Axios发送并发请求
+
+> **有时候需要发送多个请求才能执行结果，所以可能需要并发请求：**
+>
+> * 使用axios.all()方法，可以翻入多个请求的数组。
+> * axios.all([])返回的结果是一个数组，使用axios.spread可以将数组展开为res1，res2
+
+~~~javascript
+//axios发送并发请求，对多个请求进行合并
+Axios.all([
+  Axios.get(poetryUrl),
+  Axios({
+    url:baseURL+dataUrl,
+    params:{
+      type:'pop',
+      page:1
+    }
+  })
+]).then(results=>{
+  console.log(results)
+})
+
+//对结果进行分割
+Axios.all([
+  Axios.get(poetryUrl),
+  Axios({
+    url:baseURL+dataUrl,
+    params:{
+      type:'pop',
+      page:1
+    }
+  })
+]).then(Axios.spread((res1,res2)=>{
+  console.log(res1);
+  console.log(res2)
+}))
+~~~
+
+#### 22.2.3 Axios全局配置
+
+##### 22.2.3.1 配置语法
+
+> **在上面的实例中，我们的BaseURL是固定的：**
+>
+> * 事实上，在开发中可能很多参数都是固定的。
+> * 这个时候我们可以进行一些抽取，也可以利用axios的全局配置
+
+~~~javascript
+axios.defaults.baseURL = 'http://localhost:8080';
+axios.defaults.timeout = 5;
+axios.defaults.headers.post['Content-Type'] = 'application/x-www.form-urlencoded';
+
+//拼接query
+Axios({
+  method: 'get',
+  url: '/home/data' + '?type=pop&page=1'
+}).then(data => {
+  console.log(data)
+})
+
+//对象传递query
+Axios({
+  url: '/home/data',
+  params: {
+    type: 'pop',
+    page: 1
+  }
+}).then(res => {
+  console.log(res)
+})
+~~~
+
+##### 22.2.3.2 常见配置选项
+
+> 1. 请求地址：url:'/user'
+> 2. 请求类型：method:'get'
+> 3. 请求根路径：baseURL:'http://www.mt.com/api'
+> 4. 请求前的数据处理:transformRequest:[function(data){}]
+> 5. 请求后的数据处理：transformResponse:[function(data){}]
+> 6. 自定义的请求头：headers:{'x-Requested-With' : 'XMLHttpRequest'}
+> 7. URL查询对象：params:{id:12}
+
+| 类别               | 示例                                            | 描述                                        |
+| ------------------ | ----------------------------------------------- | ------------------------------------------- |
+| 请求地址           | url:'/user'                                     |                                             |
+| 请求类型           | method:'get'                                    |                                             |
+| 请求根路径         | baseURL:'http://www.mt.com/api'                 |                                             |
+| 请求前的数据处理   | transformRequest:[function(data){}]             |                                             |
+| 请求后的数据处理   | transformResponse:[function(data){}]            |                                             |
+| 自定义的请求头     | headers:{'x-Requested-With' : 'XMLHttpRequest'} |                                             |
+| URL查询对象        | params:{id:12}                                  |                                             |
+| 查询对象序列号函数 | paramsSerializer:function(params)()             |                                             |
+| request body       | data:{key:'aa}                                  |                                             |
+| 超时设置           | timeout：1000（毫秒）                           |                                             |
+| 跨域是否携带token  | withCredentials：false                          |                                             |
+| 自定义请求处理     | adapter:function(resolve,reject,config)()       |                                             |
+| 身份验证信息       | auth:{uname:'',pwd:'12}                         |                                             |
+| 响应数据格式       | responseType:'json                              | json/blob/document /arraybuffer/text/stream |
+
+### 22.3 Axios实例和模块封装
+
+#### 22.3.1 创建多个Axios实例
+
+> 在可能存在多个服务的时候，baseURL是不同的，所以，可以根据需要配置需要的Axios实例，来配置多个请求路径的问题。
+
+~~~javascript
+//创建实例使用Axios
+//创建首页的实例
+const homeAxios = Axios.create({
+  baseURL:'http://152.136.185.210:8000/api/z8',
+  timeout:5000
+})
+
+homeAxios({
+  url:'/home/data',
+  params:{
+    type:'pop',
+    page:1
+  }
+}).then(res=>{
+  console.log(res)
+})
+
+//创建poetry的实例
+const poetryAxios = Axios.create({
+  baseURL:'http://poetry.rainbase.cn',
+  timeout:300
+})
+
+poetryAxios({
+  url:'/poetry/random'
+}).then(res=>{
+  console.log(res)
+})
+~~~
+
+#### 22.3.2 模块封装Axios
+
+> 封装的必要性：
+
+> 第一种方式：利用回调函数：
+
+~~~javascript
+//request.js
+import Axios from "axios";
+export function request(config,success,failure){
+  //1.创建Axios实例
+  let instance = Axios.create({
+    baseURL:'http://152.136.185.210:8000/api/z8',
+    timeout:5000
+  });
+  //发送网络请求
+  instance(config)
+    .then(res=>{
+      success(res);
+    })
+    .catch(err => {
+      failure(err);
+    })
+}
+
+
+//main.js
+//封装网络请求模块
+import {request} from "../network/request";
+
+request({
+  url:'/home/data',
+  params:{
+    type:'pop',
+    page:1
+  }
+},res=>{
+  console.log(res)
+},err=>{
+  console.log(err)
+})
+~~~
+
+> 第二种方式：简写callback模式：
+
+~~~javascript
+//request.js
+import Axios from "axios";
+export function request(config,success,failure){
+  //1.创建Axios实例
+  let instance = Axios.create({
+    baseURL:'http://152.136.185.210:8000/api/z8',
+    timeout:5000
+  });
+  //发送网络请求
+  instance(config.baseConfig)
+    .then(res=>{
+      config.success(res);
+    })
+    .catch(err => {
+      config.failure(err);
+    })
+}
+
+
+//main.js
+//封装网络请求模块
+import {request} from "../network/request";
+
+request({
+  baseConfig: {
+    url: '/home/data',
+    params: {
+      type: 'pop',
+      page: 1
+    }
+  },
+  success(res) {
+    console.log(res);
+  },
+  failure(err) {
+    console.log(err);
+  }
+})
+~~~
+
+> 第三种方式：利用Promise对象
+
+~~~javascript
+//request.js
+import Axios from "axios";
+export function request(config) {
+  return new Promise((resolve, reject) => {
+
+    //1.创建Axios实例
+    let instance = Axios.create({
+      baseURL: 'http://152.136.185.210:8000/api/z8',
+      timeout: 5000
+    });
+    //发送网络请求
+    instance(config)
+      .then(res => {
+        resolve(res);
+      })
+      .catch(err => {
+        reject(err);
+      })
+  })
+}
+
+//main.js
+//封装网络请求模块
+import {request} from "../network/request";
+request({
+  url: '/home/data',
+  params: {
+    type: 'pop',
+    page: 1
+  }
+}).then(res=>{
+  console.log(res)
+}).catch(err=>{
+  console.log(err)
+})
+~~~
+
+> 第四种方式：直接返回instance(config)给调用方处理
+
+~~~javascript
+//request.js
+import Axios from "axios";
+export function request(config) {
+
+    //1.创建Axios实例
+    let instance = Axios.create({
+      baseURL: 'http://152.136.185.210:8000/api/z8',
+      timeout: 5000
+    });
+    //发送网络请求
+	return instance(config);
+}
+~~~
+
+### 22.4 Axios拦截器
+
+#### 22.4.1 Axios拦截器简介
+
+> **Axios提供了拦截器，用于我们在每次发送请求或者得到响应后，进行对应的处理**
+>
+> **请求拦截的使用场景：**
+>
+> * 如修改config信息，添加请求头以符合服务器的要求
+> * 如果每次请求时，都希望显示loading图标，可以使用这个
+> * 某些网络请求（需要登录等），是必须携带一些信息的，可以在此添加
+> * 判断登录状态等
+>
+> **响应拦截的使用场景：**
+>
+> * 根据失败信息进行提示或跳转
+> * 对请求结果进行处理等（如去掉axios添加的无用信息等）
+>
+> **一共进行四种拦截：**
+>
+> * 请求成功
+> * 请求失败
+> * 响应成功
+> * 响应失败
+>
+> 如何使用拦截器呢？
+
+~~~javascript
+//示例代码
+  instance.interceptors.request.use(config=>{
+    console.log('来到了request拦截success中');
+    return config;
+  },err=>{
+    console.log('来到了request拦截failure中');
+    return err;
+  })
+
+  instance.interceptors.response.use(res=>{
+    console.log('来到了response拦截success中');
+    return res.data;
+  },err=>{
+    console.log('来到了response拦截failure中');
+    return err;
+  })
+~~~
+
+
+
+#### 22.4.2 Axios拦截器使用【<span style="color:red">示例代码</span>】
+
+~~~javascript
+//2.配置拦截器
+  //config为请求参数
+  //err为错误信息
+  instance.interceptors.request.use(config=>{
+    console.log('来到了request拦截success中');
+    document.title='加载中。。。。。';
+    //如果不返回config，则请求会发送失败
+    return config;
+  },err=>{
+    console.log('来到了request拦截failure中');
+    return err;
+  })
+
+  instance.interceptors.response.use(res=>{
+    console.log('来到了response拦截success中');
+    document.title='成功'
+    //需要返回data，否则无法获取响应信息
+    return res.data;
+  },err=>{
+    console.log('来到了response拦截failure中');
+    //alert(err.toString())
+    return err;
+  })
+~~~
+
