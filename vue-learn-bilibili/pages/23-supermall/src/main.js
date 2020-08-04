@@ -11,7 +11,3 @@ new Vue({
   render: h => h(App),
 }).$mount('#app')
 
-
-import {getHomeMultiData} from "./network/home";
-
-getHomeMultiData('pop',1).then(res=>console.log(res))
