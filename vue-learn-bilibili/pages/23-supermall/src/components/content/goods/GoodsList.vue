@@ -23,5 +23,7 @@ export default {
 <style scoped>
 .goods-list {
   width: 100%;
+  display: flex;
+  flex-wrap: wrap;
 }
 </style>
