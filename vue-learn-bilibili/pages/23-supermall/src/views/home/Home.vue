@@ -11,59 +11,9 @@
       </a>
     </feature-view>
     <tab-control class="tab-control" :titles="['流行','新款','精选']"></tab-control>
+    <goods-list :goods="goods['pop'].list">
+    </goods-list>
 
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
   </div>
 </template>
 
@@ -75,10 +25,11 @@ import FeatureView from "./childComps/FeatureView";
 import TabControl from "components/content/tabControl/TabControl";
 
 import {getHomeMultiData, getHomeGoods} from "network/home";
+import GoodsList from "../../components/content/goods/GoodsList";
 
 export default {
   name: "Home",
-  components: {TabControl, FeatureView, HomeSwiper, NavBar, RecommendView},
+  components: { GoodsList, TabControl, FeatureView, HomeSwiper, NavBar, RecommendView},
   data() {
     return {
       banners: [],
