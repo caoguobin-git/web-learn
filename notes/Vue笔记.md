@@ -1823,7 +1823,7 @@ mutations: {
 }
 ~~~
 
-### 21.6.4 Action基本概念
+#### 21.6.4 Action基本概念
 
 > **通常情况下，Vuex要求我们Mutation中的方法必须是同步方法。**
 >
@@ -1919,11 +1919,12 @@ const moduleA={
       fullname3(state,getters,rootState){
           return getters.fullname2+rootState.counter;
       }
-  }，
+  },
   actions:{
     //这个context只是当前的上下文，只能修改调用muduleA中的mutations
   	aUpdateName(context)  {
     	context.commit('updateName','name11')
+    }
   }
 }
 

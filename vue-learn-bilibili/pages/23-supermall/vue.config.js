@@ -2,7 +2,7 @@
 module.exports = {
   //修改文件路径
   //publicPath:process.env.NODE_ENV === 'production'?'./':'/',
-  // publicPath: './',
+   publicPath: './',
   //声明配置webpack
   configureWebpack: {
     resolve: {

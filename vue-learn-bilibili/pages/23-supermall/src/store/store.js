@@ -6,27 +6,25 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 //3.创建对象
-const store= new Vuex.Store({
+const store = new Vuex.Store({
   //保存状态
-  state:{
-    counter:1000
+  state: {
+    counter: 1000,
+    imageState: 0
   },
-  mutations:{
+  mutations: {
     //定义方法
-    increment(){
+    increment() {
 
+    },
+    changeImageState(state, val) {
+      state.imageState = val;
     }
 
   },
-  actions:{
-
-  },
-  getters:{
-
-  },
-  modules:{
-
-  }
+  actions: {},
+  getters: {},
+  modules: {}
 
 })
 

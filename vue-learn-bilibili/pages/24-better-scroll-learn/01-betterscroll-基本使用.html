@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Title</title>
+  <style>
+    .wrapper, .wrapper2 {
+      background: red;
+      height: 200px;
+      overflow-y: hidden;
+    }
+
+    .content {
+    }
+  </style>
+</head>
+<body>
+
+<div class="wrapper">
+
+  <ul class="content">
+    <button onclick="console.log('hello')">按钮</button>
+
+    <li>列表数据 1</li>
+    <li>列表数据 2</li>
+    <li>列表数据 3</li>
+    <li>列表数据 4</li>
+    <li>列表数据 5</li>
+    <li>列表数据 6</li>
+    <li>列表数据 7</li>
+    <li>列表数据 8</li>
+    <li>列表数据 9</li>
+    <li>列表数据 10</li>
+    <li>列表数据 11</li>
+    <li>列表数据 12</li>
+    <li>列表数据 13</li>
+    <li>列表数据 14</li>
+    <li>列表数据 15</li>
+    <li>列表数据 16</li>
+    <li>列表数据 17</li>
+    <li>列表数据 18</li>
+    <li>列表数据 19</li>
+    <li>列表数据 20</li>
+    <li>列表数据 21</li>
+    <li>列表数据 22</li>
+    <li>列表数据 23</li>
+    <li>列表数据 24</li>
+    <li>列表数据 25</li>
+    <li>列表数据 26</li>
+    <li>列表数据 27</li>
+    <li>列表数据 28</li>
+    <li>列表数据 29</li>
+    <li>列表数据 30</li>
+    <li>列表数据 31</li>
+    <li>列表数据 32</li>
+    <li>列表数据 33</li>
+    <li>列表数据 34</li>
+    <li>列表数据 35</li>
+    <li>列表数据 36</li>
+    <li>列表数据 37</li>
+    <li>列表数据 38</li>
+    <li>列表数据 39</li>
+    <li>列表数据 40</li>
+    <li>列表数据 41</li>
+    <li>列表数据 42</li>
+    <li>列表数据 43</li>
+    <li>列表数据 44</li>
+    <li>列表数据 45</li>
+    <li>列表数据 46</li>
+    <li>列表数据 47</li>
+    <li>列表数据 48</li>
+    <li>列表数据 49</li>
+    <li>列表数据 50</li>
+    <li>列表数据 51</li>
+    <li>列表数据 52</li>
+    <li>列表数据 53</li>
+    <li>列表数据 54</li>
+    <li>列表数据 55</li>
+    <li>列表数据 56</li>
+    <li>列表数据 57</li>
+    <li>列表数据 58</li>
+    <li>列表数据 59</li>
+    <li>列表数据 60</li>
+    <li>列表数据 61</li>
+    <li>列表数据 62</li>
+    <li>列表数据 63</li>
+    <li>列表数据 64</li>
+    <li>列表数据 65</li>
+    <li>列表数据 66</li>
+    <li>列表数据 67</li>
+    <li>列表数据 68</li>
+    <li>列表数据 69</li>
+    <li>列表数据 70</li>
+    <li>列表数据 71</li>
+    <li>列表数据 72</li>
+    <li>列表数据 73</li>
+    <li>列表数据 74</li>
+    <li>列表数据 75</li>
+    <li>列表数据 76</li>
+    <li>列表数据 77</li>
+    <li>列表数据 78</li>
+    <li>列表数据 79</li>
+    <li>列表数据 80</li>
+    <li>列表数据 81</li>
+    <li>列表数据 82</li>
+    <li>列表数据 83</li>
+    <li>列表数据 84</li>
+    <li>列表数据 85</li>
+    <li>列表数据 86</li>
+    <li>列表数据 87</li>
+    <li>列表数据 88</li>
+    <li>列表数据 89</li>
+    <li>列表数据 90</li>
+    <li>列表数据 91</li>
+    <li>列表数据 92</li>
+    <li>列表数据 93</li>
+    <li>列表数据 94</li>
+    <li>列表数据 95</li>
+    <li>列表数据 96</li>
+    <li>列表数据 97</li>
+    <li>列表数据 98</li>
+    <li>列表数据 99</li>
+    <li>列表数据 100</li>
+  </ul>
+</div>
+<br>
+<br>
+<br>
+
+<script src="./bscroll.js"></script>
+<script>
+  //默认情况下，betterscroll是不回监听滚动的
+  const bscroll = new BScroll(
+      document.querySelector('.wrapper'),
+      {
+        //设置监听类型,
+        // 0:不监听，
+        // 1：不见听，
+        // 2：在手指滚动的过程中侦测，离开后的惯性滚动不侦测
+        // 3：监听所有滚动
+        probeType: 3,
+        //
+        click: false,
+        pullUpLoad: true,
+        pullDownRefresh:true,
+        mouseWheel:true
+      })
+  bscroll.on('scroll', (positon) => {
+    //console.log(positon)
+  })
+  //发送网络请求，请求更多数据
+  //等待数据请求完成，并且将新的数据据展示出来之后，
+  //调用finishPullUp(),即可实现下一次上拉刷新
+  bscroll.on('pullingUp',()=>{
+    console.log('上拉啊啊啊');
+    setTimeout(()=>{
+      bscroll.finishPullUp();
+    },2000)
+  })
+
+</script>
+</body>
+</html>

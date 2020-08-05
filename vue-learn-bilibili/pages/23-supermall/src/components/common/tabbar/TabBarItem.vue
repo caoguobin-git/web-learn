@@ -50,11 +50,14 @@ export default {
   flex: 1;
   text-align: center;
   height: 49px;
+  font-size: 14px;
+  padding-top: 3px;
+  border-radius: 10px;
 }
 
 .tab-bar-item img {
-  height: 24px;
-  width: 24px;
+  height: 22px;
+  width: 22px;
   margin-top: 3px;
   margin-bottom: 2px;
   vertical-align: middle;

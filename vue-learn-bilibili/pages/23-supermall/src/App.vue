@@ -2,7 +2,9 @@
   <div id="app">
     <router-view/>
 
-    <MainTabBar/>
+    <div  class="main-tab-bar" >
+      <MainTabBar />
+    </div>
   </div>
 </template>
 
@@ -19,5 +21,8 @@ export default {
 
 <style>
 @import "assets/css/base.css";
-
+.main-tab-bar{
+  position: absolute;
+  z-index: 999;
+}
 </style>
