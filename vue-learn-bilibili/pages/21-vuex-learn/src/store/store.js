@@ -77,3 +77,42 @@ const store = new Vuex.Store({
 //4.导出对象
 export default store;
 
+
+
+//分离式写法
+const moduleA={
+  state:{},
+  mutations:{},
+  getters:{
+    fullname(state){
+      return state.name + '111';
+    },
+    fullname2(state,getters){
+      return getters.fullname+'222';
+    },
+    //可以利用第三个参数传递rootState
+    fullname3(state,getters,rootState){
+      return getters.fullname2+rootState.counter;
+    }
+  },
+  actions:{
+    //这个context只是当前的上下文，只能修改调用muduleA中的mutations
+    aUpdateName(context)  {
+      context.commit('updateName','name11')
+    }
+  }
+}
+
+const moduleB={
+  state:{},
+  mutations:{},
+  actions:{},
+  getters:{}
+}
+
+const store = new Vuex.Store({
+  modules:{
+    a:moduleA,
+    b:moduleB
+  }
+})
