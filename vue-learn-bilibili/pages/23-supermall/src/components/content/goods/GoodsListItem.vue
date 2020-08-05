@@ -26,8 +26,8 @@ export default {
   methods:{
     imageLoaded(){
       //这种方式有bug
-      //this.$bus.$emit('imageLoaded')
-      this.$store.commit('changeImageState',Math.random());
+      this.$bus.$emit('imageLoaded')
+      // this.$store.commit('changeImageState',Math.random());
     }
   }
 }

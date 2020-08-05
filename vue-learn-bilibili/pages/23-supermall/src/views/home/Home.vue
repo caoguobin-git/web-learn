@@ -163,11 +163,10 @@ export default {
     this.getHomeGoods('pop');
     //3.监听item中图片加载完成
     //这种方法有bug，会重复添加监听器
-    //this.$bus.$on('imageLoaded',()=>{
-    //  //this.$refs.scroll.refreshHeight();
-    //  console.log(this.$refs)
-    //})
-
+    this.$bus.$on('imageLoaded',()=>{
+     this.$refs.scroll.refreshHeight();
+     // console.log(this.$refs)
+    })
 
   },
   mounted() {
@@ -188,7 +187,7 @@ export default {
   },
   watch:{
     imageState(){
-      this.$refs.scroll.refreshHeight();
+      // this.$refs.scroll.refreshHeight();
     },
     goods:{
       handler:(val)=>{
