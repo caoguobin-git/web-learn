@@ -63,7 +63,8 @@ export default {
   name: "Category",
   data() {
     return {
-      scroll: null
+      scroll: null,
+      name:'hello world111'
     }
   },
   methods:{

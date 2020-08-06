@@ -1,5 +1,5 @@
 <template>
-  <div class="goods-list-item">
+  <div class="goods-list-item" @click="itemClick">
     <img @load="imageLoaded" :src="goodsItem.show.img" alt="hello" :title="goodsItem.title">
 
     <div class="goods-info">
@@ -28,6 +28,15 @@ export default {
       //这种方式有bug
       this.$bus.$emit('imageLoaded')
       // this.$store.commit('changeImageState',Math.random());
+    },
+    itemClick(){
+      console.log(this.goodsItem)
+      this.$router.push({
+        path:'/detail',
+        query:{
+          id:this.goodsItem.iid
+        }
+      })
     }
   }
 }

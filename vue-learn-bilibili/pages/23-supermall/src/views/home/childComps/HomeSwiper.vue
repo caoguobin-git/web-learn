@@ -2,7 +2,7 @@
   <Swiper :interval="2000" :anim-duration="300" :move-ratio="0.25" :show-indicator="true">
     <SwiperItem v-for="item in banners" :key="item.image">
       <a :href="item.link">
-        <img :src="item.image" :title="item.title" :alt="item.title">
+        <img :src="item.image" @load="imageLoad" :title="item.title" :alt="item.title">
       </a>
     </SwiperItem>
   </Swiper>
@@ -21,8 +21,21 @@ export default {
       }
     }
   },
+  data(){
+    return{
+        imageLoaded:false
+    }
+  },
   components: {
     SwiperItem, Swiper
+  },
+  methods:{
+    imageLoad(){
+      if (!this.imageLoaded){
+        this.$emit('swiperImageLoaded')
+        this.imageLoaded=true;
+      }
+    }
   }
 }
 </script>

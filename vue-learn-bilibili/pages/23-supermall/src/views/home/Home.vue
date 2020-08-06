@@ -1,43 +1,30 @@
 <template>
-  <div
-    id="home">
-    <nav-bar
-      class="home-nav">
-      <div
-        slot="center">
-        购物街
-      </div>
+  <div id="home">
+    <!---->
+    <nav-bar class="home-nav">
+      <div slot="center"> 购物街</div>
     </nav-bar>
+    <tab-control class="tab-control-fixed" v-show="isTabFixed"  ref="tabControl1" @changeTabControl="changeTabControl" :titles="['流行','新款','精选']"/>
+
     <!--滚动模块-->
     <div class="content-wrapper">
       <scroll :probe-type="3"
               :pull-up-load="true"
               ref="scroll"
-              @reachBottom="handleReachBottom"
+              @reachBottom="loadMoreGoods"
               @scroll="scrollPositionChange">
-        <home-swiper
-          :banners="banners"/>
-        <recommend-view
-          :recommends="recommends"/>
+        <home-swiper @swiperImageLoaded="swiperImageLoaded" :banners="banners"/>
+        <recommend-view :recommends="recommends"/>
         <feature-view>
-          <a
-            :href="'https://act.mogujie.com/zzlx67'">
-            <img
-              :src="require('assets/img/home/recommend_bg.jpg')"
-              alt="">
+          <a :href="'https://act.mogujie.com/zzlx67'">
+            <img :src="require('assets/img/home/recommend_bg.jpg')" alt="">
           </a>
         </feature-view>
-        <tab-control
-          @changeTabControl="changeTabControl"
-          class="tab-control"
-          :titles="['流行','新款','精选']"></tab-control>
-        <goods-list
-          :goods="showGoods">
-        </goods-list>
+        <tab-control  ref="tabControl" @changeTabControl="changeTabControl" :titles="['流行','新款','精选']"/>
+        <goods-list :goods="showGoods"/>
       </scroll>
     </div>
     <!-- 回到顶部 -->
-    <!--    <div @click="backToTop" v-show="showBackToTop" class="back-to-top"></div>-->
     <back-top @click.native="backToTop" v-show="showBackToTop" class="back-to-top"/>
   </div>
 </template>
@@ -82,12 +69,26 @@ export default {
         }
       },
       currentType: 'pop',
-      currentScroll: 0
-
+      currentScroll: 0,
+      tabOffsetTop: 0,
+      scrollY:0
     }
   },
   methods: {
     //事件监听相关方法
+
+    //防抖函数可以使用this.debounce(func,delay)(args)调用
+    debounce(func, delay) {
+      let timer = null;
+      return function (...args) {
+        if (timer) {
+          clearTimeout(timer);
+        }
+        timer = setTimeout(() => {
+          func.apply(this, args)
+        }, delay)
+      }
+    },
 
     //监听返回顶部事件
     backToTop() {
@@ -95,7 +96,22 @@ export default {
     },
 
     //子组件传递事件
+
+
+    swiperImageLoaded() {
+      this.tabOffsetTop = this.$refs.tabControl.$el.offsetTop;
+      //setTimeout(()=>{
+      //
+      //},500)
+    },
+
+
+    //根据tab改变显示type
     changeTabControl(val) {
+      this.$refs.tabControl1.currentIndex=val
+      this.$refs.tabControl.currentIndex=val
+      //TODO 可选：切换页面跳转会顶部
+      //this.$refs.scroll.backTop(0, -this.tabOffsetTop, 500)
       switch (val) {
         case 0:
           this.currentType = 'pop';
@@ -110,18 +126,20 @@ export default {
           this.currentType = 'pop'
       }
     },
+    //监听滚动位置
     scrollPositionChange(position) {
       this.currentScroll = position;
+      //判断tabControl是否吸顶(position:fixed)
+
     },
-    handleReachBottom() {
-      console.log('触底事件发生了');
-      this.getHomeGoods(this.currentType);
+    loadMoreGoods() {
+      //获取新的数据，防抖
+      this.debounce(this.getHomeGoods, 500)(this.currentType)
     },
-
-
-
 
     //网络请求相关方法
+
+    //获取数据
     getHomeMultiData() {
       getHomeMultiData().then(res => {
         this.result = res;
@@ -129,6 +147,7 @@ export default {
         this.recommends = res.data.recommend.list
       })
     },
+    //获取商品数据
     getHomeGoods(type) {
       let page = ++this.goods[type].page;
       getHomeGoods({type, page})
@@ -138,18 +157,24 @@ export default {
         })
         .catch(err => {
         })
-    }
-
+    },
   },
   computed: {
+    //根据type计算需要显示的数据
     showGoods() {
       return this.goods[this.currentType].list;
     },
+    //判断是否展示返回顶部按钮
     showBackToTop() {
       return this.currentScroll.y < -1000;
     },
-    imageState(){
+    //使用Vuex判断图片加载状态
+    imageState() {
       return this.$store.state.imageState
+    },
+    //返回是否吸顶状态
+    isTabFixed() {
+      return (-this.currentScroll.y) > (this.tabOffsetTop);
     }
   },
   created() {
@@ -161,15 +186,14 @@ export default {
     this.getHomeGoods('sell');
     this.getHomeGoods('new');
     this.getHomeGoods('pop');
-    //3.监听item中图片加载完成
-    //这种方法有bug，会重复添加监听器
-    this.$bus.$on('imageLoaded',()=>{
-     this.$refs.scroll.refreshHeight();
-     // console.log(this.$refs)
-    })
-
   },
   mounted() {
+    //3.监听item中图片加载完成
+    //这种方法有bug，会重复添加监听器
+    const refresh = this.debounce(this.$refs.scroll.refreshHeight,500);
+    this.$bus.$on('imageLoaded', () => {
+      refresh();
+    })
 
 
     //原生实现监听滚动触底事件实现加载新数据
@@ -185,21 +209,33 @@ export default {
     //  );
     //})
   },
-  watch:{
-    imageState(){
+  watch: {
+    imageState() {
       // this.$refs.scroll.refreshHeight();
     },
-    goods:{
-      handler:(val)=>{
-        console.log(val)
+    //监听商品变化，deep用于监听内部数据变化
+    goods: {
+      handler: (val) => {
+        //console.log(val)
       },
-      deep:true
+      deep: true
     },
-    currentType(val){
-      //console.log(val)
+    isTabFixed(val){
+      console.log(val)
     }
+  },
+  beforeDestroy() {
+    console.log('destroyed')
+  },
+  activated() {
+    console.log('进入位置：'+this.scrollY)
+    this.$refs.scroll.backTop(0,-500,0)
+    this.$refs.scroll.refreshHeight()
+  },
+  deactivated() {
+    this.scrollY=this.currentScroll.y
+    console.log('离开位置：'+this.scrollY)
   }
-
 }
 </script>
 
@@ -220,21 +256,13 @@ export default {
   z-index: 3;
 }
 
-.tab-control {
-  position: sticky;
-  position: -webkit-sticky;
-  top: 0px;
-  z-index: 4;
+.tab-control-fixed{
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 44px;
 }
 
-/*.content-wrapper {*/
-/*  overflow: hidden;*/
-/*  position: absolute;*/
-/*  top: 44px;*/
-/*  bottom: 49px;*/
-/*  left: 0;*/
-/*  right: 0;*/
-/*}*/
 .content-wrapper {
   height: calc(100% - 90px);
   position: relative;
@@ -248,5 +276,4 @@ export default {
   -webkit-transition: all 5s linear;
   -o-transition: all 5s linear;
 }
-
 </style>

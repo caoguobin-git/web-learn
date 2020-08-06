@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <router-view/>
+    <keep-alive exclude="Detail">
+      <router-view/>
+    </keep-alive>
 
     <div  class="main-tab-bar" >
       <MainTabBar />
@@ -23,6 +25,6 @@ export default {
 @import "assets/css/base.css";
 .main-tab-bar{
   position: absolute;
-  z-index: 999;
+  z-index: 9;
 }
 </style>
