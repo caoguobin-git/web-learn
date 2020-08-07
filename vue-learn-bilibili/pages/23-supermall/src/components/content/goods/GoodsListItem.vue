@@ -30,7 +30,6 @@ export default {
       // this.$store.commit('changeImageState',Math.random());
     },
     itemClick(){
-      console.log(this.goodsItem)
       this.$router.push({
         path:'/detail',
         query:{

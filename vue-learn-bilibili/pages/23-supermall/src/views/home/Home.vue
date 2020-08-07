@@ -4,7 +4,8 @@
     <nav-bar class="home-nav">
       <div slot="center"> 购物街</div>
     </nav-bar>
-    <tab-control class="tab-control-fixed" v-show="isTabFixed"  ref="tabControl1" @changeTabControl="changeTabControl" :titles="['流行','新款','精选']"/>
+    <tab-control class="tab-control-fixed" v-show="isTabFixed" ref="tabControl1" @changeTabControl="changeTabControl"
+                 :titles="['流行','新款','精选']"/>
 
     <!--滚动模块-->
     <div class="content-wrapper">
@@ -20,7 +21,7 @@
             <img :src="require('assets/img/home/recommend_bg.jpg')" alt="">
           </a>
         </feature-view>
-        <tab-control  ref="tabControl" @changeTabControl="changeTabControl" :titles="['流行','新款','精选']"/>
+        <tab-control ref="tabControl" @changeTabControl="changeTabControl" :titles="['流行','新款','精选']"/>
         <goods-list :goods="showGoods"/>
       </scroll>
     </div>
@@ -35,11 +36,11 @@ import HomeSwiper from "./childComps/HomeSwiper";
 import RecommendView from "./childComps/RecommendView";
 import FeatureView from "./childComps/FeatureView";
 import TabControl from "components/content/tabControl/TabControl";
-import Scroll from "../../components/common/scroll/Scroll";
+import Scroll from "components/common/scroll/Scroll";
 
 import {getHomeMultiData, getHomeGoods} from "network/home";
-import GoodsList from "../../components/content/goods/GoodsList";
-import BackTop from "../../components/content/backtop/BackTop";
+import GoodsList from "components/content/goods/GoodsList";
+import BackTop from "components/content/backtop/BackTop";
 
 export default {
   name: "Home",
@@ -71,7 +72,7 @@ export default {
       currentType: 'pop',
       currentScroll: 0,
       tabOffsetTop: 0,
-      scrollY:0
+      scrollY: 0
     }
   },
   methods: {
@@ -108,8 +109,8 @@ export default {
 
     //根据tab改变显示type
     changeTabControl(val) {
-      this.$refs.tabControl1.currentIndex=val
-      this.$refs.tabControl.currentIndex=val
+      this.$refs.tabControl1.currentIndex = val
+      this.$refs.tabControl.currentIndex = val
       //TODO 可选：切换页面跳转会顶部
       //this.$refs.scroll.backTop(0, -this.tabOffsetTop, 500)
       switch (val) {
@@ -190,7 +191,7 @@ export default {
   mounted() {
     //3.监听item中图片加载完成
     //这种方法有bug，会重复添加监听器
-    const refresh = this.debounce(this.$refs.scroll.refreshHeight,500);
+    const refresh = this.debounce(this.$refs.scroll.refreshHeight, 500);
     this.$bus.$on('imageLoaded', () => {
       refresh();
     })
@@ -220,21 +221,21 @@ export default {
       },
       deep: true
     },
-    isTabFixed(val){
-      console.log(val)
+    isTabFixed(val) {
+      //console.log(val)
     }
   },
   beforeDestroy() {
     console.log('destroyed')
   },
   activated() {
-    console.log('进入位置：'+this.scrollY)
-    this.$refs.scroll.backTop(0,-500,0)
+    //console.log('进入位置：' + this.scrollY)
+    this.$refs.scroll.backTop(0, this.scrollY, 0)
     this.$refs.scroll.refreshHeight()
   },
   deactivated() {
-    this.scrollY=this.currentScroll.y
-    console.log('离开位置：'+this.scrollY)
+    this.scrollY = this.currentScroll.y
+    //console.log('离开位置：' + this.scrollY)
   }
 }
 </script>
@@ -256,7 +257,7 @@ export default {
   z-index: 3;
 }
 
-.tab-control-fixed{
+.tab-control-fixed {
   position: fixed;
   left: 0;
   right: 0;

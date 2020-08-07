@@ -1,6 +1,6 @@
+<!--商品详情页导航-->
 <template>
-  <div>
-    <nav-bar>
+    <nav-bar class="detail-nav-bar">
       <div @click="back" slot="left">
         <img style="vertical-align: middle" src="~assets/img/common/back.svg" alt="返回">
       </div>
@@ -13,7 +13,6 @@
 
 
     </nav-bar>
-  </div>
 </template>
 
 <script>
@@ -48,5 +47,13 @@ export default {
 }
 .title-active{
   color: var(--color-high-text);
+}
+.detail-nav-bar{
+  position: fixed;
+  right: 0;
+  left: 0;
+  top: 0;
+  z-index: 92;
+  background: rgba(255,255,255,0.95);
 }
 </style>

@@ -32,7 +32,7 @@ export default {
       click: true,
       probeType: this.probeType,
       //mouseWheel: true,
-      pullUpLoad: true,
+      pullUpLoad: this.pullUpLoad,
       pullDownRefresh: true
     })
 
@@ -54,7 +54,7 @@ export default {
   methods: {
     //返回顶部
     backTop(x, y, time = 300) {
-      console.log('执行滚动：',x,y)
+      //console.log('执行滚动：',x,y)
       this.scroll.scrollTo(x, y, time)
     },
     //异步数据加载完成，调用此方法，通知bs更新
