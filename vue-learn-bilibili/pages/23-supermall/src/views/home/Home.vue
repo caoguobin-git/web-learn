@@ -70,7 +70,7 @@ export default {
         }
       },
       currentType: 'pop',
-      currentScroll: 0,
+      currentScroll: {x:0,y:0},
       tabOffsetTop: 0,
       scrollY: 0
     }

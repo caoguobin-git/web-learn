@@ -44,7 +44,7 @@
       }
     },
     mounted: function () {
-		  //清除原来的定时器,放置数据错误
+		  //清除原来的定时器,防止数据错误
       this.stopTimer();
 
       // 1.操作DOM, 在前后添加Slide
