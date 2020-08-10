@@ -4,11 +4,8 @@
       <div @click="back" slot="left">
         <img style="vertical-align: middle" src="~assets/img/common/back.svg" alt="返回">
       </div>
-<!--      <div slot="center">-->
-<!--        <tab-control :titles="titles"></tab-control>-->
-<!--      </div>-->
       <div  slot="center" class="title">
-          <div :class="{'title-active':currentIndex===index}" @click="currentIndex=index" v-for="(item,index) in titles">{{item}}</div>
+          <div :class="{'title-active':currentIndex===index}" @click="changeDisplay(index)" v-for="(item,index) in titles">{{item}}</div>
       </div>
 
 
@@ -32,6 +29,10 @@ export default {
   methods:{
     back(){
       this.$router.back();
+    },
+    changeDisplay(val){
+      this.currentIndex=val
+      this.$emit('changeDisplay',val)
     }
   }
 }

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>穿梭框</title>
+</head>
+<body>
+<script src="../../js/vue.js"></script>
+
+<div id="app">
+<div>
+  <div v-for="(item,key) in list1">
+    <input type="checkbox" v-model="list1select" :value="key"  name="list1" :id="item">
+    <label :for="item">{{key}}</label>
+  </div>
+</div>
+  <hr>
+  <div>
+    <button @click="down">下</button>
+    <button @click="up">上</button>
+  </div>
+<div>
+  <div v-for="(item,key) in list2">
+    <input type="checkbox" v-model="list2select" :value="key"  name="list2" :id="item">
+    <label :for="item">{{key}}</label>
+  </div>
+</div>
+</div>
+
+<script>
+  var app = new Vue({
+    el:'#app',
+    data:{
+      list1:{'张三':'','李四':'','王五':''},
+      list2:{},
+      list1select:[],
+      list2select:[]
+    },
+    methods:{
+      down(){
+        this.list1select.forEach(k=>{
+          Vue.set(this.list2,k,'')
+          Vue.delete(this.list1,k);
+
+        })
+        this.list1select.splice(0,this.list1select.length)
+        this.list2select.splice(0,this.list2select.length)
+      },
+      up(){
+        this.list2select.forEach(k=>{
+          Vue.set(this.list1,k,'')
+          Vue.delete(this.list2,k);
+
+        })
+        this.list1select.splice(0,this.list1select.length)
+        this.list2select.splice(0,this.list2select.length)
+      }
+    }
+  })
+</script>
+</body>
+</html>

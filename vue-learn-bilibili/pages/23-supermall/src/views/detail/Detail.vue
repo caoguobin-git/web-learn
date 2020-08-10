@@ -1,6 +1,6 @@
 <template>
   <div id="detail">
-    <detail-nav-bar/>
+    <detail-nav-bar @changeDisplay="changeDisplay"/>
     <scroll class="detail-scroll" :probe-type="3"
             :pull-up-load="true"
             ref="scroll">
@@ -8,49 +8,15 @@
       <detail-base-info :goods-info="goods"/>
       <detail-shop-info :shopInfo="shop"/>
 
-      <h3>hello world</h3>
-      <h3>hello world</h3>
-      <h3>hello world</h3>
-      <h3>hello world</h3>
-      <h3>hello world</h3>
-      <h3>hello world</h3>
-      <h3>hello world</h3>
-      <h3>hello world</h3>
-      <h3>hello world</h3>
-      <h3>hello world</h3>
-      <h3>hello world</h3>
-      <h3>hello world</h3>
-      <h3>hello world</h3>
-      <h3>hello world</h3>
-      <h3>hello world</h3>
-      <h3>hello world</h3>
-      <h3>hello world</h3>
-      <h3>hello world</h3>
-      <h3>hello world</h3>
-      <h3>hello world</h3>
-      <h3>hello world</h3>
-      <h3>hello world</h3>
-      <h3>hello world</h3>
-      <h3>hello world</h3>
-      <h3>hello world</h3>
-      <h3>hello world</h3>
-      <h3>hello world</h3>
-      <h3>hello world</h3>
-      <h3>hello world</h3>
-      <h3>hello world</h3>
-      <h3>hello world</h3>
-      <h3>hello world</h3>
-      <h3>hello world</h3>
-      <h3>hello world</h3>
-      <h3>hello world</h3>
-      <h3>hello world</h3>
-      <h3>hello world</h3>
-      <h3>hello world</h3>
-      <h3>hello world</h3>
-      <h3>hello world</h3>
-      <h3>hello world</h3>
-      <h3>hello world</h3>
-      <h3>hello world</h3>
+      <div class="prod-detail-info">
+        <div class="prod-detail-info-desc">{{ detailInfo.desc }}</div>
+        <div class="prod-detail-info-img-container">
+          <detail-info-item @imgLoaded="imgLoaded" :detail-image="item" v-for="item in detailInfo.detailImage"/>
+        </div>
+      </div>
+
+      <detail-params-info :param-info="paramInfo"/>
+      <detail-comment-info :comment-info="commentInfo"></detail-comment-info>
     </scroll>
   </div>
 </template>
@@ -65,17 +31,26 @@ import DetailSwiper from "./childComps/DetailSwiper";
 import DetailBaseInfo from "./childComps/DetailBaseInfo";
 import DetailShopInfo from "./childComps/DetailShopInfo";
 import Scroll from "components/common/scroll/Scroll";
+import DetailInfoItem from "./childComps/DetailInfoItem";
+import {GoodsParam} from "../../network/detail";
+import DetailParamsInfo from "./childComps/DetailParamsInfo";
+import DetailCommentInfo from "./childComps/DetailCommentInfo";
 
 
 export default {
   name: "Detail",
-  components: {Scroll, DetailShopInfo, DetailBaseInfo, DetailSwiper, DetailNavBar},
+  components: {
+    DetailCommentInfo,
+    DetailParamsInfo, DetailInfoItem, Scroll, DetailShopInfo, DetailBaseInfo, DetailSwiper, DetailNavBar},
   data() {
     return {
       goods: {},
       iid: '',
       topImages: [],
-      shop: {}
+      shop: {},
+      detailInfo: {},
+      paramInfo: {},
+      commentInfo: {}
     }
   },
   computed: {},
@@ -91,9 +66,27 @@ export default {
           //2.获取商品信息
           this.goods = new Goods(data.itemInfo, data.columns, data.shopInfo.services)
           //3.创建店铺信息
-          this.shop = new Shop(data.shopInfo)
+          this.shop = new Shop(data.shopInfo);
+          //4.保存商品描述信息
+          this.detailInfo = res.result.detailInfo
+          //5.获取参数信息
+          this.paramInfo = new GoodsParam(data.itemParams.info, data.itemParams.rule)
+          //6.获取评论信息
+          if (data.rate.cRate !== 0) {
+            this.commentInfo = data.rate.list[0]
+          }
         })
     },
+    imgLoaded() {
+      this.$refs.scroll.refreshHeight();
+    },
+    changeDisplay(val) {
+      console.log(val)
+      switch (val) {
+        case 1:
+        //location.hash='#detail-params'
+      }
+    }
   },
   created() {
     this.iid = this.$route.query.id;
@@ -103,15 +96,28 @@ export default {
 </script>
 
 <style scoped>
-#detail{
+#detail {
   height: 100vh;
 }
+
 .detail-scroll {
-  height:calc(100% - 44px);
+  height: calc(100% - 44px);
   position: relative;
   top: 44px;
   overflow: hidden;
   z-index: 90;
   background: white;
+}
+
+.prod-detail-info-desc {
+  text-indent: 2rem;
+}
+
+.prod-detail-info-img-container {
+  width: 100%;
+}
+
+.prod-detail-info-img-container > img {
+  width: 50%;
 }
 </style>
