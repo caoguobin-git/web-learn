@@ -16,7 +16,9 @@
       </div>
 
       <detail-params-info :param-info="paramInfo"/>
-      <detail-comment-info :comment-info="commentInfo"></detail-comment-info>
+      <detail-comment-info :comment-info="commentInfo"/>
+<!--      <DetailRecommends @recommendClicked="recommendClicked" :recommends="recommends"/>-->
+      <GoodsList :goods="recommends"/>
     </scroll>
   </div>
 </template>
@@ -26,7 +28,7 @@
 import DetailNavBar from "./childComps/DetailNavBar";
 
 //网络模块
-import {getGoodsDetail, Goods, Shop} from "network/detail";
+import {getGoodsDetail,getGoodsRecommend, Goods, Shop} from "network/detail";
 import DetailSwiper from "./childComps/DetailSwiper";
 import DetailBaseInfo from "./childComps/DetailBaseInfo";
 import DetailShopInfo from "./childComps/DetailShopInfo";
@@ -35,11 +37,18 @@ import DetailInfoItem from "./childComps/DetailInfoItem";
 import {GoodsParam} from "../../network/detail";
 import DetailParamsInfo from "./childComps/DetailParamsInfo";
 import DetailCommentInfo from "./childComps/DetailCommentInfo";
+//import DetailRecommends from "./childComps/DetailRecommends";
+import GoodsList from "../../components/content/goods/GoodsList";
 
+import {debounce} from "../../common/commonUtils";
+
+
+import {itemListenerMixin} from "../../common/mixin";
 
 export default {
   name: "Detail",
   components: {
+    GoodsList,
     DetailCommentInfo,
     DetailParamsInfo, DetailInfoItem, Scroll, DetailShopInfo, DetailBaseInfo, DetailSwiper, DetailNavBar},
   data() {
@@ -50,10 +59,13 @@ export default {
       shop: {},
       detailInfo: {},
       paramInfo: {},
-      commentInfo: {}
+      commentInfo: {},
+      recommends:[],
+      imageListener:null
     }
   },
   computed: {},
+  mixins:[itemListenerMixin],
   methods: {
     //获取数据并完成数据分离
     getGoods(id) {
@@ -77,6 +89,13 @@ export default {
           }
         })
     },
+    getGoodsRecommend(){
+      getGoodsRecommend()
+      .then(res=>{
+        console.log(res)
+        this.recommends=res.data.list;
+      })
+    },
     imgLoaded() {
       this.$refs.scroll.refreshHeight();
     },
@@ -86,11 +105,23 @@ export default {
         case 1:
         //location.hash='#detail-params'
       }
+    },
+    recommendClicked(val){
+      this.iid=val;
+      this.getGoods(this.iid);
+      this.getGoodsRecommend()
     }
   },
   created() {
     this.iid = this.$route.query.id;
     this.getGoods(this.iid);
+    this.getGoodsRecommend()
+  },
+  mounted() {
+
+  },
+  destroyed() {
+    this.$bus.$off('imageLoaded',this.imageListener)
   }
 }
 </script>

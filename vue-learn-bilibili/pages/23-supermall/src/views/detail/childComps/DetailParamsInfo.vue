@@ -28,8 +28,8 @@ export default {
       type:Object,
       default(){
         return {
-          infos:[],
-          sizes:[]
+          infos:[[]],
+          sizes:[[]]
         }
       }
     }

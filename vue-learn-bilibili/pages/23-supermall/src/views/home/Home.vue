@@ -38,9 +38,11 @@ import FeatureView from "./childComps/FeatureView";
 import TabControl from "components/content/tabControl/TabControl";
 import Scroll from "components/common/scroll/Scroll";
 
+import {debounce} from "../../common/commonUtils";
 import {getHomeMultiData, getHomeGoods} from "network/home";
 import GoodsList from "components/content/goods/GoodsList";
 import BackTop from "components/content/backtop/BackTop";
+import {itemListenerMixin} from "../../common/mixin";
 
 export default {
   name: "Home",
@@ -54,6 +56,7 @@ export default {
     NavBar,
     RecommendView
   },
+  mixins:[itemListenerMixin],
   data() {
     return {
       banners: [],
@@ -72,24 +75,13 @@ export default {
       currentType: 'pop',
       currentScroll: {x:0,y:0},
       tabOffsetTop: 0,
-      scrollY: 0
+      scrollY: 0,
     }
   },
   methods: {
     //事件监听相关方法
 
-    //防抖函数可以使用this.debounce(func,delay)(args)调用
-    debounce(func, delay) {
-      let timer = null;
-      return function (...args) {
-        if (timer) {
-          clearTimeout(timer);
-        }
-        timer = setTimeout(() => {
-          func.apply(this, args)
-        }, delay)
-      }
-    },
+
 
     //监听返回顶部事件
     backToTop() {
@@ -135,7 +127,7 @@ export default {
     },
     loadMoreGoods() {
       //获取新的数据，防抖
-      this.debounce(this.getHomeGoods, 500)(this.currentType)
+      debounce(this.getHomeGoods, 500)(this.currentType)
     },
 
     //网络请求相关方法
@@ -191,10 +183,11 @@ export default {
   mounted() {
     //3.监听item中图片加载完成
     //这种方法有bug，会重复添加监听器
-    const refresh = this.debounce(this.$refs.scroll.refreshHeight, 500);
-    this.$bus.$on('imageLoaded', () => {
-      refresh();
-    })
+    //let refresh = debounce(this.$refs.scroll.refreshHeight, 500);
+    //this.imageListener=()=>{
+    //  refresh()
+    //}
+    //this.$bus.$on('imageLoaded', this.imageListener)
 
 
     //原生实现监听滚动触底事件实现加载新数据
@@ -236,6 +229,7 @@ export default {
   deactivated() {
     this.scrollY = this.currentScroll.y
     //console.log('离开位置：' + this.scrollY)
+    this.$bus.$off('imageLoaded',this.imageListener)
   }
 }
 </script>

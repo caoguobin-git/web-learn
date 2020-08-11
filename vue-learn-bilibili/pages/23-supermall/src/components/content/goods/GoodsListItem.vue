@@ -1,6 +1,6 @@
 <template>
   <div class="goods-list-item" @click="itemClick">
-    <img @load="imageLoaded" :src="goodsItem.show.img" alt="hello" :title="goodsItem.title">
+    <img @load="imageLoaded" :src="showImage" alt="hello" :title="goodsItem.title">
 
     <div class="goods-info">
       <p class="goods-list-item-title" :title="goodsItem.title">{{goodsItem.title}}</p>
@@ -36,6 +36,11 @@ export default {
           id:this.goodsItem.iid
         }
       })
+    }
+  },
+  computed:{
+    showImage(){
+      return this.goodsItem.image || this.goodsItem.show.img
     }
   }
 }

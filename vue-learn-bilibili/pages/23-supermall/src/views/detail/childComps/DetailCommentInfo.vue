@@ -9,23 +9,24 @@
     </div>
 
     <div class="userinfo">
-      <img  style="margin-left: 5px;vertical-align: middle;width: 30px;border-radius: 15px" :src="commentInfo.user.avatar" alt="">
-      <span style="margin-left: 10px;display: inline-block;vertical-align: middle">{{commentInfo.user.uname}}</span>
+      <img style="margin-left: 5px;vertical-align: middle;width: 30px;border-radius: 15px"
+           :src="commentInfo.user.avatar" alt="">
+      <span style="margin-left: 10px;display: inline-block;vertical-align: middle">{{ commentInfo.user.uname }}</span>
     </div>
 
     <div style="text-indent: 2rem;font-size: 14px;line-height: 1.5">
-      {{commentInfo.content}}
+      {{ commentInfo.content }}
     </div>
     <div style="display: flex;margin: 5px 0px">
-      <div style="font-size: 14px;padding: 0px 5px">{{formatDate(commentInfo.created)}}</div>
-      <div style="font-size: 14px">{{commentInfo.style}}</div>
+      <div style="font-size: 14px;padding: 0px 5px">{{ commentInfo.created | showDate }}</div>
+      <div style="font-size: 14px">{{ commentInfo.style }}</div>
     </div>
-    <div style="width: 80%;text-align: center;margin-left: 10%;font-size: 12px">{{commentInfo.explain}}</div>
+    <div style="width: 80%;text-align: center;margin-left: 10%;font-size: 12px">{{ commentInfo.explain }}</div>
 
     <div>
       <img style="height: 80px" v-for="img in commentInfo.images" :src="img" alt="">
     </div>
-<!--    {{commentInfo}}-->
+    <!--    {{commentInfo}}-->
   </div>
 </template>
 
@@ -42,22 +43,26 @@ export default {
       }
     }
   },
-  methods:{
-    formatDate(val){
-      return formatDate(val*1000)
+  methods: {},
+  filters: {
+    showDate(val) {
+      //1.将时间戳转成Date对象
+      const date = new Date(val * 1000);
+      //2.将date进行格式化
+      return formatDate(date, 'yyyy-MM-dd')
     }
   }
 }
 </script>
 
 <style scoped>
-.info-header{
+.info-header {
   display: flex;
   justify-content: space-between;
   margin-top: 5px;
 }
 
-.comment-info{
+.comment-info {
   margin-bottom: 5px;
   box-shadow: 0 3px 5px #c2bbbb;
   padding: 8px;
