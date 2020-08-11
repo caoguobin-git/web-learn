@@ -7,13 +7,25 @@
 5. cnpm命令
 6. 官方文档
 ## 创建React项目
+
 ~~~
-1. npx create-react-app [name]
-2. cd [name]
+1. npx create-react-app <name>
+2. cd <name>
 3. npm start
 ~~~
 
+## 自定义默认打开浏览器
+
+~~~json
+"scripts": {
+  "start": "set BROWSER=firefox&& react-scripts start"
+}
+~~~
+
+
+
 ## 环境介绍
+
 ~~~
 1. node_modules：依赖库文件
 2. public： 入口文件，包含index和logo等文件
@@ -25,7 +37,7 @@
 ### JSX语法
 JSX语法：JavaScript语法+XML语法 
 
-解读jsx语法：**遇到 <code>< ></code> 按照jsx语法解析，遇到 <code>{ }</code> 按照JavaScript语法解析**
+解读jsx语法：**遇到 <code>< ></code> 按照xml语法解析，遇到 <code>{ }</code> 按照JavaScript语法解析**
 
 ### 元素渲染
 
@@ -92,7 +104,9 @@ console.log(this.state.count)
 结果： 1 1
 ~~~
 ### 条件渲染
-#####常用应用场景：
+
+##### 常用应用场景：
+
 1. 对视图条件进行切换
 2. 做缺省值
 
