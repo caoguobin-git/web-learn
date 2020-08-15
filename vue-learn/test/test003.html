@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>
+		Title</title>
+	<style>
+      #app {
+          width: 100vw;
+          height: 100vh;
+          position: relative;
+      }
+
+      #app > div {
+          position: absolute;
+      }
+
+      .mask {
+          position: fixed;
+          left: 0;
+          right: 0;
+          top: 0;
+          bottom: 0;
+          background: rgba(0, 0, 0, .6);
+          text-align: center
+      }
+	</style>
+
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<div id="app">
+	<div>
+		<div v-for="(val,key) in user">
+			{{key}}:<input
+						:value="val"
+						disabled
+						type="text">
+		</div>
+		<button @click="showMask">
+			修改
+		</button>
+	</div>
+	<div class="mask"
+			 v-if="show"
+	>
+		<input
+						type="text"
+						v-model="newUser.account">
+		<input
+						type="text"
+						v-model="newUser.name">
+		<input
+						type="text"
+						v-model="newUser.gender">
+		<input
+						type="text"
+						v-model="newUser.password">
+		<div>
+			<button @click="show=false">
+				取消
+			</button>
+			<button @click="save">
+				保存
+			</button>
+		</div>
+	</div>
+
+
+</div>
+
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      show: false,
+      user: {
+        account: '123123',
+        name: 'zhangsan',
+        gender: '男',
+        password: '123123123123'
+      },
+      newUser: {
+        account: '',
+        name: '',
+        gender: '',
+        password: ''
+      }
+    },
+    methods: {
+      save() {
+        this.user.account = this.newUser.account;
+        this.user.name = this.newUser.name;
+        this.user.gender = this.newUser.gender;
+        this.user.password = this.newUser.password;
+        this.show = false;
+      },
+      showMask() {
+        this.initMask();
+        this.show = true
+      },
+      initMask() {
+        this.newUser.account = this.user.account
+        this.newUser.name = this.user.name
+        this.newUser.gender = this.user.gender
+        this.newUser.password = this.user.password
+      }
+    }
+  })
+</script>
+</body>
+</html>
