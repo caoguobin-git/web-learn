@@ -15,7 +15,7 @@
       margin: 3px;
       text-align: center;
       line-height: 50px;
-      background: red;
+      background: #dddddd;
       border-radius: 4px;
       transition: all .2s ease;
     }
@@ -30,7 +30,9 @@
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 
 <div id="app">
-  <div @mouseover="currentIndex=index" v-for="index in 300" :style="styleObj(index)">{{currentIndex}}</div>
+  <div @mouseover="currentIndex=index" v-for="index in 1080" :style="styleObj(index)">
+    {{currentIndex}}
+  </div>
   <p>{{currentIndex}}</p>
 </div>
 <script>
@@ -42,7 +44,7 @@
     methods: {
       styleObj(val) {
         let active = val === this.currentIndex;
-        return active ? {background: 'blue', animation:'mydemo .5s linear 0ms 2 alternate'} : {}
+        return active ? {background: 'red', animation:'mydemo .3s linear 0ms 1 alternate'} : {}
       }
     }
   })
