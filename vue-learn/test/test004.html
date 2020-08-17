@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    html{
+      margin: 0;
+      padding: 0;
+    }
+    #app > div {
+      width: 50px;
+      height: 50px;
+      display: inline-block;
+      margin: 3px;
+      text-align: center;
+      line-height: 50px;
+      background: red;
+      border-radius: 4px;
+      transition: all .2s ease;
+    }
+    @keyframes mydemo {
+      0%{border-radius: 0%;transform: rotateZ(0deg);}
+      50%{border-radius: 50%;transform: rotateZ(360deg);}
+      100%{border-radius: 0%;transform: rotateZ(720deg);}
+    }
+  </style>
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+<div id="app">
+  <div @mouseover="currentIndex=index" v-for="index in 300" :style="styleObj(index)">{{currentIndex}}</div>
+  <p>{{currentIndex}}</p>
+</div>
+<script>
+  var app = new Vue({
+    el: '#app',
+    data: {
+      currentIndex: 1
+    },
+    methods: {
+      styleObj(val) {
+        let active = val === this.currentIndex;
+        return active ? {background: 'blue', animation:'mydemo .5s linear 0ms 2 alternate'} : {}
+      }
+    }
+  })
+</script>
+</body>
+</html>
