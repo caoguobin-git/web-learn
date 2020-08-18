@@ -30,10 +30,9 @@
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 
 <div id="app">
-  <div @mouseover="currentIndex=index" v-for="index in 1080" :style="styleObj(index)">
+  <div @mouseover="currentIndex=index" v-for="index in 50" :style="styleObj(index)">
     {{currentIndex}}
   </div>
-  <p>{{currentIndex}}</p>
 </div>
 <script>
   var app = new Vue({
