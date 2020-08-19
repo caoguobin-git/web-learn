@@ -127,7 +127,7 @@ npm init
   "name": "meetwebpack",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "router.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -181,7 +181,7 @@ module.exports={
   "name": "meetwebpack",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "router.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack"
@@ -206,7 +206,7 @@ npm installl webpack@3.6.0 --save-dev
   "name": "meetwebpack",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "router.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack"

@@ -571,7 +571,7 @@ history.go(1)  等同于 history.forward()
 >
 
 ~~~javascript
-//index.js
+//router.js
 //配置路由相关的信息
 import VueRouter from "vue-router";
 import Vue from 'vue'
