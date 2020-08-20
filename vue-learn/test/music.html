@@ -181,15 +181,16 @@
       </svg>
     </div>
     <div>
-      <svg v-if="!playing" @click="play" xmlns="http://www.w3.org/2000/svg" version="1.1" height="100px" width="100px">
-        <circle cx="50%" cy="50%" r="calc(50% - 4px)" fill="transparent" stroke-width="4" stroke="white"/>
-        <polygon points="73,50 38,30 38,70" fill="white"/>
-      </svg>
-      <svg v-else @click="pause" xmlns="http://www.w3.org/2000/svg" version="1.1" height="100px" width="100px">
+      <svg v-if="playing"  @click="pause" xmlns="http://www.w3.org/2000/svg" version="1.1" height="100px" width="100px">
         <circle cx="50%" cy="50%" r="calc(50% - 4px)" fill="transparent" stroke-width="4" stroke="white"/>
         <line x1="38" y1="27" x2="38" y2="73" stroke-width="6px" stroke="white"/>
         <line x1="62" y1="27" x2="62" y2="73" stroke-width="6px" stroke="white"/>
       </svg>
+      <svg v-else @click="play" xmlns="http://www.w3.org/2000/svg" version="1.1" height="100px" width="100px">
+        <circle cx="50%" cy="50%" r="calc(50% - 4px)" fill="transparent" stroke-width="4" stroke="white"/>
+        <polygon points="73,50 38,30 38,70" fill="white"/>
+      </svg>
+
     </div>
     <div>
       <svg @click="nextMusic" xmlns="http://www.w3.org/2000/svg" version="1.1" height="100px" width="100px">
@@ -254,12 +255,12 @@
         this.player.play();
       },
       pause(){
+        console.log('pause')
         this.playing=false;
         this.player.pause();
       },
       musicTimeUpdate(e){
         this.currentTime=e.target.currentTime;
-        this.playing=true;
       },
       changeCurrentTime(e){
         this.currentTime=e.target.value;
