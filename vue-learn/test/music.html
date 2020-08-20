@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    html{
+      margin: 0;
+      padding: 0;
+    }
+    body{
+      margin: 0;
+      padding: 0;
+    }
+    #app{
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .music-background {
+      width: 100vw;
+      height: 100vh;
+      position: absolute;
+      background-position: center;
+      filter: blur(15px) brightness(1);
+      opacity: .5;
+    }
+
+    .music-background > div {
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0,.5);
+      filter: blur(10px);
+      opacity: 0.5;
+    }
+
+    .music-header{
+      font-size: 40px;
+      position: absolute;
+      left: 0;
+      right: 0;
+      color: white;
+      top: 80px;
+      text-align: center;
+    }
+    .music-header>div:nth-child(1){
+      font-weight: bold;
+    }
+    .music-header>div:nth-child(2){
+      font-weight: normal;
+      font-size: 30px;
+      margin-top: 10px;
+    }
+
+    .music-pic-container{
+      position: absolute;
+      left: 25vw;
+      right: 25vw;
+      height: 50vw;
+      top: 25%;
+      overflow: hidden;
+      border-radius: 50%;
+      animation: my-demo 10s linear infinite;
+    }
+    .music-pic-container>img{
+      width: 100%;
+    }
+
+    @keyframes my-demo {
+      0%{
+        transform: rotate(0deg);
+        box-shadow: 0 0 5px 90px rgba(0,0,0,.5);
+      }
+      50%{
+        transform: rotate(360deg);
+        box-shadow: 0 0 5px 80px rgba(0,0,0,.7);
+      }
+      100%{
+        transform: rotate(720deg);
+        box-shadow: 0 0 5px 90px rgba(0,0,0,.5);
+      }
+    }
+
+    .music-time-container{
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 200px;
+      font-size: 30px;
+      color: black;
+      display: flex;
+      justify-content: space-around;
+    }
+    .music-time-container>div{
+      display: inline-block;
+      text-align: center;
+      margin: 0;
+    }
+    .music-time-container>div:nth-child(1){
+      width: 10%;
+    }
+    .music-time-container>div:nth-child(2){
+      width: 70%;
+    }
+    .music-time-container>div:nth-child(3){
+      width: 10%;
+    }
+    .play-time-slider{
+      width: 100%;
+    }
+
+
+    input[type=range]::-webkit-slider-runnable-track {
+      /*background: rgba(255,255,255,0.6);*/
+    }
+
+    .music-control-container{
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 50px;
+      height: 100px;
+      display: flex;
+    }
+
+    .music-control-container>div{
+      flex: 1;
+      text-align: center;
+    }
+    .music-control-container>div:nth-child(1){
+      text-align: right;
+    }
+    .music-control-container>div:nth-child(3){
+      text-align: left;
+    }
+    .message-box{
+      position: fixed;
+      padding: 30px 0px;
+      background: rgba(0,0,0,0.5);
+      color: white;
+      font-size: 40px;
+      top: 30%;
+      left: 20vw;
+      width: 60vw;
+      border-radius: 10px;
+
+    }
+
+  </style>
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+<div id="app" >
+  <div class="music-background" :style="{backgroundImage:'url('+currentMusic.picurl+')'}">
+    <div></div>
+  </div>
+  <audio autoplay  @ended="musicEnded"  @timeupdate="musicTimeUpdate" style="display: none" id="music" :src="currentMusic.url" ></audio>
+  <div class="music-header">
+    <div>{{currentMusic.name}}</div>
+    <div>{{currentMusic.artistsname}}</div>
+  </div>
+  <div class="music-pic-container">
+      <img :src="currentMusic.picurl" alt="图片加载失败">
+  </div>
+  <div class="music-time-container">
+    <div>{{currentTime | timeFilter}}</div>
+    <div>
+      <input @input="changeCurrentTime" class="play-time-slider" type="range" step="0.1" :value="currentTime" min="0" :max="player.duration">
+    </div>
+    <div>{{player.duration | timeFilter}}</div>
+  </div>
+  <div class="music-control-container">
+    <div>
+      <svg @click="preMusic" xmlns="http://www.w3.org/2000/svg" version="1.1" height="100px" width="100px">
+        <line x1="35" y1="27" x2="35" y2="73" stroke-width="6px" stroke="white"/>
+        <polygon points="35,50 80,25 80,75" stroke="white" stroke-width="4px" fill="transparent"/>
+      </svg>
+    </div>
+    <div>
+      <svg v-if="!playing" @click="play" xmlns="http://www.w3.org/2000/svg" version="1.1" height="100px" width="100px">
+        <circle cx="50%" cy="50%" r="calc(50% - 4px)" fill="transparent" stroke-width="4" stroke="white"/>
+        <polygon points="73,50 38,30 38,70" fill="white"/>
+      </svg>
+      <svg v-else @click="pause" xmlns="http://www.w3.org/2000/svg" version="1.1" height="100px" width="100px">
+        <circle cx="50%" cy="50%" r="calc(50% - 4px)" fill="transparent" stroke-width="4" stroke="white"/>
+        <line x1="38" y1="27" x2="38" y2="73" stroke-width="6px" stroke="white"/>
+        <line x1="62" y1="27" x2="62" y2="73" stroke-width="6px" stroke="white"/>
+      </svg>
+    </div>
+    <div>
+      <svg @click="nextMusic" xmlns="http://www.w3.org/2000/svg" version="1.1" height="100px" width="100px">
+        <line x1="65" y1="27" x2="65" y2="73" stroke-width="6px" stroke="white"/>
+        <polygon points="65,50 20,25 20,75" stroke="white" stroke-width="4px" fill="transparent"/>
+      </svg>
+    </div>
+    <div v-if="showMsg" class="message-box">
+      {{message}}
+    </div>
+  </div>
+
+</div>
+
+<script>
+  var app=new Vue({
+    el:'#app',
+    data:{
+      musicHistory:[],
+      currentMusic:{},
+      player:{},
+      playing:false,
+      currentTime:0,
+      message:'没有更多历史了',
+      showMsg:false,
+      msgTimer:-1
+    },
+    methods:{
+      test(){
+        console.log('hello')
+      },
+      musicEnded(){
+        this.getMusic();
+      },
+      preMusic(){
+        if (this.musicHistory.length>0){
+          this.currentMusic=this.musicHistory.pop();
+        }else {
+          clearTimeout(this.msgTimer)
+          this.showMsg=true
+          this.msgTimer=setTimeout(()=>{
+            this.showMsg=false;
+          },1500)
+
+
+          this.player.currentTime=0;
+        }
+      },
+      nextMusic(){
+        this.musicHistory.push(this.currentMusic);
+        this.getMusic();
+      },
+      getMusic(){
+        fetch('https://api.uomg.com/api/rand.music?sort=热歌榜&format=json')
+        .then(res=>res.json())
+        .then(data=>{
+          this.currentMusic=data.data
+        })
+      },
+      play(){
+        this.playing=true;
+        this.player.play();
+      },
+      pause(){
+        this.playing=false;
+        this.player.pause();
+      },
+      musicTimeUpdate(e){
+        this.currentTime=e.target.currentTime;
+        this.playing=true;
+      },
+      changeCurrentTime(e){
+        this.currentTime=e.target.value;
+        this.player.currentTime=e.target.value;
+        this.play();
+      }
+    },
+    created(){
+      this.getMusic()
+    },
+    mounted(){
+      this.player=document.getElementById('music')
+    },
+    filters:{
+      timeFilter(val){
+        if (isNaN(val)){
+          return '00:00'
+        }else{
+          let seconds = parseInt(val % 60);
+          let minutes = parseInt(val/60);
+          return (minutes<10?'0'+minutes:minutes)+':'+(seconds<10?'0'+seconds:seconds);
+        }
+      }
+    }
+  })
+</script>
+</body>
+</html>
