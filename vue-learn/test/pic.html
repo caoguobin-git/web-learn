@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>
+		Title</title>
+	<style>
+		body{
+				width: 100%;
+				height: 100%;
+				margin: 0;
+				padding: 0;
+				overflow: hidden;
+		}
+	</style>
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+<div id="app" style="width: 100%;height: 100%">
+
+</div>
+
+<template id="pic">
+	<div style="width: 100%;height: 100%">
+		<img @click="getPic" :src="img" style="width: 100%"
+				 alt="">
+	</div>
+</template>
+<script>
+	const App={
+	  template:'#pic',
+		data(){
+	    return {
+	      img:''
+			}
+		},
+		methods:{
+	    getPic(){
+	      fetch('https://api.uomg.com/api/rand.img2?sort=美女&format=json')
+				.then(res=>res.json())
+				.then(data=>{
+					this.img=data.imgurl
+				})
+			}
+		},
+		mounted(){
+	    this.getPic()
+		}
+	}
+
+
+
+	new Vue({
+		render:h=>h(App)
+	}).$mount('#app')
+</script>
+</body>
+</html>
