@@ -63,7 +63,6 @@
       overflow: hidden;
       border-radius: 50%;
       animation: my-demo 15s linear infinite;
-      transition: all 1s linear;
 
     }
     .music-pic-container>img{
@@ -268,10 +267,9 @@
       },
       //图片旋转角度定时器
       setRotate(){
-        this.rotateDeg+=18;
         this.rotateTimer=setInterval(()=>{
-          this.rotateDeg+=18;
-        },1000)
+          this.rotateDeg+=0.36;
+        },20)
       },
       //取消图片旋转定时器
       cancelRotate(){
