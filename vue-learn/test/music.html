@@ -64,6 +64,7 @@
       overflow: hidden;
       border-radius: 50%;
       animation: my-demo 15s linear infinite;
+
     }
     .music-pic-container>img{
       width: 100%;
@@ -71,15 +72,12 @@
 
     @keyframes my-demo {
       0%{
-        transform: rotate(0deg);
         box-shadow: 0 0 5px 90px rgba(0,0,0,.5);
       }
       50%{
-        transform: rotate(360deg);
         box-shadow: 0 0 5px 80px rgba(0,0,0,.7);
       }
       100%{
-        transform: rotate(720deg);
         box-shadow: 0 0 5px 90px rgba(0,0,0,.5);
       }
     }
@@ -110,11 +108,6 @@
     }
     .play-time-slider{
       width: 100%;
-    }
-
-
-    input[type=range]::-webkit-slider-runnable-track {
-      /*background: rgba(255,255,255,0.6);*/
     }
 
     .music-control-container{
@@ -163,8 +156,8 @@
     <div>{{currentMusic.name}}</div>
     <div>{{currentMusic.artistsname}}</div>
   </div>
-  <div class="music-pic-container">
-      <img @click="changePlayStatus" :src="currentMusic.picurl" alt="图片加载失败">
+  <div :style="musicPicContainerStype" class="music-pic-container">
+      <img @load="rotateDeg=0" @click="changePlayStatus" :src="currentMusic.picurl" alt="图片加载失败">
   </div>
   <div class="music-time-container">
     <div>{{currentTime | timeFilter}}</div>
@@ -204,7 +197,6 @@
   </div>
 
 </div>
-
 <script>
   var app=new Vue({
     el:'#app',
@@ -216,9 +208,12 @@
       currentTime:0,
       message:'没有更多历史了',
       showMsg:false,
-      msgTimer:-1
+      msgTimer:-1,
+      rotateDeg:0,
+      rotateTimer:-20
     },
     methods:{
+      //点击播放图片设置播放/暂停
       changePlayStatus(){
         if (this.playing){
           this.pause()
@@ -226,30 +221,31 @@
           this.play();
         }
       },
-      test(){
-        console.log('hello')
-      },
+			//音乐结束执行获取下一首
       musicEnded(){
         this.nextMusic();
       },
+			//获取上一首歌
       preMusic(){
         if (this.musicHistory.length>0){
           this.currentMusic=this.musicHistory.pop();
+          this.play();
         }else {
           clearTimeout(this.msgTimer)
           this.showMsg=true
           this.msgTimer=setTimeout(()=>{
             this.showMsg=false;
           },1500)
-
-
           this.player.currentTime=0;
         }
       },
+			//获取下一首歌
       nextMusic(){
         this.musicHistory.push(this.currentMusic);
         this.getMusic();
+        this.play();
       },
+			//获取歌曲
       getMusic(){
         fetch('https://api.uomg.com/api/rand.music?sort=热歌榜&format=json')
         .then(res=>res.json())
@@ -260,11 +256,21 @@
       play(){
         this.playing=true;
         this.player.play();
+        this.cancelRotate();
+        this.setRotate();
       },
       pause(){
-        console.log('pause')
         this.playing=false;
         this.player.pause();
+        this.cancelRotate();
+      },
+      setRotate(){
+        this.rotateTimer=setInterval(()=>{
+          this.rotateDeg+=0.36;
+        },20)
+      },
+      cancelRotate(){
+        clearInterval(this.rotateTimer)
       },
       musicTimeUpdate(e){
         this.currentTime=e.target.currentTime;
@@ -275,10 +281,15 @@
         this.play();
       }
     },
-    created(){
-      this.getMusic()
+    computed:{
+      musicPicContainerStype(){
+        return {
+          transform: 'rotate('+this.rotateDeg+'deg)'
+        }
+      }
     },
     mounted(){
+      this.getMusic()
       this.player=document.getElementById('music')
     },
     filters:{
