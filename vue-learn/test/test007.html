@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>
+		Title</title>
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+<div id="app">
+	<img v-for="item in pics" :src="item"/>
+</div>
+
+<script>
+	var app=new Vue({
+		el:'#app',
+		data:{
+		  pics:[
+		      "https://tse3-mm.cn.bing.net/th/id/OIP.s0gsekWpOfEReWyqThwvPgHaLk?pid=Api&rs=1",
+					"http://pics.sc.chinaz.com/files/pic/pic9/201509/apic14546.jpg"
+			]
+		}
+	})
+</script>
+</body>
+</html>
