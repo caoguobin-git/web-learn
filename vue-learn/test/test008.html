@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>
+		Title</title>
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<div id="app">
+	<div ref="flag">{{flag}}</div>
+	<button @click="click">点击</button>
+</div>
+
+<script>
+	var app= new Vue({
+		el:'#app',
+		data:{
+		  flag:1
+		},
+		methods:{
+		  click(){
+        for (let i = 0; i < 100; i++) {
+					this.flag++;
+					console.log(this.$refs.flag.innerText);
+          // setTimeout(()=>{
+          //   console.log(this.$refs.flag.innerText);
+          // },0)
+        }
+        console.log('finish for: ',this.$refs.flag.innerText)
+			}
+		}
+	})
+</script>
+</body>
+</html>

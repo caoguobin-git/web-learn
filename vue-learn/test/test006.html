@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>
+		Title</title>
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+<div id="app">
+	result:
+	{{result}}
+	<p>display:{{resultDisplay}}</p>
+</div>
+<script>
+  var app = new Vue({
+    el: '#app',
+    data: {
+      result: 0,
+      list: [12, 12, 12, 1, 23, 12, 3]
+    },
+    computed: {
+      resultDisplay() {
+        for (let i = 0; i < this.list.length; i++) {
+          this.result += this.list[i];
+        }
+        // let a = 0;
+        // a = this.list.reduce((pre,current)=>{
+        //   return pre+current
+        // },0);
+        // return a;
+      },
+      test() {
+        let result = 0;
+        for (let i = 0; i < this.$store.getters.cartList.length; i++) {
+          if (this.$store.getters.cartList[i].checked) {
+            result += (this.$store.getters.cartList[i].price * this.$store.getters.cartList[i].count)
+          }
+        }
+
+        return this.$store.getters.cartList.reduce((pre, current) => {
+          return pre + (current.checked ? (current.price * current.count) : 0)
+        }, 0)
+
+        return result;
+      }
+    }
+  })
+</script>
+</body>
+</html>
