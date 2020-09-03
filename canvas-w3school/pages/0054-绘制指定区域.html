@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    #canvas{
+      position: fixed;
+      top: 200px;
+    }
+  </style>
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="https://cdn.bootcss.com/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
+
+
+<div id="app" style="width: 100vw;height: 100vh">
+  <canvas id="canvas" width="100%" height="100%" style="border:1px solid #000000;"></canvas>
+  <!--<img id="hello1" src="https://dss1.bdstatic.com/6OF1bjeh1BF3odCf/it/u=3339202615,3879308162&fm=85&app=92&f=PNG?w=121&h=75&s=67B06C6CF98ECD74462BAF0F020060DD" alt="">-->
+
+  {{msg}}
+  {{ctx}}
+</div>
+
+</body>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      ctx:{},
+      images:"adf",
+      msg: 'Hello World'
+    },
+    mounted() {
+      this.ctx = document.getElementById("canvas").getContext("2d");
+      console.log(this.ctx)
+      this.ctx.beginPath();
+      this.ctx.rect(0,0,200,200)
+      this.ctx.stroke()
+      this.ctx.beginPath()
+      let area = document.getElementById("hello1")
+      this.ctx.drawImage(area,200,200)
+    }
+  })
+</script>
+</html>
