@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    #page-container {
+      width: 97vw;
+      height: 97vh;
+      position: relative;
+    }
+
+    .heart-container {
+      animation: heartBeat .3s infinite ease-out alternate;
+    }
+
+    @keyframes heartBeat {
+      from {
+        width: 100px;
+        height: 100px;
+        /*margin-left: 200px;*/
+        /*transform: rotate(-18deg);*/
+      }
+      to {
+        width: 120px;
+        height: 120px;
+        /*margin-left: 175px;*/
+        /*transform: rotate(18deg);*/
+
+      }
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <div id="page-container" @click="show">
+    <div v-show="showHeart" :style="heartStyle" class="heart-container" style="position: absolute;z-index: 10">
+      <svg style="width: 100%;height: 100%" viewBox="0,0,100,100">
+        <path :fill="heartColor"
+              d="M92.71,7.27L92.71,7.27c-9.71-9.69-25.46-9.69-35.18,0L50,14.79l-7.54-7.52C32.75-2.42,17-2.42,7.29,7.27v0 c-9.71,9.69-9.71,25.41,0,35.1L50,85l42.71-42.63C102.43,32.68,102.43,16.96,92.71,7.27z">
+        </path>
+
+        <animateTransform
+                attributeName="transform"
+                type="scale"
+                dur="1s"
+                repeatCount="indefinite">
+        </animateTransform>
+      </svg>
+    </div>
+  </div>
+
+</div>
+
+<!--<script src="../js/vue.js"></script>-->
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      msg: 'hello world',
+      heartSize: 93,
+      showHeart: false,
+      heartX: 0,
+      heartY: 0,
+      heartWidth: 100,
+      heartHeight: 100,
+      heartTimer: -1,
+      times: 0,
+      rotate: 0,
+      heartColor: 'red',
+      animationNum: -1,
+      direction: true
+
+    },
+    methods: {
+      show(e) {
+        cancelAnimationFrame(this.animationNum)
+        this.direction = Math.random() > 0.5;
+        this.rotate = Math.random() > 0.5 ? (0 - Math.random() * 30) : (Math.random() * 30)
+        this.times = 40;
+        this.showHeart = false;
+        this.heartColor = this.getRandomColor();
+        clearTimeout(this.heartTimer)
+        let x = e.clientX;
+        let y = e.clientY;
+        this.heartX = x;
+        this.heartY = y;
+        console.log(x, y)
+        this.showHeart = true;
+        this.animationNum = requestAnimationFrame(this.changePosition)
+      },
+      changePosition() {
+
+        this.times--;
+        this.heartY -= (40 - this.times) * 0.5;
+        this.heartX += this.direction?this.times * 0.1:(0-this.times * 0.1)
+        if (this.times > 0) {
+          this.animationNum = requestAnimationFrame(() => {
+            this.changePosition()
+          })
+        } else {
+          this.showHeart = false
+        }
+      },
+      getRandomColor() {
+        let color = '#';
+        let arr = ['1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'];
+        for (let i = 0; i < 6; i++) {
+          color += arr[parseInt(Math.random() * 15)]
+        }
+        console.log(color)
+        return color;
+
+      }
+    },
+    computed: {
+      heartStyle() {
+        return {
+          left: this.heartX - 50 + 'px',
+          top: this.heartY - 50 + 'px',
+          height: this.heartHeight + 'px',
+          width: this.heartWidth + 'px',
+          transform: 'rotate(' + this.rotate + 'deg)'
+        }
+      }
+    }
+  })
+</script>
+</body>
+</html>
