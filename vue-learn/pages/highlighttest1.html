@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    .hl {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <input type="text" v-model="keyword">
+
+  <div v-for="item in displayArr" v-html="getHighLight(item)">
+  </div>
+</div>
+
+<script type="text/javascript" src="../js/vue.js"></script>
+<script>
+  var app = new Vue({
+    el: '#app',
+    data: {
+      keyword: '',
+      messages: ['hello world', 'hello world hello world hello world', 'HelloWorld', '123123','中华人民共和国，中国人民','天猫超市','天猫商城']
+    },
+    methods: {
+      replaceAllStr(str, pre, after) {
+        let reg = new RegExp(pre, "g")
+        return str.replace(reg, after);
+      },
+      getHighLight(val){
+        return this.replaceAllStr(val,this.keyword,'<span class="hl">'+this.keyword+'</span>')
+      }
+    },
+    computed: {
+      displayArr() {
+        return this.messages.filter(item=>{
+          return item.indexOf(this.keyword)!==-1;
+        })
+      }
+    }
+  })
+
+</script>
+</body>
+</html>
