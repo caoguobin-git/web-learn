@@ -4,15 +4,17 @@
   <meta charset="UTF-8">
   <title>MUSIC</title>
   <style>
-    html{
+    html {
       margin: 0;
       padding: 0;
     }
-    body{
+
+    body {
       margin: 0;
       padding: 0;
     }
-    #app{
+
+    #app {
       width: 100vw;
       height: 100vh;
       overflow: hidden;
@@ -32,11 +34,11 @@
     .music-background > div {
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0,0.3);
+      background-color: rgba(0, 0, 0, 0.3);
       filter: blur(10px);
     }
 
-    .music-header{
+    .music-header {
       font-size: 40px;
       position: absolute;
       left: 0;
@@ -45,16 +47,18 @@
       top: 80px;
       text-align: center;
     }
-    .music-header>div:nth-child(1){
+
+    .music-header > div:nth-child(1) {
       font-weight: bold;
     }
-    .music-header>div:nth-child(2){
+
+    .music-header > div:nth-child(2) {
       font-weight: normal;
       font-size: 30px;
       margin-top: 10px;
     }
 
-    .music-pic-container{
+    .music-pic-container {
       position: absolute;
       left: 25vw;
       right: 25vw;
@@ -65,23 +69,24 @@
       animation: my-demo 15s linear infinite;
 
     }
-    .music-pic-container>img{
+
+    .music-pic-container > img {
       width: 100%;
     }
 
     @keyframes my-demo {
-      0%{
-        box-shadow: 0 0 0px 90px rgba(0,0,0,.5);
+      0% {
+        box-shadow: 0 0 0px 90px rgba(0, 0, 0, .5);
       }
-      50%{
-        box-shadow: 0 0 0px 80px rgba(0,0,0,.7);
+      50% {
+        box-shadow: 0 0 0px 80px rgba(0, 0, 0, .7);
       }
-      100%{
-        box-shadow: 0 0 0px 90px rgba(0,0,0,.5);
+      100% {
+        box-shadow: 0 0 0px 90px rgba(0, 0, 0, .5);
       }
     }
 
-    .music-time-container{
+    .music-time-container {
       position: absolute;
       left: 0;
       right: 0;
@@ -91,25 +96,30 @@
       display: flex;
       justify-content: space-around;
     }
-    .music-time-container>div{
+
+    .music-time-container > div {
       display: inline-block;
       text-align: center;
       margin: 0;
     }
-    .music-time-container>div:nth-child(1){
+
+    .music-time-container > div:nth-child(1) {
       width: 10%;
     }
-    .music-time-container>div:nth-child(2){
+
+    .music-time-container > div:nth-child(2) {
       width: 70%;
     }
-    .music-time-container>div:nth-child(3){
+
+    .music-time-container > div:nth-child(3) {
       width: 10%;
     }
-    .play-time-slider{
+
+    .play-time-slider {
       width: 100%;
     }
 
-    .music-control-container{
+    .music-control-container {
       position: absolute;
       left: 0;
       right: 0;
@@ -118,20 +128,23 @@
       display: flex;
     }
 
-    .music-control-container>div{
+    .music-control-container > div {
       flex: 1;
       text-align: center;
     }
-    .music-control-container>div:nth-child(1){
+
+    .music-control-container > div:nth-child(1) {
       text-align: right;
     }
-    .music-control-container>div:nth-child(3){
+
+    .music-control-container > div:nth-child(3) {
       text-align: left;
     }
-    .message-box{
+
+    .message-box {
       position: fixed;
       padding: 30px 0px;
-      background: rgba(0,0,0,0.5);
+      background: rgba(0, 0, 0, 0.5);
       color: white;
       font-size: 40px;
       top: 30%;
@@ -146,22 +159,24 @@
 <body>
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 
-<div id="app" >
+<div id="app">
   <div class="music-background" :style="{backgroundImage:'url('+currentMusic.picurl+')'}">
     <div></div>
   </div>
-  <audio autoplay @ended="musicEnded"  @timeupdate="musicTimeUpdate" style="display: none" id="music" :src="currentMusic.url" ></audio>
+  <audio autoplay @ended="musicEnded" @timeupdate="musicTimeUpdate" style="display: none" id="music"
+         :src="currentMusic.url"></audio>
   <div class="music-header">
     <div>{{currentMusic.name}}</div>
     <div>{{currentMusic.artistsname}}</div>
   </div>
   <div :style="musicPicContainerStyle" class="music-pic-container">
-      <img @load="rotateDeg=0" @click="changePlayStatus" :src="currentMusic.picurl" alt="图片加载失败">
+    <img @load="rotateDeg=0" @click="changePlayStatus" :src="currentMusic.picurl" alt="图片加载失败">
   </div>
   <div class="music-time-container">
     <div>{{currentTime | timeFilter}}</div>
     <div>
-      <input @input="changeCurrentTime" class="play-time-slider" type="range" step="0.1" :value="currentTime" min="0" :max="player.duration">
+      <input @input="changeCurrentTime" class="play-time-slider" type="range" step="0.1" :value="currentTime" min="0"
+             :max="player.duration">
     </div>
     <div>{{player.duration | timeFilter}}</div>
   </div>
@@ -173,7 +188,7 @@
       </svg>
     </div>
     <div>
-      <svg v-if="playing"  @click="pause" xmlns="http://www.w3.org/2000/svg" version="1.1" height="100px" width="100px">
+      <svg v-if="playing" @click="pause" xmlns="http://www.w3.org/2000/svg" version="1.1" height="100px" width="100px">
         <circle cx="50%" cy="50%" r="calc(50% - 4px)" fill="transparent" stroke-width="4" stroke="white"/>
         <line x1="38" y1="27" x2="38" y2="73" stroke-width="6px" stroke="white"/>
         <line x1="62" y1="27" x2="62" y2="73" stroke-width="6px" stroke="white"/>
@@ -197,117 +212,119 @@
 
 </div>
 <script>
-  var app=new Vue({
-    el:'#app',
-    data:{
-      musicHistory:[],
-      currentMusic:{},
-      player:{},
-      playing:false,
-      currentTime:0,
-      message:'没有更多历史了',
-      showMsg:false,
-      msgTimer:-1,
-      rotateDeg:0,
-      rotateTimer:-20
+  var app = new Vue({
+    el: '#app',
+    data: {
+      musicHistory: [],
+      currentMusic: {},
+      player: {},
+      playing: false,
+      currentTime: 0,
+      message: '没有更多历史了',
+      showMsg: false,
+      msgTimer: -1,
+      rotateDeg: 0,
+      rotateTimer: -20
     },
-    methods:{
+    methods: {
       //点击播放图片设置播放/暂停
-      changePlayStatus(){
-        if (this.playing){
+      changePlayStatus() {
+        if (this.playing) {
           this.pause()
-        }else {
+        } else {
           this.play();
         }
       },
-			//音乐结束执行获取下一首
-      musicEnded(){
+      //音乐结束执行获取下一首
+      musicEnded() {
         this.nextMusic();
       },
-			//获取上一首歌
-      preMusic(){
-        if (this.musicHistory.length>0){
-          this.currentMusic=this.musicHistory.pop();
+      //获取上一首歌
+      preMusic() {
+        if (this.musicHistory.length > 0) {
+          this.currentMusic = this.musicHistory.pop();
           this.play();
-        }else {
+        } else {
           clearTimeout(this.msgTimer)
-          this.showMsg=true
-          this.msgTimer=setTimeout(()=>{
-            this.showMsg=false;
-          },1500)
-          this.player.currentTime=0;
+          this.showMsg = true
+          this.msgTimer = setTimeout(() => {
+            this.showMsg = false;
+          }, 1500)
+          this.player.currentTime = 0;
         }
       },
-			//获取下一首歌
-      nextMusic(){
+      //获取下一首歌
+      nextMusic() {
         this.musicHistory.push(this.currentMusic);
         this.getMusic();
         this.play();
       },
-			//获取歌曲
-      getMusic(){
+      //获取歌曲
+      getMusic() {
         fetch('https://api.uomg.com/api/rand.music?sort=热歌榜&format=json')
-        .then(res=>res.json())
-        .then(data=>{
-          this.currentMusic=data.data
-        })
+            .then(res => res.json())
+            .then(data => {
+              this.currentMusic = data.data;
+              window.document.title = this.currentMusic.name;
+
+            })
       },
       //开始播放并设置相关信息
-      play(){
-        this.playing=true;
+      play() {
+        this.playing = true;
         this.player.play();
         this.cancelRotate();
         this.setRotate();
       },
       //暂停播放
-      pause(){
-        this.playing=false;
+      pause() {
+        this.playing = false;
         this.player.pause();
         this.cancelRotate();
       },
       //图片旋转角度定时器
-      setRotate(){
-        this.rotateTimer=setInterval(()=>{
-          this.rotateDeg+=0.36;
-        },20)
+      setRotate() {
+        this.rotateTimer = setInterval(() => {
+          this.rotateDeg += 0.36;
+        }, 20)
       },
       //取消图片旋转定时器
-      cancelRotate(){
+      cancelRotate() {
         clearInterval(this.rotateTimer)
       },
       //更新播放时间
-      musicTimeUpdate(e){
-        this.currentTime=e.target.currentTime;
+      musicTimeUpdate(e) {
+        this.currentTime = e.target.currentTime;
       },
       //拖动进度条修改播放时间
-      changeCurrentTime(e){
-        this.currentTime=e.target.value;
-        this.player.currentTime=e.target.value;
+      changeCurrentTime(e) {
+        this.currentTime = e.target.value;
+        this.player.currentTime = e.target.value;
         this.play();
       }
     },
-    computed:{
+    computed: {
       //返回图片旋转角度
-      musicPicContainerStyle(){
+      musicPicContainerStyle() {
         return {
-          transform: 'rotate('+this.rotateDeg+'deg)'
+          transform: 'rotate(' + this.rotateDeg + 'deg)'
         }
       }
     },
-    mounted(){
+    mounted() {
       //获取音乐，初始化player播放器
       this.getMusic()
-      this.player=document.getElementById('music')
+      this.player = document.getElementById('music')
     },
-    filters:{
+    filters: {
       //时间格式化工具
-      timeFilter(val){
-        if (isNaN(val)){
+      timeFilter(val) {
+        if (isNaN(val)) {
           return '00:00'
-        }else{
+        } else {
           let seconds = parseInt(val % 60);
-          let minutes = parseInt(val/60);
-          return (minutes<10?'0'+minutes:minutes)+':'+(seconds<10?'0'+seconds:seconds);
+          let minutes = parseInt(val / 60);
+          return (minutes < 10 ? '0' + minutes : minutes) + ':' + (seconds < 10 ? '0' + seconds : seconds);
         }
       }
     }
