@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    .img-container{
+      position: fixed;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.5);
+      text-align: center;
+    }
+    .click-item{
+      padding: 10px;
+      background: lightcyan;
+      margin: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div @click="showImg=false" class="img-container" v-if="showImg">
+      <img style="width: 30%" :src="displayImg.path" alt="">
+      <div style="position: absolute;bottom: 100px;left:calc(50%)">{{displayImg.name}}</div>
+    </div>
+
+    <audio style="display: none" controls id="player"></audio>
+    <span class="click-item" @click="showLargeImg(item)" v-for="item in picList">{{item.name}}</span>
+  </div>
+  <script src="https://lib.baomitu.com/vue/2.6.12/vue.common.dev.js"></script>
+<script>
+  const app = new Vue({
+    el:'#app',
+    data:{
+      picList:[
+        {type:'pic',name:'第一个图片',path:'https://t8.baidu.com/it/u=1484500186,1503043093&fm=79&app=86&size=h300&n=0&g=4n&f=jpeg?sec=1603439437&t=d1e301af89909cbaba29b1b55544b2a5'},
+        {type:'pic',name:'第二个图片',path:'https://t8.baidu.com/it/u=3571592872,3353494284&fm=79&app=86&size=h300&n=0&g=4n&f=jpeg?sec=1603439437&t=e256bbab02e23a239b9e07eeb07b5df9'},
+        {type:'pic',name:'第三个图片',path:'https://t7.baidu.com/it/u=3616242789,1098670747&fm=79&app=86&size=h300&n=0&g=4n&f=jpeg?sec=1603439437&t=724b21756f1f9bf5cd7360b2105109fb'},
+        {type:'mp3',name:'海阔天空',path:'http://p4.music.126.net/ghmbmEQS-IJfZPjdA3KGxg==/82463372084291.jpg',musicPath:'http://music.163.com/song/media/outer/url?id=346089'},
+        {type:'mp3',name:'所念皆星河',path:'http://p4.music.126.net/M34HFzLO2xhDLuX_zEALKA==/109951164291347934.jpg',musicPath:'http://music.163.com/song/media/outer/url?id=1384026889'}
+      ],
+      displayImg:{},
+      showImg:false
+    },
+    methods:{
+      showLargeImg(item){
+        console.log(item)
+        this.displayImg = item;
+        this.showImg = true;
+        if (item.type!=='pic') {
+          document.getElementById('player').setAttribute('src',item.musicPath);
+          document.getElementById('player').play();
+        }
+      }
+    }
+  })
+</script>
+</body>
+</html>
