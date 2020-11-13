@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    html, body {
+      border: none;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+<body>
+<div id="app" style="width: 100vw;height: 100vh;background: #807e7e">
+  <svg v-show="showSvg" style="width: 100%;height: 100%;position: absolute;z-index: 99"
+       xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="orange_red" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" style="stop-color:rgb(255,255,0);
+stop-opacity:1"/>
+        <stop offset="100%" style="stop-color:rgb(255,0,0);
+stop-opacity:1"/>
+      </linearGradient>
+    </defs>
+    <path stroke="#5bedf0" stroke-width="3" id="movePath1" fill="none"
+          d="M341,321 L388,1345.5 L271,395 L456,490"
+          stroke-dasharray="50 350"
+          :stroke-dashoffset="offset"
+          stroke-linecap="round"/>
+
+    <path stroke="#5bedf0" stroke-width="3" id="movePath1" fill="none"
+          d="M0,10
+          l1000,0
+          l20,1000
+          Z"
+          stroke-dasharray="50 0"
+          :stroke-dashoffset="offset"
+          stroke-linecap="round"/>
+    <path stroke="red" stroke-width="1" id="movePath2" fill="none"
+          d="M341,321 L388,345.5 L271,395 L456,490"
+          stroke-linecap="round"/>
+  </svg>
+</div>
+
+<script src="../../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      showSvg: true,
+      offset: 1
+    },
+    methods: {
+      move() {
+        this.offset -= 3;
+        requestAnimationFrame(this.move)
+      }
+    },
+    mounted() {
+      this.move();
+    }
+  })
+</script>
+</body>
+</html>

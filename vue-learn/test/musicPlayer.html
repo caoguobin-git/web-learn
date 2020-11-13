@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    .player-container {
+      width: 200px;
+      height: 200px;
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .player-container-img {
+      width: 100%;
+      position: absolute;
+      z-index: 0;
+    }
+
+    .controls-container {
+      position: absolute;
+      width: 70%;
+      margin-left: 15%;
+      height: 30px;
+      bottom: 15px;
+      border-radius: 4px;
+      overflow: hidden;
+      transition: all 10s linear;
+    }
+  </style>
+</head>
+<body>
+<div id="player">
+  <div class="player-container" @mouseenter="showMenu=true" @mouseleave="showMenu=false">
+    <img class="player-container-img" :src="currentMusic.picurl" alt="">
+    <div class="controls-container">
+      <div style="position: absolute;z-index: 100">
+        <svg xmlns="http://www.w3.org/2000/svg" style="background: rgba(0,0,0,.4);box-shadow: 0 0 1px 10px white"
+             version="1.1" height="100%"
+             width="100%">
+          <g>
+            <polygon @click="getPreMusic" points="40,6 35,9 35,6 29,10 35,14 35,11 40,14" stroke="white"
+                     stroke-width="1" fill="transparent"/>
+          </g>
+          <g @click="changePlay">
+            <path v-if="playing" d="M66 4 L66 16 M74 4 L74 16" stroke="white" stroke-width="2"></path>
+            <polygon v-else points="66,4 75,10 66,16" stroke-linecap="round" stroke="white" stroke-width="2"
+                     fill="white"/>
+          </g>
+          <g @click="getMusic">
+            <polygon points="100,6 105,9 105,6 111,10 105,14 105,11 100,14" stroke="white" stroke-linecap="round"
+                     stroke-width="1" fill="transparent"/>
+          </g>
+          <text x="2" y="24.2" font-size="6" fill="white">{{getTimeDisplay | timeFilter}}</text>
+          <g>
+            <line style="position: absolute;z-index: 1000" @click="changeTime" x1="20" y1="22" x2="120" y2="22" stroke="rgba(255,255,255,.5)" stroke-width="2"
+                  stroke-linecap="round"></line>
+            <line @click.passive x1="20" y1="22" :x2="playedTime" y2="22" stroke="rgba(255,255,255,.8)" stroke-width="2"
+                  stroke-linecap="round"></line>
+            <line @click.passive :x1="playedTime" y1="20" :x2="playedTime" y2="24" stroke="rgba(255,255,255,1)" stroke-width="2"
+                  stroke-linecap="round"></line>
+          </g>
+          <text x="123" y="24.2" font-size="6" fill="white">{{duration | timeFilter}}</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <audio @ended="getMusic" id="musicPlayer" :src="currentMusic.url" muted></audio>
+
+</div>
+
+
+<script src="../js/vue.js"></script>
+<script>
+  const player = new Vue({
+    el: '#player',
+    data: {
+      musicList: [],
+      currentMusic: {},
+      playing: false,
+      player: {},
+      showMenu: false,
+      timePlayed: 0,
+      duration: 0
+    },
+    methods: {
+      getMusic() {
+        fetch('https://api.uomg.com/api/rand.music?sort=热歌榜&format=json')
+            .then(res => res.json())
+            .then(data => {
+              console.log(data.data)
+              //this.currentMusic = data.data;
+              this.setCurrentMusic(data.data)
+              this.musicList.push(this.currentMusic);
+
+              this.player.oncanplay = () => {
+                this.playMusic()
+              }
+            })
+      },
+      playMusic() {
+        let play = this.player.play();
+        if (play) {
+          this.playing = true;
+        }
+      },
+      pauseMusic() {
+        this.player.pause();
+        this.playing = false;
+      },
+      changePlay() {
+        if (this.playing) {
+          this.pauseMusic();
+        } else {
+          this.playMusic();
+        }
+      },
+      getPreMusic() {
+        let music = this.musicList.pop();
+        if (music) {
+          this.setCurrentMusic(music)
+        }
+      },
+      setCurrentMusic(data) {
+        this.currentMusic = data;
+        window.document.title = this.currentMusic.name;
+        setTimeout(()=>{
+          this.timePlayed = 0;
+          this.duration = this.player.duration;
+        },500)
+      },
+      changeTime(e){
+        console.log(e.offsetX)
+        this.player.currentTime=(parseFloat(e.offsetX/120))*this.player.duration
+      }
+    },
+    mounted() {
+      this.player = document.getElementById('musicPlayer')
+      this.getMusic();
+      this.player.ontimeupdate = (e) => {
+        this.timePlayed = e.target.currentTime;
+      }
+    },
+    computed: {
+      playedTime() {
+        return parseFloat(this.timePlayed / this.player.duration * 100 + 20)||20;
+      },
+      getTimeDisplay() {
+        return this.timePlayed;
+      },
+      durationTime() {
+        return this.player.duration
+      }
+    },
+    filters: {
+      //时间格式化工具
+      timeFilter(val) {
+        if (isNaN(val)) {
+          return '00:00'
+        } else {
+          let seconds = parseInt(val % 60);
+          let minutes = parseInt(val / 60);
+          return (minutes < 10 ? '0' + minutes : minutes) + ':' + (seconds < 10 ? '0' + seconds : seconds);
+        }
+      }
+    }
+  })
+</script>
+
+</body>
+</html>
