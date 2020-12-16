@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    html,body{
+      margin: 0;
+      padding: 0;
+    }
+    #app{
+      display: flex;
+    }
+    #sidebar{
+      height: 100vh;
+      /*padding-top: 100px;*/
+      display: inline-block;
+      background: #4646dc;
+      flex: 1;
+    }
+    #content-container{
+      background: white;
+      flex: 10;
+      display: flex;
+      flex-direction: column;
+    }
+    .content-header{
+      flex: 1;
+      background: white;
+    }
+    .content-display{
+      flex: 20;
+      background: silver;
+    }
+    #sidebar>div{
+      font-size: 16px;
+      color: white;
+      padding: .5vw 2vw;
+      position: relative;
+    }
+    #sidebar>div:nth-child(1){
+      margin-top: 150px;
+    }
+    #sidebar>div>div{
+      display: inline-block;
+    }
+    #sidebar>div>div:nth-child(1){
+      top: 10px;
+      width: 34px;
+      height: 34px;
+      position: relative;
+    }
+    #sidebar>div:nth-child(1)>div:nth-child(1){
+      background: url("../assets/sidebarbackground.png") 0 32px;
+    }
+    #sidebar>div:nth-child(2)>div:nth-child(1){
+      background: url("../assets/sidebarbackground.png") 170px 32px;
+    }
+    #sidebar>div:nth-child(3)>div:nth-child(1){
+      background: url("../assets/sidebarbackground.png") 34px 32px;
+    }
+    #sidebar>div:nth-child(4)>div:nth-child(1){
+      background: url("../assets/sidebarbackground.png") -102px 32px;
+    }
+    #sidebar>div:nth-child(5)>div:nth-child(1){
+      background: url("../assets/sidebarbackground.png") -34px 32px;
+    }
+    #sidebar>div:nth-child(6)>div:nth-child(1){
+      background: url("../assets/sidebarbackground.png") 170px 32px;
+    }
+    #sidebar>div:nth-child(7)>div:nth-child(1){
+      background: url("../assets/sidebarbackground.png") 34px 32px;
+    }
+    #content-container{
+      width: 89vw;
+      height: 100vh;
+      position: relative;
+      vertical-align: top;
+      margin-top: 0;
+    }
+
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div id="sidebar">
+      <div style="cursor: pointer" v-for="item in sidebarInfo">
+        <div></div>
+        <div>{{item}}</div>
+      </div>
+    </div>
+    <div id="content-container">
+      <div class="content-header">asdf</div>
+      <div class="content-display"></div>
+    </div>
+  </div>
+</body>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el:'#app',
+    data:{
+      msg:'hello world',
+      sidebarInfo:[
+          '我的任务','项目管理','问题管理','任务评价','档案库','组织管理','用户管理'
+      ]
+    }
+  })
+</script>
+</html>
