@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    img {
+      width: 200px;
+      border: 2px solid pink;
+      margin: 4px;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <div>
+    <button @click="numberA++">A++</button>
+    <button @click="numberA--">A--</button>
+    <button @click="numberB++">B++</button>
+    <button @click="numberB--">B--</button>
+  </div>
+  <div style="padding: 10px;border: 2px solid blue;display: inline-block">
+    <img src="../img/img.png" v-for="i in numberA" alt="">
+  </div>
+  <div style="display: inline-block;font-size: 100px;line-height: 100px;font-weight: bold">+</div>
+  <div style="padding: 10px;border: 2px solid yellow;display: inline-block">
+    <img src="../img/img.png" v-for="i in numberB" alt="">
+  </div>
+  <div style="display: inline-block;font-size: 100px;line-height: 100px;font-weight: bold">=</div>
+  <div style="padding: 10px;border: 2px solid red;display: inline-block">
+
+    <img src="../img/img.png" v-for="i in sum" alt="">
+  </div>
+  <br>
+  <div style="padding: 10px;border: 2px solid blue;display: inline-block;font-size: 100px;font-weight: bold">
+    {{numberA}}
+  </div>
+  <div style="display: inline-block;font-size: 100px;line-height: 100px;font-weight: bold">+</div>
+  <div style="padding: 10px;border: 2px solid yellow;display: inline-block;font-size: 100px;font-weight: bold">
+    {{numberB}}
+  </div>
+  <div style="display: inline-block;font-size: 100px;line-height: 100px;font-weight: bold">=</div>
+  <div style="padding: 10px;border: 2px solid red;display: inline-block;font-size: 100px;font-weight: bold">
+    <!--{{sum}}-->
+    {{numberA + numberB}}
+  </div>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      numberA: 1,
+      numberB: 1
+    },
+    computed: {
+      sum() {
+        return this.numberA + this.numberB;
+      }
+    }
+  })
+</script>
+</body>
+</html>
